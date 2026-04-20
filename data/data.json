@@ -310,52 +310,52 @@
         "Maine": {
             "cook": "Toss-Up",
             "sabato": "Toss-Up",
-            "ie": null
+            "ie": "Toss-Up"
         },
         "North Carolina": {
             "cook": "Lean D",
             "sabato": "Lean D",
-            "ie": null
+            "ie": "Lean D"
         },
         "Georgia": {
             "cook": "Lean D",
             "sabato": "Lean D",
-            "ie": null
+            "ie": "Lean D"
         },
         "Michigan": {
             "cook": "Toss-Up",
             "sabato": "Lean D",
-            "ie": null
+            "ie": "Lean D"
         },
         "Ohio": {
             "cook": "Toss-Up",
             "sabato": "Toss-Up",
-            "ie": null
+            "ie": "Toss-Up"
         },
         "New Hampshire": {
             "cook": "Lean D",
             "sabato": "Lean D",
-            "ie": null
+            "ie": "Lean D"
         },
         "Alaska": {
             "cook": "Lean R",
             "sabato": "Lean R",
-            "ie": null
+            "ie": "Lean R"
         },
         "Nebraska": {
             "cook": "Likely R",
             "sabato": "Likely R",
-            "ie": null
+            "ie": "Likely R"
         },
         "Iowa": {
             "cook": "Likely R",
             "sabato": "Lean R",
-            "ie": null
+            "ie": "Lean R"
         },
         "Texas": {
             "cook": "Likely R",
             "sabato": "Likely R",
-            "ie": null
+            "ie": "Likely R"
         }
     },
     "trumpApproval": {
