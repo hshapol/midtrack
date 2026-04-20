@@ -309,52 +309,52 @@
     "senateRatings": {
         "Maine": {
             "cook": "Toss-Up",
-            "sabato": null,
+            "sabato": "Toss-Up",
             "ie": null
         },
         "North Carolina": {
             "cook": "Lean D",
-            "sabato": null,
+            "sabato": "Lean D",
             "ie": null
         },
         "Georgia": {
             "cook": "Lean D",
-            "sabato": null,
+            "sabato": "Lean D",
             "ie": null
         },
         "Michigan": {
             "cook": "Toss-Up",
-            "sabato": null,
+            "sabato": "Lean D",
             "ie": null
         },
         "Ohio": {
             "cook": "Toss-Up",
-            "sabato": null,
+            "sabato": "Toss-Up",
             "ie": null
         },
         "New Hampshire": {
             "cook": "Lean D",
-            "sabato": null,
+            "sabato": "Lean D",
             "ie": null
         },
         "Alaska": {
             "cook": "Lean R",
-            "sabato": null,
+            "sabato": "Lean R",
             "ie": null
         },
         "Nebraska": {
             "cook": "Likely R",
-            "sabato": null,
+            "sabato": "Likely R",
             "ie": null
         },
         "Iowa": {
             "cook": "Likely R",
-            "sabato": null,
+            "sabato": "Lean R",
             "ie": null
         },
         "Texas": {
             "cook": "Likely R",
-            "sabato": null,
+            "sabato": "Likely R",
             "ie": null
         }
     },
@@ -363,4 +363,4 @@
         "disapprove": null,
         "net": null
     }
-    }
+}
