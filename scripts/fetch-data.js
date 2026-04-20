@@ -35,15 +35,37 @@ async function fetchRendered(browser, url, waitMs = 3000) {
   }
 }
 
+// RCP table format: Pollster | Date | Sample | MoE | Dem(col4) | Rep(col5) | Spread
+function parseRCPTable(html) {
+  const $ = cheerio.load(html);
+  const polls = [];
+  let avg = null;
+
+  $('table tr').each((i, row) => {
+    const cells = $(row).find('td');
+    if (cells.length < 6) return;
+    const source = $(cells[0]).text().trim();
+    const date   = $(cells[1]).text().trim();
+    const dem    = parseFloat($(cells[4]).text().trim());
+    const rep    = parseFloat($(cells[5]).text().trim());
+    if (!source || isNaN(dem) || isNaN(rep)) return;
+    const entry = { source, date, dem, rep, margin: (dem - rep).toFixed(1) };
+    if (source.toLowerCase().includes('rcp') || source.toLowerCase().includes('average')) avg = entry;
+    else polls.push(entry);
+  });
+
+  return { polls, avg };
+}
+
 const RCP_RACES = {
   'North Carolina': 'https://www.realclearpolling.com/polls/senate/general/2026/north-carolina/cooper-vs-whatley',
   'Georgia':        'https://www.realclearpolling.com/polls/senate/general/2026/georgia/ossoff-vs-collins',
-  'Michigan':       'https://www.realclearpolling.com/polls/senate/general/2026/michigan/stevens-vs-rogers',
-  'Ohio (Special)': 'https://www.realclearpolling.com/polls/senate/general/2026/ohio/brown-vs-husted',
+  'Michigan':       'https://www.realclearpolling.com/polls/senate/general/2026/michigan/rogers-vs-stevens',
+  'Ohio (Special)': 'https://www.realclearpolling.com/polls/senate/special-election/2026/ohio/husted-vs-brown',
   'New Hampshire':  'https://www.realclearpolling.com/polls/senate/general/2026/new-hampshire/pappas-vs-sununu',
-  'Maine':          'https://www.realclearpolling.com/polls/senate/general/2026/maine/mills-vs-collins',
-  'Alaska':         'https://www.realclearpolling.com/polls/senate/general/2026/alaska/peltola-vs-sullivan',
-  'Texas':          'https://www.realclearpolling.com/polls/senate/general/2026/texas/talarico-vs-paxton',
+  'Maine':          'https://www.realclearpolling.com/polls/senate/general/2026/maine/collins-vs-mills',
+  'Alaska':         'https://www.realclearpolling.com/polls/senate/general/2026/alaska/sullivan-vs-peltola',
+  'Texas':          'https://www.realclearpolling.com/polls/senate/general/2026/texas/cornyn-vs-talarico',
 };
 
 async function fetchRCPSenatePolls(browser) {
@@ -53,29 +75,19 @@ async function fetchRCPSenatePolls(browser) {
     try {
       console.log(`  ${state}...`);
       const html = await fetchRendered(browser, url, 2000);
-      const $ = cheerio.load(html);
-      const polls = [];
-      let avg = null;
-      $('table tr').each((i, row) => {
-        const cells = $(row).find('td');
-        if (cells.length < 4) return;
-        const source = $(cells[0]).text().trim();
-        const date   = $(cells[1]).text().trim();
-        const dem    = parseFloat($(cells[2]).text().trim());
-        const rep    = parseFloat($(cells[3]).text().trim());
-        if (!source || isNaN(dem) || isNaN(rep)) return;
-        const entry = { source, date, dem, rep, margin: (dem - rep).toFixed(1) };
-        if (source.toLowerCase().includes('rcp') || source.toLowerCase().includes('average')) avg = entry;
-        else polls.push(entry);
-      });
-      if (!avg && polls.length > 0) {
+      const { polls, avg } = parseRCPTable(html);
+
+      // Fallback: compute avg from recent polls if RCP avg not found
+      let finalAvg = avg;
+      if (!finalAvg && polls.length > 0) {
         const recent = polls.slice(0, 5);
         const d = recent.reduce((s, p) => s + p.dem, 0) / recent.length;
         const r = recent.reduce((s, p) => s + p.rep, 0) / recent.length;
-        avg = { source: 'Computed Avg', date: TODAY, dem: parseFloat(d.toFixed(1)), rep: parseFloat(r.toFixed(1)), margin: (d - r).toFixed(1) };
+        finalAvg = { source: 'Computed Avg', date: TODAY, dem: parseFloat(d.toFixed(1)), rep: parseFloat(r.toFixed(1)), margin: (d - r).toFixed(1) };
       }
-      results[state] = { polls: polls.slice(0, 6), avg };
-      console.log(`    Done: ${polls.length} polls`);
+
+      results[state] = { polls: polls.slice(0, 6), avg: finalAvg };
+      console.log(`    ${polls.length} polls, avg: ${finalAvg ? finalAvg.margin : 'none'}`);
     } catch (e) {
       console.error(`  Error ${state}:`, e.message);
       results[state] = { polls: [], avg: null };
@@ -88,21 +100,7 @@ async function fetchGenericBallot(browser) {
   console.log('Fetching generic ballot...');
   try {
     const html = await fetchRendered(browser, 'https://www.realclearpolling.com/polls/congress/generic-congressional-ballot', 3000);
-    const $ = cheerio.load(html);
-    const polls = [];
-    let avg = null;
-    $('table tr').each((i, row) => {
-      const cells = $(row).find('td');
-      if (cells.length < 4) return;
-      const source = $(cells[0]).text().trim();
-      const date   = $(cells[1]).text().trim();
-      const dem    = parseFloat($(cells[2]).text().trim());
-      const rep    = parseFloat($(cells[3]).text().trim());
-      if (!source || isNaN(dem) || isNaN(rep)) return;
-      const entry = { source, date, dem, rep, margin: (dem - rep).toFixed(1) };
-      if (source.toLowerCase().includes('rcp') || source.toLowerCase().includes('average')) avg = entry;
-      else polls.push(entry);
-    });
+    const { polls, avg } = parseRCPTable(html);
     console.log(`  ${polls.length} polls, avg: ${avg ? `D+${avg.margin}` : 'not found'}`);
     return { polls: polls.slice(0, 8), avg };
   } catch (e) {
@@ -117,16 +115,33 @@ async function fetchTrumpApproval(browser) {
     const html = await fetchRendered(browser, 'https://www.realclearpolling.com/polls/approval/donald-trump/job-approval', 3000);
     const $ = cheerio.load(html);
     let approve = null, disapprove = null;
+
+    // Approval table: Pollster | Date | Sample | MoE | Approve(4) | Disapprove(5)
     $('table tr').each((_, row) => {
-      const text = $(row).text().toLowerCase();
-      if (text.includes('rcp average') || text.includes('average')) {
-        const cells = $(row).find('td');
-        approve    = parseFloat($(cells[1]).text().trim()) || null;
-        disapprove = parseFloat($(cells[2]).text().trim()) || null;
+      const cells = $(row).find('td');
+      if (cells.length < 6) return;
+      const source = $(cells[0]).text().trim().toLowerCase();
+      if (source.includes('rcp') || source.includes('average')) {
+        approve    = parseFloat($(cells[4]).text().trim()) || null;
+        disapprove = parseFloat($(cells[5]).text().trim()) || null;
       }
     });
+
+    // Fallback — try cols 1 and 2 if above didn't work
+    if (!approve) {
+      $('table tr').each((_, row) => {
+        const cells = $(row).find('td');
+        if (cells.length < 3) return;
+        const source = $(cells[0]).text().trim().toLowerCase();
+        if (source.includes('rcp') || source.includes('average')) {
+          approve    = parseFloat($(cells[1]).text().trim()) || null;
+          disapprove = parseFloat($(cells[2]).text().trim()) || null;
+        }
+      });
+    }
+
     const net = (approve && disapprove) ? (approve - disapprove).toFixed(1) : null;
-    console.log(`  net: ${net}`);
+    console.log(`  approve: ${approve}, disapprove: ${disapprove}, net: ${net}`);
     return { approve, disapprove, net, source: 'RCP Average' };
   } catch (e) {
     console.error('  Trump approval error:', e.message);
@@ -140,34 +155,42 @@ async function fetchBallotpediaRatings() {
     const html = await fetchHTML('https://ballotpedia.org/United_States_Senate_elections,_2026');
     const $ = cheerio.load(html);
     const ratings = {};
+
+    // Try multiple table parsing strategies
     $('table').each((_, table) => {
-      const headers = [];
-      $(table).find('th').each((_, th) => headers.push($(th).text().trim().toLowerCase()));
-      const hasCook   = headers.some(h => h.includes('cook'));
-      const hasSabato = headers.some(h => h.includes('sabato') || h.includes('crystal'));
-      const hasIE     = headers.some(h => h.includes('inside') || h.includes('elections'));
+      const headerText = $(table).find('th').map((_, th) => $(th).text().trim().toLowerCase()).get().join(' ');
+      const hasCook   = headerText.includes('cook');
+      const hasSabato = headerText.includes('sabato') || headerText.includes('crystal');
+      const hasIE     = headerText.includes('inside') || headerText.includes('elections');
       if (!hasCook && !hasSabato && !hasIE) return;
-      let stateCol = -1, cookCol = -1, sabatoCol = -1, ieCol = -1;
-      $(table).find('tr').first().find('th, td').each((i, cell) => {
+
+      // Find column indices from first header row
+      const headerCells = $(table).find('tr').first().find('th, td');
+      let stateCol = 0, cookCol = -1, sabatoCol = -1, ieCol = -1;
+      headerCells.each((i, cell) => {
         const t = $(cell).text().trim().toLowerCase();
-        if (t.includes('state') || t.includes('race')) stateCol = i;
+        if (t.includes('state') || t.includes('race') || t.includes('election')) stateCol = i;
         if (t.includes('cook'))   cookCol   = i;
         if (t.includes('sabato') || t.includes('crystal')) sabatoCol = i;
         if (t.includes('inside')) ieCol     = i;
       });
+
       $(table).find('tr').slice(1).each((_, row) => {
         const cells = $(row).find('td');
         if (cells.length < 2) return;
-        const state = safe(() => $(cells[stateCol >= 0 ? stateCol : 0]).text().trim());
-        if (!state) return;
-        ratings[state.replace(/\s*\(.*\)/, '').trim()] = {
-          cook:   cookCol >= 0   ? safe(() => $(cells[cookCol]).text().trim())   : null,
-          sabato: sabatoCol >= 0 ? safe(() => $(cells[sabatoCol]).text().trim()) : null,
-          ie:     ieCol >= 0     ? safe(() => $(cells[ieCol]).text().trim())     : null,
+        const stateRaw = safe(() => $(cells[stateCol]).text().trim());
+        if (!stateRaw || stateRaw.length < 2) return;
+        const state = stateRaw.replace(/\s*\(.*\)/, '').replace(/\[.*\]/, '').trim();
+        if (state.length < 2) return;
+        ratings[state] = {
+          cook:   cookCol >= 0   ? safe(() => $(cells[cookCol]).text().trim().replace(/\[.*\]/, '').trim())   : null,
+          sabato: sabatoCol >= 0 ? safe(() => $(cells[sabatoCol]).text().trim().replace(/\[.*\]/, '').trim()) : null,
+          ie:     ieCol >= 0     ? safe(() => $(cells[ieCol]).text().trim().replace(/\[.*\]/, '').trim())     : null,
         };
       });
     });
-    console.log(`  ${Object.keys(ratings).length} states`);
+
+    console.log(`  ${Object.keys(ratings).length} states: ${Object.keys(ratings).join(', ')}`);
     return ratings;
   } catch (e) {
     console.error('  Ballotpedia error:', e.message);
@@ -188,6 +211,7 @@ async function fetchPolymarket() {
       const data = await fetchJSON(`https://gamma-api.polymarket.com/events?slug=${slug}&limit=1`);
       if (!data?.length) continue;
       const event = data[0];
+
       if (key === 'house') {
         const m = event.markets?.find(m => m.outcomePrices && (m.question?.toLowerCase().includes('democrat') || m.groupItemTitle?.toLowerCase().includes('democrat')));
         if (m?.outcomePrices) markets.houseD = Math.round(parseFloat(JSON.parse(m.outcomePrices)[0]) * 100);
@@ -197,13 +221,16 @@ async function fetchPolymarket() {
         if (m?.outcomePrices) markets.senateR = Math.round(parseFloat(JSON.parse(m.outcomePrices)[0]) * 100);
       }
       if (key === 'balance') {
+        // Log all market titles to debug
+        console.log('  Balance markets:', event.markets?.map(m => m.question || m.groupItemTitle));
         for (const m of (event.markets || [])) {
           const title = (m.question || m.groupItemTitle || '').toLowerCase();
           if (!m.outcomePrices) continue;
-          const pct = Math.round(parseFloat(JSON.parse(m.outcomePrices)[0]) * 100);
-          if (title.includes('republican') && title.includes('senate') && title.includes('democrat') && title.includes('house')) markets.splitPct = pct;
-          else if (title.includes('democrat') && (title.includes('sweep') || title.includes('both'))) markets.dSweepPct = pct;
-          else if (title.includes('republican') && (title.includes('sweep') || title.includes('both'))) markets.repSweepPct = pct;
+          const prices = JSON.parse(m.outcomePrices);
+          const pct = Math.round(parseFloat(prices[0]) * 100);
+          if (title.includes('split') || (title.includes('republican') && title.includes('senate') && title.includes('democrat') && title.includes('house'))) markets.splitPct = pct;
+          else if (title.includes('democrat') && (title.includes('sweep') || title.includes('both') || title.includes('house') && title.includes('senate') && !title.includes('republican'))) markets.dSweepPct = pct;
+          else if (title.includes('republican') && (title.includes('sweep') || title.includes('both') || (title.includes('house') && title.includes('senate') && !title.includes('democrat')))) markets.repSweepPct = pct;
         }
       }
     } catch (e) { console.error(`  Polymarket ${key} error:`, e.message); }
@@ -216,17 +243,26 @@ async function fetchKalshi() {
   console.log('Fetching Kalshi...');
   const markets = { houseD: null, senateR: null };
   try {
+    // Try v2 API endpoints
     const [houseRes, senateRes] = await Promise.allSettled([
-      fetchJSON('https://api.elections.kalshi.com/v1/events/CONTROLH-2026'),
-      fetchJSON('https://api.elections.kalshi.com/v1/events/CONTROLS-2026'),
+      fetchJSON('https://api.kalshi.com/trade-api/v2/events/CONTROLH-2026'),
+      fetchJSON('https://api.kalshi.com/trade-api/v2/events/CONTROLS-2026'),
     ]);
+
     if (houseRes.status === 'fulfilled') {
-      const m = houseRes.value.markets?.find(m => m.subtitle?.toLowerCase().includes('democrat') || m.yes_sub_title?.toLowerCase().includes('democrat'));
-      if (m) markets.houseD = Math.round(m.last_price || m.yes_bid || 0);
+      const data = houseRes.value;
+      const m = data.event?.markets?.find(m =>
+        (m.subtitle || m.yes_sub_title || '').toLowerCase().includes('democrat')
+      );
+      if (m) markets.houseD = Math.round((m.last_price || m.yes_bid || 0) * 100);
     }
+
     if (senateRes.status === 'fulfilled') {
-      const m = senateRes.value.markets?.find(m => m.subtitle?.toLowerCase().includes('republican') || m.yes_sub_title?.toLowerCase().includes('republican'));
-      if (m) markets.senateR = Math.round(m.last_price || m.yes_bid || 0);
+      const data = senateRes.value;
+      const m = data.event?.markets?.find(m =>
+        (m.subtitle || m.yes_sub_title || '').toLowerCase().includes('republican')
+      );
+      if (m) markets.senateR = Math.round((m.last_price || m.yes_bid || 0) * 100);
     }
   } catch (e) { console.error('  Kalshi error:', e.message); }
   console.log('  Kalshi:', markets);
