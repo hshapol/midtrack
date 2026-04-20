@@ -54,6 +54,7 @@
     .race-row-label { font-size: 11px; color: var(--faint); }
     .poll-row { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 8px; }
     .poll-row.avg-row { border-color: #854d0e; background: #1c0a00; }
+    .poll-row.rtwh-row { border-color: #1d4ed8; background: #0f1f3d; }
     .poll-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .poll-margin { font-size: 16px; font-weight: 800; }
     .race-tabs { display: flex; overflow-x: auto; border-bottom: 1px solid var(--border); background: var(--surface); border-radius: 12px 12px 0 0; }
@@ -162,6 +163,21 @@ function div(cls, html) {
   return d;
 }
 
+function pollBar(dem, rep) {
+  return `
+    <div style="margin-top:8px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <span style="font-size:12px;color:var(--dem);width:40px">${dem}%</span>
+        <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${dem}%;height:100%;background:var(--dem)"></div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:12px;color:var(--rep);width:40px">${rep}%</span>
+        <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${rep}%;height:100%;background:var(--rep)"></div></div>
+      </div>
+    </div>
+  `;
+}
+
 function renderTabs() {
   const container = document.getElementById('tabs');
   container.innerHTML = '';
@@ -224,14 +240,19 @@ function renderOverview(poly, kalshi, gb) {
     const card = div('race-card');
     card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
     const primaryRating = rating.cook || rating.sabato || '—';
-    const lastPollDate = liveData?.avg?.date;
+    const lastPollDate = liveData?.avg?.date || liveData?.rtwh?.date;
     const isStale = daysSince(lastPollDate) > 14;
-    const avgMargin = liveData?.avg
-      ? `${parseFloat(liveData.avg.margin) > 0 ? '+' : ''}${liveData.avg.margin} ${parseFloat(liveData.avg.margin) > 0 ? 'D' : 'R'}`
+
+    // Use RTWH as primary avg if available, fall back to RCP
+    const bestAvg = liveData?.rtwh || liveData?.avg;
+    const avgSource = liveData?.rtwh ? 'RTWH' : liveData?.avg ? 'RCP' : '';
+    const avgMargin = bestAvg
+      ? `${parseFloat(bestAvg.margin) > 0 ? '+' : ''}${bestAvg.margin} ${parseFloat(bestAvg.margin) > 0 ? 'D' : 'R'}`
       : (detail.matchups[0]?.margin || '—');
-    const isLiveD = liveData?.avg
-      ? parseFloat(liveData.avg.margin) > 0
+    const isLiveD = bestAvg
+      ? parseFloat(bestAvg.margin) > 0
       : detail.matchups[0]?.margin?.includes('D');
+
     card.innerHTML = `
       <div class="race-header">
         <span class="race-name">${state}</span>
@@ -239,7 +260,7 @@ function renderOverview(poly, kalshi, gb) {
         <span class="badge ${ratingBadgeClass(primaryRating)}" style="margin-left:auto">${primaryRating}</span>
       </div>
       <div class="race-row">
-        <span class="race-row-label">Latest avg ${lastPollDate && isStale ? '<span class="stale-badge">⚠ stale</span>' : ''}</span>
+        <span class="race-row-label">Latest avg ${avgSource ? '<span style="font-size:10px;color:var(--faint)">('+avgSource+')</span>' : ''} ${lastPollDate && isStale ? '<span class="stale-badge">⚠ stale</span>' : ''}</span>
         <span class="${isLiveD ? 'pill pill-d' : 'pill pill-r'}">${avgMargin}</span>
       </div>
       <div class="race-row">
@@ -288,14 +309,14 @@ function renderSenateRaces() {
     const detail = RACE_DETAILS[state];
     const rating = getRating(state);
     const liveData = DATA?.senatePolls?.[state];
-    const isStale = daysSince(liveData?.avg?.date) > 14;
+    const isStale = daysSince(liveData?.avg?.date || liveData?.rtwh?.date) > 14;
     const card = div('race-card');
     card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
     card.innerHTML = `
       <div class="race-header">
         <span class="race-name">${state}</span>
         <span class="badge badge-${detail.hold.toLowerCase()}" title="Current seat holder">Current: ${detail.hold}</span>
-    ${liveData?.avg?.date && isStale ? '<span class="stale-badge">⚠ stale poll</span>' : ''}
+        ${(liveData?.avg?.date || liveData?.rtwh?.date) && isStale ? '<span class="stale-badge">⚠ stale poll</span>' : ''}
         <div style="margin-left:auto;display:flex;gap:6px">
           ${['Cook','Sabato','IE'].map((l,i) => { const r=[rating.cook,rating.sabato,rating.ie][i]||'—'; return `<span class="badge ${ratingBadgeClass(r)}">${l}: ${r}</span>`; }).join('')}
         </div>
@@ -328,8 +349,8 @@ function renderSenatePolling() {
       <div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
           <h2 style="font-size:22px;font-weight:800">${selectedRace}</h2>
-       <span class="badge badge-${detail.hold.toLowerCase()}" title="Current seat holder">Current: ${detail.hold}</span>
-       </div>
+          <span class="badge badge-${detail.hold.toLowerCase()}" title="Current seat holder">Current: ${detail.hold}</span>
+        </div>
         <p style="font-size:13px;color:var(--muted);max-width:600px;line-height:1.5">${detail.context}</p>
         <div style="display:flex;gap:16px;font-size:12px;color:var(--faint);margin-top:8px">
           <span>Primary: <span style="color:var(--muted)">${detail.primaryDate}</span></span>
@@ -350,33 +371,47 @@ function renderSenatePolling() {
   const mSection = div('');
   mSection.innerHTML = '<div class="card-title">Poll Averages</div>';
 
-  if (liveData?.avg) {
-    const avg = liveData.avg;
-    const isDem = parseFloat(avg.margin) > 0;
-    const isStale = daysSince(avg.date) > 14;
-    const avgRow = div('poll-row avg-row');
-    avgRow.innerHTML = `
-      <div class="poll-header">
-        <div>
-          <div style="font-size:13px;color:var(--text);font-weight:600">RCP Average ${isStale ? '<span class="stale-badge">⚠ stale</span>' : ''}</div>
-          <div style="font-size:11px;color:var(--faint)">${avg.source} · <span style="color:var(--green)">${avg.date}</span></div>
-        </div>
-        <div class="poll-margin ${isDem ? 'dem-color' : 'rep-color'}">${isDem ? '+' : ''}${avg.margin} ${isDem ? 'D' : 'R'}</div>
-      </div>
-      <div style="margin-top:8px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <span style="font-size:12px;color:var(--dem);width:40px">${avg.dem}%</span>
-          <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${avg.dem}%;height:100%;background:var(--dem)"></div></div>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-size:12px;color:var(--rep);width:40px">${avg.rep}%</span>
-          <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${avg.rep}%;height:100%;background:var(--rep)"></div></div>
-        </div>
-      </div>
-    `;
-    mSection.appendChild(avgRow);
+  if (liveData?.avg || liveData?.rtwh) {
 
-    (liveData.polls || []).forEach(p => {
+    // RCP Average
+    if (liveData?.avg) {
+      const avg = liveData.avg;
+      const isDem = parseFloat(avg.margin) > 0;
+      const isStale = daysSince(avg.date) > 14;
+      const avgRow = div('poll-row avg-row');
+      avgRow.innerHTML = `
+        <div class="poll-header">
+          <div>
+            <div style="font-size:13px;color:var(--text);font-weight:600">RCP Average ${isStale ? '<span class="stale-badge">⚠ stale</span>' : ''}</div>
+            <div style="font-size:11px;color:var(--faint)">${avg.source || 'RCP'} · <span style="color:var(--green)">${avg.date}</span></div>
+          </div>
+          <div class="poll-margin ${isDem ? 'dem-color' : 'rep-color'}">${isDem ? '+' : ''}${avg.margin} ${isDem ? 'D' : 'R'}</div>
+        </div>
+        ${pollBar(avg.dem, avg.rep)}
+      `;
+      mSection.appendChild(avgRow);
+    }
+
+    // RTWH Average
+    if (liveData?.rtwh) {
+      const rtwh = liveData.rtwh;
+      const isDem = parseFloat(rtwh.margin) > 0;
+      const rtwhRow = div('poll-row rtwh-row');
+      rtwhRow.innerHTML = `
+        <div class="poll-header">
+          <div>
+            <div style="font-size:13px;color:var(--text);font-weight:600">RaceToTheWH Average</div>
+            <div style="font-size:11px;color:var(--faint)">Weighted by recency & pollster quality · <span style="color:var(--green)">${rtwh.date}</span></div>
+          </div>
+          <div class="poll-margin ${isDem ? 'dem-color' : 'rep-color'}">${isDem ? '+' : ''}${rtwh.margin} ${isDem ? 'D' : 'R'}</div>
+        </div>
+        ${pollBar(rtwh.dem, rtwh.rep)}
+      `;
+      mSection.appendChild(rtwhRow);
+    }
+
+    // Individual polls
+    (liveData?.polls || []).forEach(p => {
       const pIsDem = parseFloat(p.margin) > 0;
       const pRow = div('poll-row');
       pRow.innerHTML = `
@@ -384,16 +419,7 @@ function renderSenatePolling() {
           <div><div style="font-size:13px;color:var(--text)">${p.source}</div><div style="font-size:11px;color:var(--faint)">${p.date}</div></div>
           <div class="poll-margin ${pIsDem ? 'dem-color' : 'rep-color'}">${pIsDem ? '+' : ''}${p.margin} ${pIsDem ? 'D' : 'R'}</div>
         </div>
-        <div style="margin-top:8px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-            <span style="font-size:12px;color:var(--dem);width:40px">${p.dem}%</span>
-            <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${p.dem}%;height:100%;background:var(--dem)"></div></div>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <span style="font-size:12px;color:var(--rep);width:40px">${p.rep}%</span>
-            <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${p.rep}%;height:100%;background:var(--rep)"></div></div>
-          </div>
-        </div>
+        ${pollBar(p.dem, p.rep)}
       `;
       mSection.appendChild(pRow);
     });
@@ -407,10 +433,7 @@ function renderSenatePolling() {
           <div><div style="font-size:13px;color:var(--text)"><span style="color:var(--dem)">${m.dem}</span> vs <span style="color:var(--rep)">${m.rep}</span></div><div style="font-size:11px;color:var(--faint)">${m.source} · ${m.date}</div></div>
           <div class="poll-margin ${isDem ? 'dem-color' : 'rep-color'}">${m.margin}</div>
         </div>
-        <div style="margin-top:8px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:12px;color:var(--dem);width:40px">${m.demPct}%</span><div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${m.demPct}%;height:100%;background:var(--dem)"></div></div></div>
-          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;color:var(--rep);width:40px">${m.repPct}%</span><div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${m.repPct}%;height:100%;background:var(--rep)"></div></div></div>
-        </div>
+        ${pollBar(m.demPct, m.repPct)}
       `;
       mSection.appendChild(row);
     });
@@ -494,7 +517,6 @@ function renderTrends() {
     }, 50);
   }
 
-  // Market charts
   makeChart('chart-markets', 'Prediction Markets', [
     { label:'House → Dem %', data:HISTORY.map(d => d.markets?.polymarket?.houseD??null), borderColor:'#3b82f6', tension:0.3, pointRadius:3, fill:false },
     { label:'Senate → Rep %', data:HISTORY.map(d => d.markets?.polymarket?.senateR??null), borderColor:'#ef4444', tension:0.3, pointRadius:3, fill:false },
@@ -513,11 +535,13 @@ function renderTrends() {
     { label:'Dem sweep %', data:HISTORY.map(d => d.markets?.polymarket?.dSweepPct??null), borderColor:'#60a5fa', backgroundColor:'rgba(96,165,250,0.15)', tension:0.3, pointRadius:3, fill:true },
   ]);
 
-  // Senate polling trend charts — only show states with 2+ data points
   const TREND_STATES = ['North Carolina','Georgia','Michigan','Ohio (Special)','New Hampshire','Maine','Alaska','Texas'];
   TREND_STATES.forEach(state => {
     const stateData = HISTORY
-      .map(d => ({ date: d.date.slice(5), avg: d.senatePolls?.[state]?.avg }))
+      .map(d => ({
+        date: d.date.slice(5),
+        avg: d.senatePolls?.[state]?.rtwh || d.senatePolls?.[state]?.avg
+      }))
       .filter(d => d.avg);
     if (stateData.length < 2) return;
     makeChart(
@@ -531,7 +555,7 @@ function renderTrends() {
     );
   });
 
-  wrap.appendChild(div('', `<p style="font-size:11px;color:var(--faint);text-align:center">Tracking ${HISTORY.length} days · Data from Polymarket, RCP</p>`));
+  wrap.appendChild(div('', `<p style="font-size:11px;color:var(--faint);text-align:center">Tracking ${HISTORY.length} days · Data from Polymarket, RCP, RTWH</p>`));
   return wrap;
 }
 
@@ -552,6 +576,7 @@ function renderSources() {
     { cat:'Polling', items:[
       { name:'RealClearPolling Senate', url:'https://www.realclearpolling.com/polls/senate' },
       { name:'RealClearPolling Generic Ballot', url:'https://www.realclearpolling.com/polls/congress/generic-congressional-ballot' },
+      { name:'RaceToTheWH Senate Polls', url:'https://www.racetothewh.com/senate/26polls' },
       { name:'Silver Bulletin', url:'https://www.natesilver.net/p/generic-ballot-average-2026-nate-silver-bulletin-congress-polls' },
     ]},
     { cat:'Forecasters', items:[
