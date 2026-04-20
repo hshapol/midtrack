@@ -53,7 +53,58 @@
             ]
         }
     },
-    "senateRatings": {},
+    "senateRatings": {
+        "Maine": {
+            "cook": "Toss-Up",
+            "sabato": null,
+            "ie": null
+        },
+        "North Carolina": {
+            "cook": "Lean D",
+            "sabato": null,
+            "ie": null
+        },
+        "Georgia": {
+            "cook": "Lean D",
+            "sabato": null,
+            "ie": null
+        },
+        "Michigan": {
+            "cook": "Toss-Up",
+            "sabato": null,
+            "ie": null
+        },
+        "Ohio": {
+            "cook": "Toss-Up",
+            "sabato": null,
+            "ie": null
+        },
+        "New Hampshire": {
+            "cook": "Lean D",
+            "sabato": null,
+            "ie": null
+        },
+        "Alaska": {
+            "cook": "Lean R",
+            "sabato": null,
+            "ie": null
+        },
+        "Nebraska": {
+            "cook": "Likely R",
+            "sabato": null,
+            "ie": null
+        },
+        "Iowa": {
+            "cook": "Likely R",
+            "sabato": null,
+            "ie": null
+        },
+        "Texas": {
+            "cook": "Likely R",
+            "sabato": null,
+            "ie": null
+        }
+    },
     "trumpApproval": {
         "approve": null,
         "disapprove": null,
