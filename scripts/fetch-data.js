@@ -70,87 +70,37 @@ async function fetchAllSenatePolls(browser) {
     await page.goto('https://www.racetothewh.com/senate/26polls', { waitUntil: 'domcontentloaded', timeout: 60000 });
     await new Promise(r => setTimeout(r, 4000));
 
-    // Count how many matchups exist by clicking next until we loop
-    const seen = new Set();
-    let attempts = 0;
-    const maxAttempts = 30;
+    // Get all options from the select dropdown
+    const options = await page.$$eval('select.igc-tab-select option', opts =>
+      opts.map(o => ({ value: o.value, text: o.textContent.trim() }))
+    );
 
-    while (attempts < maxAttempts) {
-      // Get current matchup title
-      const title = await page.$eval(
-        'div[class*="sqs-block"] select, .polling-selector, [class*="dropdown"] option:checked, h2, h3',
-        el => el.textContent
-      ).catch(() => '');
+    console.log(`  Found ${options.length} matchups:`, options.map(o => o.text).join(', '));
 
-      // Get the dropdown/title text more broadly
+    for (const opt of options) {
+      const state = matchState(opt.text);
+      if (!state || results[state]) continue;
+
+      console.log(`  Selecting: "${opt.text}" → ${state}`);
+
+      // Select this option
+      await page.select('select.igc-tab-select', opt.value);
+      await new Promise(r => setTimeout(r, 2000));
+
       const html = await page.content();
       const $ = cheerio.load(html);
+      const polls = parseRTWHTable($);
 
-      // Find current race title from the page
-      let raceTitle = '';
-      $('h2, h3, .race-title, [class*="title"]').each((_, el) => {
-        const t = $(el).text().trim();
-        if (t.includes(' v. ') || t.includes(' vs ') || t.includes('Senate')) {
-          raceTitle = t;
-          return false;
-        }
-      });
-
-      // Also check button/dropdown text
-      $('button, select option:selected, [class*="selected"]').each((_, el) => {
-        const t = $(el).text().trim();
-        if (t.length > 5) { raceTitle = raceTitle || t; }
-      });
-
-      const state = matchState(raceTitle);
-      console.log(`  Slide ${attempts + 1}: "${raceTitle}" → ${state || 'unknown'}`);
-
-      if (seen.has(raceTitle) && attempts > 0) {
-        console.log('  Looped back to start, done');
-        break;
-      }
-      seen.add(raceTitle);
-
-      if (state && !results[state]) {
-        const polls = parseRTWHTable($);
-        let avg = null;
-        if (polls.length > 0) {
-          const recent = polls.slice(0, 5);
-          const d = recent.reduce((s, p) => s + p.dem, 0) / recent.length;
-          const r = recent.reduce((s, p) => s + p.rep, 0) / recent.length;
-          avg = { source: 'RTWH Avg', date: TODAY, dem: parseFloat(d.toFixed(1)), rep: parseFloat(r.toFixed(1)), margin: (d - r).toFixed(1) };
-        }
-        results[state] = { polls: polls.slice(0, 6), avg };
-        console.log(`    Saved ${polls.length} polls for ${state}`);
+      let avg = null;
+      if (polls.length > 0) {
+        const recent = polls.slice(0, 5);
+        const d = recent.reduce((s, p) => s + p.dem, 0) / recent.length;
+        const r = recent.reduce((s, p) => s + p.rep, 0) / recent.length;
+        avg = { source: 'RTWH Avg', date: TODAY, dem: parseFloat(d.toFixed(1)), rep: parseFloat(r.toFixed(1)), margin: (d - r).toFixed(1) };
       }
 
-      // Click the next arrow
-      const clicked = await page.evaluate(() => {
-        // Try various next button selectors
-        const selectors = [
-          'button[aria-label="Next"]',
-          '.next-button',
-          '[class*="next"]',
-          'button:last-of-type',
-        ];
-        for (const sel of selectors) {
-          const el = document.querySelector(sel);
-          if (el) { el.click(); return true; }
-        }
-        // Try clicking the > arrow by finding buttons with > text
-        const buttons = Array.from(document.querySelectorAll('button'));
-        const nextBtn = buttons.find(b => b.textContent.trim() === '>' || b.textContent.trim() === '›' || b.textContent.trim() === '→');
-        if (nextBtn) { nextBtn.click(); return true; }
-        return false;
-      });
-
-      if (!clicked) {
-        console.log('  Could not find next button, stopping');
-        break;
-      }
-
-      await new Promise(r => setTimeout(r, 2000));
-      attempts++;
+      results[state] = { polls: polls.slice(0, 6), avg };
+      console.log(`    ${polls.length} polls for ${state}, avg: ${avg ? avg.margin : 'none'}`);
     }
 
   } catch (e) {
