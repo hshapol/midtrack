@@ -23,11 +23,11 @@ function safe(fn, fallback = null) {
   try { return fn(); } catch { return fallback; }
 }
 
-async function fetchRendered(browser, url, waitMs = 3000) {
+async function fetchRendered(browser, url, waitMs = 2000) {
   const page = await browser.newPage();
   await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36');
   try {
-    await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
     await new Promise(r => setTimeout(r, waitMs));
     return await page.content();
   } finally {
@@ -221,16 +221,13 @@ async function fetchPolymarket() {
         if (m?.outcomePrices) markets.senateR = Math.round(parseFloat(JSON.parse(m.outcomePrices)[0]) * 100);
       }
       if (key === 'balance') {
-        // Log all market titles to debug
-        console.log('  Balance markets:', event.markets?.map(m => m.question || m.groupItemTitle));
         for (const m of (event.markets || [])) {
-          const title = (m.question || m.groupItemTitle || '').toLowerCase();
+          const title = (m.question || m.groupItemTitle || '');
           if (!m.outcomePrices) continue;
-          const prices = JSON.parse(m.outcomePrices);
-          const pct = Math.round(parseFloat(prices[0]) * 100);
-          if (title.includes('split') || (title.includes('republican') && title.includes('senate') && title.includes('democrat') && title.includes('house'))) markets.splitPct = pct;
-          else if (title.includes('democrat') && (title.includes('sweep') || title.includes('both') || title.includes('house') && title.includes('senate') && !title.includes('republican'))) markets.dSweepPct = pct;
-          else if (title.includes('republican') && (title.includes('sweep') || title.includes('both') || (title.includes('house') && title.includes('senate') && !title.includes('democrat')))) markets.repSweepPct = pct;
+          const pct = Math.round(parseFloat(JSON.parse(m.outcomePrices)[0]) * 100);
+          if (title.includes('R Senate, D House')) markets.splitPct = pct;
+          else if (title.includes('D Senate, D House')) markets.dSweepPct = pct;
+          else if (title.includes('R Senate, R House')) markets.repSweepPct = pct;
         }
       }
     } catch (e) { console.error(`  Polymarket ${key} error:`, e.message); }
