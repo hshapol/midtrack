@@ -86,7 +86,7 @@
   },
   {
     "date": "2026-04-20",
-    "fetchedAt": "2026-04-20T19:18:58.962Z",
+    "fetchedAt": "2026-04-20T19:42:11.699Z",
     "markets": {
       "polymarket": {
         "houseD": 85,
@@ -104,11 +104,95 @@
       "polls": [],
       "avg": null
     },
+    "senatePolls": {
+      "North Carolina": {
+        "polls": [
+          {
+            "source": "High Point/YouGov",
+            "date": "3/26 - 4/6",
+            "dem": 703,
+            "rep": 4.3,
+            "margin": "698.7"
+          },
+          {
+            "source": "Quantus Insights",
+            "date": "3/31 - 4/1",
+            "dem": 987,
+            "rep": 3.5,
+            "margin": "983.5"
+          },
+          {
+            "source": "Carolina Journal/Harper",
+            "date": "3/22 - 3/23",
+            "dem": 600,
+            "rep": 4,
+            "margin": "596.0"
+          },
+          {
+            "source": "PPP",
+            "date": "3/13 - 3/14",
+            "dem": 556,
+            "rep": 4.2,
+            "margin": "551.8"
+          },
+          {
+            "source": "Change Research**",
+            "date": "1/31 - 2/4",
+            "dem": 1069,
+            "rep": 3.1,
+            "margin": "1065.9"
+          },
+          {
+            "source": "High Point/YouGov",
+            "date": "3/26 - 4/6",
+            "dem": 703,
+            "rep": 4.3,
+            "margin": "698.7"
+          }
+        ],
+        "avg": {
+          "source": "Computed Avg",
+          "date": "2026-04-20",
+          "dem": 783,
+          "rep": 3.8,
+          "margin": "779.2"
+        }
+      },
+      "Georgia": {
+        "polls": [],
+        "avg": null
+      },
+      "Michigan": {
+        "polls": [],
+        "avg": null
+      },
+      "Ohio (Special)": {
+        "polls": [],
+        "avg": null
+      },
+      "New Hampshire": {
+        "polls": [],
+        "avg": null
+      },
+      "Maine": {
+        "polls": [],
+        "avg": null
+      },
+      "Alaska": {
+        "polls": [],
+        "avg": null
+      },
+      "Texas": {
+        "polls": [],
+        "avg": null
+      }
+    },
     "senateRatings": {},
     "trumpApproval": {
       "approve": null,
       "disapprove": null,
-      "net": null
+      "net": null,
+      "source": "RCP Average"
     }
   }
 ]
