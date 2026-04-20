@@ -199,23 +199,31 @@ function renderOverview(poly, kalshi, gb) {
   });
   wrap.appendChild(statsGrid);
 
-  const big8Card = div('card');
+ const big8Card = div('card');
   big8Card.innerHTML = '<div class="card-title">The Big 8 Senate Races</div>';
   const big8Grid = div('grid-2');
-  [
-    { state:"Maine", polyD:55 }, { state:"North Carolina", polyD:64 },
-    { state:"Georgia", polyD:42 }, { state:"Michigan", polyD:58 },
-    { state:"Ohio (Special)", polyD:35 }, { state:"Alaska", polyD:48 },
-    { state:"Texas", polyD:22 }, { state:"New Hampshire", polyD:65 },
-  ].forEach(({ state, polyD }) => {
+
+  const POLY_ODDS = {
+    "Maine": 55, "North Carolina": 64, "Georgia": 70,
+    "Michigan": 58, "Ohio (Special)": 40, "Alaska": 48,
+    "Texas": 22, "New Hampshire": 65,
+  };
+
+  ["Maine","North Carolina","Georgia","Michigan","Ohio (Special)","Alaska","Texas","New Hampshire"]
+  .forEach(state => {
+    const polyD = POLY_ODDS[state] || 50;
     const detail = RACE_DETAILS[state];
     const rating = getRating(state);
     const liveData = DATA?.senatePolls?.[state];
     const card = div('race-card');
     card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
     const primaryRating = rating.cook || rating.sabato || '—';
-    const avgMargin = liveData?.avg ? `${parseFloat(liveData.avg.margin) > 0 ? '+' : ''}${liveData.avg.margin} D` : (detail.matchups[0]?.margin || '—');
-    const isLiveD = liveData?.avg ? parseFloat(liveData.avg.margin) > 0 : detail.matchups[0]?.margin?.includes('D');
+    const avgMargin = liveData?.avg
+      ? `${parseFloat(liveData.avg.margin) > 0 ? '+' : ''}${liveData.avg.margin} ${parseFloat(liveData.avg.margin) > 0 ? 'D' : 'R'}`
+      : (detail.matchups[0]?.margin || '—');
+    const isLiveD = liveData?.avg
+      ? parseFloat(liveData.avg.margin) > 0
+      : detail.matchups[0]?.margin?.includes('D');
     card.innerHTML = `
       <div class="race-header">
         <span class="race-name">${state}</span>
@@ -231,7 +239,7 @@ function renderOverview(poly, kalshi, gb) {
   wrap.appendChild(big8Card);
   return wrap;
 }
-
+  
 function renderGenericBallot(gb) {
   const wrap = div('space-y');
   const card = div('card');
