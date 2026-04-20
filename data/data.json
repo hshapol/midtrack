@@ -1,7 +1,7 @@
 {
   "lastUpdated": "2026-04-20",
   "date": "2026-04-20",
-  "fetchedAt": "2026-04-20T20:01:34.450Z",
+  "fetchedAt": "2026-04-20T20:06:30.563Z",
   "markets": {
     "polymarket": {
       "houseD": 85,
@@ -23,34 +23,6 @@
     "North Carolina": {
       "polls": [],
       "avg": null
-    },
-    "Georgia": {
-      "polls": [],
-      "avg": null
-    },
-    "Michigan": {
-      "polls": [],
-      "avg": null
-    },
-    "Ohio (Special)": {
-      "polls": [],
-      "avg": null
-    },
-    "New Hampshire": {
-      "polls": [],
-      "avg": null
-    },
-    "Maine": {
-      "polls": [],
-      "avg": null
-    },
-    "Alaska": {
-      "polls": [],
-      "avg": null
-    },
-    "Texas": {
-      "polls": [],
-      "avg": null
     }
   },
   "senateRatings": {},
@@ -58,6 +30,6 @@
     "approve": null,
     "disapprove": null,
     "net": null,
-    "source": "RCP Average"
+    "source": "RTWH"
   }
 }
