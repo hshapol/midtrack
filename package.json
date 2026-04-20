@@ -9,6 +9,6 @@
   "dependencies": {
     "node-fetch": "^3.3.2",
     "cheerio": "^1.0.0",
-    "puppeteer": "^21.0.0"
+    "puppeteer-core": "^21.0.0"
   }
 }
