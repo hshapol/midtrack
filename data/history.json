@@ -86,7 +86,7 @@
   },
   {
     "date": "2026-04-20",
-    "fetchedAt": "2026-04-20T19:54:25.750Z",
+    "fetchedAt": "2026-04-20T20:01:34.450Z",
     "markets": {
       "polymarket": {
         "houseD": 85,
@@ -106,57 +106,8 @@
     },
     "senatePolls": {
       "North Carolina": {
-        "polls": [
-          {
-            "source": "High Point/YouGov",
-            "date": "3/26 - 4/6",
-            "dem": 50,
-            "rep": 42,
-            "margin": "8.0"
-          },
-          {
-            "source": "Quantus Insights",
-            "date": "3/31 - 4/1",
-            "dem": 49,
-            "rep": 44,
-            "margin": "5.0"
-          },
-          {
-            "source": "Carolina Journal/Harper",
-            "date": "3/22 - 3/23",
-            "dem": 49,
-            "rep": 41,
-            "margin": "8.0"
-          },
-          {
-            "source": "PPP",
-            "date": "3/13 - 3/14",
-            "dem": 47,
-            "rep": 44,
-            "margin": "3.0"
-          },
-          {
-            "source": "Change Research**",
-            "date": "1/31 - 2/4",
-            "dem": 50,
-            "rep": 40,
-            "margin": "10.0"
-          },
-          {
-            "source": "High Point/YouGov",
-            "date": "3/26 - 4/6",
-            "dem": 50,
-            "rep": 42,
-            "margin": "8.0"
-          }
-        ],
-        "avg": {
-          "source": "RCP Average",
-          "date": "1/31 - 4/6",
-          "dem": 49,
-          "rep": 42.2,
-          "margin": "6.8"
-        }
+        "polls": [],
+        "avg": null
       },
       "Georgia": {
         "polls": [],
@@ -167,57 +118,8 @@
         "avg": null
       },
       "Ohio (Special)": {
-        "polls": [
-          {
-            "source": "Quantus Insights",
-            "date": "3/13 - 3/14",
-            "dem": 46,
-            "rep": 44,
-            "margin": "2.0"
-          },
-          {
-            "source": "Emerson",
-            "date": "12/6 - 12/8",
-            "dem": 49,
-            "rep": 46,
-            "margin": "3.0"
-          },
-          {
-            "source": "Bowling Green/YouGov",
-            "date": "10/2 - 10/14",
-            "dem": 48,
-            "rep": 49,
-            "margin": "-1.0"
-          },
-          {
-            "source": "Quantus Insights",
-            "date": "3/13 - 3/14",
-            "dem": 46,
-            "rep": 44,
-            "margin": "2.0"
-          },
-          {
-            "source": "Emerson",
-            "date": "12/6 - 12/8",
-            "dem": 49,
-            "rep": 46,
-            "margin": "3.0"
-          },
-          {
-            "source": "Bowling Green/YouGov",
-            "date": "10/2 - 10/14",
-            "dem": 48,
-            "rep": 49,
-            "margin": "-1.0"
-          }
-        ],
-        "avg": {
-          "source": "RCP Average",
-          "date": "10/2 - 3/14",
-          "dem": 47.7,
-          "rep": 46.3,
-          "margin": "1.4"
-        }
+        "polls": [],
+        "avg": null
       },
       "New Hampshire": {
         "polls": [],
@@ -232,50 +134,8 @@
         "avg": null
       },
       "Texas": {
-        "polls": [
-          {
-            "source": "University of Houston*",
-            "date": "1/20 - 1/31",
-            "dem": 44,
-            "rep": 43,
-            "margin": "1.0"
-          },
-          {
-            "source": "Emerson",
-            "date": "1/10 - 1/12",
-            "dem": 47,
-            "rep": 44,
-            "margin": "3.0"
-          },
-          {
-            "source": "University of Houston*",
-            "date": "1/20 - 1/31",
-            "dem": 44,
-            "rep": 43,
-            "margin": "1.0"
-          },
-          {
-            "source": "Emerson",
-            "date": "1/10 - 1/12",
-            "dem": 47,
-            "rep": 44,
-            "margin": "3.0"
-          },
-          {
-            "source": "U. of Houston/TSU",
-            "date": "9/19 - 10/1",
-            "dem": 48,
-            "rep": 45,
-            "margin": "3.0"
-          }
-        ],
-        "avg": {
-          "source": "RCP Average",
-          "date": "1/10 - 1/31",
-          "dem": 45.5,
-          "rep": 43.5,
-          "margin": "2.0"
-        }
+        "polls": [],
+        "avg": null
       }
     },
     "senateRatings": {},
