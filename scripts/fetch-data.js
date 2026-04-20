@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 import { writeFileSync, readFileSync, mkdirSync } from 'fs';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 
 const TODAY = new Date().toISOString().split('T')[0];
 
@@ -238,7 +238,8 @@ async function main() {
 
   const browser = await puppeteer.launch({
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+    executablePath: '/usr/bin/google-chrome-stable',
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
   });
 
   try {
