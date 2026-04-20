@@ -23,86 +23,180 @@ function safe(fn, fallback = null) {
   try { return fn(); } catch { return fallback; }
 }
 
-async function fetchRendered(browser, url, waitMs = 2000) {
+// ─── RTWH SENATE POLLS (click through all matchups on one page) ──────────────
+
+const STATE_KEYWORDS = {
+  'North Carolina': ['north carolina', 'nc -', 'cooper', 'whatley'],
+  'Georgia':        ['georgia', 'ga -', 'ossoff', 'collins'],
+  'Michigan':       ['michigan', 'mi -', 'stevens', 'rogers', 'mcmorrow'],
+  'Ohio (Special)': ['ohio', 'oh -', 'brown', 'husted'],
+  'New Hampshire':  ['new hampshire', 'nh -', 'pappas', 'sununu'],
+  'Maine':          ['maine', 'me -', 'collins', 'mills', 'platner'],
+  'Alaska':         ['alaska', 'ak -', 'peltola', 'sullivan'],
+  'Texas':          ['texas', 'tx -', 'talarico', 'cornyn', 'paxton'],
+};
+
+function matchState(title) {
+  const t = title.toLowerCase();
+  for (const [state, keywords] of Object.entries(STATE_KEYWORDS)) {
+    if (keywords.some(k => t.includes(k))) return state;
+  }
+  return null;
+}
+
+function parseRTWHTable($) {
+  const polls = [];
+  $('table tr').each((i, row) => {
+    if (i === 0) return;
+    const cells = $(row).find('td');
+    if (cells.length < 4) return;
+    const date   = $(cells[0]).text().trim();
+    const poll   = $(cells[1]).text().trim();
+    const dem    = parseFloat($(cells[2]).text().replace('%', '').trim());
+    const rep    = parseFloat($(cells[3]).text().replace('%', '').trim());
+    if (!poll || isNaN(dem) || isNaN(rep)) return;
+    polls.push({ source: poll, date, dem, rep, margin: (dem - rep).toFixed(1) });
+  });
+  return polls;
+}
+
+async function fetchAllSenatePolls(browser) {
+  console.log('Fetching RTWH senate polls (all states)...');
+  const results = {};
   const page = await browser.newPage();
   await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36');
+
   try {
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    // Wait for poll table to actually render
-    await page.waitForSelector('table tr td', { timeout: 15000 }).catch(() => {});
-    await new Promise(r => setTimeout(r, waitMs));
-    return await page.content();
+    await page.goto('https://www.racetothewh.com/senate/26polls', { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await new Promise(r => setTimeout(r, 4000));
+
+    // Count how many matchups exist by clicking next until we loop
+    const seen = new Set();
+    let attempts = 0;
+    const maxAttempts = 30;
+
+    while (attempts < maxAttempts) {
+      // Get current matchup title
+      const title = await page.$eval(
+        'div[class*="sqs-block"] select, .polling-selector, [class*="dropdown"] option:checked, h2, h3',
+        el => el.textContent
+      ).catch(() => '');
+
+      // Get the dropdown/title text more broadly
+      const html = await page.content();
+      const $ = cheerio.load(html);
+
+      // Find current race title from the page
+      let raceTitle = '';
+      $('h2, h3, .race-title, [class*="title"]').each((_, el) => {
+        const t = $(el).text().trim();
+        if (t.includes(' v. ') || t.includes(' vs ') || t.includes('Senate')) {
+          raceTitle = t;
+          return false;
+        }
+      });
+
+      // Also check button/dropdown text
+      $('button, select option:selected, [class*="selected"]').each((_, el) => {
+        const t = $(el).text().trim();
+        if (t.length > 5) { raceTitle = raceTitle || t; }
+      });
+
+      const state = matchState(raceTitle);
+      console.log(`  Slide ${attempts + 1}: "${raceTitle}" → ${state || 'unknown'}`);
+
+      if (seen.has(raceTitle) && attempts > 0) {
+        console.log('  Looped back to start, done');
+        break;
+      }
+      seen.add(raceTitle);
+
+      if (state && !results[state]) {
+        const polls = parseRTWHTable($);
+        let avg = null;
+        if (polls.length > 0) {
+          const recent = polls.slice(0, 5);
+          const d = recent.reduce((s, p) => s + p.dem, 0) / recent.length;
+          const r = recent.reduce((s, p) => s + p.rep, 0) / recent.length;
+          avg = { source: 'RTWH Avg', date: TODAY, dem: parseFloat(d.toFixed(1)), rep: parseFloat(r.toFixed(1)), margin: (d - r).toFixed(1) };
+        }
+        results[state] = { polls: polls.slice(0, 6), avg };
+        console.log(`    Saved ${polls.length} polls for ${state}`);
+      }
+
+      // Click the next arrow
+      const clicked = await page.evaluate(() => {
+        // Try various next button selectors
+        const selectors = [
+          'button[aria-label="Next"]',
+          '.next-button',
+          '[class*="next"]',
+          'button:last-of-type',
+        ];
+        for (const sel of selectors) {
+          const el = document.querySelector(sel);
+          if (el) { el.click(); return true; }
+        }
+        // Try clicking the > arrow by finding buttons with > text
+        const buttons = Array.from(document.querySelectorAll('button'));
+        const nextBtn = buttons.find(b => b.textContent.trim() === '>' || b.textContent.trim() === '›' || b.textContent.trim() === '→');
+        if (nextBtn) { nextBtn.click(); return true; }
+        return false;
+      });
+
+      if (!clicked) {
+        console.log('  Could not find next button, stopping');
+        break;
+      }
+
+      await new Promise(r => setTimeout(r, 2000));
+      attempts++;
+    }
+
+  } catch (e) {
+    console.error('  RTWH senate error:', e.message);
   } finally {
     await page.close();
   }
-}
 
-// RCP table format: Pollster | Date | Sample | MoE | Dem(col4) | Rep(col5) | Spread
-function parseRCPTable(html) {
-  const $ = cheerio.load(html);
-  const polls = [];
-  let avg = null;
-
-  $('table tr').each((i, row) => {
-    const cells = $(row).find('td');
-    if (cells.length < 6) return;
-    const source = $(cells[0]).text().trim();
-    const date   = $(cells[1]).text().trim();
-    const dem    = parseFloat($(cells[4]).text().trim());
-    const rep    = parseFloat($(cells[5]).text().trim());
-    if (!source || isNaN(dem) || isNaN(rep)) return;
-    const entry = { source, date, dem, rep, margin: (dem - rep).toFixed(1) };
-    if (source.toLowerCase().includes('rcp') || source.toLowerCase().includes('average')) avg = entry;
-    else polls.push(entry);
-  });
-
-  return { polls, avg };
-}
-
-const RCP_RACES = {
-  'North Carolina': 'https://www.realclearpolling.com/polls/senate/general/2026/north-carolina/cooper-vs-whatley',
-  'Georgia':        'https://www.realclearpolling.com/polls/senate/general/2026/georgia/ossoff-vs-collins',
-  'Michigan':       'https://www.realclearpolling.com/polls/senate/general/2026/michigan/rogers-vs-stevens',
-  'Ohio (Special)': 'https://www.realclearpolling.com/polls/senate/special-election/2026/ohio/husted-vs-brown',
-  'New Hampshire':  'https://www.realclearpolling.com/polls/senate/general/2026/new-hampshire/pappas-vs-sununu',
-  'Maine':          'https://www.realclearpolling.com/polls/senate/general/2026/maine/collins-vs-mills',
-  'Alaska':         'https://www.realclearpolling.com/polls/senate/general/2026/alaska/sullivan-vs-peltola',
-  'Texas':          'https://www.realclearpolling.com/polls/senate/general/2026/texas/cornyn-vs-talarico',
-};
-
-async function fetchRCPSenatePolls(browser) {
-  console.log('Fetching RCP senate polls...');
-  const results = {};
-  for (const [state, url] of Object.entries(RCP_RACES)) {
-    try {
-      console.log(`  ${state}...`);
-      const html = await fetchRendered(browser, url, 2000);
-      const { polls, avg } = parseRCPTable(html);
-
-      // Fallback: compute avg from recent polls if RCP avg not found
-      let finalAvg = avg;
-      if (!finalAvg && polls.length > 0) {
-        const recent = polls.slice(0, 5);
-        const d = recent.reduce((s, p) => s + p.dem, 0) / recent.length;
-        const r = recent.reduce((s, p) => s + p.rep, 0) / recent.length;
-        finalAvg = { source: 'Computed Avg', date: TODAY, dem: parseFloat(d.toFixed(1)), rep: parseFloat(r.toFixed(1)), margin: (d - r).toFixed(1) };
-      }
-
-      results[state] = { polls: polls.slice(0, 6), avg: finalAvg };
-      console.log(`    ${polls.length} polls, avg: ${finalAvg ? finalAvg.margin : 'none'}`);
-    } catch (e) {
-      console.error(`  Error ${state}:`, e.message);
-      results[state] = { polls: [], avg: null };
-    }
-  }
+  console.log(`  Got data for: ${Object.keys(results).join(', ')}`);
   return results;
 }
 
+// ─── RTWH GENERIC BALLOT ─────────────────────────────────────────────────────
+
 async function fetchGenericBallot(browser) {
-  console.log('Fetching generic ballot...');
+  console.log('Fetching RTWH generic ballot...');
   try {
-    const html = await fetchRendered(browser, 'https://www.realclearpolling.com/polls/congress/generic-congressional-ballot', 3000);
-    const { polls, avg } = parseRCPTable(html);
+    const page = await browser.newPage();
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36');
+    await page.goto('https://www.racetothewh.com/polls/genericballot', { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await new Promise(r => setTimeout(r, 3000));
+    const html = await page.content();
+    await page.close();
+
+    const $ = cheerio.load(html);
+    const polls = [];
+    $('table tr').each((i, row) => {
+      if (i === 0) return;
+      const cells = $(row).find('td');
+      if (cells.length < 4) return;
+      const date = $(cells[0]).text().trim();
+      const poll = $(cells[1]).text().trim();
+      const dem  = parseFloat($(cells[2]).text().replace('%', '').trim());
+      const rep  = parseFloat($(cells[3]).text().replace('%', '').trim());
+      if (!poll || isNaN(dem) || isNaN(rep)) return;
+      polls.push({ source: poll, date, dem, rep, margin: (dem - rep).toFixed(1) });
+    });
+
+    let avg = null;
+    if (polls.length > 0) {
+      const recent = polls.slice(0, 5);
+      const d = recent.reduce((s, p) => s + p.dem, 0) / recent.length;
+      const r = recent.reduce((s, p) => s + p.rep, 0) / recent.length;
+      avg = { source: 'RTWH Avg', date: TODAY, dem: parseFloat(d.toFixed(1)), rep: parseFloat(r.toFixed(1)), margin: (d - r).toFixed(1) };
+    }
+
     console.log(`  ${polls.length} polls, avg: ${avg ? `D+${avg.margin}` : 'not found'}`);
     return { polls: polls.slice(0, 8), avg };
   } catch (e) {
@@ -111,45 +205,43 @@ async function fetchGenericBallot(browser) {
   }
 }
 
+// ─── RTWH TRUMP APPROVAL ─────────────────────────────────────────────────────
+
 async function fetchTrumpApproval(browser) {
-  console.log('Fetching Trump approval...');
+  console.log('Fetching RTWH Trump approval...');
   try {
-    const html = await fetchRendered(browser, 'https://www.realclearpolling.com/polls/approval/donald-trump/job-approval', 3000);
+    const page = await browser.newPage();
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36');
+    await page.goto('https://www.racetothewh.com/trump', { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await new Promise(r => setTimeout(r, 3000));
+    const html = await page.content();
+    await page.close();
+
     const $ = cheerio.load(html);
     let approve = null, disapprove = null;
 
-    // Approval table: Pollster | Date | Sample | MoE | Approve(4) | Disapprove(5)
-    $('table tr').each((_, row) => {
+    $('table tr').each((i, row) => {
+      if (i === 0) return;
       const cells = $(row).find('td');
-      if (cells.length < 6) return;
-      const source = $(cells[0]).text().trim().toLowerCase();
-      if (source.includes('rcp') || source.includes('average')) {
-        approve    = parseFloat($(cells[4]).text().trim()) || null;
-        disapprove = parseFloat($(cells[5]).text().trim()) || null;
+      if (cells.length < 3) return;
+      const a = parseFloat($(cells[1]).text().replace('%','').trim());
+      const d = parseFloat($(cells[2]).text().replace('%','').trim());
+      if (!isNaN(a) && !isNaN(d) && !approve) {
+        approve = a;
+        disapprove = d;
       }
     });
 
-    // Fallback — try cols 1 and 2 if above didn't work
-    if (!approve) {
-      $('table tr').each((_, row) => {
-        const cells = $(row).find('td');
-        if (cells.length < 3) return;
-        const source = $(cells[0]).text().trim().toLowerCase();
-        if (source.includes('rcp') || source.includes('average')) {
-          approve    = parseFloat($(cells[1]).text().trim()) || null;
-          disapprove = parseFloat($(cells[2]).text().trim()) || null;
-        }
-      });
-    }
-
     const net = (approve && disapprove) ? (approve - disapprove).toFixed(1) : null;
-    console.log(`  approve: ${approve}, disapprove: ${disapprove}, net: ${net}`);
-    return { approve, disapprove, net, source: 'RCP Average' };
+    console.log(`  approve: ${approve}, net: ${net}`);
+    return { approve, disapprove, net, source: 'RTWH' };
   } catch (e) {
     console.error('  Trump approval error:', e.message);
     return { approve: null, disapprove: null, net: null };
   }
 }
+
+// ─── BALLOTPEDIA RATINGS ──────────────────────────────────────────────────────
 
 async function fetchBallotpediaRatings() {
   console.log('Fetching Ballotpedia ratings...');
@@ -158,7 +250,6 @@ async function fetchBallotpediaRatings() {
     const $ = cheerio.load(html);
     const ratings = {};
 
-    // Try multiple table parsing strategies
     $('table').each((_, table) => {
       const headerText = $(table).find('th').map((_, th) => $(th).text().trim().toLowerCase()).get().join(' ');
       const hasCook   = headerText.includes('cook');
@@ -166,7 +257,6 @@ async function fetchBallotpediaRatings() {
       const hasIE     = headerText.includes('inside') || headerText.includes('elections');
       if (!hasCook && !hasSabato && !hasIE) return;
 
-      // Find column indices from first header row
       const headerCells = $(table).find('tr').first().find('th, td');
       let stateCol = 0, cookCol = -1, sabatoCol = -1, ieCol = -1;
       headerCells.each((i, cell) => {
@@ -200,6 +290,8 @@ async function fetchBallotpediaRatings() {
   }
 }
 
+// ─── POLYMARKET ───────────────────────────────────────────────────────────────
+
 async function fetchPolymarket() {
   console.log('Fetching Polymarket...');
   const markets = { houseD: null, senateR: null, splitPct: null, dSweepPct: null, repSweepPct: null };
@@ -213,7 +305,6 @@ async function fetchPolymarket() {
       const data = await fetchJSON(`https://gamma-api.polymarket.com/events?slug=${slug}&limit=1`);
       if (!data?.length) continue;
       const event = data[0];
-
       if (key === 'house') {
         const m = event.markets?.find(m => m.outcomePrices && (m.question?.toLowerCase().includes('democrat') || m.groupItemTitle?.toLowerCase().includes('democrat')));
         if (m?.outcomePrices) markets.houseD = Math.round(parseFloat(JSON.parse(m.outcomePrices)[0]) * 100);
@@ -238,35 +329,30 @@ async function fetchPolymarket() {
   return markets;
 }
 
+// ─── KALSHI ───────────────────────────────────────────────────────────────────
+
 async function fetchKalshi() {
   console.log('Fetching Kalshi...');
   const markets = { houseD: null, senateR: null };
   try {
-    // Try v2 API endpoints
     const [houseRes, senateRes] = await Promise.allSettled([
       fetchJSON('https://api.kalshi.com/trade-api/v2/events/CONTROLH-2026'),
       fetchJSON('https://api.kalshi.com/trade-api/v2/events/CONTROLS-2026'),
     ]);
-
     if (houseRes.status === 'fulfilled') {
-      const data = houseRes.value;
-      const m = data.event?.markets?.find(m =>
-        (m.subtitle || m.yes_sub_title || '').toLowerCase().includes('democrat')
-      );
+      const m = houseRes.value.event?.markets?.find(m => (m.subtitle || m.yes_sub_title || '').toLowerCase().includes('democrat'));
       if (m) markets.houseD = Math.round((m.last_price || m.yes_bid || 0) * 100);
     }
-
     if (senateRes.status === 'fulfilled') {
-      const data = senateRes.value;
-      const m = data.event?.markets?.find(m =>
-        (m.subtitle || m.yes_sub_title || '').toLowerCase().includes('republican')
-      );
+      const m = senateRes.value.event?.markets?.find(m => (m.subtitle || m.yes_sub_title || '').toLowerCase().includes('republican'));
       if (m) markets.senateR = Math.round((m.last_price || m.yes_bid || 0) * 100);
     }
   } catch (e) { console.error('  Kalshi error:', e.message); }
   console.log('  Kalshi:', markets);
   return markets;
 }
+
+// ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 async function main() {
   console.log(`\n=== Midtrack Fetch — ${TODAY} ===\n`);
@@ -278,26 +364,25 @@ async function main() {
   });
 
   try {
-    const [ratings, polymarket, kalshi, genericBallot, senatePolls, trumpApproval] = await Promise.allSettled([
-      fetchBallotpediaRatings(),
+    // Run non-browser tasks in parallel, browser tasks sequentially to avoid conflicts
+    const [polymarket, kalshi, ratings] = await Promise.all([
       fetchPolymarket(),
       fetchKalshi(),
-      fetchGenericBallot(browser),
-      fetchRCPSenatePolls(browser),
-      fetchTrumpApproval(browser),
+      fetchBallotpediaRatings(),
     ]);
+
+    const senatePolls   = await fetchAllSenatePolls(browser);
+    const genericBallot = await fetchGenericBallot(browser);
+    const trumpApproval = await fetchTrumpApproval(browser);
 
     const todayEntry = {
       date: TODAY,
       fetchedAt: new Date().toISOString(),
-      markets: {
-        polymarket: polymarket.status === 'fulfilled' ? polymarket.value : {},
-        kalshi:     kalshi.status     === 'fulfilled' ? kalshi.value     : {},
-      },
-      genericBallot: genericBallot.status === 'fulfilled' ? genericBallot.value : { polls: [], avg: null },
-      senatePolls:   senatePolls.status   === 'fulfilled' ? senatePolls.value   : {},
-      senateRatings: ratings.status       === 'fulfilled' ? ratings.value       : {},
-      trumpApproval: trumpApproval.status === 'fulfilled' ? trumpApproval.value : {},
+      markets: { polymarket, kalshi },
+      genericBallot,
+      senatePolls,
+      senateRatings: ratings,
+      trumpApproval,
     };
 
     mkdirSync('data', { recursive: true });
@@ -314,6 +399,7 @@ async function main() {
     writeFileSync('data/data.json', JSON.stringify({ lastUpdated: TODAY, ...todayEntry }, null, 2));
 
     console.log(`\n✅ Done. ${history.length} days tracked`);
+    console.log(`   States with polls: ${Object.keys(senatePolls).filter(s => senatePolls[s].polls.length > 0).join(', ')}`);
   } finally {
     await browser.close();
   }
