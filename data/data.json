@@ -1,7 +1,7 @@
 {
   "lastUpdated": "2026-04-20",
   "date": "2026-04-20",
-  "fetchedAt": "2026-04-20T20:06:30.563Z",
+  "fetchedAt": "2026-04-20T20:11:38.649Z",
   "markets": {
     "polymarket": {
       "houseD": 85,
@@ -19,12 +19,7 @@
     "polls": [],
     "avg": null
   },
-  "senatePolls": {
-    "North Carolina": {
-      "polls": [],
-      "avg": null
-    }
-  },
+  "senatePolls": {},
   "senateRatings": {},
   "trumpApproval": {
     "approve": null,
