@@ -1,29 +1,62 @@
 {
-  "lastUpdated": "2026-04-20",
-  "date": "2026-04-20",
-  "fetchedAt": "2026-04-20T20:17:15.236Z",
-  "markets": {
-    "polymarket": {
-      "houseD": 85,
-      "senateR": 46,
-      "splitPct": 35,
-      "dSweepPct": 52,
-      "repSweepPct": 13
+    "lastUpdated": "2026-04-20",
+    "date": "2026-04-20",
+    "fetchedAt": "2026-04-20T20:17:15.236Z",
+    "markets": {
+          "polymarket": {
+                  "houseD": 85,
+                  "senateR": 46,
+                  "splitPct": 35,
+                  "dSweepPct": 52,
+                  "repSweepPct": 13
+          },
+          "kalshi": {
+                  "houseD": null,
+                  "senateR": null
+          }
     },
-    "kalshi": {
-      "houseD": null,
-      "senateR": null
+    "genericBallot": {
+          "polls": [],
+          "avg": null
+    },
+    "senatePolls": {
+          "NC": {
+                  "avg": {
+                            "source": "RCP Average",
+                            "date": "2026-04-20",
+                            "dem": 49.0,
+                            "rep": 42.2,
+                            "margin": "6.8"
+                  },
+                  "polls": [
+                            {
+                                        "source": "High Point/YouGov",
+                                        "date": "3/26 - 4/6",
+                                        "dem": 50,
+                                        "rep": 42,
+                                        "margin": "8.0"
+                            },
+                            {
+                                        "source": "Quantus Insights",
+                                        "date": "3/31 - 4/1",
+                                        "dem": 49,
+                                        "rep": 44,
+                                        "margin": "5.0"
+                            },
+                            {
+                                        "source": "Carolina Journal/Harper",
+                                        "date": "3/22 - 3/23",
+                                        "dem": 49,
+                                        "rep": 41,
+                                        "margin": "8.0"
+                            }
+                  ]
+          }
+    },
+    "senateRatings": {},
+    "trumpApproval": {
+          "approve": null,
+          "disapprove": null,
+          "net": null
     }
-  },
-  "genericBallot": {
-    "polls": [],
-    "avg": null
-  },
-  "senatePolls": {},
-  "senateRatings": {},
-  "trumpApproval": {
-    "approve": null,
-    "disapprove": null,
-    "net": null
-  }
 }
