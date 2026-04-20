@@ -73,6 +73,7 @@
     .source-link { color: var(--dem); font-size: 12px; text-decoration: none; }
     .source-link:hover { text-decoration: underline; }
     .space-y > * + * { margin-top: 16px; }
+    .stale-badge { color: var(--tossup); font-size: 10px; margin-left: 4px; }
   </style>
 </head>
 <body>
@@ -137,6 +138,11 @@ function getRating(state) {
   return key ? DATA.senateRatings[key] : { cook: '—', sabato: '—', ie: '—' };
 }
 
+function daysSince(dateStr) {
+  if (!dateStr) return 999;
+  return (new Date() - new Date(dateStr)) / (1000 * 60 * 60 * 24);
+}
+
 function el(tag, attrs, ...children) {
   const e = document.createElement(tag);
   Object.entries(attrs || {}).forEach(([k, v]) => {
@@ -199,7 +205,7 @@ function renderOverview(poly, kalshi, gb) {
   });
   wrap.appendChild(statsGrid);
 
- const big8Card = div('card');
+  const big8Card = div('card');
   big8Card.innerHTML = '<div class="card-title">The Big 8 Senate Races</div>';
   const big8Grid = div('grid-2');
 
@@ -218,6 +224,8 @@ function renderOverview(poly, kalshi, gb) {
     const card = div('race-card');
     card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
     const primaryRating = rating.cook || rating.sabato || '—';
+    const lastPollDate = liveData?.avg?.date;
+    const isStale = daysSince(lastPollDate) > 14;
     const avgMargin = liveData?.avg
       ? `${parseFloat(liveData.avg.margin) > 0 ? '+' : ''}${liveData.avg.margin} ${parseFloat(liveData.avg.margin) > 0 ? 'D' : 'R'}`
       : (detail.matchups[0]?.margin || '—');
@@ -230,8 +238,14 @@ function renderOverview(poly, kalshi, gb) {
         <span class="badge badge-${detail.hold.toLowerCase()}">${detail.hold}</span>
         <span class="badge ${ratingBadgeClass(primaryRating)}" style="margin-left:auto">${primaryRating}</span>
       </div>
-      <div class="race-row"><span class="race-row-label">Latest avg</span><span class="${isLiveD ? 'pill pill-d' : 'pill pill-r'}">${avgMargin}</span></div>
-      <div class="race-row"><span class="race-row-label">Polymarket</span><span class="${polyD >= 50 ? 'pill pill-d' : 'pill pill-r'}">${polyD >= 50 ? polyD+'% D' : (100-polyD)+'% R'}</span></div>
+      <div class="race-row">
+        <span class="race-row-label">Latest avg ${lastPollDate && isStale ? '<span class="stale-badge">⚠ stale</span>' : ''}</span>
+        <span class="${isLiveD ? 'pill pill-d' : 'pill pill-r'}">${avgMargin}</span>
+      </div>
+      <div class="race-row">
+        <span class="race-row-label">Polymarket</span>
+        <span class="${polyD >= 50 ? 'pill pill-d' : 'pill pill-r'}">${polyD >= 50 ? polyD+'% D' : (100-polyD)+'% R'}</span>
+      </div>
     `;
     big8Grid.appendChild(card);
   });
@@ -239,7 +253,7 @@ function renderOverview(poly, kalshi, gb) {
   wrap.appendChild(big8Card);
   return wrap;
 }
-  
+
 function renderGenericBallot(gb) {
   const wrap = div('space-y');
   const card = div('card');
@@ -273,9 +287,21 @@ function renderSenateRaces() {
   RACE_ORDER.forEach(state => {
     const detail = RACE_DETAILS[state];
     const rating = getRating(state);
+    const liveData = DATA?.senatePolls?.[state];
+    const isStale = daysSince(liveData?.avg?.date) > 14;
     const card = div('race-card');
     card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
-    card.innerHTML = `<div class="race-header"><span class="race-name">${state}</span><span class="badge badge-${detail.hold.toLowerCase()}">Hold: ${detail.hold}</span><div style="margin-left:auto;display:flex;gap:6px">${['Cook','Sabato','IE'].map((l,i) => { const r=[rating.cook,rating.sabato,rating.ie][i]||'—'; return `<span class="badge ${ratingBadgeClass(r)}">${l}: ${r}</span>`; }).join('')}</div></div><div style="font-size:12px;color:var(--faint)">${detail.candidates.rep} · ${detail.trump24}</div>`;
+    card.innerHTML = `
+      <div class="race-header">
+        <span class="race-name">${state}</span>
+        <span class="badge badge-${detail.hold.toLowerCase()}">Hold: ${detail.hold}</span>
+        ${liveData?.avg?.date && isStale ? '<span class="stale-badge">⚠ stale poll</span>' : ''}
+        <div style="margin-left:auto;display:flex;gap:6px">
+          ${['Cook','Sabato','IE'].map((l,i) => { const r=[rating.cook,rating.sabato,rating.ie][i]||'—'; return `<span class="badge ${ratingBadgeClass(r)}">${l}: ${r}</span>`; }).join('')}
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--faint)">${detail.candidates.rep} · ${detail.trump24}</div>
+    `;
     wrap.appendChild(card);
   });
   return wrap;
@@ -296,7 +322,6 @@ function renderSenatePolling() {
   const rating = getRating(selectedRace);
   const content = div('race-content space-y');
 
-  // Header
   const raceHead = div('');
   raceHead.innerHTML = `
     <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
@@ -321,7 +346,6 @@ function renderSenatePolling() {
   `;
   content.appendChild(raceHead);
 
-  // ── LIVE POLL DATA (from data.json) or fallback to hardcoded ──
   const liveData = DATA?.senatePolls?.[selectedRace];
   const mSection = div('');
   mSection.innerHTML = '<div class="card-title">Poll Averages</div>';
@@ -329,10 +353,14 @@ function renderSenatePolling() {
   if (liveData?.avg) {
     const avg = liveData.avg;
     const isDem = parseFloat(avg.margin) > 0;
+    const isStale = daysSince(avg.date) > 14;
     const avgRow = div('poll-row avg-row');
     avgRow.innerHTML = `
       <div class="poll-header">
-        <div><div style="font-size:13px;color:var(--text);font-weight:600">RCP Average</div><div style="font-size:11px;color:var(--faint)">${avg.source} · ${avg.date}</div></div>
+        <div>
+          <div style="font-size:13px;color:var(--text);font-weight:600">RCP Average ${isStale ? '<span class="stale-badge">⚠ stale</span>' : ''}</div>
+          <div style="font-size:11px;color:var(--faint)">${avg.source} · <span style="color:var(--green)">${avg.date}</span></div>
+        </div>
         <div class="poll-margin ${isDem ? 'dem-color' : 'rep-color'}">${isDem ? '+' : ''}${avg.margin} ${isDem ? 'D' : 'R'}</div>
       </div>
       <div style="margin-top:8px">
@@ -441,31 +469,68 @@ function renderTrends() {
     wrap.appendChild(msg);
     return wrap;
   }
+
   const dates = HISTORY.map(d => d.date.slice(5));
-  function makeChart(canvasId, label, datasets) {
+
+  function makeChart(canvasId, label, datasets, customLabels) {
     const card = div('card');
     card.innerHTML = `<div class="card-title">${label}</div><div style="position:relative;height:200px"><canvas id="${canvasId}"></canvas></div>`;
     wrap.appendChild(card);
     setTimeout(() => {
       const ctx = document.getElementById(canvasId);
       if (!ctx) return;
-      new Chart(ctx, { type:'line', data:{ labels:dates, datasets }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ labels:{ color:'#94a3b8', font:{ size:11 } } } }, scales:{ x:{ ticks:{ color:'#64748b', font:{ size:10 } }, grid:{ color:'#1e293b' } }, y:{ ticks:{ color:'#64748b', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#1e293b' } } } } });
+      new Chart(ctx, {
+        type:'line',
+        data:{ labels: customLabels || dates, datasets },
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{ legend:{ labels:{ color:'#94a3b8', font:{ size:11 } } } },
+          scales:{
+            x:{ ticks:{ color:'#64748b', font:{ size:10 } }, grid:{ color:'#1e293b' } },
+            y:{ ticks:{ color:'#64748b', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#1e293b' } }
+          }
+        }
+      });
     }, 50);
   }
+
+  // Market charts
   makeChart('chart-markets', 'Prediction Markets', [
     { label:'House → Dem %', data:HISTORY.map(d => d.markets?.polymarket?.houseD??null), borderColor:'#3b82f6', tension:0.3, pointRadius:3, fill:false },
     { label:'Senate → Rep %', data:HISTORY.map(d => d.markets?.polymarket?.senateR??null), borderColor:'#ef4444', tension:0.3, pointRadius:3, fill:false },
     { label:'R Senate / D House %', data:HISTORY.map(d => d.markets?.polymarket?.splitPct??null), borderColor:'#f59e0b', tension:0.3, pointRadius:3, fill:false },
   ]);
+
   makeChart('chart-ballot', 'Generic Ballot Margin (D − R)', [
     { label:'D margin', data:HISTORY.map(d => { const a=d.genericBallot?.avg; return a?parseFloat(a.margin):null; }), borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,0.15)', tension:0.3, pointRadius:3, fill:true },
   ]);
+
   makeChart('chart-approval', 'Trump Net Approval', [
     { label:'Net approval', data:HISTORY.map(d => d.trumpApproval?.net?parseFloat(d.trumpApproval.net):null), borderColor:'#f87171', tension:0.3, pointRadius:3, fill:false },
   ]);
+
   makeChart('chart-sweep', 'Dem Sweep Probability', [
     { label:'Dem sweep %', data:HISTORY.map(d => d.markets?.polymarket?.dSweepPct??null), borderColor:'#60a5fa', backgroundColor:'rgba(96,165,250,0.15)', tension:0.3, pointRadius:3, fill:true },
   ]);
+
+  // Senate polling trend charts — only show states with 2+ data points
+  const TREND_STATES = ['North Carolina','Georgia','Michigan','Ohio (Special)','New Hampshire','Maine','Alaska','Texas'];
+  TREND_STATES.forEach(state => {
+    const stateData = HISTORY
+      .map(d => ({ date: d.date.slice(5), avg: d.senatePolls?.[state]?.avg }))
+      .filter(d => d.avg);
+    if (stateData.length < 2) return;
+    makeChart(
+      'chart-senate-' + state.replace(/[^a-z]/gi, ''),
+      `${state} — Poll Average`,
+      [
+        { label:'Dem %', data:stateData.map(d => d.avg.dem), borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,0.1)', tension:0.3, pointRadius:3, fill:false },
+        { label:'Rep %', data:stateData.map(d => d.avg.rep), borderColor:'#ef4444', backgroundColor:'rgba(239,68,68,0.1)', tension:0.3, pointRadius:3, fill:false },
+      ],
+      stateData.map(d => d.date)
+    );
+  });
+
   wrap.appendChild(div('', `<p style="font-size:11px;color:var(--faint);text-align:center">Tracking ${HISTORY.length} days · Data from Polymarket, RCP</p>`));
   return wrap;
 }
