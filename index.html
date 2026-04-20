@@ -6,15 +6,15 @@
   <title>2026 Midterm Tracker</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
-    :root {
-      --bg: #030712; --surface: #0f172a; --card: #1e293b; --border: #334155;
-      --text: #f1f5f9; --muted: #94a3b8; --faint: #475569;
-      --dem: #3b82f6; --rep: #ef4444; --dem-bg: #1e3a5f; --rep-bg: #450a0a;
-      --tossup: #f59e0b; --tossup-bg: #451a03; --green: #22c55e;
+   :root {
+      --bg: #f1f5f9; --surface: #ffffff; --card: #ffffff; --border: #e2e8f0;
+      --text: #0f172a; --muted: #64748b; --faint: #94a3b8;
+      --dem: #2563eb; --rep: #dc2626; --dem-bg: #dbeafe; --rep-bg: #fee2e2;
+      --tossup: #d97706; --tossup-bg: #fef3c7; --green: #16a34a;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 14px; min-height: 100vh; }
-    .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+    .header { background: #0f172a; border-bottom: 1px solid #1e293b; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
     .header-inner { max-width: 1100px; margin: 0 auto; }
     .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
     .header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
@@ -40,21 +40,24 @@
     .badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
     .badge-d { background: #1d4ed8; color: white; } .badge-r { background: #b91c1c; color: white; }
     .badge-tossup { background: var(--tossup-bg); color: var(--tossup); border: 1px solid var(--tossup); }
-    .badge-lean-d { background: var(--dem-bg); color: #93c5fd; } .badge-lean-r { background: var(--rep-bg); color: #fca5a5; }
-    .badge-likely-d { background: #1e3a8a; color: #bfdbfe; } .badge-likely-r { background: #7f1d1d; color: #fecaca; }
-    .badge-safe-d { background: #1e40af; color: white; } .badge-safe-r { background: #991b1b; color: white; }
+    .badge-lean-d { background: #dbeafe; color: #1d4ed8; }
+    .badge-lean-r { background: #fee2e2; color: #b91c1c; }
+    .badge-likely-d { background: #bfdbfe; color: #1e40af; }
+    .badge-likely-r { background: #fecaca; color: #991b1b; }
+    .badge-safe-d { background: #1e40af; color: white; }
+    .badge-safe-r { background: #991b1b; color: white; }
     .pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; }
-    .pill-d { background: var(--dem-bg); color: #93c5fd; border: 1px solid #2563eb; }
-    .pill-r { background: var(--rep-bg); color: #fca5a5; border: 1px solid #b91c1c; }
-    .race-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px; cursor: pointer; transition: border-color 0.15s; }
+    .pill-d { background: #dbeafe; color: #1d4ed8; border: 1px solid #2563eb; }
+    .pill-r { background: #fee2e2; color: #b91c1c; border: 1px solid #dc2626; }
+    .race-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px; cursor: pointer; transition: border-color 0.15s; }
     .race-card:hover { border-color: var(--dem); }
     .race-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
     .race-name { font-weight: 700; font-size: 15px; }
     .race-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
     .race-row-label { font-size: 11px; color: var(--faint); }
     .poll-row { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 8px; }
-    .poll-row.avg-row { border-color: #854d0e; background: #1c0a00; }
-    .poll-row.rtwh-row { border-color: #1d4ed8; background: #0f1f3d; }
+     .poll-row.avg-row { border-color: #92400e; background: #fffbeb; }
+    .poll-row.rtwh-row { border-color: #1d4ed8; background: #eff6ff; }
     .poll-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .poll-margin { font-size: 16px; font-weight: 800; }
     .race-tabs { display: flex; overflow-x: auto; border-bottom: 1px solid var(--border); background: var(--surface); border-radius: 12px 12px 0 0; }
