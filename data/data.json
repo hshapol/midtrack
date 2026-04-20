@@ -1,7 +1,7 @@
 {
   "lastUpdated": "2026-04-20",
   "date": "2026-04-20",
-  "fetchedAt": "2026-04-20T20:11:38.649Z",
+  "fetchedAt": "2026-04-20T20:14:33.807Z",
   "markets": {
     "polymarket": {
       "houseD": 85,
@@ -24,7 +24,6 @@
   "trumpApproval": {
     "approve": null,
     "disapprove": null,
-    "net": null,
-    "source": "RTWH"
+    "net": null
   }
 }
