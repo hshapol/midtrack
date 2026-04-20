@@ -68,7 +68,18 @@ async function fetchAllSenatePolls(browser) {
 
   try {
     await page.goto('https://www.racetothewh.com/senate/26polls', { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await new Promise(r => setTimeout(r, 4000));
+   await new Promise(r => setTimeout(r, 8000));
+// Wait for any interactive element to appear
+await page.waitForSelector('select, [class*="igc"], [class*="tab"]', { timeout: 15000 }).catch(() => console.log('  Selector wait timed out'));
+
+// Debug what's actually on the page
+const pageTitle = await page.title();
+const bodyText = await page.evaluate(() => document.body.innerText.slice(0, 200));
+console.log('  Page title:', pageTitle);
+console.log('  Body preview:', bodyText);
+const allSelects = await page.evaluate(() => document.querySelectorAll('select').length);
+const allInputs = await page.evaluate(() => document.querySelectorAll('input, button').length);
+console.log(`  DOM: ${allSelects} selects, ${allInputs} inputs/buttons`);
 
     // Get all options from the select dropdown
    const options = await page.$$eval('select option', opts =>
