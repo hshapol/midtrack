@@ -235,7 +235,7 @@ function renderOverview(poly, kalshi, gb) {
     card.innerHTML = `
       <div class="race-header">
         <span class="race-name">${state}</span>
-        <span class="badge badge-${detail.hold.toLowerCase()}">${detail.hold}</span>
+        <span class="badge badge-${detail.hold.toLowerCase()}" title="Current seat holder">Current: ${detail.hold}</span>
         <span class="badge ${ratingBadgeClass(primaryRating)}" style="margin-left:auto">${primaryRating}</span>
       </div>
       <div class="race-row">
@@ -294,8 +294,8 @@ function renderSenateRaces() {
     card.innerHTML = `
       <div class="race-header">
         <span class="race-name">${state}</span>
-        <span class="badge badge-${detail.hold.toLowerCase()}">Hold: ${detail.hold}</span>
-        ${liveData?.avg?.date && isStale ? '<span class="stale-badge">⚠ stale poll</span>' : ''}
+        <span class="badge badge-${detail.hold.toLowerCase()}" title="Current seat holder">Current: ${detail.hold}</span>
+    ${liveData?.avg?.date && isStale ? '<span class="stale-badge">⚠ stale poll</span>' : ''}
         <div style="margin-left:auto;display:flex;gap:6px">
           ${['Cook','Sabato','IE'].map((l,i) => { const r=[rating.cook,rating.sabato,rating.ie][i]||'—'; return `<span class="badge ${ratingBadgeClass(r)}">${l}: ${r}</span>`; }).join('')}
         </div>
@@ -328,8 +328,8 @@ function renderSenatePolling() {
       <div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
           <h2 style="font-size:22px;font-weight:800">${selectedRace}</h2>
-          <span class="badge badge-${detail.hold.toLowerCase()}">${detail.hold} Hold</span>
-        </div>
+       <span class="badge badge-${detail.hold.toLowerCase()}" title="Current seat holder">Current: ${detail.hold}</span>
+       </div>
         <p style="font-size:13px;color:var(--muted);max-width:600px;line-height:1.5">${detail.context}</p>
         <div style="display:flex;gap:16px;font-size:12px;color:var(--faint);margin-top:8px">
           <span>Primary: <span style="color:var(--muted)">${detail.primaryDate}</span></span>
