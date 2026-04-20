@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026 Midterm Tracker</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg:       #030712;
+      --surface:  #0f172a;
+      --card:     #1e293b;
+      --border:   #334155;
+      --text:     #f1f5f9;
+      --muted:    #94a3b8;
+      --faint:    #475569;
+      --dem:      #3b82f6;
+      --rep:      #ef4444;
+      --dem-bg:   #1e3a5f;
+      --rep-bg:   #450a0a;
+      --tossup:   #f59e0b;
+      --tossup-bg:#451a03;
+      --green:    #22c55e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 14px; min-height: 100vh; }
+
+    /* HEADER */
+    .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+    .header-inner { max-width: 1100px; margin: 0 auto; }
+    .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .header-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .header-meta { text-align: right; font-size: 12px; color: var(--muted); }
+    .header-meta .updated { color: var(--green); font-weight: 600; }
+
+    /* TABS */
+    .tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tab { padding: 6px 14px; border-radius: 6px; border: none; cursor: pointer; font-size: 13px; font-weight: 500; background: transparent; color: var(--muted); transition: all 0.15s; text-transform: capitalize; }
+    .tab:hover { background: var(--card); color: var(--text); }
+    .tab.active { background: var(--dem); color: white; }
+
+    /* MAIN */
+    .main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+    /* CARDS */
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .card + .card, .card + .grid { margin-top: 16px; }
+    .card-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 14px; }
+
+    /* GRIDS */
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    @media (max-width: 768px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* STAT CARDS */
+    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .stat-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .stat-val { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+    .stat-sub { font-size: 11px; color: var(--faint); margin-top: 4px; }
+    .dem-color { color: var(--dem); }
+    .rep-color { color: var(--rep); }
+    .tossup-color { color: var(--tossup); }
+
+    /* BADGES */
+    .badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+    .badge-d { background: #1d4ed8; color: white; }
+    .badge-r { background: #b91c1c; color: white; }
+    .badge-tossup { background: var(--tossup-bg); color: var(--tossup); border: 1px solid var(--tossup); }
+    .badge-lean-d { background: var(--dem-bg); color: #93c5fd; }
+    .badge-lean-r { background: var(--rep-bg); color: #fca5a5; }
+    .badge-likely-d { background: #1e3a8a; color: #bfdbfe; }
+    .badge-likely-r { background: #7f1d1d; color: #fecaca; }
+    .badge-safe-d { background: #1e40af; color: white; }
+    .badge-safe-r { background: #991b1b; color: white; }
+
+    /* PILL RESULTS */
+    .pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; }
+    .pill-d { background: var(--dem-bg); color: #93c5fd; border: 1px solid #2563eb; }
+    .pill-r { background: var(--rep-bg); color: #fca5a5; border: 1px solid #b91c1c; }
+
+    /* RACE CARDS */
+    .race-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px; cursor: pointer; transition: border-color 0.15s; }
+    .race-card:hover { border-color: var(--dem); }
+    .race-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+    .race-name { font-weight: 700; font-size: 15px; }
+    .race-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+    .race-row-label { font-size: 11px; color: var(--faint); }
+
+    /* PROGRESS BARS */
+    .bar-wrap { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin: 0 8px; }
+    .bar-fill-d { height: 100%; background: var(--dem); border-radius: 3px; }
+    .bar-fill-r { height: 100%; background: var(--rep); border-radius: 3px; }
+
+    /* POLL TABLE */
+    .poll-row { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+    .poll-row.avg-row { border-color: #854d0e; background: #1c0a00; }
+    .poll-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .poll-source { font-weight: 600; font-size: 13px; }
+    .poll-date { font-size: 11px; color: var(--faint); }
+    .poll-margin { font-size: 16px; font-weight: 800; }
+
+    /* SENATE TABS */
+    .race-tabs { display: flex; overflow-x: auto; border-bottom: 1px solid var(--border); background: var(--surface); border-radius: 12px 12px 0 0; }
+    .race-tab { padding: 10px 14px; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; color: var(--faint); transition: all 0.15s; background: none; border-top: none; border-left: none; border-right: none; }
+    .race-tab:hover { color: var(--text); }
+    .race-tab.active { border-bottom-color: var(--dem); color: #93c5fd; background: var(--card); }
+    .race-content { padding: 20px; }
+
+    /* MARKET BARS */
+    .mkt-bar-wrap { height: 28px; background: var(--border); border-radius: 6px; overflow: hidden; }
+    .mkt-bar-fill { height: 100%; display: flex; align-items: center; padding-left: 8px; font-size: 12px; font-weight: 700; color: white; border-radius: 6px; }
+
+    /* DELTA */
+    .delta-pos { color: #34d399; font-size: 12px; font-weight: 600; }
+    .delta-neg { color: #f87171; font-size: 12px; font-weight: 600; }
+    .delta-flat { color: var(--faint); font-size: 12px; }
+
+    /* LOADING */
+    .loading { text-align: center; padding: 60px; color: var(--muted); }
+    .spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--dem); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* SEPARATOR */
+    .sep { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+    /* APPROVAL BARS */
+    .appr-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .appr-label { font-size: 12px; width: 80px; }
+    .appr-fill { height: 20px; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 12px; font-weight: 700; color: white; }
+
+    /* SOURCES */
+    .source-item { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; }
+    .source-link { color: var(--dem); font-size: 12px; text-decoration: none; }
+    .source-link:hover { text-decoration: underline; }
+
+    /* SPACERS */
+    .space-y > * + * { margin-top: 16px; }
+    .mt-4 { margin-top: 16px; }
+    .mb-2 { margin-bottom: 8px; }
+    .text-sm { font-size: 12px; }
+    .text-muted { color: var(--muted); }
+    .text-faint { color: var(--faint); }
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-2 { gap: 8px; }
+    .gap-3 { gap: 12px; }
+    .font-bold { font-weight: 700; }
+    .font-semibold { font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <h1>2026 Midterm Tracker</h1>
+        <div class="header-sub">House · Senate · Polls · Markets · Forecasters</div>
+      </div>
+      <div class="header-meta">
+        <div>Updated: <span class="updated" id="last-updated">Loading...</span></div>
+        <div style="color:var(--faint)">Election: Nov 3, 2026</div>
+      </div>
+    </div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+</div>
+
+<div class="main" id="main">
+  <div class="loading"><div class="spinner"></div>Loading latest data...</div>
+</div>
+
+<script>
+// ─── STATE ───────────────────────────────────────────────────────────────────
+
+let DATA = null;
+let currentTab = 'overview';
+let selectedRace = 'North Carolina';
+
+const TABS = ['overview', 'generic ballot', 'senate races', 'senate polling', 'markets', 'trends', 'trump approval', 'sources'];
+
+let HISTORY = [];
+
+// Static race details (context, matchups, candidates - scraped data overlays ratings)
+const RACE_DETAILS = {
+  "Maine":          { hold:"R", trump24:"Harris +7.0",  primaryDate:"Jun 9, 2026",  context:"Only R-held seat in a Harris state. Collins seeking 6th term. D primary: Mills vs Platner.", candidates:{ dem:"Janet Mills / Graham Platner", rep:"Susan Collins (R, incumbent)" }, matchups:[{ dem:"Mills", rep:"Collins", demPct:42.5, repPct:44.5, margin:"+2.0 R", source:"RCP Avg", date:"Feb 24, 2026" },{ dem:"Platner", rep:"Collins", demPct:44.0, repPct:41.5, margin:"+2.5 D", source:"RCP Avg", date:"Feb 24, 2026" }], primary:{ label:"D Primary RCP Avg", result:"Mills 43.0% · Platner 39.0%", margin:"Mills +4.0" } },
+  "North Carolina": { hold:"R", trump24:"Trump +3.2",   primaryDate:"May 2026",      context:"Open seat — Tillis retired. Cooper is a 6-time statewide winner. Now rated Lean D by all forecasters.", candidates:{ dem:"Roy Cooper (D, fmr. Gov.)", rep:"Michael Whatley (R)" }, matchups:[{ dem:"Cooper", rep:"Whatley", demPct:47.2, repPct:37.6, margin:"+9.6 D", source:"RCP Avg", date:"Feb 24, 2026" }], primary:null },
+  "Georgia":        { hold:"D", trump24:"Trump +2.2",   primaryDate:"May 19, 2026",  context:"Ossoff defending in Trump +2.2 state. Moved to Lean D. R primary May 19.", candidates:{ dem:"Jon Ossoff (D, incumbent)", rep:"TBD — primary May 19" }, matchups:[{ dem:"Ossoff", rep:"Collins", demPct:44.3, repPct:42.0, margin:"+2.3 D", source:"RCP Avg", date:"Feb 24, 2026" }], primary:{ label:"R Primary RCP Avg", result:"Collins 29.5% · Carter 17.8% · Dooley 10.3%", margin:"Collins +11.7" } },
+  "Michigan":       { hold:"D", trump24:"Trump +1.0",   primaryDate:"Aug 4, 2026",   context:"Open seat — Peters retiring. Rogers (R) likely nominee. Stevens leads by +1.3 in RCP avg.", candidates:{ dem:"Stevens / McMorrow / El-Sayed", rep:"Mike Rogers (R)" }, matchups:[{ dem:"Stevens", rep:"Rogers", demPct:43.8, repPct:42.5, margin:"+1.3 D", source:"RCP Avg", date:"Feb 24, 2026" },{ dem:"McMorrow", rep:"Rogers", demPct:42.3, repPct:43.8, margin:"+1.5 R", source:"RCP Avg", date:"Feb 24, 2026" }], primary:null },
+  "Ohio (Special)": { hold:"R", trump24:"Trump +11.0",  primaryDate:"May 5, 2026",   context:"Special election for Vance's old seat. Husted appointed. Moved to Toss-Up. RCP avg tight.", candidates:{ dem:"Sherrod Brown (D)", rep:"Jon Husted (R, appt.)" }, matchups:[{ dem:"Brown", rep:"Husted", demPct:47.5, repPct:48.5, margin:"+1.0 R", source:"RCP Avg", date:"Feb 24, 2026" }], primary:null },
+  "New Hampshire":  { hold:"D", trump24:"Harris +2.0",  primaryDate:"Sep 8, 2026",   context:"Open seat — Shaheen retiring. Pappas leads Sununu +3.6. R primary: Sununu leads +16.3.", candidates:{ dem:"Chris Pappas (D)", rep:"Sununu / Brown (R primary)" }, matchups:[{ dem:"Pappas", rep:"Sununu", demPct:46.3, repPct:42.7, margin:"+3.6 D", source:"RCP Avg", date:"Feb 24, 2026" },{ dem:"Pappas", rep:"Brown", demPct:48.3, repPct:39.0, margin:"+9.3 D", source:"RCP Avg", date:"Feb 24, 2026" }], primary:{ label:"R Primary RCP Avg", result:"Sununu 42.3% · Brown 26.0%", margin:"Sununu +16.3" } },
+  "Alaska":         { hold:"R", trump24:"Trump +13.0",  primaryDate:"Aug 2026",      context:"Peltola entered Jan 2026. AK Survey Research (Jan): Peltola +1.6 vs Sullivan.", candidates:{ dem:"Mary Peltola (D)", rep:"Dan Sullivan (R, incumbent)" }, matchups:[{ dem:"Peltola", rep:"Sullivan", demPct:48, repPct:46.4, margin:"+1.6 D", source:"AK Survey Research", date:"Jan 2026" }], primary:null },
+  "Nebraska":       { hold:"R", trump24:"Trump +20.0",  primaryDate:"May 2026",      context:"Osborn (Ind.) backed by NE Dems. Moved to Likely R. No RCP average.", candidates:{ dem:"Dan Osborn (Ind.)", rep:"Pete Ricketts (R, incumbent)" }, matchups:[{ dem:"Osborn", rep:"Ricketts", demPct:45.4, repPct:49.3, margin:"+4 R (adj.)", source:"Avg (adj.)", date:"Feb 2026" }], primary:null },
+  "Iowa":           { hold:"R", trump24:"Trump +13.0",  primaryDate:"Jun 2, 2026",   context:"Open seat — Ernst retired. Hinson (R) consolidated GOP support. No general polling yet.", candidates:{ dem:"TBD", rep:"Ashley Hinson (R)" }, matchups:[], primary:null },
+  "Texas":          { hold:"R", trump24:"Trump +14.0",  primaryDate:"Mar 3, 2026 (runoff May 26)", context:"Cornyn vs Paxton runoff May 26. Cornyn led 42–40.5% in March primary. All forecasters now Likely R.", candidates:{ dem:"Crockett / Talarico (D primary)", rep:"Cornyn vs Paxton runoff" }, matchups:[{ dem:"Talarico", rep:"Paxton", demPct:45.0, repPct:46.0, margin:"+1.0 R", source:"RCP Avg", date:"Feb 24, 2026" }], primary:{ label:"R Primary (March 3)", result:"Cornyn 42.0% · Paxton 40.5%", margin:"Cornyn +1.5 → runoff May 26" } },
+};
+
+const RACE_ORDER = ["Maine","North Carolina","Georgia","Michigan","Ohio (Special)","New Hampshire","Alaska","Nebraska","Iowa","Texas"];
+
+// ─── UTILS ───────────────────────────────────────────────────────────────────
+
+function ratingBadgeClass(r) {
+  if (!r) return '';
+  const l = r.toLowerCase();
+  if (l.includes('toss')) return 'badge-tossup';
+  if (l.includes('lean d')) return 'badge-lean-d';
+  if (l.includes('lean r')) return 'badge-lean-r';
+  if (l.includes('likely d')) return 'badge-likely-d';
+  if (l.includes('likely r')) return 'badge-likely-r';
+  if (l.includes('safe d')) return 'badge-safe-d';
+  if (l.includes('safe r')) return 'badge-safe-r';
+  return '';
+}
+
+function getRating(state) {
+  if (!DATA || !DATA.senateRatings) return { cook: '—', sabato: '—', ie: '—' };
+  // Try exact match, then partial
+  const key = Object.keys(DATA.senateRatings).find(k =>
+    k.toLowerCase() === state.toLowerCase() ||
+    state.toLowerCase().startsWith(k.toLowerCase()) ||
+    k.toLowerCase().startsWith(state.toLowerCase().split(' ')[0])
+  );
+  return key ? DATA.senateRatings[key] : { cook: '—', sabato: '—', ie: '—' };
+}
+
+function pillClass(margin) {
+  if (!margin) return 'pill';
+  return margin.includes('D') ? 'pill pill-d' : 'pill pill-r';
+}
+
+function marketColor(pct, favD) {
+  return (favD ? pct >= 50 : pct < 50) ? 'dem-color' : 'rep-color';
+}
+
+function el(tag, attrs, ...children) {
+  const e = document.createElement(tag);
+  Object.entries(attrs || {}).forEach(([k, v]) => {
+    if (k === 'class') e.className = v;
+    else if (k === 'html') e.innerHTML = v;
+    else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+    else e.setAttribute(k, v);
+  });
+  children.forEach(c => c && e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
+  return e;
+}
+
+function div(cls, html) {
+  const d = document.createElement('div');
+  if (cls) d.className = cls;
+  if (html) d.innerHTML = html;
+  return d;
+}
+
+// ─── RENDER TABS ─────────────────────────────────────────────────────────────
+
+function renderTabs() {
+  const container = document.getElementById('tabs');
+  container.innerHTML = '';
+  TABS.forEach(t => {
+    const btn = el('button', {
+      class: 'tab' + (t === currentTab ? ' active' : ''),
+      onclick: () => { currentTab = t; renderTabs(); renderMain(); }
+    }, t);
+    container.appendChild(btn);
+  });
+}
+
+// ─── RENDER MAIN ─────────────────────────────────────────────────────────────
+
+function renderMain() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+
+  if (!DATA) {
+    main.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+    return;
+  }
+
+  const { markets, genericBallot, trumpApproval } = DATA;
+  const poly = markets?.polymarket || {};
+  const kalshi = markets?.kalshi || {};
+
+  if (currentTab === 'overview')      main.appendChild(renderOverview(poly, kalshi, genericBallot));
+  if (currentTab === 'generic ballot') main.appendChild(renderGenericBallot(genericBallot));
+  if (currentTab === 'senate races')  main.appendChild(renderSenateRaces());
+  if (currentTab === 'senate polling') main.appendChild(renderSenatePolling());
+  if (currentTab === 'markets')       main.appendChild(renderMarkets(poly, kalshi));
+  if (currentTab === 'trends')        main.appendChild(renderTrends());
+  if (currentTab === 'sources')       main.appendChild(renderSources());
+}
+
+// ─── OVERVIEW ────────────────────────────────────────────────────────────────
+
+function renderOverview(poly, kalshi, gb) {
+  const wrap = div('space-y');
+
+  // Top stats
+  const statsGrid = div('grid-4');
+  const avg = gb?.avg;
+  [
+    { label: 'Generic Ballot (RCP)', val: avg ? `D+${avg.margin}` : '—', sub: avg ? `${avg.dem}% Dem · ${avg.rep}% Rep` : 'No data', cls: 'dem-color' },
+    { label: 'House (Polymarket)',   val: poly.houseD != null ? `${poly.houseD}% D` : '—', sub: poly.houseD != null ? `Rep ${100 - poly.houseD}%` : '', cls: 'dem-color' },
+    { label: 'Senate (Polymarket)',  val: poly.senateR != null ? `Rep ${poly.senateR}%` : '—', sub: poly.senateR != null ? `Dem ${100 - poly.senateR}%` : '', cls: 'rep-color' },
+    { label: 'R Senate / D House',  val: poly.splitPct != null ? `${poly.splitPct}%` : '—', sub: poly.dSweepPct != null ? `Dem Sweep ${poly.dSweepPct}%` : '', cls: 'tossup-color' },
+  ].forEach(({ label, val, sub, cls }) => {
+    statsGrid.appendChild(div('stat-card', `<div class="stat-label">${label}</div><div class="stat-val ${cls}">${val}</div><div class="stat-sub">${sub}</div>`));
+  });
+  wrap.appendChild(statsGrid);
+
+  // Big 8
+  const big8Card = div('card');
+  big8Card.innerHTML = '<div class="card-title">The Big 8 Senate Races</div>';
+  const big8Grid = div('grid-2');
+
+  const BIG8 = [
+    { state:"Maine",          polyD:55 },
+    { state:"North Carolina", polyD:64 },
+    { state:"Georgia",        polyD:42 },
+    { state:"Michigan",       polyD:58 },
+    { state:"Ohio (Special)", polyD:35 },
+    { state:"Alaska",         polyD:48 },
+    { state:"Texas",          polyD:22 },
+    { state:"New Hampshire",  polyD:65 },
+  ];
+
+  BIG8.forEach(({ state, polyD }) => {
+    const detail = RACE_DETAILS[state];
+    const rating = getRating(state);
+    const card = div('race-card');
+    card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
+
+    const primaryRating = rating.cook || rating.sabato || '—';
+    const m0 = detail.matchups[0];
+
+    card.innerHTML = `
+      <div class="race-header">
+        <span class="race-name">${state}</span>
+        <span class="badge badge-${detail.hold.toLowerCase()}">${detail.hold}</span>
+        <span class="badge ${ratingBadgeClass(primaryRating)}" style="margin-left:auto">${primaryRating}</span>
+      </div>
+      ${m0 ? `<div class="race-row"><span class="race-row-label">Latest poll avg</span><span class="${pillClass(m0.margin)}">${m0.margin}</span></div>` : ''}
+      <div class="race-row">
+        <span class="race-row-label">Polymarket</span>
+        <span class="${polyD >= 50 ? 'pill pill-d' : 'pill pill-r'}">${polyD >= 50 ? polyD + '% D' : (100 - polyD) + '% R'}</span>
+      </div>
+    `;
+    big8Grid.appendChild(card);
+  });
+
+  big8Card.appendChild(big8Grid);
+  wrap.appendChild(big8Card);
+  return wrap;
+}
+
+// ─── GENERIC BALLOT ──────────────────────────────────────────────────────────
+
+function renderGenericBallot(gb) {
+  const wrap = div('space-y');
+  const card = div('card');
+  card.innerHTML = '<div class="card-title">Generic Congressional Ballot</div>';
+
+  const polls = gb?.polls || [];
+  const avg = gb?.avg;
+
+  if (avg) {
+    const avgRow = div('poll-row avg-row');
+    const mSign = parseFloat(avg.margin) > 0 ? '+' : '';
+    avgRow.innerHTML = `
+      <div class="poll-header">
+        <div><div class="poll-source">RCP Average</div><div class="poll-date">Latest</div></div>
+        <div class="poll-margin dem-color">${mSign}${avg.margin} D</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="font-size:12px;color:var(--dem);width:40px">${avg.dem}%</span>
+        <div class="bar-wrap" style="margin:0"><div class="bar-fill-d" style="width:${avg.dem}%"></div></div>
+        <span style="font-size:12px;color:var(--rep);width:40px;text-align:right">${avg.rep}%</span>
+      </div>
+    `;
+    card.appendChild(avgRow);
+  }
+
+  polls.forEach(p => {
+    const m = parseFloat(p.margin);
+    const row = div('poll-row');
+    row.innerHTML = `
+      <div class="poll-header">
+        <div><div class="poll-source">${p.source}</div><div class="poll-date">${p.date}</div></div>
+        <div class="poll-margin ${m >= 0 ? 'dem-color' : 'rep-color'}">${m >= 0 ? '+' : ''}${p.margin} ${m >= 0 ? 'D' : 'R'}</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="font-size:12px;color:var(--dem);width:40px">${p.dem}%</span>
+        <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+          <div style="width:${p.dem}%;height:100%;background:var(--dem)"></div>
+        </div>
+        <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+          <div style="width:${p.rep}%;height:100%;background:var(--rep)"></div>
+        </div>
+        <span style="font-size:12px;color:var(--rep);width:40px;text-align:right">${p.rep}%</span>
+      </div>
+    `;
+    card.appendChild(row);
+  });
+
+  if (!avg && !polls.length) {
+    card.innerHTML += '<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">No poll data loaded yet</div>';
+  }
+
+  wrap.appendChild(card);
+
+  // Historical context
+  const hist = div('card');
+  hist.innerHTML = `
+    <div class="card-title">Historical Context</div>
+    ${[['2022 (R fell short)','+3.0 R final vote',false],['2018 (D wave)','+8.6 D final vote',true],['2010 (R wave)','+6.8 R final vote',false],['2006 (D wave)','+7.9 D final vote',true]]
+      .map(([label, val, d]) => `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">${label}</span><span class="${d ? 'dem-color' : 'rep-color'} font-semibold">${val}</span></div>`)
+      .join('')}
+  `;
+  wrap.appendChild(hist);
+  return wrap;
+}
+
+// ─── SENATE RACES ─────────────────────────────────────────────────────────────
+
+function renderSenateRaces() {
+  const wrap = div('space-y');
+  const header = div('flex items-center justify-between mb-4');
+  header.innerHTML = '<span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">All Competitive Races</span><span style="font-size:11px;color:var(--faint)">Cook · Sabato · IE · Auto-updated</span>';
+  wrap.appendChild(header);
+
+  RACE_ORDER.forEach(state => {
+    const detail = RACE_DETAILS[state];
+    const rating = getRating(state);
+    const card = div('race-card');
+    card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
+
+    card.innerHTML = `
+      <div class="race-header">
+        <span class="race-name">${state}</span>
+        <span class="badge badge-${detail.hold.toLowerCase()}">Hold: ${detail.hold}</span>
+        <div style="margin-left:auto;display:flex;gap:6px">
+          ${['Cook','Sabato','IE'].map((label, i) => {
+            const r = [rating.cook, rating.sabato, rating.ie][i] || '—';
+            return `<span class="badge ${ratingBadgeClass(r)}">${label}: ${r}</span>`;
+          }).join('')}
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--faint)">${detail.candidates.rep} · ${detail.trump24}</div>
+    `;
+    wrap.appendChild(card);
+  });
+
+  return wrap;
+}
+
+// ─── SENATE POLLING ───────────────────────────────────────────────────────────
+
+function renderSenatePolling() {
+  const wrap = div('');
+  const outer = div('card', '');
+  outer.style.padding = '0';
+  outer.style.overflow = 'hidden';
+
+  // Race tabs
+  const tabsRow = div('race-tabs');
+  RACE_ORDER.forEach(state => {
+    const btn = el('button', {
+      class: 'race-tab' + (state === selectedRace ? ' active' : ''),
+      onclick: () => { selectedRace = state; renderMain(); }
+    }, state);
+    tabsRow.appendChild(btn);
+  });
+  outer.appendChild(tabsRow);
+
+  const detail = RACE_DETAILS[selectedRace];
+  const rating = getRating(selectedRace);
+  const content = div('race-content space-y');
+
+  // Header
+  const raceHead = div('');
+  raceHead.innerHTML = `
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
+          <h2 style="font-size:22px;font-weight:800">${selectedRace}</h2>
+          <span class="badge badge-${detail.hold.toLowerCase()}">${detail.hold} Hold</span>
+        </div>
+        <p style="font-size:13px;color:var(--muted);max-width:600px;line-height:1.5">${detail.context}</p>
+        <div style="display:flex;gap:16px;font-size:12px;color:var(--faint);margin-top:8px">
+          <span>Primary: <span style="color:var(--muted)">${detail.primaryDate}</span></span>
+          <span>2024: <span class="${detail.trump24.includes('Harris') ? 'dem-color' : 'rep-color'}">${detail.trump24}</span></span>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px">
+        ${['Cook','Sabato','IE'].map((label, i) => {
+          const r = [rating.cook, rating.sabato, rating.ie][i] || '—';
+          return `<div style="text-align:center"><div style="font-size:11px;color:var(--faint);margin-bottom:4px">${label}</div><span class="badge ${ratingBadgeClass(r)}">${r}</span></div>`;
+        }).join('')}
+      </div>
+    </div>
+  `;
+  content.appendChild(raceHead);
+
+  // Matchups
+  if (detail.matchups.length > 0) {
+    const mSection = div('');
+    mSection.innerHTML = '<div class="card-title">Poll Averages</div>';
+
+    detail.matchups.forEach(m => {
+      const isDem = m.margin.includes('D');
+      const row = div('poll-row avg-row');
+      row.innerHTML = `
+        <div class="poll-header">
+          <div>
+            <div style="font-size:13px;color:var(--text)"><span style="color:var(--dem)">${m.dem}</span> vs <span style="color:var(--rep)">${m.rep}</span></div>
+            <div style="font-size:11px;color:var(--faint)">${m.source} · ${m.date}</div>
+          </div>
+          <div class="poll-margin ${isDem ? 'dem-color' : 'rep-color'}">${m.margin}</div>
+        </div>
+        <div style="margin-top:8px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="font-size:12px;color:var(--dem);width:40px">${m.demPct}%</span>
+            <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${m.demPct}%;height:100%;background:var(--dem)"></div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:12px;color:var(--rep);width:40px">${m.repPct}%</span>
+            <div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${m.repPct}%;height:100%;background:var(--rep)"></div></div>
+          </div>
+        </div>
+      `;
+      mSection.appendChild(row);
+    });
+    content.appendChild(mSection);
+  }
+
+  // Primary
+  if (detail.primary) {
+    const pSection = div('');
+    pSection.innerHTML = `
+      <div class="card-title">${detail.primary.label || 'Primary'}</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:13px;color:var(--text)">${detail.primary.result}</span>
+        <span style="font-size:14px;font-weight:700;color:var(--dem)">${detail.primary.margin}</span>
+      </div>
+    `;
+    content.appendChild(pSection);
+  }
+
+  outer.appendChild(content);
+  wrap.appendChild(outer);
+  return wrap;
+}
+
+// ─── MARKETS ─────────────────────────────────────────────────────────────────
+
+function renderMarkets(poly, kalshi) {
+  const wrap = div('space-y');
+
+  // Chamber control
+  const chamberCard = div('card');
+  chamberCard.innerHTML = '<div class="card-title">Chamber Control</div>';
+
+  [
+    { chamber:'House',  polyD:poly.houseD,              kD:kalshi.houseD,              polyR:100-(poly.houseD||0),              kR:kalshi.houseD ? 100-kalshi.houseD : null, favors:'D' },
+    { chamber:'Senate', polyD:poly.senateR ? 100-poly.senateR : null, kD:kalshi.senateR ? 100-kalshi.senateR : null, polyR:poly.senateR, kR:kalshi.senateR, favors:'R' },
+  ].forEach(({ chamber, polyD, kD, polyR, kR, favors }) => {
+    const inner = div('poll-row');
+    inner.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <span style="font-weight:700;font-size:15px">${chamber}</span>
+        <span class="badge ${favors === 'D' ? 'badge-lean-d' : 'badge-lean-r'}">Favors ${favors === 'D' ? 'Dems' : 'Rep'}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:12px;text-align:center;margin-bottom:8px">
+        <div></div><div style="color:var(--faint);font-weight:600">Polymarket</div><div style="color:var(--faint);font-weight:600">Kalshi</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:center;margin-bottom:6px">
+        <div style="font-size:12px;color:var(--dem)">Dem wins</div>
+        <div style="text-align:center;font-weight:700;color:#93c5fd">${polyD != null ? polyD + '%' : '—'}</div>
+        <div style="text-align:center;font-weight:700;color:#93c5fd">${kD != null ? kD + '%' : '—'}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:center">
+        <div style="font-size:12px;color:var(--rep)">Rep wins</div>
+        <div style="text-align:center;font-weight:700;color:#fca5a5">${polyR != null ? polyR + '%' : '—'}</div>
+        <div style="text-align:center;font-weight:700;color:#fca5a5">${kR != null ? kR + '%' : '—'}</div>
+      </div>
+    `;
+    chamberCard.appendChild(inner);
+  });
+  wrap.appendChild(chamberCard);
+
+  // Balance of power
+  const bopCard = div('card');
+  bopCard.innerHTML = '<div class="card-title">Balance of Power</div>';
+  bopCard.innerHTML += `
+    <div style="display:grid;grid-template-columns:140px 1fr 1fr;gap:8px;font-size:11px;color:var(--faint);font-weight:600;margin-bottom:8px">
+      <div></div><div>Polymarket</div><div>Kalshi</div>
+    </div>
+  `;
+
+  [
+    { label:'R Senate / D House', poly:poly.splitPct,   kalshi:kalshi.splitPct,  d:false },
+    { label:'Democrats Sweep',    poly:poly.dSweepPct,  kalshi:kalshi.dSweepPct, d:true  },
+    { label:'Republicans Sweep',  poly:poly.repSweepPct, kalshi:null,             d:false },
+    { label:'D Senate / R House', poly:2,               kalshi:null,             d:true  },
+  ].forEach(({ label, poly: pPct, kalshi: kPct, d }) => {
+    const row = div('');
+    row.style.cssText = 'display:grid;grid-template-columns:140px 1fr 1fr;gap:8px;align-items:center;margin-bottom:8px';
+    row.innerHTML = `
+      <div style="font-size:12px;font-weight:500;color:${d ? '#93c5fd' : '#fca5a5'}">${label}</div>
+      <div class="mkt-bar-wrap"><div class="mkt-bar-fill" style="width:${pPct||0}%;background:${d ? '#1d4ed8' : '#b91c1c'}">${pPct != null ? pPct + '%' : ''}</div></div>
+      <div class="mkt-bar-wrap">${kPct != null ? `<div class="mkt-bar-fill" style="width:${kPct}%;background:${d ? '#1e40af' : '#991b1b'}">${kPct}%</div>` : '<span style="padding-left:8px;font-size:12px;color:var(--faint)">—</span>'}</div>
+    `;
+    bopCard.appendChild(row);
+  });
+  wrap.appendChild(bopCard);
+  return wrap;
+}
+
+// ─── TRENDS ───────────────────────────────────────────────────────────────────
+
+function renderTrends() {
+  const wrap = div('space-y');
+
+  if (HISTORY.length < 2) {
+    const msg = div('card');
+    msg.innerHTML = `<div class="card-title">Trends</div><div style="color:var(--muted);text-align:center;padding:32px;font-size:13px">Trends appear once 2+ days of data are collected.<br><span style="color:var(--faint);font-size:12px">Currently tracking ${HISTORY.length} day(s).</span></div>`;
+    wrap.appendChild(msg);
+    return wrap;
+  }
+
+  const dates = HISTORY.map(d => d.date.slice(5)); // MM-DD
+
+  function makeChart(canvasId, label, datasets, yLabel) {
+    const card = div('card');
+    card.innerHTML = `<div class="card-title">${label}</div><div style="position:relative;height:200px"><canvas id="${canvasId}"></canvas></div>`;
+    wrap.appendChild(card);
+    setTimeout(() => {
+      const ctx = document.getElementById(canvasId);
+      if (!ctx) return;
+      new Chart(ctx, {
+        type: 'line',
+        data: { labels: dates, datasets },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
+          scales: {
+            x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: '#1e293b' } },
+            y: { ticks: { color: '#64748b', font: { size: 10 }, callback: v => v + '%' }, grid: { color: '#1e293b' }, title: { display: !!yLabel, text: yLabel, color: '#64748b', font: { size: 10 } } }
+          }
+        }
+      });
+    }, 50);
+  }
+
+  // Polymarket House & Senate
+  makeChart('chart-markets', 'Prediction Markets', [
+    {
+      label: 'House → Dem %',
+      data: HISTORY.map(d => d.markets?.polymarket?.houseD ?? null),
+      borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)',
+      tension: 0.3, pointRadius: 3, fill: false,
+    },
+    {
+      label: 'Senate → Rep %',
+      data: HISTORY.map(d => d.markets?.polymarket?.senateR ?? null),
+      borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)',
+      tension: 0.3, pointRadius: 3, fill: false,
+    },
+    {
+      label: 'R Senate / D House %',
+      data: HISTORY.map(d => d.markets?.polymarket?.splitPct ?? null),
+      borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.1)',
+      tension: 0.3, pointRadius: 3, fill: false,
+    },
+  ]);
+
+  // Generic ballot margin
+  makeChart('chart-ballot', 'Generic Ballot Margin (D − R)', [
+    {
+      label: 'D margin',
+      data: HISTORY.map(d => {
+        const avg = d.genericBallot?.avg;
+        return avg ? parseFloat(avg.margin) : null;
+      }),
+      borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.15)',
+      tension: 0.3, pointRadius: 3, fill: true,
+    },
+  ]);
+
+  // Trump net approval
+  makeChart('chart-approval', 'Trump Net Approval', [
+    {
+      label: 'Net approval',
+      data: HISTORY.map(d => d.trumpApproval?.net ? parseFloat(d.trumpApproval.net) : null),
+      borderColor: '#f87171', backgroundColor: 'rgba(248,113,113,0.1)',
+      tension: 0.3, pointRadius: 3, fill: false,
+    },
+  ]);
+
+  // Dem sweep %
+  makeChart('chart-sweep', 'Dem Sweep Probability (Polymarket)', [
+    {
+      label: 'Dem sweep %',
+      data: HISTORY.map(d => d.markets?.polymarket?.dSweepPct ?? null),
+      borderColor: '#60a5fa', backgroundColor: 'rgba(96,165,250,0.15)',
+      tension: 0.3, pointRadius: 3, fill: true,
+    },
+  ]);
+
+  // Footer
+  const footer = div('');
+  footer.innerHTML = `<p style="font-size:11px;color:var(--faint);text-align:center">Tracking ${HISTORY.length} days · Started Feb 24, 2026 · Data from Polymarket, RCP</p>`;
+  wrap.appendChild(footer);
+
+  return wrap;
+}
+
+// ─── TRUMP APPROVAL ───────────────────────────────────────────────────────────
+
+function renderTrumpApproval(appr) {
+  const wrap = div('space-y');
+  const card = div('card');
+
+  const approve = appr?.approve ?? 40.5;
+  const disapprove = appr?.disapprove ?? 55.4;
+  const net = appr?.net ?? '-14.9';
+  const source = appr?.source || 'RCP Average';
+
+  card.innerHTML = `
+    <div class="card-title">Trump Job Approval — ${source}</div>
+    <div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap;margin-bottom:20px">
+      <div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Net Approval</div>
+        <div style="font-size:44px;font-weight:800;color:var(--rep);letter-spacing:-2px">${net}</div>
+        <div style="font-size:11px;color:var(--faint);margin-top:2px">Near 2nd term low</div>
+      </div>
+      <div style="flex:1;min-width:200px">
+        <div class="appr-bar">
+          <span class="appr-label" style="color:var(--dem)">Approve</span>
+          <div style="flex:1;height:20px;background:var(--border);border-radius:4px;overflow:hidden">
+            <div class="appr-fill" style="width:${approve}%;background:var(--dem)">${approve}%</div>
+          </div>
+        </div>
+        <div class="appr-bar">
+          <span class="appr-label" style="color:var(--rep)">Disapprove</span>
+          <div style="flex:1;height:20px;background:var(--border);border-radius:4px;overflow:hidden">
+            <div class="appr-fill" style="width:${disapprove}%;background:var(--rep)">${disapprove}%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="sep">
+    <div class="grid-2">
+      ${[
+        { label:'Trump 2nd term low', val:'-15.0', sub:'Feb 26', cls:'rep-color' },
+        { label:'Biden same point',   val:'-12.2', sub:'Feb 22', cls:'text-muted' },
+        { label:'Obama same point',   val:'-2.0',  sub:'Feb 10', cls:'text-muted' },
+        { label:'2018 election day',  val:'-14.0', sub:'D+40 seats', cls:'dem-color' },
+      ].map(s => `
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px">
+          <div style="font-size:20px;font-weight:800" class="${s.cls}">${s.val}</div>
+          <div style="font-size:12px;color:var(--text);font-weight:500">${s.label}</div>
+          <div style="font-size:11px;color:var(--faint)">${s.sub}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  wrap.appendChild(card);
+  return wrap;
+}
+
+// ─── SOURCES ─────────────────────────────────────────────────────────────────
+
+function renderSources() {
+  const wrap = div('space-y');
+  [
+    { cat:'Polling', items:[
+      { name:'RealClearPolling Senate', url:'https://www.realclearpolling.com/polls/senate' },
+      { name:'RealClearPolling Generic Ballot', url:'https://www.realclearpolling.com/polls/congress/generic-congressional-ballot' },
+      { name:'Silver Bulletin', url:'https://www.natesilver.net/p/generic-ballot-average-2026-nate-silver-bulletin-congress-polls' },
+    ]},
+    { cat:'Forecasters', items:[
+      { name:'Cook Political Report', url:'https://www.cookpolitical.com/ratings/senate-race-ratings' },
+      { name:'Sabato Crystal Ball', url:'https://centerforpolitics.org/crystalball/2026-senate/' },
+      { name:'Inside Elections', url:'https://insideelections.com' },
+      { name:'Ballotpedia 2026 Senate', url:'https://ballotpedia.org/United_States_Senate_elections,_2026' },
+      { name:'270toWin Senate', url:'https://www.270towin.com/2026-senate-election-predictions/' },
+    ]},
+    { cat:'Markets', items:[
+      { name:'Polymarket Balance of Power', url:'https://polymarket.com/event/balance-of-power-2026-midterms' },
+      { name:'Polymarket House', url:'https://polymarket.com/event/which-party-will-win-the-house-in-2026' },
+      { name:'Polymarket Senate', url:'https://polymarket.com/event/which-party-will-win-the-senate-in-2026' },
+      { name:'Kalshi House', url:'https://kalshi.com/markets/controlh/house-winner/controlh-2026' },
+      { name:'Kalshi Senate', url:'https://kalshi.com/markets/controls/senate-winner/controls-2026' },
+    ]},
+    { cat:'Automation', items:[
+      { name:'GitHub Actions Workflow Log', url:'https://github.com/hshapol/midtrack/actions' },
+      { name:'Raw data.json', url:'https://hshapol.github.io/midtrack/data/data.json' },
+    ]},
+  ].forEach(({ cat, items }) => {
+    const card = div('card');
+    card.innerHTML = `<div class="card-title">${cat}</div>`;
+    items.forEach(({ name, url }) => {
+      card.innerHTML += `
+        <div class="source-item">
+          <span style="font-size:13px">${name}</span>
+          <a href="${url}" target="_blank" class="source-link">Open →</a>
+        </div>
+      `;
+    });
+    wrap.appendChild(card);
+  });
+  return wrap;
+}
+
+// ─── LOAD DATA ────────────────────────────────────────────────────────────────
+
+async function loadData() {
+  try {
+    const [dataRes, histRes] = await Promise.allSettled([
+      fetch('data/data.json?v=' + Date.now()),
+      fetch('data/history.json?v=' + Date.now()),
+    ]);
+
+    if (dataRes.status === 'fulfilled' && dataRes.value.ok) {
+      DATA = await dataRes.value.json();
+      document.getElementById('last-updated').textContent = DATA.lastUpdated || 'Unknown';
+    }
+
+    if (histRes.status === 'fulfilled' && histRes.value.ok) {
+      HISTORY = await histRes.value.json();
+    }
+  } catch (e) {
+    console.warn('Could not load data files, using fallback');
+    DATA = { markets: { polymarket: {}, kalshi: {} }, genericBallot: { polls: [], avg: null }, senateRatings: {}, trumpApproval: {} };
+  }
+  renderTabs();
+  renderMain();
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+
+renderTabs();
+loadData();
+</script>
+</body>
+</html>

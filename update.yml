@@ -1,0 +1,14 @@
+{
+  "name": "midterm-tracker",
+  "version": "1.0.0",
+  "description": "2026 Midterm Election Tracker - Daily Data Scraper",
+  "main": "scripts/fetch-data.js",
+  "scripts": {
+    "fetch": "node scripts/fetch-data.js",
+    "serve": "npx serve ."
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "cheerio": "^1.0.0"
+  }
+}
