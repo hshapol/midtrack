@@ -28,6 +28,8 @@ async function fetchRendered(browser, url, waitMs = 2000) {
   await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36');
   try {
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    // Wait for poll table to actually render
+    await page.waitForSelector('table tr td', { timeout: 15000 }).catch(() => {});
     await new Promise(r => setTimeout(r, waitMs));
     return await page.content();
   } finally {
