@@ -71,10 +71,15 @@ async function fetchAllSenatePolls(browser) {
     await new Promise(r => setTimeout(r, 4000));
 
     // Get all options from the select dropdown
-    const options = await page.$$eval('select.igc-tab-select option', opts =>
-      opts.map(o => ({ value: o.value, text: o.textContent.trim() }))
-    );
+   const options = await page.$$eval('select option', opts =>
+  opts.map(o => ({ value: o.value, text: o.textContent.trim() }))
+);
 
+// Debug: also log all select elements found
+const selectCount = await page.$$eval('select', els => els.length);
+console.log(`  Found ${selectCount} select elements, ${options.length} options`);
+console.log(`  Option texts:`, options.slice(0, 5).map(o => o.text).join(', '));
+    
     console.log(`  Found ${options.length} matchups:`, options.map(o => o.text).join(', '));
 
     for (const opt of options) {
