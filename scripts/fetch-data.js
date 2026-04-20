@@ -341,16 +341,21 @@ async function main() {
     const genericBallot = await fetchGenericBallot(browser);
     const trumpApproval = await fetchTrumpApproval(browser);
 
+    // Load existing data.json to preserve manual updates
+    let existingData = {};
+    try { existingData = JSON.parse(readFileSync('data/data.json', 'utf8')); }
+    catch { console.log('  No existing data.json'); }
+
     const todayEntry = {
       date: TODAY,
       fetchedAt: new Date().toISOString(),
       markets: { polymarket, kalshi },
-      genericBallot,
-      senatePolls,
-      senateRatings: ratings,
-      trumpApproval,
+      genericBallot: genericBallot.polls?.length > 0 ? genericBallot : (existingData.genericBallot || { polls: [], avg: null }),
+      senatePolls: Object.keys(senatePolls).length > 0 ? senatePolls : (existingData.senatePolls || {}),
+      senateRatings: Object.keys(ratings).length > 0 ? ratings : (existingData.senateRatings || {}),
+      trumpApproval: trumpApproval.approve ? trumpApproval : (existingData.trumpApproval || {}),
     };
-
+    
     mkdirSync('data', { recursive: true });
 
     let history = [];
