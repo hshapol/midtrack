@@ -479,7 +479,7 @@
   },
   {
     "date": "2026-04-22",
-    "fetchedAt": "2026-04-22T15:05:26.201Z",
+    "fetchedAt": "2026-04-22T15:18:00.761Z",
     "markets": {
       "polymarket": {
         "houseD": 85,
@@ -745,46 +745,46 @@
       "Maine": {
         "avg": {
           "source": "RCP Average",
-          "date": "2026-04-20",
-          "dem": 43.2,
-          "rep": 43.4,
-          "margin": "-0.2"
+          "date": "2/12 - 3/31",
+          "dem": 47.6,
+          "rep": 40,
+          "margin": "7.6"
         },
         "polls": [
           {
             "source": "MPRC",
             "date": "3/20 - 3/31",
-            "dem": 42,
-            "rep": 45,
-            "margin": "-3.0"
+            "dem": 48,
+            "rep": 39,
+            "margin": "9.0"
           },
           {
             "source": "Emerson",
             "date": "3/21 - 3/23",
-            "dem": 46,
-            "rep": 43,
-            "margin": "3.0"
+            "dem": 48,
+            "rep": 41,
+            "margin": "7.0"
           },
           {
             "source": "Quantus Insights",
             "date": "3/3 - 3/5",
-            "dem": 43,
-            "rep": 45,
-            "margin": "-2.0"
+            "dem": 49,
+            "rep": 42,
+            "margin": "7.0"
           },
           {
             "source": "Pan Atlantic",
             "date": "2/20 - 3/2",
             "dem": 44,
-            "rep": 44,
-            "margin": "0.0"
+            "rep": 40,
+            "margin": "4.0"
           },
           {
             "source": "UNH",
             "date": "2/12 - 2/16",
-            "dem": 41,
-            "rep": 40,
-            "margin": "1.0"
+            "dem": 49,
+            "rep": 38,
+            "margin": "11.0"
           }
         ]
       },
