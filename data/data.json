@@ -11,8 +11,9 @@
       "repSweepPct": 13
     },
     "kalshi": {
-      "houseD": null,
-      "senateR": null
+      "houseD": 86,
+      "senateR": 50,
+      "updatedDate": "2026-04-22"
     }
   },
   "genericBallot": {
@@ -72,10 +73,11 @@
     "North Carolina": {
       "avg": {
         "source": "RCP Average",
-        "date": "2026-04-20",
+        "date": "4/6",
         "dem": 49,
         "rep": 42.2,
-        "margin": "6.8"
+        "margin": "6.8",
+        "dateRange": "1/31 - 4/6"
       },
       "polls": [
         {
@@ -118,10 +120,11 @@
     "Georgia": {
       "avg": {
         "source": "RCP Average",
-        "date": "2026-04-20",
+        "date": "3/2",
         "dem": 45,
         "rep": 42.2,
-        "margin": "2.8"
+        "margin": "2.8",
+        "dateRange": "4/24 - 3/2"
       },
       "polls": [
         {
@@ -164,10 +167,11 @@
     "Michigan": {
       "avg": {
         "source": "RCP Average",
-        "date": "2026-04-20",
+        "date": "1/25",
         "dem": 43.8,
         "rep": 42.5,
-        "margin": "1.3"
+        "margin": "1.3",
+        "dateRange": "11/6 - 1/25"
       },
       "polls": [
         {
@@ -203,10 +207,11 @@
     "Ohio": {
       "avg": {
         "source": "RCP Average",
-        "date": "2026-04-20",
+        "date": "4/14",
         "dem": 45.7,
         "rep": 48.3,
-        "margin": "-2.6"
+        "margin": "-2.6",
+        "dateRange": "12/6 - 4/14"
       },
       "polls": [
         {
@@ -235,10 +240,11 @@
     "New Hampshire": {
       "avg": {
         "source": "RCP Average",
-        "date": "2026-04-20",
+        "date": "3/23",
         "dem": 47,
         "rep": 44,
-        "margin": "3.0"
+        "margin": "3.0",
+        "dateRange": "1/15 - 3/23"
       },
       "polls": [
         {
@@ -267,10 +273,11 @@
     "Maine": {
       "avg": {
         "source": "RCP Average",
-        "date": "2/12 - 3/31",
+        "date": "3/31",
         "dem": 47.6,
         "rep": 40,
-        "margin": "7.6"
+        "margin": "7.6",
+        "dateRange": "2/12 - 3/31"
       },
       "polls": [
         {
@@ -332,10 +339,11 @@
     "Texas": {
       "avg": {
         "source": "RCP Average",
-        "date": "2026-04-20",
+        "date": "1/31",
         "dem": 43.5,
         "rep": 45.5,
-        "margin": "-2.0"
+        "margin": "-2.0",
+        "dateRange": "1/10 - 1/31"
       },
       "polls": [
         {
