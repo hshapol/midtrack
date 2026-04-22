@@ -11,15 +11,15 @@
       "repSweepPct": 14
     },
     "kalshi": {
-      "houseD": null,
-      "senateR": null
+      "houseD": 86,
+      "senateR": 50
     }
   },
   "genericBallot": {
     "avg": {
       "source": "RCP Average",
       "date": "3/16 - 4/20",
-      "dem": 48.0,
+      "dem": 48,
       "rep": 42.1,
       "margin": "5.9"
     },
@@ -412,4 +412,4 @@
     "disapprove": 57.6,
     "net": -17.1
   }
-}
+        }
