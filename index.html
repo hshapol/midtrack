@@ -117,8 +117,8 @@ const RACE_DETAILS = {
   "Texas":          { hold:"R", trump24:"Trump +14.0",  primaryDate:"Mar 3, 2026 (runoff May 26)", context:"Cornyn vs Paxton runoff May 26. Cornyn led 42–40.5% in March primary. All forecasters now Likely R.", candidates:{ dem:"Crockett / Talarico (D primary)", rep:"Cornyn vs Paxton runoff" }, matchups:[{ dem:"Talarico", rep:"Paxton", demPct:45.0, repPct:46.0, margin:"+1.0 R", source:"RCP Avg", date:"Feb 24, 2026" }], primary:{ label:"R Primary (March 3)", result:"Cornyn 42.0% · Paxton 40.5%", margin:"Cornyn +1.5 → runoff May 26" } },
 };
 
-const RACE_ORDER = ["Maine","North Carolina","Georgia","Michigan","Ohio (Special)","New Hampshire","Alaska","Nebraska","Iowa","Texas"];
-
+const RACE_ORDER = ["North Carolina","Maine","Ohio (Special)","Alaska","Michigan","Georgia","New Hampshire","Nebraska","Iowa","Texas"];
+  
 function ratingBadgeClass(r) {
   if (!r) return '';
   const l = r.toLowerCase();
