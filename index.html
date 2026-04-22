@@ -761,7 +761,7 @@ function renderOverview(poly, kalshi, gb) {
     card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
     const primaryRating = rating.cook || rating.sabato || '—';
     const lastPollDate = liveData?.avg?.date || liveData?.rtwh?.date;
-    const isStale = daysSince(lastPollDate) > 7;
+    const isStale = daysSince(DATA.lastUpdated) > 7;
     const bestAvg = liveData?.rtwh || liveData?.avg;
     const avgSource = liveData?.rtwh ? 'RTWH' : liveData?.avg ? 'RCP' : '';
     const avgMarginStr = bestAvg ? fmtMargin(bestAvg.margin) : (detail.matchups[0]?.margin || '—');
