@@ -290,52 +290,57 @@ async function fetchPolymarket() {
   return markets;
 }
 
-// ─── KALSHI (via public API — no auth required for market data) ───────────────
+// ─── KALSHI (via Puppeteer browser scrape) ────────────────────────────────────
 
-async function fetchKalshi() {
-  console.log('Fetching Kalshi via API...');
+async function fetchKalshi(browser) {
+  console.log('Fetching Kalshi via browser...');
   const markets = { houseD: null, senateR: null };
-  const BASE = 'https://trading-api.kalshi.com/trade-api/v2';
-
   try {
-    // House — D contract
-    const houseRes = await fetch(
-      `${BASE}/series/CONTROLH/markets/CONTROLH-2026-D/candlesticks?start_ts=${NOW_TS - 3600}&end_ts=${NOW_TS}&period_interval=60`,
-      { headers: { 'Accept': 'application/json' } }
-    );
-    if (houseRes.ok) {
-      const houseData = await houseRes.json();
-      const candles = houseData.candlesticks || [];
-      if (candles.length > 0) {
-        const last = candles[candles.length - 1];
-        const price = parseFloat(last.price?.close_dollars || last.yes_bid?.close_dollars || 0);
-        if (price > 0) markets.houseD = Math.round(price * 100);
-      }
-    } else {
-      console.log('  Kalshi house HTTP:', houseRes.status);
-    }
-  } catch (e) { console.error('  Kalshi house error:', e.message); }
+    const page = await browser.newPage();
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36');
 
-  try {
-    // Senate — R contract (CONTROLS-2026 — check if D or R contract)
-    // D contract = CONTROLS-2026-D, R = 100 - D
-    const senateRes = await fetch(
-      `${BASE}/series/CONTROLS/markets/CONTROLS-2026-D/candlesticks?start_ts=${NOW_TS - 3600}&end_ts=${NOW_TS}&period_interval=60`,
-      { headers: { 'Accept': 'application/json' } }
-    );
-    if (senateRes.ok) {
-      const senateData = await senateRes.json();
-      const candles = senateData.candlesticks || [];
-      if (candles.length > 0) {
-        const last = candles[candles.length - 1];
-        const dPrice = parseFloat(last.price?.close_dollars || last.yes_bid?.close_dollars || 0);
-        if (dPrice > 0) markets.senateR = Math.round((1 - dPrice) * 100);
-      }
-    } else {
-      console.log('  Kalshi senate HTTP:', senateRes.status);
-    }
-  } catch (e) { console.error('  Kalshi senate error:', e.message); }
+    try {
+      await page.goto('https://kalshi.com/markets/controlh/house-winner/controlh-2026', { waitUntil: 'domcontentloaded', timeout: 60000 });
+      await new Promise(r => setTimeout(r, 5000));
+      const houseD = await page.evaluate(() => {
+        const bodyText = document.body.innerText;
+        const lines = bodyText.split('\n').map(l => l.trim()).filter(Boolean);
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].toLowerCase().includes('democrat')) {
+            for (let j = i; j < Math.min(i+3, lines.length); j++) {
+              const m = lines[j].match(/^(\d+)%$/);
+              if (m) return parseInt(m[1]);
+            }
+          }
+        }
+        return null;
+      });
+      if (houseD) markets.houseD = houseD;
+      console.log('  Kalshi House D:', houseD);
+    } catch (e) { console.error('  Kalshi house error:', e.message); }
 
+    try {
+      await page.goto('https://kalshi.com/markets/controls/senate-winner/controls-2026', { waitUntil: 'domcontentloaded', timeout: 60000 });
+      await new Promise(r => setTimeout(r, 5000));
+      const senateR = await page.evaluate(() => {
+        const bodyText = document.body.innerText;
+        const lines = bodyText.split('\n').map(l => l.trim()).filter(Boolean);
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].toLowerCase().includes('republican')) {
+            for (let j = i; j < Math.min(i+3, lines.length); j++) {
+              const m = lines[j].match(/^(\d+)%$/);
+              if (m) return parseInt(m[1]);
+            }
+          }
+        }
+        return null;
+      });
+      if (senateR) markets.senateR = senateR;
+      console.log('  Kalshi Senate R:', senateR);
+    } catch (e) { console.error('  Kalshi senate error:', e.message); }
+
+    await page.close();
+  } catch (e) { console.error('  Kalshi browser error:', e.message); }
   console.log('  Kalshi:', markets);
   return markets;
 }
@@ -356,7 +361,7 @@ async function main() {
       fetchPolymarket(),
       fetchBallotpediaRatings(),
     ]);
-    const kalshi        = await fetchKalshi();  // No browser needed — pure API
+    const kalshi        = await fetchKalshi(browser);
     const senatePolls   = await fetchAllSenatePolls(browser);
     const genericBallot = await fetchGenericBallot(browser);
     const trumpApproval = await fetchTrumpApproval(browser);
