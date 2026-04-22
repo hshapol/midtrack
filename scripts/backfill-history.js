@@ -71,7 +71,7 @@ async function getPolymarketTokens() {
 async function getPolymarketHistory(tokenId, label) {
   if (!tokenId) { console.log(`  Skipping ${label} — no token`); return []; }
   try {
-    const url = `${CLOB_BASE}/prices-history?market=${tokenId}&start_ts=${START_TS}&end_ts=${NOW_TS}&fidelity=1440`;
+    const url = `${CLOB_BASE}/prices-history?market=${tokenId}&interval=max`;
     const data = await fetchJSON(url);
     const history = (data.history || []).map(p => ({
       date: new Date(p.t * 1000).toISOString().split('T')[0],
