@@ -761,7 +761,7 @@ function renderOverview(poly, kalshi, gb) {
     card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
     const primaryRating = rating.cook || rating.sabato || '—';
     const lastPollDate = liveData?.avg?.date || liveData?.rtwh?.date;
-    const isStale = daysSince(lastPollDate) > 14;
+    const isStale = daysSince(lastPollDate) > 7;
     const bestAvg = liveData?.rtwh || liveData?.avg;
     const avgSource = liveData?.rtwh ? 'RTWH' : liveData?.avg ? 'RCP' : '';
     const avgMarginStr = bestAvg ? fmtMargin(bestAvg.margin) : (detail.matchups[0]?.margin || '—');
@@ -819,7 +819,7 @@ function renderSenateRaces() {
     const detail = RACE_DETAILS[state];
     const rating = getRating(state);
     const liveData = DATA?.senatePolls?.[state];
-    const isStale = daysSince(liveData?.avg?.date || liveData?.rtwh?.date) > 14;
+    const isStale = daysSince(liveData?.avg?.date || liveData?.rtwh?.date) > 7;
     const card = div('race-card');
     card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
     const bestAvg = liveData?.rtwh || liveData?.avg;
@@ -883,7 +883,7 @@ function renderSenatePolling() {
     if (liveData?.avg) {
       const avg = liveData.avg;
       const isDem = isMarginD(avg.margin);
-      const isStale = daysSince(avg.date) > 14;
+      const isStale = daysSince(DATA.lastUpdated) > 7;
       const avgRow = div('poll-row avg-row');
       const weekAgo = HISTORY.slice().reverse().find(h => {
       const d = new Date(h.date);
