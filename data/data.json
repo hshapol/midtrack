@@ -11,8 +11,8 @@
       "repSweepPct": 13
     },
     "kalshi": {
-      "houseD": null,
-      "senateR": null
+      "houseD": 85,
+      "senateR": 50
     }
   },
   "genericBallot": {
