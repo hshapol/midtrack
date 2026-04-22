@@ -819,7 +819,7 @@ function renderSenateRaces() {
     const detail = RACE_DETAILS[state];
     const rating = getRating(state);
     const liveData = DATA?.senatePolls?.[state];
-    const isStale = daysSince(liveData?.avg?.date || liveData?.rtwh?.date) > 7;
+    const isStale = daysSince(DATA.lastUpdated) > 7;
     const card = div('race-card');
     card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
     const bestAvg = liveData?.rtwh || liveData?.avg;
