@@ -106,10 +106,11 @@
 <script>
 let DATA = null, HISTORY = [];
 let currentTab = 'overview', selectedRace = 'North Carolina';
-const TABS = ['overview', 'generic ballot', 'senate races', 'senate polling', 'markets', 'trends', 'trump approval', 'sources'];
- 
+// CHANGE 1: Tab order
+const TABS = ['overview', 'senate races', 'senate polling', 'markets', 'generic ballot', 'trends', 'trump approval', 'sources'];
+
 const RACE_DETAILS = {
-  "Maine":          { hold:"R", trump24:"Harris +7.0",  primaryDate:"Jun 9, 2026",  context:"Only R-held seat in a Harris state. Collins seeking 6th term. Platner appears likley to beat win primary over former Governor Mills.", candidates:{ dem:"Graham Platner / Janet Mills", rep:"Susan Collins (R, incumbent)" }, matchups:[{ dem:"Platner", rep:"Collins", demPct:44.0, repPct:41.5, margin:"+2.5 D", source:"RCP Avg", date:"Feb 24, 2026" },{ dem:"Mills", rep:"Collins", demPct:42.5, repPct:44.5, margin:"+2.0 R", source:"RCP Avg", date:"Feb 24, 2026" }], primary:{ label:"D Primary RCP Avg", result:"Mills 43.0% · Platner 39.0%", margin:"Mills +4.0" } },
+  "Maine":          { hold:"R", trump24:"Harris +7.0",  primaryDate:"Jun 9, 2026",  context:"Only R-held seat in a Harris state. Collins seeking 6th term. Platner appears likely to win primary over former Governor Mills.", candidates:{ dem:"Graham Platner / Janet Mills", rep:"Susan Collins (R, incumbent)" }, matchups:[{ dem:"Platner", rep:"Collins", demPct:44.0, repPct:41.5, margin:"+2.5 D", source:"RCP Avg", date:"Feb 24, 2026" },{ dem:"Mills", rep:"Collins", demPct:42.5, repPct:44.5, margin:"+2.0 R", source:"RCP Avg", date:"Feb 24, 2026" }], primary:{ label:"D Primary RCP Avg", result:"Platner 53.8% · Mills 31.8%", margin:"Platner +22" } },
   "North Carolina": { hold:"R", trump24:"Trump +3.2",   primaryDate:"May 2026",      context:"Open seat — Tillis retired. Cooper is a 6-time statewide winner. Now rated Lean D by all forecasters.", candidates:{ dem:"Roy Cooper (D, fmr. Gov.)", rep:"Michael Whatley (R)" }, matchups:[{ dem:"Cooper", rep:"Whatley", demPct:47.2, repPct:37.6, margin:"+9.6 D", source:"RCP Avg", date:"Feb 24, 2026" }], primary:null },
   "Georgia":        { hold:"D", trump24:"Trump +2.2",   primaryDate:"May 19, 2026",  context:"Ossoff defending in Trump +2.2 state. Moved to Lean D. R primary May 19.", candidates:{ dem:"Jon Ossoff (D, incumbent)", rep:"TBD — primary May 19" }, matchups:[{ dem:"Ossoff", rep:"Collins", demPct:44.3, repPct:42.0, margin:"+2.3 D", source:"RCP Avg", date:"Feb 24, 2026" }], primary:{ label:"R Primary RCP Avg", result:"Collins 29.5% · Carter 17.8% · Dooley 10.3%", margin:"Collins +11.7" } },
   "Michigan":       { hold:"D", trump24:"Trump +1.0",   primaryDate:"Aug 4, 2026",   context:"Open seat — Peters retiring. Rogers (R) likely nominee. Stevens leads by +1.3 in RCP avg.", candidates:{ dem:"Stevens / McMorrow / El-Sayed", rep:"Mike Rogers (R)" }, matchups:[{ dem:"Stevens", rep:"Rogers", demPct:43.8, repPct:42.5, margin:"+1.3 D", source:"RCP Avg", date:"Feb 24, 2026" },{ dem:"McMorrow", rep:"Rogers", demPct:42.3, repPct:43.8, margin:"+1.5 R", source:"RCP Avg", date:"Feb 24, 2026" }], primary:null },
@@ -120,10 +121,9 @@ const RACE_DETAILS = {
   "Iowa":           { hold:"R", trump24:"Trump +13.0",  primaryDate:"Jun 2, 2026",   context:"Open seat — Ernst retired. Hinson (R) consolidated GOP support. No general polling yet.", candidates:{ dem:"TBD", rep:"Ashley Hinson (R)" }, matchups:[], primary:null },
   "Texas":          { hold:"R", trump24:"Trump +14.0",  primaryDate:"Mar 3, 2026 (runoff May 26)", context:"Cornyn vs Paxton runoff May 26. Cornyn led 42-40.5% in March primary. All forecasters now Likely R.", candidates:{ dem:"Crockett / Talarico (D primary)", rep:"Cornyn vs Paxton runoff" }, matchups:[{ dem:"Talarico", rep:"Paxton", demPct:45.0, repPct:46.0, margin:"+1.0 R", source:"RCP Avg", date:"Feb 24, 2026" }], primary:{ label:"R Primary (March 3)", result:"Cornyn 42.0% · Paxton 40.5%", margin:"Cornyn +1.5 → runoff May 26" } },
 };
- 
+
 const RACE_ORDER = ["North Carolina","Maine","Ohio (Special)","Alaska","Michigan","Georgia","New Hampshire","Nebraska","Iowa","Texas"];
- 
-// Helper: format margin cleanly e.g. "+6.8 D" or "+0.2 R"
+
 function fmtMargin(margin) {
   const m = parseFloat(margin);
   const abs = Math.abs(m).toFixed(1);
@@ -131,9 +131,9 @@ function fmtMargin(margin) {
   if (m < 0) return `+${abs} R`;
   return 'Even';
 }
- 
+
 function isMarginD(margin) { return parseFloat(margin) > 0; }
- 
+
 function ratingBadgeClass(r) {
   if (!r) return '';
   const l = r.toLowerCase();
@@ -146,7 +146,7 @@ function ratingBadgeClass(r) {
   if (l.includes('safe r')) return 'badge-safe-r';
   return '';
 }
- 
+
 function getRating(state) {
   if (!DATA || !DATA.senateRatings) return { cook: '', sabato: '', ie: '' };
   const key = Object.keys(DATA.senateRatings).find(k =>
@@ -156,12 +156,12 @@ function getRating(state) {
   );
   return key ? DATA.senateRatings[key] : { cook: '', sabato: '', ie: '' };
 }
- 
+
 function daysSince(dateStr) {
   if (!dateStr) return 999;
   return (new Date() - new Date(dateStr)) / (1000 * 60 * 60 * 24);
 }
- 
+
 function el(tag, attrs, ...children) {
   const e = document.createElement(tag);
   Object.entries(attrs || {}).forEach(([k, v]) => {
@@ -173,18 +173,18 @@ function el(tag, attrs, ...children) {
   children.forEach(c => c && e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
   return e;
 }
- 
+
 function div(cls, html) {
   const d = document.createElement('div');
   if (cls) d.className = cls;
   if (html !== undefined) d.innerHTML = html;
   return d;
 }
- 
+
 function pollBar(dem, rep) {
   return `<div style="margin-top:8px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:12px;color:var(--dem);width:40px">${dem}%</span><div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${dem}%;height:100%;background:var(--dem)"></div></div></div><div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;color:var(--rep);width:40px">${rep}%</span><div style="flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${rep}%;height:100%;background:var(--rep)"></div></div></div></div>`;
 }
- 
+
 function renderTabs() {
   const container = document.getElementById('tabs');
   container.innerHTML = '';
@@ -193,7 +193,7 @@ function renderTabs() {
     container.appendChild(btn);
   });
 }
- 
+
 function renderMain() {
   const main = document.getElementById('main');
   main.innerHTML = '';
@@ -210,41 +210,11 @@ function renderMain() {
   if (currentTab === 'trump approval')  main.appendChild(renderTrumpApproval(DATA.trumpApproval));
   if (currentTab === 'sources')         main.appendChild(renderSources());
 }
- 
+
 function renderOverview(poly, kalshi, gb) {
   const wrap = div('space-y');
- 
-  // Market Summary Table
-  const summaryCard = div('card');
-  summaryCard.innerHTML = `
-    <div class="card-title">Market Summary</div>
-    <table style="width:100%;border-collapse:collapse;font-size:13px">
-      <thead>
-        <tr style="border-bottom:2px solid var(--border)">
-          <th style="text-align:left;padding:8px 12px;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Outcome</th>
-          <th style="text-align:center;padding:8px 12px;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Polymarket</th>
-          <th style="text-align:center;padding:8px 12px;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Kalshi</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${[
-          { label:'House → Dem', pD: poly.houseD, kD: kalshi.houseD, d:true },
-          { label:'Senate → Dem', pD: poly.senateR != null ? 100-poly.senateR : null, kD: kalshi.senateR != null ? 100-kalshi.senateR : null, d:true },
-          { label:'Senate → Rep', pD: poly.senateR, kD: kalshi.senateR, d:false },
-          { label:'Dem Sweep', pD: poly.dSweepPct, kD: kalshi.dSweepPct, d:true },
-          { label:'Rep Sweep', pD: poly.repSweepPct, kD: null, d:false },
-          { label:'R Senate / D House', pD: poly.splitPct, kD: kalshi.splitPct, d:false },
-        ].map(({ label, pD, kD, d }, i) => `
-          <tr style="border-bottom:1px solid var(--border);${i%2===0?'background:#f8fafc':''}">
-            <td style="padding:8px 12px;font-weight:500;color:var(--text)">${label}</td>
-            <td style="padding:8px 12px;text-align:center">${pD != null ? `<span style="font-weight:700;color:${d?'var(--dem)':'var(--rep)'}">${pD}%</span>` : '<span style="color:var(--faint)">—</span>'}</td>
-            <td style="padding:8px 12px;text-align:center">${kD != null ? `<span style="font-weight:700;color:${d?'var(--dem)':'var(--rep)'}">${kD}%</span>` : '<span style="color:var(--faint)">—</span>'}</td>
-          </tr>`).join('')}
-      </tbody>
-    </table>`;
-  wrap.appendChild(summaryCard);
- 
-  // If Election Held Today
+
+  // CHANGE 2: IETD card first
   const ietdCard = div('card');
   const BIG8 = ["Maine","North Carolina","Georgia","Michigan","Ohio (Special)","Alaska","Texas","New Hampshire"];
   const pollDFlips = [], pollDHolds = [], pollRHolds = [];
@@ -258,7 +228,7 @@ function renderOverview(poly, kalshi, gb) {
     else if (isD && detail.hold === 'D') pollDHolds.push(state);
     else pollRHolds.push(state);
   });
- 
+
   const fcDFlips = [], fcDHolds = [], fcTossups = [], fcRHolds = [];
   RACE_ORDER.forEach(state => {
     const detail = RACE_DETAILS[state];
@@ -270,18 +240,11 @@ function renderOverview(poly, kalshi, gb) {
     else if (leanD && detail.hold === 'D') fcDHolds.push(state);
     else fcRHolds.push(state);
   });
- 
-  const baseD = 47 + fcDFlips.length;
-  const bestCaseD = baseD + fcTossups.length;
-  let majorityLine;
-  if (bestCaseD >= 51) majorityLine = `Best case D+${fcDFlips.length + fcTossups.length} — <span style="color:var(--dem);font-weight:600">Dems could flip Senate</span>`;
-  else if (bestCaseD === 50) majorityLine = `Best case D+${fcDFlips.length + fcTossups.length} (${bestCaseD} seats) — <span style="color:var(--tossup);font-weight:600">Rs retain via VP tiebreak at 50–50</span>`;
-  else majorityLine = `Best case D+${fcDFlips.length + fcTossups.length} (${bestCaseD} seats) — <span style="color:var(--rep);font-weight:600">Rs retain Senate, Dems short of majority</span>`;
- 
+
   const polyHouse = poly.houseD != null ? `<span style="color:var(--dem);font-weight:600">${poly.houseD}% D</span>` : '—';
   const polySenate = poly.senateR != null ? `<span style="color:var(--dem);font-weight:600">${100-poly.senateR}% D</span>` : '—';
   const kalshiSenate = kalshi.senateR != null ? `<span style="color:var(--dem);font-weight:600">${100-kalshi.senateR}% D</span>` : '<span style="color:var(--faint)">—</span>';
- 
+
   ietdCard.innerHTML = `
     <div class="card-title">🗳 If the Election Were Held Today</div>
     <div class="ietd-row">
@@ -294,16 +257,42 @@ function renderOverview(poly, kalshi, gb) {
     </div>
     <div class="ietd-row">
       <span class="ietd-label">Forecasters</span>
-      <span class="ietd-value">${fcTossups.length ? `<span style="color:var(--tossup);font-weight:600">${fcTossups.length} Toss-Up${fcTossups.length>1?'s':''}</span> (${fcTossups.join(', ')}) · ` : ''}${fcDFlips.length ? `<span style="color:var(--dem);font-weight:600">${fcDFlips.length} Lean D flip${fcDFlips.length>1?'s':''}</span> (${fcDFlips.join(', ')}) · ` : ''}${fcDHolds.length ? `<span style="color:var(--dem);">${fcDHolds.length} Lean D hold${fcDHolds.length>1?'s':''}</span> (${fcDHolds.join(', ')}) · ` : ''}${fcRHolds.length ? `<span style="color:var(--rep);">${fcRHolds.length} Lean/Likely R</span> (${fcRHolds.join(', ')}) · ` : ''}${majorityLine}</span>
+      <span class="ietd-value">${fcTossups.length ? `<span style="color:var(--tossup);font-weight:600">${fcTossups.length} Toss-Up${fcTossups.length>1?'s':''}</span> (${fcTossups.join(', ')}) · ` : ''}${fcDFlips.length ? `<span style="color:var(--dem);font-weight:600">${fcDFlips.length} Lean D flip${fcDFlips.length>1?'s':''}</span> (${fcDFlips.join(', ')}) · ` : ''}${fcDHolds.length ? `<span style="color:var(--dem);">${fcDHolds.length} Lean D hold${fcDHolds.length>1?'s':''}</span> (${fcDHolds.join(', ')}) · ` : ''}${fcRHolds.length ? `<span style="color:var(--rep);">${fcRHolds.length} Lean/Likely R</span> (${fcRHolds.join(', ')})` : ''}</span>
     </div>`;
   wrap.appendChild(ietdCard);
- 
+
+  // CHANGE 3: Prediction Market Summary, CHANGE 4: only House D and Senate R
+  const summaryCard = div('card');
+  summaryCard.innerHTML = `
+    <div class="card-title">Prediction Market Summary</div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border)">
+          <th style="text-align:left;padding:8px 12px;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Outcome</th>
+          <th style="text-align:center;padding:8px 12px;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Polymarket</th>
+          <th style="text-align:center;padding:8px 12px;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Kalshi</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${[
+          { label:'House → Dem', pD: poly.houseD, kD: kalshi.houseD, d:true },
+          { label:'Senate → Rep', pD: poly.senateR, kD: kalshi.senateR, d:false },
+        ].map(({ label, pD, kD, d }, i) => `
+          <tr style="border-bottom:1px solid var(--border);${i%2===0?'background:#f8fafc':''}">
+            <td style="padding:8px 12px;font-weight:500;color:var(--text)">${label}</td>
+            <td style="padding:8px 12px;text-align:center">${pD != null ? `<span style="font-weight:700;color:${d?'var(--dem)':'var(--rep)'}">${pD}%</span>` : '<span style="color:var(--faint)">—</span>'}</td>
+            <td style="padding:8px 12px;text-align:center">${kD != null ? `<span style="font-weight:700;color:${d?'var(--dem)':'var(--rep)'}">${kD}%</span>` : '<span style="color:var(--faint)">—</span>'}</td>
+          </tr>`).join('')}
+      </tbody>
+    </table>`;
+  wrap.appendChild(summaryCard);
+
   // Big 8
   const big8Card = div('card');
   big8Card.innerHTML = '<div class="card-title">The Big 8 Senate Races</div>';
   const big8Grid = div('grid-2');
   const POLY_ODDS = { "Maine":55,"North Carolina":64,"Georgia":70,"Michigan":58,"Ohio (Special)":40,"Alaska":48,"Texas":22,"New Hampshire":65 };
- 
+
   ["North Carolina","Maine","Ohio (Special)","Alaska","Michigan","Georgia","New Hampshire","Texas"].forEach(state => {
     const polyD = POLY_ODDS[state] || 50;
     const detail = RACE_DETAILS[state];
@@ -318,7 +307,7 @@ function renderOverview(poly, kalshi, gb) {
     const avgSource = liveData?.rtwh ? 'RTWH' : liveData?.avg ? 'RCP' : '';
     const avgMarginStr = bestAvg ? fmtMargin(bestAvg.margin) : (detail.matchups[0]?.margin || '—');
     const isLiveD = bestAvg ? isMarginD(bestAvg.margin) : detail.matchups[0]?.margin?.includes('D');
- 
+
     card.innerHTML = `
       <div class="race-header">
         <span class="race-name">${state}</span>
@@ -339,7 +328,7 @@ function renderOverview(poly, kalshi, gb) {
   wrap.appendChild(big8Card);
   return wrap;
 }
- 
+
 function renderGenericBallot(gb) {
   const wrap = div('space-y');
   const card = div('card');
@@ -362,7 +351,7 @@ function renderGenericBallot(gb) {
   wrap.appendChild(hist);
   return wrap;
 }
- 
+
 function renderSenateRaces() {
   const wrap = div('space-y');
   wrap.appendChild(div('', '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">All Competitive Races</span><span style="font-size:11px;color:var(--faint)">Cook · Sabato · IE · Auto-updated</span></div>'));
@@ -377,7 +366,7 @@ function renderSenateRaces() {
     const avgMarginStr = bestAvg ? fmtMargin(bestAvg.margin) : null;
     const isLiveD = bestAvg ? isMarginD(bestAvg.margin) : null;
     const avgSource = liveData?.rtwh ? 'RTWH' : liveData?.avg ? 'RCP' : null;
- 
+
     card.innerHTML = `
       <div class="race-header">
         <span class="race-name">${state}</span>
@@ -386,14 +375,14 @@ function renderSenateRaces() {
         <div style="margin-left:auto;display:flex;gap:6px">${['Cook','Sabato','IE'].map((l,i) => { const r=[rating.cook,rating.sabato,rating.ie][i]||'—'; return `<span class="badge ${ratingBadgeClass(r)}">${l}: ${r}</span>`; }).join('')}</div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
-        <div style="font-size:12px;color:var(--faint)">${detail.candidates.rep} · ${detail.trump24}</div>
+        <div style="font-size:12px;color:var(--faint)"><span style="color:var(--dem)">${detail.candidates.dem}</span> vs <span style="color:var(--rep)">${detail.candidates.rep}</span> · ${detail.trump24}</div>
         ${avgMarginStr ? `<span class="${isLiveD ? 'pill pill-d' : 'pill pill-r'}" style="font-size:11px">${avgMarginStr} <span style="font-size:10px;color:var(--faint)">(${avgSource})</span></span>` : '<span style="font-size:11px;color:var(--faint)">No polls</span>'}
       </div>`;
     wrap.appendChild(card);
   });
   return wrap;
 }
- 
+
 function renderSenatePolling() {
   const wrap = div('');
   const outer = div('card', '');
@@ -403,11 +392,11 @@ function renderSenatePolling() {
     tabsRow.appendChild(el('button', { class: 'race-tab' + (state === selectedRace ? ' active' : ''), onclick: () => { selectedRace = state; renderMain(); } }, state));
   });
   outer.appendChild(tabsRow);
- 
+
   const detail = RACE_DETAILS[selectedRace];
   const rating = getRating(selectedRace);
   const content = div('race-content space-y');
- 
+
   const raceHead = div('');
   raceHead.innerHTML = `
     <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
@@ -425,11 +414,11 @@ function renderSenatePolling() {
       <div style="display:flex;gap:12px">${['Cook','Sabato','IE'].map((label, i) => { const r = [rating.cook, rating.sabato, rating.ie][i] || '—'; return `<div style="text-align:center"><div style="font-size:11px;color:var(--faint);margin-bottom:4px">${label}</div><span class="badge ${ratingBadgeClass(r)}">${r}</span></div>`; }).join('')}</div>
     </div>`;
   content.appendChild(raceHead);
- 
+
   const liveData = DATA?.senatePolls?.[selectedRace];
   const mSection = div('');
   mSection.innerHTML = '<div class="card-title">Poll Averages</div>';
- 
+
   if (liveData?.avg || liveData?.rtwh) {
     if (liveData?.avg) {
       const avg = liveData.avg;
@@ -463,18 +452,18 @@ function renderSenatePolling() {
     mSection.innerHTML += '<div style="color:var(--muted);font-size:13px;padding:16px">No poll data yet</div>';
   }
   content.appendChild(mSection);
- 
+
   if (detail.primary) {
     const pSection = div('');
     pSection.innerHTML = `<div class="card-title">${detail.primary.label || 'Primary'}</div><div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">${detail.primary.result}</span><span style="font-size:14px;font-weight:700;color:var(--dem)">${detail.primary.margin}</span></div>`;
     content.appendChild(pSection);
   }
- 
+
   outer.appendChild(content);
   wrap.appendChild(outer);
   return wrap;
 }
- 
+
 function renderMarkets(poly, kalshi) {
   const wrap = div('space-y');
   const chamberCard = div('card');
@@ -504,7 +493,7 @@ function renderMarkets(poly, kalshi) {
   wrap.appendChild(bopCard);
   return wrap;
 }
- 
+
 function renderTrends() {
   const wrap = div('space-y');
   if (HISTORY.length < 2) {
@@ -524,13 +513,16 @@ function renderTrends() {
       new Chart(ctx, { type:'line', data:{ labels: customLabels || dates, datasets }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ labels:{ color:'#64748b', font:{ size:11 } } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 } }, grid:{ color:'#e2e8f0' } }, y:{ ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
     }, 50);
   }
-  makeChart('chart-markets', 'Prediction Markets', [
-    { label:'House → Dem %', data:HISTORY.map(d => d.markets?.polymarket?.houseD??null), borderColor:'#2563eb', tension:0.3, pointRadius:2, fill:false },
-    { label:'Senate → Rep %', data:HISTORY.map(d => d.markets?.polymarket?.senateR??null), borderColor:'#dc2626', tension:0.3, pointRadius:2, fill:false },
-    { label:'Kalshi House D %', data:HISTORY.map(d => d.markets?.kalshi?.houseD??null), borderColor:'#7c3aed', tension:0.3, pointRadius:2, fill:false, borderDash:[4,2] },
-    { label:'Kalshi Senate R %', data:HISTORY.map(d => d.markets?.kalshi?.senateR??null), borderColor:'#db2777', tension:0.3, pointRadius:2, fill:false, borderDash:[4,2] },
+  // CHANGE 5: Separate House and Senate charts
+  makeChart('chart-house', 'House Control — Dem Win Probability', [
+    { label:'Polymarket', data:HISTORY.map(d => d.markets?.polymarket?.houseD??null), borderColor:'#2563eb', tension:0.3, pointRadius:2, fill:false },
+    { label:'Kalshi', data:HISTORY.map(d => d.markets?.kalshi?.houseD??null), borderColor:'#7c3aed', tension:0.3, pointRadius:2, fill:false, borderDash:[4,2] },
   ]);
-  makeChart('chart-ballot', 'Generic Ballot Margin (D − R)', [{ label:'D margin', data:HISTORY.map(d => { const a=d.genericBallot?.avg; return a?parseFloat(a.margin):null; }), borderColor:'#2563eb', backgroundColor:'rgba(37,99,235,0.1)', tension:0.3, pointRadius:2, fill:true }]);
+  makeChart('chart-senate', 'Senate Control — Rep Win Probability', [
+    { label:'Polymarket', data:HISTORY.map(d => d.markets?.polymarket?.senateR??null), borderColor:'#dc2626', tension:0.3, pointRadius:2, fill:false },
+    { label:'Kalshi', data:HISTORY.map(d => d.markets?.kalshi?.senateR??null), borderColor:'#db2777', tension:0.3, pointRadius:2, fill:false, borderDash:[4,2] },
+  ]);
+  makeChart('chart-ballot', 'Generic Ballot Margin (D − R)', [{ label:'D margin', data:HISTORY.map(d => { const a=d.genericBallot?.avg; return a?parseFloat(parseFloat(a.margin).toFixed(1)):null; }), borderColor:'#2563eb', backgroundColor:'rgba(37,99,235,0.1)', tension:0.3, pointRadius:2, fill:true }]);
   makeChart('chart-approval', 'Trump Net Approval', [{ label:'Net approval', data:HISTORY.map(d => d.trumpApproval?.net?parseFloat(d.trumpApproval.net):null), borderColor:'#dc2626', tension:0.3, pointRadius:2, fill:false }]);
   makeChart('chart-sweep', 'Dem Sweep Probability', [{ label:'Dem sweep %', data:HISTORY.map(d => d.markets?.polymarket?.dSweepPct??null), borderColor:'#2563eb', backgroundColor:'rgba(37,99,235,0.1)', tension:0.3, pointRadius:2, fill:true }]);
   ['North Carolina','Maine','Ohio (Special)','Alaska','Michigan','Georgia','New Hampshire'].forEach(state => {
@@ -541,7 +533,7 @@ function renderTrends() {
   wrap.appendChild(div('', `<p style="font-size:11px;color:var(--faint);text-align:center">Tracking ${HISTORY.length} days · Data from Polymarket, Kalshi, RCP, RTWH</p>`));
   return wrap;
 }
- 
+
 function renderTrumpApproval(appr) {
   const wrap = div('space-y');
   const card = div('card');
@@ -552,7 +544,7 @@ function renderTrumpApproval(appr) {
   wrap.appendChild(card);
   return wrap;
 }
- 
+
 function renderSources() {
   const wrap = div('space-y');
   [
@@ -567,7 +559,7 @@ function renderSources() {
   });
   return wrap;
 }
- 
+
 async function loadData() {
   try {
     const [dataRes, histRes] = await Promise.allSettled([fetch('data/data.json?v=' + Date.now()), fetch('data/history.json?v=' + Date.now())]);
@@ -577,7 +569,7 @@ async function loadData() {
   renderTabs();
   renderMain();
 }
- 
+
 renderTabs();
 loadData();
 </script>
