@@ -315,6 +315,13 @@ function renderSenateRaces() {
     const isStale = daysSince(liveData?.avg?.date || liveData?.rtwh?.date) > 14;
     const card = div('race-card');
     card.onclick = () => { currentTab = 'senate polling'; selectedRace = state; renderTabs(); renderMain(); };
+    const bestAvg = liveData?.rtwh || liveData?.avg;
+    const avgMargin = bestAvg
+      ? `${parseFloat(bestAvg.margin) > 0 ? '+' : ''}${bestAvg.margin} ${parseFloat(bestAvg.margin) > 0 ? 'D' : 'R'}`
+      : null;
+    const isLiveD = bestAvg ? parseFloat(bestAvg.margin) > 0 : null;
+    const avgSource = liveData?.rtwh ? 'RTWH' : liveData?.avg ? 'RCP' : null;
+
     card.innerHTML = `
       <div class="race-header">
         <span class="race-name">${state}</span>
@@ -324,7 +331,10 @@ function renderSenateRaces() {
           ${['Cook','Sabato','IE'].map((l,i) => { const r=[rating.cook,rating.sabato,rating.ie][i]||'—'; return `<span class="badge ${ratingBadgeClass(r)}">${l}: ${r}</span>`; }).join('')}
         </div>
       </div>
-      <div style="font-size:12px;color:var(--faint)">${detail.candidates.rep} · ${detail.trump24}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+        <div style="font-size:12px;color:var(--faint)">${detail.candidates.rep} · ${detail.trump24}</div>
+        ${avgMargin ? `<span class="${isLiveD ? 'pill pill-d' : 'pill pill-r'}" style="font-size:11px">${avgMargin} <span style="font-size:10px;color:var(--faint)">(${avgSource})</span></span>` : '<span style="font-size:11px;color:var(--faint)">No polls</span>'}
+      </div>
     `;
     wrap.appendChild(card);
   });
