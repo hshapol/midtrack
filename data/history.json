@@ -85,12 +85,592 @@
     }
   },
   {
+    "date": "2026-03-22",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 53,
+        "splitPct": 37,
+        "dSweepPct": 50,
+        "repSweepPct": 14
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-03-23",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 53,
+        "splitPct": 36,
+        "dSweepPct": 49,
+        "repSweepPct": 14
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-03-24",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 52,
+        "splitPct": 37,
+        "dSweepPct": 48,
+        "repSweepPct": 17
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-03-25",
+    "markets": {
+      "polymarket": {
+        "houseD": 84,
+        "senateR": 52,
+        "splitPct": 37,
+        "dSweepPct": 48,
+        "repSweepPct": 16
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-03-26",
+    "markets": {
+      "polymarket": {
+        "houseD": 84,
+        "senateR": 53,
+        "splitPct": 36,
+        "dSweepPct": 49,
+        "repSweepPct": 14
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-03-27",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 51,
+        "splitPct": 37,
+        "dSweepPct": 49,
+        "repSweepPct": 14
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-03-28",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 51,
+        "splitPct": 37,
+        "dSweepPct": 49,
+        "repSweepPct": 14
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-03-29",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 49,
+        "splitPct": 37,
+        "dSweepPct": 49,
+        "repSweepPct": 14
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-03-30",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 49,
+        "splitPct": 36,
+        "dSweepPct": 50,
+        "repSweepPct": 14
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-03-31",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 49,
+        "splitPct": 37,
+        "dSweepPct": 51,
+        "repSweepPct": 14
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-01",
+    "markets": {
+      "polymarket": {
+        "houseD": 86,
+        "senateR": 49,
+        "splitPct": 36,
+        "dSweepPct": 51,
+        "repSweepPct": 14
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-02",
+    "markets": {
+      "polymarket": {
+        "houseD": 86,
+        "senateR": 49,
+        "splitPct": 36,
+        "dSweepPct": 51,
+        "repSweepPct": 14
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-03",
+    "markets": {
+      "polymarket": {
+        "houseD": 87,
+        "senateR": 49,
+        "splitPct": 36,
+        "dSweepPct": 52,
+        "repSweepPct": 14
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-04",
+    "markets": {
+      "polymarket": {
+        "houseD": 88,
+        "senateR": 49,
+        "splitPct": 36,
+        "dSweepPct": 53,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-05",
+    "markets": {
+      "polymarket": {
+        "houseD": 89,
+        "senateR": 48,
+        "splitPct": 36,
+        "dSweepPct": 52,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-06",
+    "markets": {
+      "polymarket": {
+        "houseD": 87,
+        "senateR": 48,
+        "splitPct": 37,
+        "dSweepPct": 52,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-07",
+    "markets": {
+      "polymarket": {
+        "houseD": 88,
+        "senateR": 48,
+        "splitPct": 36,
+        "dSweepPct": 53,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-08",
+    "markets": {
+      "polymarket": {
+        "houseD": 87,
+        "senateR": 48,
+        "splitPct": 36,
+        "dSweepPct": 53,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-09",
+    "markets": {
+      "polymarket": {
+        "houseD": 88,
+        "senateR": 48,
+        "splitPct": 36,
+        "dSweepPct": 53,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-10",
+    "markets": {
+      "polymarket": {
+        "houseD": 87,
+        "senateR": 47,
+        "splitPct": 36,
+        "dSweepPct": 53,
+        "repSweepPct": 12
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-11",
+    "markets": {
+      "polymarket": {
+        "houseD": 86,
+        "senateR": 47,
+        "splitPct": 36,
+        "dSweepPct": 53,
+        "repSweepPct": 12
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-12",
+    "markets": {
+      "polymarket": {
+        "houseD": 86,
+        "senateR": 44,
+        "splitPct": 36,
+        "dSweepPct": 53,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-13",
+    "markets": {
+      "polymarket": {
+        "houseD": 86,
+        "senateR": 45,
+        "splitPct": 35,
+        "dSweepPct": 54,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-14",
+    "markets": {
+      "polymarket": {
+        "houseD": 86,
+        "senateR": 46,
+        "splitPct": 34,
+        "dSweepPct": 54,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-15",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 45,
+        "splitPct": 35,
+        "dSweepPct": 53,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-16",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 45,
+        "splitPct": 35,
+        "dSweepPct": 53,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-17",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 45,
+        "splitPct": 35,
+        "dSweepPct": 53,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-18",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 46,
+        "splitPct": 35,
+        "dSweepPct": 53,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
+    "date": "2026-04-19",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 46,
+        "splitPct": 35,
+        "dSweepPct": 52,
+        "repSweepPct": 13
+      },
+      "kalshi": {}
+    },
+    "genericBallot": {
+      "polls": [],
+      "avg": null
+    },
+    "senatePolls": {},
+    "senateRatings": {},
+    "trumpApproval": {}
+  },
+  {
     "date": "2026-04-20",
     "fetchedAt": "2026-04-20T20:17:15.236Z",
     "markets": {
       "polymarket": {
         "houseD": 85,
-        "senateR": 46,
+        "senateR": 47,
         "splitPct": 35,
         "dSweepPct": 52,
         "repSweepPct": 13
@@ -118,7 +698,7 @@
     "markets": {
       "polymarket": {
         "houseD": 85,
-        "senateR": 48,
+        "senateR": 47,
         "splitPct": 35,
         "dSweepPct": 52,
         "repSweepPct": 14
