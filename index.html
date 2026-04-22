@@ -515,7 +515,7 @@ const RACE_DETAILS = {
   "North Carolina": { hold:"R", trump24:"Trump +3.2",   primaryDate:"May 2026",      context:"Open seat — Tillis retired. Cooper is a 6-time statewide winner. Now rated Lean D by all forecasters.", candidates:{ dem:"Roy Cooper (D, fmr. Gov.)", rep:"Michael Whatley (R)" }, matchups:[{ dem:"Cooper", rep:"Whatley", demPct:47.2, repPct:37.6, margin:"+9.6 D", source:"RCP Avg", date:"Feb 24, 2026" }], primary:null },
   "Georgia":        { hold:"D", trump24:"Trump +2.2",   primaryDate:"May 19, 2026",  context:"Ossoff defending in Trump +2.2 state. Moved to Lean D. R primary May 19.", candidates:{ dem:"Jon Ossoff (D, incumbent)", rep:"TBD — primary May 19" }, matchups:[{ dem:"Ossoff", rep:"Collins", demPct:44.3, repPct:42.0, margin:"+2.3 D", source:"RCP Avg", date:"Feb 24, 2026" }], primary:{ label:"R Primary RCP Avg", result:"Collins 29.5% · Carter 17.8% · Dooley 10.3%", margin:"Collins +11.7" } },
   "Michigan":       { hold:"D", trump24:"Trump +1.0",   primaryDate:"Aug 4, 2026",   context:"Open seat — Peters retiring. Rogers (R) likely nominee. Stevens leads by +1.3 in RCP avg.", candidates:{ dem:"Stevens / McMorrow / El-Sayed", rep:"Mike Rogers (R)" }, matchups:[{ dem:"Stevens", rep:"Rogers", demPct:43.8, repPct:42.5, margin:"+1.3 D", source:"RCP Avg", date:"Feb 24, 2026" },{ dem:"McMorrow", rep:"Rogers", demPct:42.3, repPct:43.8, margin:"+1.5 R", source:"RCP Avg", date:"Feb 24, 2026" }], primary:null },
-  "Ohio (Special)": { hold:"R", trump24:"Trump +11.0",  primaryDate:"May 5, 2026",   context:"Special election for Vance's old seat. Husted appointed. Moved to Toss-Up. RCP avg tight.", candidates:{ dem:"Sherrod Brown (D)", rep:"Jon Husted (R, appt.)" }, matchups:[{ dem:"Brown", rep:"Husted", demPct:47.5, repPct:48.5, margin:"+1.0 R", source:"RCP Avg", date:"Feb 24, 2026" }], primary:null },
+  "Ohio (Special)": { hold:"R", trump24:"Trump +11.0",  primaryDate:"May 5, 2026",   context:"Special election for Vance's old seat. Husted appointed. Effectively tied — Brown 46.8% vs Husted 46.7% (DDHQ avg). D primary May 5 (Brown vs Kincaid).", candidates:{ dem:"Sherrod Brown (D)", rep:"Jon Husted (R, appt.)" }, matchups:[{ dem:"Brown", rep:"Husted", demPct:47.5, repPct:48.5, margin:"+1.0 R", source:"RCP Avg", date:"Feb 24, 2026" }], primary:null },
   "New Hampshire":  { hold:"D", trump24:"Harris +2.0",  primaryDate:"Sep 8, 2026",   context:"Open seat — Shaheen retiring. Pappas leads Sununu +3.6. R primary: Sununu leads +16.3.", candidates:{ dem:"Chris Pappas (D)", rep:"Sununu / Brown (R primary)" }, matchups:[{ dem:"Pappas", rep:"Sununu", demPct:46.3, repPct:42.7, margin:"+3.6 D", source:"RCP Avg", date:"Feb 24, 2026" },{ dem:"Pappas", rep:"Brown", demPct:48.3, repPct:39.0, margin:"+9.3 D", source:"RCP Avg", date:"Feb 24, 2026" }], primary:{ label:"R Primary RCP Avg", result:"Sununu 42.3% · Brown 26.0%", margin:"Sununu +16.3" } },
   "Alaska":         { hold:"R", trump24:"Trump +13.0",  primaryDate:"Aug 2026",      context:"Peltola entered Jan 2026. AK Survey Research (Jan): Peltola +1.6 vs Sullivan.", candidates:{ dem:"Mary Peltola (D)", rep:"Dan Sullivan (R, incumbent)" }, matchups:[{ dem:"Peltola", rep:"Sullivan", demPct:48, repPct:46.4, margin:"+1.6 D", source:"AK Survey Research", date:"Jan 2026" }], primary:null },
   "Nebraska":       { hold:"R", trump24:"Trump +20.0",  primaryDate:"May 2026",      context:"Osborn (Ind.) backed by NE Dems. Moved to Likely R. No RCP average.", candidates:{ dem:"Dan Osborn (Ind.)", rep:"Pete Ricketts (R, incumbent)" }, matchups:[{ dem:"Osborn", rep:"Ricketts", demPct:45.4, repPct:49.3, margin:"+4 R (adj.)", source:"Avg (adj.)", date:"Feb 2026" }], primary:null },
@@ -879,6 +879,12 @@ function renderMarkets(poly, kalshi) {
     inner.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-weight:700;font-size:15px">${chamber}</span><span class="badge ${favors==='D'?'badge-lean-d':'badge-lean-r'}">Favors ${favors==='D'?'Dems':'Rep'}</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:12px;text-align:center;margin-bottom:8px"><div></div><div style="color:var(--faint);font-weight:600">Polymarket</div><div style="color:var(--faint);font-weight:600">Kalshi</div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:center;margin-bottom:6px"><div style="font-size:12px;color:var(--dem)">Dem wins</div><div style="text-align:center;font-weight:700;color:var(--dem)">${polyD!=null?polyD+'%':'—'}</div><div style="text-align:center;font-weight:700;color:var(--dem)">${kD!=null?kD+'%':'—'}</div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:center"><div style="font-size:12px;color:var(--rep)">Rep wins</div><div style="text-align:center;font-weight:700;color:var(--rep)">${polyR!=null?polyR+'%':'—'}</div><div style="text-align:center;font-weight:700;color:var(--rep)">${kR!=null?kR+'%':'—'}</div></div>`;
     chamberCard.appendChild(inner);
   });
+  if (kalshi.updatedDate && kalshi.updatedDate !== DATA?.lastUpdated) {
+    const staleNote = document.createElement('div');
+    staleNote.style.cssText = 'font-size:10px;color:var(--tossup);text-align:right;margin-top:6px;padding:0 4px';
+    staleNote.textContent = '* Kalshi data from ' + kalshi.updatedDate + ' (auto-update pending)';
+    chamberCard.appendChild(staleNote);
+  }
   wrap.appendChild(chamberCard);
 
   // Polymarket House Control chart
@@ -919,18 +925,18 @@ function renderMarkets(poly, kalshi) {
       if (houseCtx) new Chart(houseCtx, { type:'line', data:{ labels:dates, datasets:[
         { label:'Dem wins %', data:HISTORY.map(d => d.markets?.polymarket?.houseD??null), borderColor:'#2563eb', tension:0.3, pointRadius:1, fill:false },
         { label:'Rep wins %', data:HISTORY.map(d => d.markets?.polymarket?.houseD!=null ? 100-d.markets.polymarket.houseD : null), borderColor:'#dc2626', tension:0.3, pointRadius:1, fill:false },
-      ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ labels:{ color:'#64748b', font:{ size:11 } } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:8 }, grid:{ color:'#e2e8f0' } }, y:{ min:0, max:100, ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
+      ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{ color:'#64748b', font:{ size:11 }, boxWidth:20, padding:10 } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:8 }, grid:{ color:'#e2e8f0' } }, y:{ min:0, max:100, ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
 
       const senateCtx = document.getElementById('mkt-chart-senate');
       if (senateCtx) new Chart(senateCtx, { type:'line', data:{ labels:dates, datasets:[
         { label:'Rep wins %', data:HISTORY.map(d => d.markets?.polymarket?.senateR??null), borderColor:'#dc2626', tension:0.3, pointRadius:1, fill:false },
         { label:'Dem wins %', data:HISTORY.map(d => d.markets?.polymarket?.senateR!=null ? 100-d.markets.polymarket.senateR : null), borderColor:'#2563eb', tension:0.3, pointRadius:1, fill:false },
-      ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ labels:{ color:'#64748b', font:{ size:11 } } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:8 }, grid:{ color:'#e2e8f0' } }, y:{ min:0, max:100, ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
+      ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{ color:'#64748b', font:{ size:11 }, boxWidth:20, padding:10 } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:8 }, grid:{ color:'#e2e8f0' } }, y:{ min:0, max:100, ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
 
       const sweepCtx = document.getElementById('mkt-chart-sweep');
       if (sweepCtx) new Chart(sweepCtx, { type:'line', data:{ labels:dates, datasets:[
         { label:'Dem sweep %', data:HISTORY.map(d => d.markets?.polymarket?.dSweepPct??null), borderColor:'#2563eb', backgroundColor:'rgba(37,99,235,0.1)', tension:0.3, pointRadius:1, fill:true },
-      ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ labels:{ color:'#64748b', font:{ size:11 } } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:8 }, grid:{ color:'#e2e8f0' } }, y:{ min:0, max:100, ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
+      ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{ color:'#64748b', font:{ size:11 }, boxWidth:20, padding:10 } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:8 }, grid:{ color:'#e2e8f0' } }, y:{ min:0, max:100, ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
     }, 50);
   }
 
@@ -946,28 +952,105 @@ function renderTrends() {
     return wrap;
   }
   const dates = HISTORY.map(d => d.date.slice(5));
+  // Time window filter
+  let activeWindow = '9m';
+  const windows = [
+    { key:'1m', label:'1 Month', days:30 },
+    { key:'3m', label:'3 Months', days:90 },
+    { key:'ytd', label:'YTD', days:null },
+    { key:'9m', label:'All', days:999 },
+  ];
+
+  function filterByWindow(dataArr, labelArr, days) {
+    if (!days || days >= 999) return { data: dataArr, labels: labelArr };
+    const cutoff = new Date();
+    if (days === null) { // YTD
+      cutoff.setMonth(0); cutoff.setDate(1);
+    } else {
+      cutoff.setDate(cutoff.getDate() - days);
+    }
+    const cutoffStr = cutoff.toISOString().split('T')[0];
+    const indices = labelArr.map((l,i) => i).filter(i => {
+      const yr = new Date().getFullYear();
+      const full = `${yr}-${labelArr[i]}`;
+      return full >= cutoffStr || labelArr[i] <= cutoffStr.slice(5);
+    });
+    // simpler: just take last N items
+    const n = days === null ? 
+      labelArr.filter(l => {
+        const yr = new Date().getFullYear();
+        return `${yr}-${l}` >= cutoffStr;
+      }).length :
+      Math.min(days, labelArr.length);
+    const start = Math.max(0, labelArr.length - n);
+    return { data: dataArr.map(d => d.slice(start)), labels: labelArr.slice(start) };
+  }
+
+  function makeWindowSelector(onSelect) {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;gap:6px;margin-bottom:10px;';
+    windows.forEach(w => {
+      const btn = document.createElement('button');
+      btn.textContent = w.label;
+      btn.style.cssText = `padding:3px 10px;border-radius:4px;border:1px solid var(--border);cursor:pointer;font-size:11px;font-weight:600;background:${w.key===activeWindow?'var(--dem)':'white'};color:${w.key===activeWindow?'white':'var(--muted)'};`;
+      btn.onclick = () => { activeWindow = w.key; onSelect(); };
+      row.appendChild(btn);
+    });
+    return row;
+  }
+
+  const chartRegistry = {};
+
   function makeChart(canvasId, label, datasets, customLabels) {
     const card = div('card');
-    card.innerHTML = `<div class="card-title">${label}</div><div style="position:relative;height:200px"><canvas id="${canvasId}"></canvas></div>`;
+    const selectorId = canvasId + '-sel';
+    card.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="card-title" style="margin-bottom:0">${label}</div><div id="${selectorId}" style="display:flex;gap:4px;"></div></div><div style="position:relative;height:200px"><canvas id="${canvasId}"></canvas></div>`;
     wrap.appendChild(card);
-    setTimeout(() => {
+
+    function renderChart() {
+      const allLabels = customLabels || dates;
+      const w = windows.find(w => w.key === activeWindow);
+      const n = w.days === null ? allLabels.filter(l => {
+        const cutoff = new Date(); cutoff.setMonth(0); cutoff.setDate(1);
+        const yr = new Date().getFullYear();
+        return new Date(`${yr}-${l}`) >= cutoff;
+      }).length : Math.min(w.days || 9999, allLabels.length);
+      const start = Math.max(0, allLabels.length - n);
+      const slicedLabels = allLabels.slice(start);
+      const slicedDatasets = datasets.map(ds => ({ ...ds, data: ds.data.slice(start) }));
+
+      const existing = chartRegistry[canvasId];
+      if (existing) { existing.destroy(); delete chartRegistry[canvasId]; }
       const ctx = document.getElementById(canvasId);
       if (!ctx) return;
-      new Chart(ctx, { type:'line', data:{ labels: customLabels || dates, datasets }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ labels:{ color:'#64748b', font:{ size:11 } } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 } }, grid:{ color:'#e2e8f0' } }, y:{ ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
+      chartRegistry[canvasId] = new Chart(ctx, { type:'line', data:{ labels: slicedLabels, datasets: slicedDatasets }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{ color:'#64748b', font:{ size:11 }, boxWidth:20, padding:12 } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:8 }, grid:{ color:'#e2e8f0' } }, y:{ ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
+
+      // Render window selector buttons
+      const selEl = document.getElementById(selectorId);
+      if (selEl) {
+        selEl.innerHTML = '';
+        windows.forEach(w => {
+          const btn = document.createElement('button');
+          btn.textContent = w.label;
+          btn.style.cssText = `padding:2px 8px;border-radius:4px;border:1px solid var(--border);cursor:pointer;font-size:10px;font-weight:600;background:${w.key===activeWindow?'var(--dem)':'white'};color:${w.key===activeWindow?'white':'var(--muted)'};`;
+          btn.onclick = () => { activeWindow = w.key; Object.keys(chartRegistry).forEach(id => { const fn = renderFns[id]; if(fn) fn(); }); };
+          selEl.appendChild(btn);
+        });
+      }
+    }
+    if (!window.renderFns) window.renderFns = {};
+    window.renderFns = window.renderFns || {};
+    setTimeout(() => {
+      renderChart();
+      if (!window.renderFns) window.renderFns = {};
+      window.renderFns[canvasId] = renderChart;
     }, 50);
   }
   makeChart('chart-ballot', 'Generic Ballot Margin (D − R)', [{ label:'D margin', data:HISTORY.map(d => { const a=d.genericBallot?.avg; return a?parseFloat(parseFloat(a.margin).toFixed(1)):null; }), borderColor:'#2563eb', backgroundColor:'rgba(37,99,235,0.1)', tension:0.3, pointRadius:2, fill:true }]);
-  // Nate Silver Trump approval trend
-  const approvalDates = NATE_APPROVAL.map(r => r[0].slice(5));
-  const approvalNets = NATE_APPROVAL.map(r => r[3]);
-  const approvalCard = div('card');
-  approvalCard.innerHTML = `<div class="card-title">Trump Net Approval (Nate Silver)</div><div style="position:relative;height:200px"><canvas id="chart-approval-ns"></canvas></div>`;
-  wrap.appendChild(approvalCard);
-  setTimeout(() => {
-    const ctx = document.getElementById('chart-approval-ns');
-    if (!ctx) return;
-    new Chart(ctx, { type:'line', data:{ labels:approvalDates, datasets:[{ label:'Net approval', data:approvalNets, borderColor:'#dc2626', tension:0.3, pointRadius:1, fill:false }]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ labels:{ color:'#64748b', font:{ size:11 } } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:10 }, grid:{ color:'#e2e8f0' } }, y:{ ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
-  }, 50);
+  makeChart('chart-approval-ns', 'Trump Net Approval (Nate Silver)',
+    [{ label:'Net approval', data:NATE_APPROVAL.map(r => r[3]), borderColor:'#dc2626', tension:0.3, pointRadius:1, fill:false }],
+    NATE_APPROVAL.map(r => r[0].slice(5))
+  );
   ['North Carolina','Maine','Ohio (Special)','Alaska','Michigan','Georgia','New Hampshire'].forEach(state => {
     const stateData = HISTORY.map(d => ({ date: d.date.slice(5), avg: d.senatePolls?.[state]?.rtwh || d.senatePolls?.[state]?.avg })).filter(d => d.avg);
     if (stateData.length < 2) return;
@@ -990,20 +1073,47 @@ function renderTrumpApproval(appr) {
   card.innerHTML = `<div class="card-title">Trump Job Approval — ${sourceLabel}</div><div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap;margin-bottom:20px"><div><div style="font-size:11px;color:var(--muted);margin-bottom:4px">Net Approval</div><div style="font-size:44px;font-weight:800;color:var(--rep);letter-spacing:-2px">${netStr}</div></div><div style="flex:1;min-width:200px"><div class="appr-bar"><span style="font-size:12px;width:80px;color:var(--dem)">Approve</span><div style="flex:1;height:20px;background:var(--border);border-radius:4px;overflow:hidden"><div class="appr-fill" style="width:${approve}%;background:var(--dem)">${approve}%</div></div></div><div class="appr-bar"><span style="font-size:12px;width:80px;color:var(--rep)">Disapprove</span><div style="flex:1;height:20px;background:var(--border);border-radius:4px;overflow:hidden"><div class="appr-fill" style="width:${disapprove}%;background:var(--rep)">${disapprove}%</div></div></div></div></div><hr class="sep"><div class="grid-2">${[{label:'Trump 2nd term low',val:'-15.0',sub:'Feb 26',cls:'rep-color'},{label:'Biden same point',val:'-12.2',sub:'Feb 22',cls:'text-muted'},{label:'Obama same point',val:'-2.0',sub:'Feb 10',cls:'text-muted'},{label:'2018 election day',val:'-14.0',sub:'D+40 seats',cls:'dem-color'}].map(s=>`<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px"><div style="font-size:20px;font-weight:800" class="${s.cls}">${s.val}</div><div style="font-size:12px;color:var(--text);font-weight:500">${s.label}</div><div style="font-size:11px;color:var(--faint)">${s.sub}</div></div>`).join('')}</div>`;
   wrap.appendChild(card);
 
-  // Nate Silver historical chart
+  // Nate Silver historical chart with window toggle
+  const nsLabels = NATE_APPROVAL.map(r => r[0].slice(5));
   const nsCard = div('card');
-  nsCard.innerHTML = '<div class="card-title">Historical Net Approval (Nate Silver)</div><div style="position:relative;height:220px"><canvas id="ns-approval-chart"></canvas></div>';
+  nsCard.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="card-title" style="margin-bottom:0">Historical Approval (Nate Silver)</div><div id="ns-chart-sel" style="display:flex;gap:4px;"></div></div><div style="position:relative;height:240px"><canvas id="ns-approval-chart"></canvas></div>';
   wrap.appendChild(nsCard);
-  setTimeout(() => {
+  let nsWindow = '9m';
+  const nsWindows = [{key:'1m',label:'1M',days:30},{key:'3m',label:'3M',days:90},{key:'ytd',label:'YTD',days:null},{key:'9m',label:'All',days:9999}];
+  let nsChart = null;
+  function renderNsChart() {
+    const w = nsWindows.find(w => w.key === nsWindow);
+    let start = 0;
+    if (w.days === null) {
+      const cutoff = new Date(); cutoff.setMonth(0); cutoff.setDate(1);
+      start = NATE_APPROVAL.findIndex(r => new Date(r[0]) >= cutoff);
+      if (start < 0) start = 0;
+    } else {
+      start = Math.max(0, NATE_APPROVAL.length - (w.days || 9999));
+    }
+    const slice = NATE_APPROVAL.slice(start);
+    const labels = slice.map(r => r[0].slice(5));
+    if (nsChart) { nsChart.destroy(); nsChart = null; }
     const ctx = document.getElementById('ns-approval-chart');
     if (!ctx) return;
-    const labels = NATE_APPROVAL.map(r => r[0].slice(5));
-    new Chart(ctx, { type:'line', data:{ labels, datasets:[
-      { label:'Approve', data:NATE_APPROVAL.map(r => r[1]), borderColor:'#2563eb', tension:0.3, pointRadius:1, fill:false },
-      { label:'Disapprove', data:NATE_APPROVAL.map(r => r[2]), borderColor:'#dc2626', tension:0.3, pointRadius:1, fill:false },
-      { label:'Net', data:NATE_APPROVAL.map(r => r[3]), borderColor:'#94a3b8', tension:0.3, pointRadius:1, fill:false, borderDash:[4,2] },
-    ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ labels:{ color:'#64748b', font:{ size:11 } } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:12 }, grid:{ color:'#e2e8f0' } }, y:{ ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
-  }, 50);
+    nsChart = new Chart(ctx, { type:'line', data:{ labels, datasets:[
+      { label:'Approve', data:slice.map(r => r[1]), borderColor:'#2563eb', tension:0.3, pointRadius:1, fill:false },
+      { label:'Disapprove', data:slice.map(r => r[2]), borderColor:'#dc2626', tension:0.3, pointRadius:1, fill:false },
+      { label:'Net', data:slice.map(r => r[3]), borderColor:'#94a3b8', tension:0.3, pointRadius:1, fill:false, borderDash:[4,2] },
+    ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{ color:'#64748b', font:{ size:11 }, boxWidth:20, padding:10 } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:10 }, grid:{ color:'#e2e8f0' } }, y:{ ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
+    const sel = document.getElementById('ns-chart-sel');
+    if (sel) {
+      sel.innerHTML = '';
+      nsWindows.forEach(w2 => {
+        const btn = document.createElement('button');
+        btn.textContent = w2.label;
+        btn.style.cssText = `padding:2px 8px;border-radius:4px;border:1px solid var(--border);cursor:pointer;font-size:10px;font-weight:600;background:${w2.key===nsWindow?'var(--dem)':'white'};color:${w2.key===nsWindow?'white':'var(--muted)'};`;
+        btn.onclick = () => { nsWindow = w2.key; renderNsChart(); };
+        sel.appendChild(btn);
+      });
+    }
+  }
+  setTimeout(renderNsChart, 50);
 
   return wrap;
 }
