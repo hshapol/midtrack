@@ -4,6 +4,8 @@ import { writeFileSync, readFileSync, mkdirSync } from 'fs';
 import puppeteer from 'puppeteer-core';
 
 const TODAY = new Date().toISOString().split('T')[0];
+const NOW_TS = Math.floor(Date.now() / 1000);
+const START_TS = 1700000000; // Nov 2023 — before markets opened
 
 async function fetchJSON(url) {
   const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
@@ -23,7 +25,7 @@ function safe(fn, fallback = null) {
   try { return fn(); } catch { return fallback; }
 }
 
-// ─── RTWH SENATE POLLS (click through all matchups on one page) ──────────────
+// ─── RTWH SENATE POLLS ───────────────────────────────────────────────────────
 
 const STATE_KEYWORDS = {
   'North Carolina': ['north carolina', 'nc -', 'cooper', 'whatley'],
@@ -68,29 +70,24 @@ async function fetchAllSenatePolls(browser) {
 
   try {
     await page.goto('https://www.racetothewh.com/senate/26polls', { waitUntil: 'domcontentloaded', timeout: 60000 });
-   await new Promise(r => setTimeout(r, 8000));
-// Wait for any interactive element to appear
-await page.waitForSelector('select, [class*="igc"], [class*="tab"]', { timeout: 15000 }).catch(() => console.log('  Selector wait timed out'));
+    await new Promise(r => setTimeout(r, 8000));
+    await page.waitForSelector('select, [class*="igc"], [class*="tab"]', { timeout: 15000 }).catch(() => console.log('  Selector wait timed out'));
 
-// Debug what's actually on the page
-const pageTitle = await page.title();
-const bodyText = await page.evaluate(() => document.body.innerText.slice(0, 200));
-console.log('  Page title:', pageTitle);
-console.log('  Body preview:', bodyText);
-const allSelects = await page.evaluate(() => document.querySelectorAll('select').length);
-const allInputs = await page.evaluate(() => document.querySelectorAll('input, button').length);
-console.log(`  DOM: ${allSelects} selects, ${allInputs} inputs/buttons`);
+    const pageTitle = await page.title();
+    const bodyText = await page.evaluate(() => document.body.innerText.slice(0, 200));
+    console.log('  Page title:', pageTitle);
+    console.log('  Body preview:', bodyText);
+    const allSelects = await page.evaluate(() => document.querySelectorAll('select').length);
+    const allInputs = await page.evaluate(() => document.querySelectorAll('input, button').length);
+    console.log(`  DOM: ${allSelects} selects, ${allInputs} inputs/buttons`);
 
-    // Get all options from the select dropdown
-   const options = await page.$$eval('select option', opts =>
-  opts.map(o => ({ value: o.value, text: o.textContent.trim() }))
-);
+    const options = await page.$$eval('select option', opts =>
+      opts.map(o => ({ value: o.value, text: o.textContent.trim() }))
+    );
 
-// Debug: also log all select elements found
-const selectCount = await page.$$eval('select', els => els.length);
-console.log(`  Found ${selectCount} select elements, ${options.length} options`);
-console.log(`  Option texts:`, options.slice(0, 5).map(o => o.text).join(', '));
-    
+    const selectCount = await page.$$eval('select', els => els.length);
+    console.log(`  Found ${selectCount} select elements, ${options.length} options`);
+    console.log(`  Option texts:`, options.slice(0, 5).map(o => o.text).join(', '));
     console.log(`  Found ${options.length} matchups:`, options.map(o => o.text).join(', '));
 
     for (const opt of options) {
@@ -98,8 +95,6 @@ console.log(`  Option texts:`, options.slice(0, 5).map(o => o.text).join(', '));
       if (!state || results[state]) continue;
 
       console.log(`  Selecting: "${opt.text}" → ${state}`);
-
-      // Select this option
       await page.select('select.igc-tab-select', opt.value);
       await new Promise(r => setTimeout(r, 2000));
 
@@ -295,76 +290,52 @@ async function fetchPolymarket() {
   return markets;
 }
 
-// ─── KALSHI ───────────────────────────────────────────────────────────────────
+// ─── KALSHI (via public API — no auth required for market data) ───────────────
 
-async function fetchKalshi(browser) {
-  console.log('Fetching Kalshi via browser...');
+async function fetchKalshi() {
+  console.log('Fetching Kalshi via API...');
   const markets = { houseD: null, senateR: null };
+  const BASE = 'https://trading-api.kalshi.com/trade-api/v2';
+
   try {
-    const page = await browser.newPage();
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36');
+    // House — D contract
+    const houseRes = await fetch(
+      `${BASE}/series/CONTROLH/markets/CONTROLH-2026-D/candlesticks?start_ts=${NOW_TS - 3600}&end_ts=${NOW_TS}&period_interval=60`,
+      { headers: { 'Accept': 'application/json' } }
+    );
+    if (houseRes.ok) {
+      const houseData = await houseRes.json();
+      const candles = houseData.candlesticks || [];
+      if (candles.length > 0) {
+        const last = candles[candles.length - 1];
+        const price = parseFloat(last.price?.close_dollars || last.yes_bid?.close_dollars || 0);
+        if (price > 0) markets.houseD = Math.round(price * 100);
+      }
+    } else {
+      console.log('  Kalshi house HTTP:', houseRes.status);
+    }
+  } catch (e) { console.error('  Kalshi house error:', e.message); }
 
-    // House
-    try {
-      await page.goto('https://kalshi.com/markets/controlh/house-winner/controlh-2026', { waitUntil: 'domcontentloaded', timeout: 60000 });
-      await new Promise(r => setTimeout(r, 5000));
-      const houseD = await page.evaluate(() => {
-        const rows = Array.from(document.querySelectorAll('tr, [class*="row"], [class*="market"]'));
-        for (const row of rows) {
-          const text = row.innerText || '';
-          if (text.toLowerCase().includes('democratic') || text.toLowerCase().includes('democrat')) {
-            const match = text.match(/(\d+)%/);
-            if (match) return parseInt(match[1]);
-          }
-        }
-        // Fallback: find all percentages near "Democrat"
-        const bodyText = document.body.innerText;
-        const lines = bodyText.split('\n').map(l => l.trim()).filter(Boolean);
-        for (let i = 0; i < lines.length; i++) {
-          if (lines[i].toLowerCase().includes('democrat')) {
-            for (let j = i; j < Math.min(i+3, lines.length); j++) {
-              const m = lines[j].match(/^(\d+)%$/);
-              if (m) return parseInt(m[1]);
-            }
-          }
-        }
-        return null;
-      });
-      if (houseD) markets.houseD = houseD;
-      console.log('  Kalshi House D:', houseD);
-    } catch (e) { console.error('  Kalshi house error:', e.message); }
+  try {
+    // Senate — R contract (CONTROLS-2026 — check if D or R contract)
+    // D contract = CONTROLS-2026-D, R = 100 - D
+    const senateRes = await fetch(
+      `${BASE}/series/CONTROLS/markets/CONTROLS-2026-D/candlesticks?start_ts=${NOW_TS - 3600}&end_ts=${NOW_TS}&period_interval=60`,
+      { headers: { 'Accept': 'application/json' } }
+    );
+    if (senateRes.ok) {
+      const senateData = await senateRes.json();
+      const candles = senateData.candlesticks || [];
+      if (candles.length > 0) {
+        const last = candles[candles.length - 1];
+        const dPrice = parseFloat(last.price?.close_dollars || last.yes_bid?.close_dollars || 0);
+        if (dPrice > 0) markets.senateR = Math.round((1 - dPrice) * 100);
+      }
+    } else {
+      console.log('  Kalshi senate HTTP:', senateRes.status);
+    }
+  } catch (e) { console.error('  Kalshi senate error:', e.message); }
 
-    // Senate
-    try {
-      await page.goto('https://kalshi.com/markets/controls/senate-winner/controls-2026', { waitUntil: 'domcontentloaded', timeout: 60000 });
-      await new Promise(r => setTimeout(r, 5000));
-      const senateR = await page.evaluate(() => {
-        const rows = Array.from(document.querySelectorAll('tr, [class*="row"], [class*="market"]'));
-        for (const row of rows) {
-          const text = row.innerText || '';
-          if (text.toLowerCase().includes('republican')) {
-            const match = text.match(/(\d+)%/);
-            if (match) return parseInt(match[1]);
-          }
-        }
-        const bodyText = document.body.innerText;
-        const lines = bodyText.split('\n').map(l => l.trim()).filter(Boolean);
-        for (let i = 0; i < lines.length; i++) {
-          if (lines[i].toLowerCase().includes('republican')) {
-            for (let j = i; j < Math.min(i+3, lines.length); j++) {
-              const m = lines[j].match(/^(\d+)%$/);
-              if (m) return parseInt(m[1]);
-            }
-          }
-        }
-        return null;
-      });
-      if (senateR) markets.senateR = senateR;
-      console.log('  Kalshi Senate R:', senateR);
-    } catch (e) { console.error('  Kalshi senate error:', e.message); }
-
-    await page.close();
-  } catch (e) { console.error('  Kalshi browser error:', e.message); }
   console.log('  Kalshi:', markets);
   return markets;
 }
@@ -381,17 +352,15 @@ async function main() {
   });
 
   try {
-    // Run non-browser tasks in parallel, browser tasks sequentially to avoid conflicts
     const [polymarket, ratings] = await Promise.all([
       fetchPolymarket(),
       fetchBallotpediaRatings(),
     ]);
-    const kalshi        = await fetchKalshi(browser);
+    const kalshi        = await fetchKalshi();  // No browser needed — pure API
     const senatePolls   = await fetchAllSenatePolls(browser);
     const genericBallot = await fetchGenericBallot(browser);
     const trumpApproval = await fetchTrumpApproval(browser);
 
-    // Load existing data.json to preserve manual updates
     let existingData = {};
     try { existingData = JSON.parse(readFileSync('data/data.json', 'utf8')); }
     catch { console.log('  No existing data.json'); }
@@ -405,7 +374,7 @@ async function main() {
       senateRatings: Object.keys(ratings).length > 0 ? ratings : (existingData.senateRatings || {}),
       trumpApproval: trumpApproval.approve ? trumpApproval : (existingData.trumpApproval || {}),
     };
-    
+
     mkdirSync('data', { recursive: true });
 
     let history = [];
