@@ -368,7 +368,6 @@ async function fetchKalshi(browser) {
   console.log('  Kalshi:', markets);
   return markets;
 }
-}
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
 
@@ -383,12 +382,11 @@ async function main() {
 
   try {
     // Run non-browser tasks in parallel, browser tasks sequentially to avoid conflicts
-    const [polymarket, kalshi, ratings] = await Promise.all([
+    const [polymarket, ratings] = await Promise.all([
       fetchPolymarket(),
-      fetchKalshi(),
       fetchBallotpediaRatings(),
     ]);
-
+    const kalshi        = await fetchKalshi(browser);
     const senatePolls   = await fetchAllSenatePolls(browser);
     const genericBallot = await fetchGenericBallot(browser);
     const trumpApproval = await fetchTrumpApproval(browser);
