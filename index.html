@@ -826,14 +826,27 @@ function renderSenatePolling() {
       const isDem = isMarginD(avg.margin);
       const isStale = daysSince(avg.date) > 14;
       const avgRow = div('poll-row avg-row');
-      avgRow.innerHTML = `<div class="poll-header"><div><div style="font-size:13px;color:var(--text);font-weight:600">RCP Average ${isStale ? '<span class="stale-badge">⚠ stale</span>' : ''}</div><div style="font-size:11px;color:var(--faint)">${avg.source || 'RCP'} · <span style="color:var(--green)">${avg.date}</span></div></div><div class="poll-margin ${isDem ? 'dem-color' : 'rep-color'}">${fmtMargin(avg.margin)}</div></div>${pollBar(avg.dem, avg.rep)}`;
+      const weekAgo = HISTORY.slice().reverse().find(h => {
+      const d = new Date(h.date);
+      const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 5);
+      return d <= cutoff && (h.senatePolls?.[selectedRace]?.avg || h.senatePolls?.[selectedRace]?.rtwh);
+    });
+    const weekAvg = weekAgo?.senatePolls?.[selectedRace]?.rtwh || weekAgo?.senatePolls?.[selectedRace]?.avg;
+    const weekDelta = weekAvg ? (parseFloat(avg.margin) - parseFloat(weekAvg.margin)).toFixed(1) : null;
+    const deltaStr = weekDelta ? (parseFloat(weekDelta) > 0 ? `▲ +${weekDelta} D` : parseFloat(weekDelta) < 0 ? `▼ ${Math.abs(parseFloat(weekDelta)).toFixed(1)} R` : '→ no change') : null;
+    const deltaColor = weekDelta ? (parseFloat(weekDelta) > 0 ? 'var(--dem)' : parseFloat(weekDelta) < 0 ? 'var(--rep)' : 'var(--faint)') : '';
+    avgRow.innerHTML = `<div class="poll-header"><div><div style="font-size:13px;color:var(--text);font-weight:600">RCP Average ${isStale ? '<span class="stale-badge">⚠ stale</span>' : ''}</div><div style="font-size:11px;color:var(--faint)">${avg.source || 'RCP'} · <span style="color:var(--green)">${avg.date}</span>${deltaStr ? ` · <span style="color:${deltaColor};font-weight:600">${deltaStr} vs last week</span>` : ''}</div></div><div class="poll-margin ${isDem ? 'dem-color' : 'rep-color'}">${fmtMargin(avg.margin)}</div></div>${pollBar(avg.dem, avg.rep)}`;
       mSection.appendChild(avgRow);
     }
     if (liveData?.rtwh) {
       const rtwh = liveData.rtwh;
       const isDem = isMarginD(rtwh.margin);
       const rtwhRow = div('poll-row rtwh-row');
-      rtwhRow.innerHTML = `<div class="poll-header"><div><div style="font-size:13px;color:var(--text);font-weight:600">RaceToTheWH Average</div><div style="font-size:11px;color:var(--faint)">Weighted by recency & pollster quality · <span style="color:var(--green)">${rtwh.date}</span></div></div><div class="poll-margin ${isDem ? 'dem-color' : 'rep-color'}">${fmtMargin(rtwh.margin)}</div></div>${pollBar(rtwh.dem, rtwh.rep)}`;
+      const rtwhWeekAvg = weekAgo?.senatePolls?.[selectedRace]?.rtwh;
+    const rtwhDelta = rtwhWeekAvg ? (parseFloat(rtwh.margin) - parseFloat(rtwhWeekAvg.margin)).toFixed(1) : null;
+    const rtwhDeltaStr = rtwhDelta ? (parseFloat(rtwhDelta) > 0 ? `▲ +${rtwhDelta} D` : parseFloat(rtwhDelta) < 0 ? `▼ ${Math.abs(parseFloat(rtwhDelta)).toFixed(1)} R` : '→ no change') : null;
+    const rtwhDeltaColor = rtwhDelta ? (parseFloat(rtwhDelta) > 0 ? 'var(--dem)' : parseFloat(rtwhDelta) < 0 ? 'var(--rep)' : 'var(--faint)') : '';
+    rtwhRow.innerHTML = `<div class="poll-header"><div><div style="font-size:13px;color:var(--text);font-weight:600">RaceToTheWH Average</div><div style="font-size:11px;color:var(--faint)">Weighted by recency & pollster quality · <span style="color:var(--green)">${rtwh.date}</span>${rtwhDeltaStr ? ` · <span style="color:${rtwhDeltaColor};font-weight:600">${rtwhDeltaStr} vs last week</span>` : ''}</div></div><div class="poll-margin ${isDem ? 'dem-color' : 'rep-color'}">${fmtMargin(rtwh.margin)}</div></div>${pollBar(rtwh.dem, rtwh.rep)}`;
       mSection.appendChild(rtwhRow);
     }
     (liveData?.polls || []).forEach(p => {
@@ -1062,58 +1075,80 @@ function renderTrends() {
 
 function renderTrumpApproval(appr) {
   const wrap = div('space-y');
-  const card = div('card');
-  // Use Nate Silver data if available, fall back to scraped data
+
+  // Current numbers card
   const nsLatest = NATE_APPROVAL.length > 0 ? NATE_APPROVAL[NATE_APPROVAL.length - 1] : null;
   const approve = nsLatest ? nsLatest[1] : (appr?.approve ?? 40.5);
   const disapprove = nsLatest ? nsLatest[2] : (appr?.disapprove ?? 55.4);
-  const net = nsLatest ? nsLatest[3] : (appr?.net ?? '-14.9');
+  const net = nsLatest ? nsLatest[3] : (appr?.net ?? -14.9);
   const netStr = typeof net === 'number' ? net.toFixed(1) : net;
   const sourceLabel = nsLatest ? `Nate Silver Avg · Updated ${nsLatest[0]}` : (appr?.source || 'RCP Average');
-  card.innerHTML = `<div class="card-title">Trump Job Approval — ${sourceLabel}</div><div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap;margin-bottom:20px"><div><div style="font-size:11px;color:var(--muted);margin-bottom:4px">Net Approval</div><div style="font-size:44px;font-weight:800;color:var(--rep);letter-spacing:-2px">${netStr}</div></div><div style="flex:1;min-width:200px"><div class="appr-bar"><span style="font-size:12px;width:80px;color:var(--dem)">Approve</span><div style="flex:1;height:20px;background:var(--border);border-radius:4px;overflow:hidden"><div class="appr-fill" style="width:${approve}%;background:var(--dem)">${approve}%</div></div></div><div class="appr-bar"><span style="font-size:12px;width:80px;color:var(--rep)">Disapprove</span><div style="flex:1;height:20px;background:var(--border);border-radius:4px;overflow:hidden"><div class="appr-fill" style="width:${disapprove}%;background:var(--rep)">${disapprove}%</div></div></div></div></div><hr class="sep"><div class="grid-2">${[{label:'Trump 2nd term low',val:'-15.0',sub:'Feb 26',cls:'rep-color'},{label:'Biden same point',val:'-12.2',sub:'Feb 22',cls:'text-muted'},{label:'Obama same point',val:'-2.0',sub:'Feb 10',cls:'text-muted'},{label:'2018 election day',val:'-14.0',sub:'D+40 seats',cls:'dem-color'}].map(s=>`<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px"><div style="font-size:20px;font-weight:800" class="${s.cls}">${s.val}</div><div style="font-size:12px;color:var(--text);font-weight:500">${s.label}</div><div style="font-size:11px;color:var(--faint)">${s.sub}</div></div>`).join('')}</div>`;
+
+  const card = div('card');
+  card.innerHTML = `
+    <div class="card-title">Trump Job Approval — ${sourceLabel}</div>
+    <div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Net Approval</div>
+        <div style="font-size:44px;font-weight:800;color:var(--rep);letter-spacing:-2px">${netStr}</div>
+      </div>
+      <div style="flex:1;min-width:200px">
+        <div class="appr-bar"><span style="font-size:12px;width:80px;color:var(--dem)">Approve</span><div style="flex:1;height:20px;background:var(--border);border-radius:4px;overflow:hidden"><div class="appr-fill" style="width:${approve}%;background:var(--dem)">${approve}%</div></div></div>
+        <div class="appr-bar"><span style="font-size:12px;width:80px;color:var(--rep)">Disapprove</span><div style="flex:1;height:20px;background:var(--border);border-radius:4px;overflow:hidden"><div class="appr-fill" style="width:${disapprove}%;background:var(--rep)">${disapprove}%</div></div></div>
+      </div>
+    </div>`;
   wrap.appendChild(card);
 
-  // Nate Silver historical chart with window toggle
-  const nsLabels = NATE_APPROVAL.map(r => r[0].slice(5));
-  const nsCard = div('card');
-  nsCard.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="card-title" style="margin-bottom:0">Historical Approval (Nate Silver)</div><div id="ns-chart-sel" style="display:flex;gap:4px;"></div></div><div style="position:relative;height:240px"><canvas id="ns-approval-chart"></canvas></div>';
-  wrap.appendChild(nsCard);
-  let nsWindow = '9m';
-  const nsWindows = [{key:'1m',label:'1M',days:30},{key:'3m',label:'3M',days:90},{key:'ytd',label:'YTD',days:null},{key:'9m',label:'All',days:9999}];
-  let nsChart = null;
-  function renderNsChart() {
-    const w = nsWindows.find(w => w.key === nsWindow);
-    let start = 0;
-    if (w.days === null) {
-      const cutoff = new Date(); cutoff.setMonth(0); cutoff.setDate(1);
-      start = NATE_APPROVAL.findIndex(r => new Date(r[0]) >= cutoff);
-      if (start < 0) start = 0;
-    } else {
-      start = Math.max(0, NATE_APPROVAL.length - (w.days || 9999));
+  // Chart helper for Trump approval tab with window toggle
+  function makeTrumpChart(canvasId, titleText, datasets) {
+    const card = div('card');
+    card.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="card-title" style="margin-bottom:0">${titleText}</div><div id="${canvasId}-sel" style="display:flex;gap:4px;"></div></div><div style="position:relative;height:200px"><canvas id="${canvasId}"></canvas></div>`;
+    wrap.appendChild(card);
+    const wins = [{key:'1m',label:'1M',days:30},{key:'3m',label:'3M',days:90},{key:'ytd',label:'YTD',days:null},{key:'all',label:'All',days:9999}];
+    let curWin = 'all';
+    let chartInst = null;
+    function render() {
+      const w = wins.find(w => w.key === curWin);
+      let start = 0;
+      if (w.days === null) {
+        const cutoff = new Date(); cutoff.setMonth(0); cutoff.setDate(1);
+        start = NATE_APPROVAL.findIndex(r => new Date(r[0]) >= cutoff);
+        if (start < 0) start = 0;
+      } else {
+        start = Math.max(0, NATE_APPROVAL.length - (w.days || 9999));
+      }
+      const slice = NATE_APPROVAL.slice(start);
+      const labels = slice.map(r => r[0].slice(5));
+      const slicedDatasets = datasets.map(ds => ({ ...ds, data: ds.getData(slice) }));
+      if (chartInst) { chartInst.destroy(); chartInst = null; }
+      const ctx = document.getElementById(canvasId);
+      if (!ctx) return;
+      chartInst = new Chart(ctx, { type:'line', data:{ labels, datasets: slicedDatasets }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{ color:'#64748b', font:{ size:11 }, boxWidth:20, padding:10 } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:10 }, grid:{ color:'#e2e8f0' } }, y:{ ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
+      const sel = document.getElementById(canvasId + '-sel');
+      if (sel) {
+        sel.innerHTML = '';
+        wins.forEach(w2 => {
+          const btn = document.createElement('button');
+          btn.textContent = w2.label;
+          btn.style.cssText = `padding:2px 8px;border-radius:4px;border:1px solid var(--border);cursor:pointer;font-size:10px;font-weight:600;background:${w2.key===curWin?'var(--dem)':'white'};color:${w2.key===curWin?'white':'var(--muted)'};`;
+          btn.onclick = () => { curWin = w2.key; render(); };
+          sel.appendChild(btn);
+        });
+      }
     }
-    const slice = NATE_APPROVAL.slice(start);
-    const labels = slice.map(r => r[0].slice(5));
-    if (nsChart) { nsChart.destroy(); nsChart = null; }
-    const ctx = document.getElementById('ns-approval-chart');
-    if (!ctx) return;
-    nsChart = new Chart(ctx, { type:'line', data:{ labels, datasets:[
-      { label:'Approve', data:slice.map(r => r[1]), borderColor:'#2563eb', tension:0.3, pointRadius:1, fill:false },
-      { label:'Disapprove', data:slice.map(r => r[2]), borderColor:'#dc2626', tension:0.3, pointRadius:1, fill:false },
-      { label:'Net', data:slice.map(r => r[3]), borderColor:'#94a3b8', tension:0.3, pointRadius:1, fill:false, borderDash:[4,2] },
-    ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{ color:'#64748b', font:{ size:11 }, boxWidth:20, padding:10 } } }, scales:{ x:{ ticks:{ color:'#94a3b8', font:{ size:10 }, maxTicksLimit:10 }, grid:{ color:'#e2e8f0' } }, y:{ ticks:{ color:'#94a3b8', font:{ size:10 }, callback: v => v+'%' }, grid:{ color:'#e2e8f0' } } } } });
-    const sel = document.getElementById('ns-chart-sel');
-    if (sel) {
-      sel.innerHTML = '';
-      nsWindows.forEach(w2 => {
-        const btn = document.createElement('button');
-        btn.textContent = w2.label;
-        btn.style.cssText = `padding:2px 8px;border-radius:4px;border:1px solid var(--border);cursor:pointer;font-size:10px;font-weight:600;background:${w2.key===nsWindow?'var(--dem)':'white'};color:${w2.key===nsWindow?'white':'var(--muted)'};`;
-        btn.onclick = () => { nsWindow = w2.key; renderNsChart(); };
-        sel.appendChild(btn);
-      });
-    }
+    setTimeout(render, 50);
   }
-  setTimeout(renderNsChart, 50);
+
+  // Chart 1: Approve vs Disapprove
+  makeTrumpChart('ns-appr-chart', 'Approve / Disapprove (Nate Silver)', [
+    { label:'Approve', borderColor:'#2563eb', tension:0.3, pointRadius:1, fill:false, getData: s => s.map(r => r[1]) },
+    { label:'Disapprove', borderColor:'#dc2626', tension:0.3, pointRadius:1, fill:false, getData: s => s.map(r => r[2]) },
+  ]);
+
+  // Chart 2: Net approval
+  makeTrumpChart('ns-net-chart', 'Net Approval (Nate Silver)', [
+    { label:'Net', borderColor:'#94a3b8', tension:0.3, pointRadius:1, fill:false, borderDash:[4,2], getData: s => s.map(r => r[3]) },
+  ]);
 
   return wrap;
 }
