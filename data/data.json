@@ -379,12 +379,12 @@
     "Ohio": {
       "cook": "Toss-Up",
       "sabato": "Toss-Up",
-      "ie": "Lean R"
+      "ie": "Toss-Up"
     },
     "New Hampshire": {
       "cook": "Lean D",
       "sabato": "Lean D",
-      "ie": "Tilt D"
+      "ie": "Lean D"
     },
     "Alaska": {
       "cook": "Lean R",
@@ -399,7 +399,7 @@
     "Iowa": {
       "cook": "Likely R",
       "sabato": "Lean R",
-      "ie": "Likely R"
+      "ie": "Lean R"
     },
     "Texas": {
       "cook": "Likely R",
