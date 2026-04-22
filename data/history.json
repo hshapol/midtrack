@@ -118,7 +118,7 @@
     "markets": {
       "polymarket": {
         "houseD": 85,
-        "senateR": 47,
+        "senateR": 48,
         "splitPct": 35,
         "dSweepPct": 52,
         "repSweepPct": 14
