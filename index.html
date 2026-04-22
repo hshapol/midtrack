@@ -784,6 +784,7 @@ function renderOverview(poly, kalshi, gb) {
     big8Grid.appendChild(card);
   });
   big8Card.appendChild(big8Grid);
+   big8Card.appendChild(div('', '<div style="font-size:10px;color:var(--faint);margin-top:12px">* Ratings per Cook Political Report · Polymarket odds as of ' + (DATA.lastUpdated || 'latest') + '</div>'));
   wrap.appendChild(big8Card);
   return wrap;
 }
