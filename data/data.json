@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-04-21",
-  "date": "2026-04-21",
-  "fetchedAt": "2026-04-21T16:20:53.757Z",
+  "lastUpdated": "2026-04-22",
+  "date": "2026-04-22",
+  "fetchedAt": "2026-04-22T00:00:00.000Z",
   "markets": {
     "polymarket": {
       "houseD": 85,
@@ -16,8 +16,57 @@
     }
   },
   "genericBallot": {
-    "polls": [],
-    "avg": null
+    "avg": {
+      "source": "RCP Average",
+      "date": "3/16 - 4/20",
+      "dem": 48.0,
+      "rep": 42.1,
+      "margin": "5.9"
+    },
+    "polls": [
+      {
+        "source": "Marquette",
+        "date": "4/8 - 4/16",
+        "dem": 53,
+        "rep": 43,
+        "margin": "10.0"
+      },
+      {
+        "source": "Economist/YouGov",
+        "date": "4/17 - 4/20",
+        "dem": 45,
+        "rep": 40,
+        "margin": "5.0"
+      },
+      {
+        "source": "Echelon Insights",
+        "date": "4/17 - 4/20",
+        "dem": 50,
+        "rep": 44,
+        "margin": "6.0"
+      },
+      {
+        "source": "Morning Consult",
+        "date": "4/17 - 4/20",
+        "dem": 45,
+        "rep": 42,
+        "margin": "3.0"
+      },
+      {
+        "source": "Reuters/Ipsos",
+        "date": "4/15 - 4/20",
+        "dem": 41,
+        "rep": 38,
+        "margin": "3.0"
+      },
+      {
+        "source": "RMG Research",
+        "date": "4/6 - 4/9",
+        "dem": 49,
+        "rep": 44,
+        "margin": "5.0"
+      }
+    ]
   },
   "senatePolls": {
     "North Carolina": {
@@ -330,12 +379,12 @@
     "Ohio": {
       "cook": "Toss-Up",
       "sabato": "Toss-Up",
-      "ie": "Toss-Up"
+      "ie": "Lean R"
     },
     "New Hampshire": {
       "cook": "Lean D",
       "sabato": "Lean D",
-      "ie": "Lean D"
+      "ie": "Tilt D"
     },
     "Alaska": {
       "cook": "Lean R",
@@ -350,7 +399,7 @@
     "Iowa": {
       "cook": "Likely R",
       "sabato": "Lean R",
-      "ie": "Lean R"
+      "ie": "Likely R"
     },
     "Texas": {
       "cook": "Likely R",
@@ -359,8 +408,8 @@
     }
   },
   "trumpApproval": {
-    "approve": null,
-    "disapprove": null,
-    "net": null
+    "approve": 40.5,
+    "disapprove": 57.6,
+    "net": -17.1
   }
 }
