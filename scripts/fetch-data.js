@@ -297,25 +297,77 @@ async function fetchPolymarket() {
 
 // ─── KALSHI ───────────────────────────────────────────────────────────────────
 
-async function fetchKalshi() {
-  console.log('Fetching Kalshi...');
+async function fetchKalshi(browser) {
+  console.log('Fetching Kalshi via browser...');
   const markets = { houseD: null, senateR: null };
   try {
-    const [houseRes, senateRes] = await Promise.allSettled([
-      fetchJSON('https://api.kalshi.com/trade-api/v2/events/CONTROLH-2026'),
-      fetchJSON('https://api.kalshi.com/trade-api/v2/events/CONTROLS-2026'),
-    ]);
-    if (houseRes.status === 'fulfilled') {
-      const m = houseRes.value.event?.markets?.find(m => (m.subtitle || m.yes_sub_title || '').toLowerCase().includes('democrat'));
-      if (m) markets.houseD = Math.round((m.last_price || m.yes_bid || 0) * 100);
-    }
-    if (senateRes.status === 'fulfilled') {
-      const m = senateRes.value.event?.markets?.find(m => (m.subtitle || m.yes_sub_title || '').toLowerCase().includes('republican'));
-      if (m) markets.senateR = Math.round((m.last_price || m.yes_bid || 0) * 100);
-    }
-  } catch (e) { console.error('  Kalshi error:', e.message); }
+    const page = await browser.newPage();
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36');
+
+    // House
+    try {
+      await page.goto('https://kalshi.com/markets/controlh/house-winner/controlh-2026', { waitUntil: 'domcontentloaded', timeout: 60000 });
+      await new Promise(r => setTimeout(r, 5000));
+      const houseD = await page.evaluate(() => {
+        const rows = Array.from(document.querySelectorAll('tr, [class*="row"], [class*="market"]'));
+        for (const row of rows) {
+          const text = row.innerText || '';
+          if (text.toLowerCase().includes('democratic') || text.toLowerCase().includes('democrat')) {
+            const match = text.match(/(\d+)%/);
+            if (match) return parseInt(match[1]);
+          }
+        }
+        // Fallback: find all percentages near "Democrat"
+        const bodyText = document.body.innerText;
+        const lines = bodyText.split('\n').map(l => l.trim()).filter(Boolean);
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].toLowerCase().includes('democrat')) {
+            for (let j = i; j < Math.min(i+3, lines.length); j++) {
+              const m = lines[j].match(/^(\d+)%$/);
+              if (m) return parseInt(m[1]);
+            }
+          }
+        }
+        return null;
+      });
+      if (houseD) markets.houseD = houseD;
+      console.log('  Kalshi House D:', houseD);
+    } catch (e) { console.error('  Kalshi house error:', e.message); }
+
+    // Senate
+    try {
+      await page.goto('https://kalshi.com/markets/controls/senate-winner/controls-2026', { waitUntil: 'domcontentloaded', timeout: 60000 });
+      await new Promise(r => setTimeout(r, 5000));
+      const senateR = await page.evaluate(() => {
+        const rows = Array.from(document.querySelectorAll('tr, [class*="row"], [class*="market"]'));
+        for (const row of rows) {
+          const text = row.innerText || '';
+          if (text.toLowerCase().includes('republican')) {
+            const match = text.match(/(\d+)%/);
+            if (match) return parseInt(match[1]);
+          }
+        }
+        const bodyText = document.body.innerText;
+        const lines = bodyText.split('\n').map(l => l.trim()).filter(Boolean);
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].toLowerCase().includes('republican')) {
+            for (let j = i; j < Math.min(i+3, lines.length); j++) {
+              const m = lines[j].match(/^(\d+)%$/);
+              if (m) return parseInt(m[1]);
+            }
+          }
+        }
+        return null;
+      });
+      if (senateR) markets.senateR = senateR;
+      console.log('  Kalshi Senate R:', senateR);
+    } catch (e) { console.error('  Kalshi senate error:', e.message); }
+
+    await page.close();
+  } catch (e) { console.error('  Kalshi browser error:', e.message); }
   console.log('  Kalshi:', markets);
   return markets;
+}
 }
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
