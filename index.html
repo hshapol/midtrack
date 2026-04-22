@@ -712,7 +712,7 @@ function renderOverview(poly, kalshi, gb) {
     </div>
     <div class="ietd-row">
       <span class="ietd-label">Polls say</span>
-      <span class="ietd-value">${pollDFlips.length ? `Dems on track for <span style="color:var(--dem);font-weight:600">${pollDFlips.length} flip${pollDFlips.length>1?'s':''}</span> (${pollDFlips.join(', ')}) · ` : 'No clear D flips · '}${pollDHolds.length ? `Dems hold ${pollDHolds.join(', ')} · ` : ''}${pollRHolds.length ? `Rs hold ${pollRHolds.join(', ')} · ` : ''}Net: Dems <span style="color:var(--dem);font-weight:600">+${pollDFlips.length}</span>, still short of majority</span>
+      <span class="ietd-value">${pollDFlips.length ? `Dems on track for <span style="color:var(--dem);font-weight:600">${pollDFlips.length} flip${pollDFlips.length>1?'s':''}</span> (${pollDFlips.join(', ')}) · ` : 'No clear D flips · '}${pollDHolds.length ? `Dems hold ${pollDHolds.join(', ')} · ` : ''}${pollRHolds.length ? `Rs hold ${pollRHolds.join(', ')} · ` : ''}Net: Dems <span style="color:var(--dem);font-weight:600">+${pollDFlips.length}</span>${pollDFlips.length < 4 ? ', still short of majority' : ', enough for majority'}</span>
     </div>
     <div class="ietd-row">
       <span class="ietd-label">Forecasters</span>
