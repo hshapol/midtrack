@@ -1,7 +1,7 @@
 {
   "lastUpdated": "2026-04-24",
   "date": "2026-04-24",
-  "fetchedAt": "2026-04-24T12:06:42.698Z",
+  "fetchedAt": "2026-04-24T13:30:12.559Z",
   "markets": {
     "polymarket": {
       "houseD": 85,
@@ -11,9 +11,9 @@
       "repSweepPct": 14
     },
     "kalshi": {
-      "houseD": 85,
+      "houseD": 86,
       "senateR": 50,
-      "updatedDate": "2026-04-23"
+      "updatedDate": "2026-04-24"
     }
   },
   "genericBallot": {
@@ -240,11 +240,11 @@
     "New Hampshire": {
       "avg": {
         "source": "RCP Average",
-        "date": "3/23",
-        "dem": 47,
-        "rep": 44,
-        "margin": "3.0",
-        "dateRange": "1/15 - 3/23"
+        "date": "4/20",
+        "dem": 46.7,
+        "rep": 43,
+        "margin": "3.7",
+        "dateRange": "3/16 - 4/20"
       },
       "polls": [
         {
