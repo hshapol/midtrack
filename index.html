@@ -899,17 +899,17 @@ function renderSenatePolling() {
   const mSection = div('');
   mSection.innerHTML = '<div class="card-title">Poll Averages</div>';
 
-  if (liveData?.avg || liveData?.rtwh) {
+if (liveData?.avg || liveData?.rtwh) {
+    const weekAgo = HISTORY.slice().reverse().find(h => {
+      const d = new Date(h.date);
+      const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 5);
+      return d <= cutoff && (h.senatePolls?.[selectedRace]?.avg || h.senatePolls?.[selectedRace]?.rtwh);
+    });
     if (liveData?.avg) {
       const avg = liveData.avg;
       const isDem = isMarginD(avg.margin);
       const isStale = daysSince(DATA.lastUpdated) > 7;
       const avgRow = div('poll-row avg-row');
-      const weekAgo = HISTORY.slice().reverse().find(h => {
-      const d = new Date(h.date);
-      const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 5);
-      return d <= cutoff && (h.senatePolls?.[selectedRace]?.avg || h.senatePolls?.[selectedRace]?.rtwh);
-    });
     const weekAvg = weekAgo?.senatePolls?.[selectedRace]?.rtwh || weekAgo?.senatePolls?.[selectedRace]?.avg;
     const weekDelta = weekAvg ? (parseFloat(avg.margin) - parseFloat(weekAvg.margin)).toFixed(1) : null;
     const deltaStr = weekDelta ? (parseFloat(weekDelta) > 0 ? `▲ +${weekDelta} D` : parseFloat(weekDelta) < 0 ? `▼ ${Math.abs(parseFloat(weekDelta)).toFixed(1)} R` : '→ no change') : null;
