@@ -6784,5 +6784,427 @@
       "disapprove": 57.6,
       "net": -17.1
     }
+  },
+  {
+    "date": "2026-04-24",
+    "fetchedAt": "2026-04-24T12:06:42.698Z",
+    "markets": {
+      "polymarket": {
+        "houseD": 85,
+        "senateR": 48,
+        "splitPct": 37,
+        "dSweepPct": 51,
+        "repSweepPct": 14
+      },
+      "kalshi": {
+        "houseD": 85,
+        "senateR": 50,
+        "updatedDate": "2026-04-23"
+      }
+    },
+    "genericBallot": {
+      "avg": {
+        "source": "RCP Average",
+        "date": "3/16 - 4/20",
+        "dem": 48,
+        "rep": 42.1,
+        "margin": "5.9"
+      },
+      "polls": [
+        {
+          "source": "Marquette",
+          "date": "4/8 - 4/16",
+          "dem": 53,
+          "rep": 43,
+          "margin": "10.0"
+        },
+        {
+          "source": "Economist/YouGov",
+          "date": "4/17 - 4/20",
+          "dem": 45,
+          "rep": 40,
+          "margin": "5.0"
+        },
+        {
+          "source": "Echelon Insights",
+          "date": "4/17 - 4/20",
+          "dem": 50,
+          "rep": 44,
+          "margin": "6.0"
+        },
+        {
+          "source": "Morning Consult",
+          "date": "4/17 - 4/20",
+          "dem": 45,
+          "rep": 42,
+          "margin": "3.0"
+        },
+        {
+          "source": "Reuters/Ipsos",
+          "date": "4/15 - 4/20",
+          "dem": 41,
+          "rep": 38,
+          "margin": "3.0"
+        },
+        {
+          "source": "RMG Research",
+          "date": "4/6 - 4/9",
+          "dem": 49,
+          "rep": 44,
+          "margin": "5.0"
+        }
+      ]
+    },
+    "senatePolls": {
+      "North Carolina": {
+        "avg": {
+          "source": "RCP Average",
+          "date": "4/6",
+          "dem": 49,
+          "rep": 42.2,
+          "margin": "6.8",
+          "dateRange": "1/31 - 4/6"
+        },
+        "polls": [
+          {
+            "source": "High Point/YouGov",
+            "date": "3/26 - 4/6",
+            "dem": 50,
+            "rep": 42,
+            "margin": "8.0"
+          },
+          {
+            "source": "Quantus Insights",
+            "date": "3/31 - 4/1",
+            "dem": 49,
+            "rep": 44,
+            "margin": "5.0"
+          },
+          {
+            "source": "Carolina Journal/Harper",
+            "date": "3/22 - 3/23",
+            "dem": 49,
+            "rep": 41,
+            "margin": "8.0"
+          },
+          {
+            "source": "PPP",
+            "date": "3/13 - 3/14",
+            "dem": 47,
+            "rep": 44,
+            "margin": "3.0"
+          },
+          {
+            "source": "Change Research",
+            "date": "1/31 - 2/4",
+            "dem": 50,
+            "rep": 40,
+            "margin": "10.0"
+          }
+        ]
+      },
+      "Georgia": {
+        "avg": {
+          "source": "RCP Average",
+          "date": "3/2",
+          "dem": 45,
+          "rep": 42.2,
+          "margin": "2.8",
+          "dateRange": "4/24 - 3/2"
+        },
+        "polls": [
+          {
+            "source": "Emerson",
+            "date": "2/28 - 3/2",
+            "dem": 48,
+            "rep": 43,
+            "margin": "5.0"
+          },
+          {
+            "source": "Quantus Insights",
+            "date": "9/9 - 9/12",
+            "dem": 38,
+            "rep": 38,
+            "margin": "0.0"
+          },
+          {
+            "source": "TIPP",
+            "date": "7/28 - 8/1",
+            "dem": 45,
+            "rep": 44,
+            "margin": "1.0"
+          },
+          {
+            "source": "Cygnal",
+            "date": "5/15 - 5/17",
+            "dem": 46,
+            "rep": 43,
+            "margin": "3.0"
+          },
+          {
+            "source": "Trafalgar Group",
+            "date": "4/24 - 4/27",
+            "dem": 48,
+            "rep": 43,
+            "margin": "5.0"
+          }
+        ]
+      },
+      "Michigan": {
+        "avg": {
+          "source": "RCP Average",
+          "date": "1/25",
+          "dem": 43.8,
+          "rep": 42.5,
+          "margin": "1.3",
+          "dateRange": "11/6 - 1/25"
+        },
+        "polls": [
+          {
+            "source": "Emerson",
+            "date": "1/24 - 1/25",
+            "dem": 47,
+            "rep": 42,
+            "margin": "5.0"
+          },
+          {
+            "source": "Detroit News/WDIV-TV",
+            "date": "1/2 - 1/6",
+            "dem": 44,
+            "rep": 44,
+            "margin": "0.0"
+          },
+          {
+            "source": "MIRS/Mitchell Research",
+            "date": "11/18 - 11/21",
+            "dem": 40,
+            "rep": 42,
+            "margin": "-2.0"
+          },
+          {
+            "source": "EPIC-MRA",
+            "date": "11/6 - 11/11",
+            "dem": 44,
+            "rep": 42,
+            "margin": "2.0"
+          }
+        ]
+      },
+      "Ohio": {
+        "avg": {
+          "source": "RCP Average",
+          "date": "4/14",
+          "dem": 45.7,
+          "rep": 48.3,
+          "margin": "-2.6",
+          "dateRange": "12/6 - 4/14"
+        },
+        "polls": [
+          {
+            "source": "Bowling Green/YouGov",
+            "date": "4/7 - 4/14",
+            "dem": 47,
+            "rep": 50,
+            "margin": "-3.0"
+          },
+          {
+            "source": "Quantus Insights",
+            "date": "3/13 - 3/14",
+            "dem": 44,
+            "rep": 46,
+            "margin": "-2.0"
+          },
+          {
+            "source": "Emerson",
+            "date": "12/6 - 12/8",
+            "dem": 46,
+            "rep": 49,
+            "margin": "-3.0"
+          }
+        ]
+      },
+      "New Hampshire": {
+        "avg": {
+          "source": "RCP Average",
+          "date": "3/23",
+          "dem": 47,
+          "rep": 44,
+          "margin": "3.0",
+          "dateRange": "1/15 - 3/23"
+        },
+        "polls": [
+          {
+            "source": "Emerson",
+            "date": "3/21 - 3/23",
+            "dem": 45,
+            "rep": 44,
+            "margin": "1.0"
+          },
+          {
+            "source": "St. Anselm",
+            "date": "3/16 - 3/18",
+            "dem": 46,
+            "rep": 43,
+            "margin": "3.0"
+          },
+          {
+            "source": "UNH",
+            "date": "1/15 - 1/19",
+            "dem": 50,
+            "rep": 45,
+            "margin": "5.0"
+          }
+        ]
+      },
+      "Maine": {
+        "avg": {
+          "source": "RCP Average",
+          "date": "3/31",
+          "dem": 47.6,
+          "rep": 40,
+          "margin": "7.6",
+          "dateRange": "2/12 - 3/31"
+        },
+        "polls": [
+          {
+            "source": "MPRC",
+            "date": "3/20 - 3/31",
+            "dem": 48,
+            "rep": 39,
+            "margin": "9.0"
+          },
+          {
+            "source": "Emerson",
+            "date": "3/21 - 3/23",
+            "dem": 48,
+            "rep": 41,
+            "margin": "7.0"
+          },
+          {
+            "source": "Quantus Insights",
+            "date": "3/3 - 3/5",
+            "dem": 49,
+            "rep": 42,
+            "margin": "7.0"
+          },
+          {
+            "source": "Pan Atlantic",
+            "date": "2/20 - 3/2",
+            "dem": 44,
+            "rep": 40,
+            "margin": "4.0"
+          },
+          {
+            "source": "UNH",
+            "date": "2/12 - 2/16",
+            "dem": 49,
+            "rep": 38,
+            "margin": "11.0"
+          }
+        ]
+      },
+      "Alaska": {
+        "avg": null,
+        "polls": [
+          {
+            "source": "Data for Progress",
+            "date": "10/17 - 11/23",
+            "dem": 46,
+            "rep": 45,
+            "margin": "1.0"
+          },
+          {
+            "source": "Data for Progress",
+            "date": "7/21 - 7/27",
+            "dem": 45,
+            "rep": 46,
+            "margin": "-1.0"
+          }
+        ]
+      },
+      "Texas": {
+        "avg": {
+          "source": "RCP Average",
+          "date": "1/31",
+          "dem": 43.5,
+          "rep": 45.5,
+          "margin": "-2.0",
+          "dateRange": "1/10 - 1/31"
+        },
+        "polls": [
+          {
+            "source": "University of Houston",
+            "date": "1/20 - 1/31",
+            "dem": 43,
+            "rep": 44,
+            "margin": "-1.0"
+          },
+          {
+            "source": "Emerson",
+            "date": "1/10 - 1/12",
+            "dem": 44,
+            "rep": 47,
+            "margin": "-3.0"
+          }
+        ]
+      }
+    },
+    "senateRatings": {
+      "Maine": {
+        "cook": "Toss-Up",
+        "sabato": "Toss-Up",
+        "ie": "Toss-Up"
+      },
+      "North Carolina": {
+        "cook": "Lean D",
+        "sabato": "Lean D",
+        "ie": "Lean D"
+      },
+      "Georgia": {
+        "cook": "Lean D",
+        "sabato": "Lean D",
+        "ie": "Lean D"
+      },
+      "Michigan": {
+        "cook": "Toss-Up",
+        "sabato": "Lean D",
+        "ie": "Lean D"
+      },
+      "Ohio": {
+        "cook": "Toss-Up",
+        "sabato": "Toss-Up",
+        "ie": "Toss-Up"
+      },
+      "New Hampshire": {
+        "cook": "Lean D",
+        "sabato": "Lean D",
+        "ie": "Lean D"
+      },
+      "Alaska": {
+        "cook": "Lean R",
+        "sabato": "Lean R",
+        "ie": "Lean R"
+      },
+      "Nebraska": {
+        "cook": "Likely R",
+        "sabato": "Likely R",
+        "ie": "Likely R"
+      },
+      "Iowa": {
+        "cook": "Likely R",
+        "sabato": "Lean R",
+        "ie": "Lean R"
+      },
+      "Texas": {
+        "cook": "Likely R",
+        "sabato": "Likely R",
+        "ie": "Likely R"
+      }
+    },
+    "trumpApproval": {
+      "approve": 40.5,
+      "disapprove": 57.7,
+      "net": -17.2
+    }
   }
 ]
