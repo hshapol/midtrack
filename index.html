@@ -269,16 +269,16 @@ function renderOverview(poly, kalshi, gb) {
   const summaryCard = div('card');
   const weekAgoMkt = HISTORY.slice().reverse().find(function(h) {
     const d = new Date(h.date);
-    const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 5);
+    const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 7);
     return d <= cutoff;
   });
   const fmtDelta = function(curr, prev, invert) {
     if (curr == null || prev == null) return '';
     const d = (curr - prev) * (invert ? -1 : 1);
     const abs = Math.abs(d).toFixed(0);
-    if (d > 0) return ' <span style="color:var(--dem);font-size:10px">▲' + abs + '</span>';
-    if (d < 0) return ' <span style="color:var(--rep);font-size:10px">▼' + abs + '</span>';
-    return '';
+    if (d > 0) return ' <span style="color:var(--dem);font-size:10px">▲' + abs + ' w/w</span>';
+    if (d < 0) return ' <span style="color:var(--rep);font-size:10px">▼' + abs + ' w/w</span>';
+    return ' <span style="color:var(--faint);font-size:10px">→ flat w/w</span>';
   };
   const mktRows = [
     { label:'House → Dem', pD: poly.houseD, kD: kalshi.houseD, d:true,
@@ -393,7 +393,7 @@ function renderSenatePolling() {
   if (liveData && (liveData.avg || liveData.rtwh)) {
     const weekAgo = HISTORY.slice().reverse().find(function(h) {
       const d = new Date(h.date);
-      const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 5);
+      const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 7);
       return d <= cutoff && h.senatePolls && h.senatePolls[selectedRace] && (h.senatePolls[selectedRace].avg || h.senatePolls[selectedRace].rtwh);
     });
     if (liveData.avg) {
