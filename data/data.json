@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-04-26",
-  "date": "2026-04-26",
-  "fetchedAt": "2026-04-26T11:27:16.226Z",
+  "lastUpdated": "2026-04-27",
+  "date": "2026-04-27",
+  "fetchedAt": "2026-04-27T11:23:06.891Z",
   "markets": {
     "polymarket": {
       "houseD": 86,
@@ -11,9 +11,9 @@
       "repSweepPct": 14
     },
     "kalshi": {
-      "houseD": 86,
-      "senateR": 50,
-      "updatedDate": "2026-04-24"
+      "houseD": 85,
+      "senateR": 53,
+      "updatedDate": "2026-04-27"
     }
   },
   "genericBallot": {
