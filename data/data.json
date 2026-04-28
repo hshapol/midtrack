@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-04-27",
-  "date": "2026-04-27",
-  "fetchedAt": "2026-04-27T15:27:32.789Z",
+  "lastUpdated": "2026-04-28",
+  "date": "2026-04-28",
+  "fetchedAt": "2026-04-28T14:42:51.630Z",
   "markets": {
     "polymarket": {
       "houseD": 86,
@@ -12,8 +12,8 @@
     },
     "kalshi": {
       "houseD": 85,
-      "senateR": 53,
-      "updatedDate": "2026-04-27"
+      "senateR": 52,
+      "updatedDate": "2026-04-28"
     }
   },
   "genericBallot": {
@@ -416,8 +416,8 @@
     }
   },
   "trumpApproval": {
-    "approve": 40.5,
+    "approve": 40.6,
     "disapprove": 57.7,
-    "net": -17.2
+    "net": -17.1
   }
 }
