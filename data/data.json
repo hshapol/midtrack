@@ -11,9 +11,9 @@
       "repSweepPct": 14
     },
     "kalshi": {
-      "houseD": 85,
-      "senateR": 52,
-      "updatedDate": "2026-04-28"
+      "houseD": 83,
+      "senateR": 50,
+      "updatedDate": "2026-04-29"
     }
   },
   "genericBallot": {
@@ -120,11 +120,11 @@
     "Georgia": {
       "avg": {
         "source": "RCP Average",
-        "date": "3/2",
+        "date": "4/24",
         "dem": 45,
         "rep": 42.2,
         "margin": "2.8",
-        "dateRange": "4/24 - 3/2"
+        "dateRange": "3/2 - 4/24"
       },
       "polls": [
         {
@@ -339,11 +339,11 @@
     "Texas": {
       "avg": {
         "source": "RCP Average",
-        "date": "1/31",
-        "dem": 43.5,
-        "rep": 45.5,
-        "margin": "-2.0",
-        "dateRange": "1/10 - 1/31"
+        "date": "4/20",
+        "dem": 42.3,
+        "rep": 41.3,
+        "margin": "1.0",
+        "dateRange": "1/10 - 4/20"
       },
       "polls": [
         {
@@ -416,8 +416,8 @@
     }
   },
   "trumpApproval": {
-    "approve": 40.6,
-    "disapprove": 57.7,
-    "net": -17.1
+    "approve": 40.9,
+    "disapprove": 56.5,
+    "net": -15.6
   }
-}
+        }
