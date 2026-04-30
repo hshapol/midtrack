@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-04-29",
-  "date": "2026-04-29",
-  "fetchedAt": "2026-04-29T16:04:51.386Z",
+  "lastUpdated": "2026-04-30",
+  "date": "2026-04-30",
+  "fetchedAt": "2026-04-30T15:30:13.339Z",
   "markets": {
     "polymarket": {
       "houseD": 85,
       "senateR": 50,
-      "splitPct": 39,
+      "splitPct": 38,
       "dSweepPct": 49,
       "repSweepPct": 14
     },
@@ -420,4 +420,4 @@
     "disapprove": 56.5,
     "net": -15.6
   }
-        }
+}
