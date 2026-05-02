@@ -1,10 +1,10 @@
 {
-  "lastUpdated": "2026-05-01",
-  "date": "2026-05-01",
-  "fetchedAt": "2026-05-01T12:06:57.688Z",
+  "lastUpdated": "2026-05-02",
+  "date": "2026-05-02",
+  "fetchedAt": "2026-05-02T11:34:00.883Z",
   "markets": {
     "polymarket": {
-      "houseD": 84,
+      "houseD": 85,
       "senateR": 50,
       "splitPct": 39,
       "dSweepPct": 49,
