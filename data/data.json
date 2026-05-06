@@ -1,14 +1,14 @@
 {
-  "lastUpdated": "2026-05-05",
-  "date": "2026-05-05",
-  "fetchedAt": "2026-05-05T12:15:51.249Z",
+  "lastUpdated": "2026-05-06",
+  "date": "2026-05-06",
+  "fetchedAt": "2026-05-06T16:12:36.436Z",
   "markets": {
     "polymarket": {
       "houseD": 83,
-      "senateR": 50,
-      "splitPct": 36,
-      "dSweepPct": 50,
-      "repSweepPct": 16
+      "senateR": 51,
+      "splitPct": 35,
+      "dSweepPct": 49,
+      "repSweepPct": 18
     },
     "kalshi": {
       "houseD": 83,
