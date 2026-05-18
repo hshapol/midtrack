@@ -1,14 +1,14 @@
 {
-  "lastUpdated": "2026-05-17",
-  "date": "2026-05-17",
-  "fetchedAt": "2026-05-17T12:05:38.211Z",
+  "lastUpdated": "2026-05-18",
+  "date": "2026-05-18",
+  "fetchedAt": "2026-05-18T17:37:52.838Z",
   "markets": {
     "polymarket": {
-      "houseD": 79,
-      "senateR": 55,
-      "splitPct": 34,
-      "dSweepPct": 45,
-      "repSweepPct": 23
+      "houseD": 80,
+      "senateR": 53,
+      "splitPct": 33,
+      "dSweepPct": 47,
+      "repSweepPct": 21
     },
     "kalshi": {
       "houseD": 83,
@@ -364,55 +364,40 @@
     }
   },
   "senateRatings": {
-    "Maine": {
-      "cook": "Toss-Up",
-      "sabato": "Toss-Up",
-      "ie": "Toss-Up"
+    "Safe Republican": {
+      "cook": "Solid Republican",
+      "sabato": "",
+      "ie": "Safe Republican"
     },
-    "North Carolina": {
-      "cook": "Lean D",
-      "sabato": "Lean D",
-      "ie": "Lean D"
+    "Lean Republican": {
+      "cook": "Tilt Republican",
+      "sabato": "",
+      "ie": "Lean Republican"
     },
-    "Georgia": {
-      "cook": "Lean D",
-      "sabato": "Lean D",
-      "ie": "Lean D"
+    "Safe Democratic": {
+      "cook": "Solid Democratic",
+      "sabato": "",
+      "ie": "Safe Democratic"
     },
-    "Michigan": {
-      "cook": "Toss-Up",
-      "sabato": "Lean D",
-      "ie": "Lean D"
+    "Likely Republican": {
+      "cook": "Likely Republican",
+      "sabato": "",
+      "ie": "Likely Republican"
     },
-    "Ohio": {
-      "cook": "Toss-Up",
-      "sabato": "Toss-Up",
-      "ie": "Toss-Up"
+    "Lean Democratic": {
+      "cook": "Tilt Democratic",
+      "sabato": "",
+      "ie": "Lean Democratic"
     },
-    "New Hampshire": {
-      "cook": "Lean D",
-      "sabato": "Lean D",
-      "ie": "Lean D"
+    "Toss-up": {
+      "cook": "Toss-up",
+      "sabato": "",
+      "ie": "Toss-up"
     },
-    "Alaska": {
-      "cook": "Lean R",
-      "sabato": "Lean R",
-      "ie": "Lean R"
-    },
-    "Nebraska": {
-      "cook": "Likely R",
-      "sabato": "Likely R",
-      "ie": "Likely R"
-    },
-    "Iowa": {
-      "cook": "Likely R",
-      "sabato": "Lean R",
-      "ie": "Lean R"
-    },
-    "Texas": {
-      "cook": "Likely R",
-      "sabato": "Likely R",
-      "ie": "Likely R"
+    "Likely Democratic": {
+      "cook": "Likely Democratic",
+      "sabato": "",
+      "ie": "Likely Democratic"
     }
   },
   "trumpApproval": {
