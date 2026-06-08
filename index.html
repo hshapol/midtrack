@@ -480,15 +480,15 @@ function renderMarkets(poly, kalshi) {
   wrap.appendChild(senateChartCard);
 
   const bopCard = div('card');
-  bopCard.innerHTML = '<div class="card-title">Balance of Power</div><div style="display:grid;grid-template-columns:140px 1fr;gap:8px;font-size:11px;color:var(--faint);font-weight:600;margin-bottom:8px"><div></div><div>Polymarket</div></div>';
+  bopCard.innerHTML = '<div class="card-title">Balance of Power</div><div style="display:grid;grid-template-columns:140px 1fr 1fr;gap:8px;font-size:11px;color:var(--faint);font-weight:600;margin-bottom:8px"><div></div><div>Polymarket</div><div>Kalshi</div></div>';
   [
-    { label:'R Senate / D House', pct:poly.splitPct, d:false },
-    { label:'Republicans Sweep', pct:poly.repSweepPct, d:false },
-    { label:'D Senate / R House', pct:2, d:true },
+    { label:'R Senate / D House', pct:poly.splitPct,    kpct:kalshi.splitPct,    d:false },
+    { label:'Democrats Sweep',    pct:poly.dSweepPct,   kpct:kalshi.dSweepPct,   d:true  },
+    { label:'Republicans Sweep',  pct:poly.repSweepPct, kpct:kalshi.repSweepPct, d:false },
   ].forEach(function(item) {
     const row = div('');
-    row.style.cssText = 'display:grid;grid-template-columns:140px 1fr;gap:8px;align-items:center;margin-bottom:8px';
-    row.innerHTML = '<div style="font-size:12px;font-weight:500;color:' + (item.d?'var(--dem)':'var(--rep)') + '">' + item.label + '</div><div class="mkt-bar-wrap"><div class="mkt-bar-fill" style="width:' + (item.pct||0) + '%;background:' + (item.d?'#1d4ed8':'#b91c1c') + '">' + (item.pct!=null?item.pct+'%':'') + '</div></div>';
+   row.style.cssText = 'display:grid;grid-template-columns:140px 1fr 1fr;gap:8px;align-items:center;margin-bottom:8px';
+    row.innerHTML = '<div style="font-size:12px;font-weight:500;color:' + (item.d?'var(--dem)':'var(--rep)') + '">' + item.label + '</div><div class="mkt-bar-wrap"><div class="mkt-bar-fill" style="width:' + (item.pct||0) + '%;background:' + (item.d?'#1d4ed8':'#b91c1c') + '">' + (item.pct!=null?item.pct+'%':'') + '</div></div><div class="mkt-bar-wrap"><div class="mkt-bar-fill" style="width:' + (item.kpct||0) + '%;background:' + (item.d?'#1d4ed8':'#b91c1c') + '">' + (item.kpct!=null?item.kpct+'%':'—') + '</div></div>';
     bopCard.appendChild(row);
   });
   wrap.appendChild(bopCard);
