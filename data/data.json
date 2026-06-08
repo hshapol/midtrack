@@ -1,7 +1,7 @@
 {
   "lastUpdated": "2026-06-08",
   "date": "2026-06-08",
-  "fetchedAt": "2026-06-08T20:39:15.259Z",
+  "fetchedAt": "2026-06-08T21:57:50.444Z",
   "markets": {
     "polymarket": {
       "houseD": 82,
@@ -22,11 +22,11 @@
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 48.1,
-      "rep": 42,
+      "dem": 48,
+      "rep": 41.9,
       "margin": "6.1",
       "date": "06/04",
-      "dateRange": "04/03 - 06/04"
+      "dateRange": "12/16 - 06/04"
     },
     "polls": [
       {
@@ -226,35 +226,11 @@
           "partisan": null
         },
         {
-          "source": "Quantus Insights",
-          "date": "03/03 - 03/05",
-          "dem": 43,
-          "rep": 44.6,
-          "margin": "-1.6",
-          "partisan": null
-        },
-        {
           "source": "Pan Atlantic SMS Group",
           "date": "02/13 - 03/02",
           "dem": 44,
           "rep": 40,
           "margin": "4",
-          "partisan": null
-        },
-        {
-          "source": "University of New Hampshire",
-          "date": "02/12 - 02/16",
-          "dem": 41,
-          "rep": 40,
-          "margin": "1",
-          "partisan": null
-        },
-        {
-          "source": "Pan Atlantic SMS Group",
-          "date": "11/29 - 12/07",
-          "dem": 43,
-          "rep": 43,
-          "margin": "0",
           "partisan": null
         }
       ],
@@ -356,11 +332,11 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 41,
-        "rep": 44.3,
-        "margin": "-3.3",
+        "dem": 41.1,
+        "rep": 43.7,
+        "margin": "-2.6",
         "date": "05/07",
-        "dateRange": "03/06 - 05/07"
+        "dateRange": "01/25 - 05/07"
       },
       "polls": [
         {
@@ -656,14 +632,6 @@
           "partisan": null
         },
         {
-          "source": "YouGov",
-          "date": "04/10 - 04/12",
-          "dem": 40,
-          "rep": 33,
-          "margin": "7",
-          "partisan": null
-        },
-        {
           "source": "Impact Research",
           "date": "03/12 - 03/17",
           "dem": 44,
@@ -729,7 +697,16 @@
     },
     "Iowa": {
       "avg": null,
-      "polls": [],
+      "polls": [
+        {
+          "source": "Change Research",
+          "date": "01/08 - 01/11",
+          "dem": 41,
+          "rep": 44,
+          "margin": "-3",
+          "partisan": null
+        }
+      ],
       "rtwh": null
     }
   },
