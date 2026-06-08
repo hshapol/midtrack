@@ -394,9 +394,8 @@ function renderSenatePolling() {
     mktBox.style.cssText = 'display:flex;gap:8px;margin-bottom:12px';
     const kalshiData = DATA && DATA.markets && DATA.markets.kalshi;
     const kalshiStateD = null; // no per-state Kalshi data yet
-    mktBox.innerHTML = 
-      (polyD != null ? '<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:6px 12px;font-size:12px"><span style="color:var(--faint)">Polymarket</span> <span style="font-weight:700;color:' + (polyD>=50?'var(--dem)':'var(--rep)') + '">' + (polyD >= 50 ? polyD+'% D' : (100-polyD)+'% R') + '</span></div>' : '') +
-      (kalshiData && kalshiData.houseD != null ? '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:6px 12px;font-size:12px"><span style="color:var(--faint)">Kalshi (chamber)</span> <span style="font-weight:700;color:var(--dem)">' + kalshiData.houseD + '% D House</span></div>' : '');
+   mktBox.innerHTML = 
+      (polyD != null ? '<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:6px 12px;font-size:12px"><span style="color:var(--faint)">Polymarket</span> <span style="font-weight:700;color:' + (polyD>=50?'var(--dem)':'var(--rep)') + '">' + (polyD >= 50 ? polyD+'% D' : (100-polyD)+'% R') + '</span></div>' : '');
     mSection.appendChild(mktBox);
   }
   
