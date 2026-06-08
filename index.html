@@ -261,7 +261,7 @@ function renderOverview(poly, kalshi, gb) {
     (fcRHolds.length ? '<span style="color:var(--rep);">' + fcRHolds.length + ' Lean/Likely R</span> (' + fcRHolds.join(', ') + ')' : '');
 
   ietdCard.innerHTML = '<div class="card-title">🗳 If the Election Were Held Today</div>' +
-    '<div class="ietd-row"><span class="ietd-label">Markets</span><span class="ietd-value">House ' + houseStr + ' · Senate flip ' + senateStr + ' <span style="color:var(--faint);font-size:11px">(Avg. Polymarket & Kalshi)</span></span></div>' +
+    '<div class="ietd-row"><span class="ietd-label">Markets</span><span class="ietd-value">House ' + houseStr + ' · Senate ' + senateStr + ' <span style="color:var(--faint);font-size:11px">(Avg. Polymarket & Kalshi)</span></span></div>' +
     '<div class="ietd-row"><span class="ietd-label">Polls say</span><span class="ietd-value">' + pollsText + '</span></div>' +
     '<div class="ietd-row"><span class="ietd-label">Forecasters</span><span class="ietd-value">' + fcText + '</span></div>';
   wrap.appendChild(ietdCard);
