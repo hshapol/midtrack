@@ -309,7 +309,7 @@ function renderOverview(poly, kalshi, gb) {
     const lastPollDate = liveData && (liveData.avg && liveData.avg.date || liveData.rtwh && liveData.rtwh.date);
     const isStale = daysSince(DATA.lastUpdated) > 7;
     const bestAvg = liveData && (liveData.rtwh || liveData.avg);
-    const avgSource = liveData && liveData.rtwh ? 'RTWH' : liveData && liveData.avg ? (liveData.avg.source || 'Avg') : '';
+    const avgSource = liveData && liveData.rtwh ? 'RTWH' : liveData && liveData.avg ? ((liveData.avg.source || 'Avg') + (liveData.avg.dateRange ? ' · ' + liveData.avg.dateRange : '')) : '';
     const avgMarginStr = bestAvg ? fmtMargin(bestAvg.margin) : (detail.matchups[0] && detail.matchups[0].margin || '—');
     const isLiveD = bestAvg ? isMarginD(bestAvg.margin) : detail.matchups[0] && detail.matchups[0].margin && detail.matchups[0].margin.includes('D');
     card.innerHTML = '<div class="race-header"><span class="race-name">' + state + '</span><span class="badge badge-' + detail.hold.toLowerCase() + '">Current: ' + detail.hold + '</span><span class="badge ' + ratingBadgeClass(primaryRating) + '" style="margin-left:auto">' + primaryRating + '</span></div><div class="race-row"><span class="race-row-label">Latest avg ' + (avgSource ? '(' + avgSource + ')' : '') + (lastPollDate && isStale ? ' ⚠ stale' : '') + '</span><span class="' + (isLiveD ? 'pill pill-d' : 'pill pill-r') + '">' + avgMarginStr + '</span></div><div class="race-row"><span class="race-row-label">Polymarket</span><span class="' + (polyD >= 50 ? 'pill pill-d' : 'pill pill-r') + '">' + (polyD >= 50 ? polyD+'% D' : (100-polyD)+'% R') + '</span></div>';
