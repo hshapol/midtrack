@@ -52,20 +52,34 @@ async function fetchKalshi() {
   console.log('Fetching Kalshi...');
   try {
     const [houseRes, senateRes] = await Promise.all([
-      fetch('https://external-api.kalshi.com/trade-api/v2/markets/CONTROLH-2026-D'),
-      fetch('https://external-api.kalshi.com/trade-api/v2/markets/CONTROLS-2026-D'),
+      fetch('https://external-api.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLH&limit=100'),
+      fetch('https://external-api.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLS&limit=100'),
     ]);
+    
     let houseD = null, senateR = null;
+    
     if (houseRes.ok) {
       const d = await houseRes.json();
-      const price = d.market?.yes_bid_dollars || d.market?.last_price_dollars;
-      if (price) houseD = Math.round(parseFloat(price) * 100);
+      const markets = d.markets || [];
+      // Find Dem wins contract
+      const m = markets.find(m => m.ticker?.includes('-D') || m.yes_sub_title?.toLowerCase().includes('democrat')) || markets[0];
+      if (m) {
+        const price = m.yes_bid_dollars ?? m.last_price_dollars ?? m.close_price_dollars ?? null;
+        if (price != null) houseD = Math.round(parseFloat(price) * 100);
+      }
     }
+    
     if (senateRes.ok) {
       const d = await senateRes.json();
-      const price = d.market?.yes_bid_dollars || d.market?.last_price_dollars;
-      if (price) senateR = Math.round((1 - parseFloat(price)) * 100);
+      const markets = d.markets || [];
+      // Find Dem wins contract (senate R = 100 - Dem%)
+      const m = markets.find(m => m.ticker?.includes('-D') || m.yes_sub_title?.toLowerCase().includes('democrat')) || markets[0];
+      if (m) {
+        const price = m.yes_bid_dollars ?? m.last_price_dollars ?? m.close_price_dollars ?? null;
+        if (price != null) senateR = 100 - Math.round(parseFloat(price) * 100);
+      }
     }
+    
     console.log('  Kalshi:', { houseD, senateR });
     return { houseD, senateR, updatedDate: TODAY };
   } catch (e) {
