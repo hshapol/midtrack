@@ -62,7 +62,7 @@ async function fetchKalshi() {
       const d = await houseRes.json();
       const markets = d.markets || [];
       // Find Dem wins contract
-      const m = markets.find(m => m.ticker?.includes('-D') || m.yes_sub_title?.toLowerCase().includes('democrat')) || markets[0];
+      const m = markets.find(m => m.ticker === 'CONTROLH-2026-D') || markets.find(m => m.ticker?.includes('2026') && m.ticker?.includes('-D'));
       if (m) {
         const price = m.yes_bid_dollars ?? m.last_price_dollars ?? m.close_price_dollars ?? null;
         if (price != null) houseD = Math.round(parseFloat(price) * 100);
@@ -73,7 +73,7 @@ async function fetchKalshi() {
       const d = await senateRes.json();
       const markets = d.markets || [];
       // Find Dem wins contract (senate R = 100 - Dem%)
-      const m = markets.find(m => m.ticker?.includes('-D') || m.yes_sub_title?.toLowerCase().includes('democrat')) || markets[0];
+      const m = markets.find(m => m.ticker === 'CONTROLS-2026-D') || markets.find(m => m.ticker?.includes('2026') && m.ticker?.includes('-D'));
       if (m) {
         const price = m.yes_bid_dollars ?? m.last_price_dollars ?? m.close_price_dollars ?? null;
         if (price != null) senateR = 100 - Math.round(parseFloat(price) * 100);
