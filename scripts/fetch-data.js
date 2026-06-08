@@ -118,7 +118,7 @@ async function fetchVoteHub(existingData) {
         continue;
       }
 
-      console.log(`  ${stateName}: ${polls.length} polls (latest ${polls[0].end_date})`);
+      console.log(`  ${stateName}: ${polls.length} polls (latest ${polls[0].end_date})`); if (stateName === 'North Carolina') console.log('  NC sample answers:', JSON.stringify(polls[0].answers));
       const avg = computeAverage(polls);
       const fmt = d => d.slice(5).replace('-', '/');
 
