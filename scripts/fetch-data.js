@@ -51,7 +51,7 @@ async function fetchPolymarket() {
 const STATE_SUBJECTS = {
   'North Carolina': '2026 North Carolina',
   'Maine':          '2026 Maine',
-  'Ohio':           '2026 Ohio',
+  'Ohio (Special)': '2026 Ohio',
   'Michigan':       '2026 Michigan',
   'Georgia':        '2026 Georgia',
   'New Hampshire':  '2026 New Hampshire',
