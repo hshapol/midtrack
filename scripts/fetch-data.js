@@ -16,7 +16,7 @@ const EXPECTED_CANDIDATES = {
   'Georgia':        ['Ossoff'],
   'Maine':          ['Collins', 'Platner'],
   'Ohio (Special)': ['Brown', 'Husted'],
-  'New Hampshire':  ['Pappas'],
+  'New Hampshire':  ['Sununu', 'Pappas'],
   'Alaska':         ['Peltola', 'Sullivan'],
   'Michigan':       null,
   'Texas':          ['Paxton', 'Talarico'],
@@ -141,7 +141,7 @@ const STATE_SUBJECTS = {
   'Iowa':           '2026 Iowa',
 };
 
-const DEM_CANDIDATES = ['cooper','ossoff','pappas','peltola','stevens','mcmorrow','el-sayed','brown','platner','talarico','osborn','cortez masto','slotkin'];
+const DEM_CANDIDATES = ['cooper','ossoff','pappas','peltola','stevens','mcmorrow','el-sayed','brown','platner','talarico','turek','osborn'];
 const REP_CANDIDATES = ['whatley','collins','sununu','sullivan','rogers','husted','paxton','ricketts','hinson'];
 
 function getDemPct(answers) {
@@ -161,8 +161,11 @@ function computeAverage(polls, stateName) {
       expected.some(name => p.answers.some(a => a.candidate && a.candidate.toLowerCase().includes(name.toLowerCase())))
     );
   }
+ const sixMonthsAgo = new Date();
+  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+  nonPartisan = nonPartisan.filter(p => new Date(p.end_date) >= sixMonthsAgo);
   if (!nonPartisan.length) return null;
-
+  
   // One poll per pollster (most recent)
   const byPollster = {};
   nonPartisan.forEach(p => {
