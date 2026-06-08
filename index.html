@@ -419,7 +419,7 @@ function renderSenatePolling() {
     (liveData.polls || []).forEach(function(p) {
       const pIsDem = isMarginD(p.margin);
       const pRow = div('poll-row');
-      pRow.innerHTML = '<div class="poll-header"><div><div style="font-size:13px;color:var(--text)">' + p.source + '</div><div style="font-size:11px;color:var(--faint)">' + p.date + '</div></div><div class="poll-margin ' + (pIsDem ? 'dem-color' : 'rep-color') + '">' + fmtMargin(p.margin) + '</div></div>' + pollBar(p.dem, p.rep);
+      pRow.innerHTML = '<div class="poll-header"><div><div style="font-size:13px;color:var(--text)">' + p.source + (p.partisan ? ' <span style="font-size:10px;background:#f1f5f9;border:1px solid var(--border);border-radius:3px;padding:1px 5px;color:var(--muted)">' + p.partisan + '</span>' : '') + '</div><div style="font-size:11px;color:var(--faint)">' + p.date + '</div></div><div class="poll-margin ' + (pIsDem ? 'dem-color' : 'rep-color') + '">' + fmtMargin(p.margin) + '</div></div>' + pollBar(p.dem, p.rep);
       mSection.appendChild(pRow);
     });
   } else if (detail.matchups.length > 0) {
