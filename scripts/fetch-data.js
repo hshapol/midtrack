@@ -86,13 +86,13 @@ async function fetchKalshi() {
       const markets = d.markets || [];
       console.log('  Kalshi BOP markets:', markets.map(m => m.ticker + ' ' + (m.subtitle || m.title || '')));
       markets.forEach(function(m) {
-        const sub = (m.subtitle || m.title || m.yes_sub_title || '').toLowerCase();
+        const ticker = m.ticker || '';
         const price = m.yes_bid_dollars ?? m.last_price_dollars ?? null;
         if (price == null) return;
         const pct = Math.round(parseFloat(price) * 100);
-        if (sub.includes('dem') && sub.includes('sweep')) dSweepPct = pct;
-        else if (sub.includes('rep') && sub.includes('sweep')) repSweepPct = pct;
-        else if (sub.includes('split') || (sub.includes('r senate') && sub.includes('d house'))) splitPct = pct;
+        if (ticker.endsWith('-DD')) dSweepPct = pct;       // Dem House + Dem Senate
+        else if (ticker.endsWith('-RR')) repSweepPct = pct; // Rep House + Rep Senate
+        else if (ticker.endsWith('-DR')) splitPct = pct;    // Dem House + Rep Senate
       });
       console.log('  Kalshi BOP:', { dSweepPct, splitPct, repSweepPct });
     }
