@@ -474,8 +474,8 @@ function renderMarkets(poly, kalshi) {
       wkKD: weekAgo?.markets?.kalshi?.senateR != null ? 100-weekAgo.markets.kalshi.senateR : null },
     ].forEach(function(row) {
     const inner = div('poll-row');
- const pDemDelta = row.wkPolyD!=null&&row.polyD!=null ? row.polyD-row.wkPolyD : null;
-  const kDemDelta = row.wkKD!=null&&row.kD!=null ? row.kD-row.wkKD : null;
+  const pDemDelta = row.wkPolyD!=null&&row.polyD!=null ? row.polyD-row.wkPolyD : null;
+  const kDemDelta = row.wkKD!=null&&row.kD!=null&&weekAgo&&weekAgo.markets&&weekAgo.markets.kalshi&&weekAgo.markets.kalshi.updatedDate ? row.kD-row.wkKD : null;
   const dColor = function(d) { return d>0?'var(--dem)':d<0?'var(--rep)':'var(--faint)'; };
   const dStr = function(d) { return d>0?'▲+'+d:d<0?'▼'+d:'→0'; };
     inner.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-weight:700;font-size:15px">' + row.chamber + '</span><span class="badge ' + (row.favors==='D'?'badge-lean-d':'badge-lean-r') + '">Favors ' + (row.favors==='D'?'Dems':'Rep') + '</span></div>' +
