@@ -321,10 +321,10 @@ function renderOverview(poly, kalshi, gb) {
   const mktRows = [
     { label:'House → Dem', pD: poly.houseD, kD: kalshi.houseD, d:true,
       pDelta: fmtDelta(poly.houseD, weekAgoMkt && weekAgoMkt.markets && weekAgoMkt.markets.polymarket && weekAgoMkt.markets.polymarket.houseD, false),
-      kDelta: fmtDelta(kalshi.houseD, weekAgoMkt?.markets?.kalshi?.updatedDate ? weekAgoMkt.markets.kalshi.houseD : null, false) },
+      kDelta: fmtDelta(kalshi.houseD, (weekAgoMkt?.markets?.kalshi?.updatedDate && (new Date() - new Date(weekAgoMkt.markets.kalshi.updatedDate)) / (1000*60*60*24) < 14) ? weekAgoMkt.markets.kalshi.houseD : null, false) },
     { label:'Senate → Rep', pD: poly.senateR, kD: kalshi.senateR, d:false,
       pDelta: fmtDelta(poly.senateR, weekAgoMkt && weekAgoMkt.markets && weekAgoMkt.markets.polymarket && weekAgoMkt.markets.polymarket.senateR, true),
-      kDelta: fmtDelta(kalshi.senateR, weekAgoMkt?.markets?.kalshi?.updatedDate ? weekAgoMkt.markets.kalshi.senateR : null, true) },
+      kDelta: fmtDelta(kalshi.senateR, (weekAgoMkt?.markets?.kalshi?.updatedDate && (new Date() - new Date(weekAgoMkt.markets.kalshi.updatedDate)) / (1000*60*60*24) < 14) ? weekAgoMkt.markets.kalshi.senateR : null, true) },
   ];
   let tblRows = '';
   mktRows.forEach(function(row, i) {
