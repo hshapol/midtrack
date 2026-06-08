@@ -468,10 +468,10 @@ function renderMarkets(poly, kalshi) {
   const chamberCard = div('card');
       chamberCard.innerHTML = '<div class="card-title">Chamber Control</div>';  [
       { chamber:'House', polyD:poly.houseD, kD:kalshi.houseD, polyR:100-(poly.houseD||0), kR:kalshi.houseD?100-kalshi.houseD:null, favors:'D',
-      wkPolyD: weekAgo?.markets?.polymarket?.houseD, wkKD: weekAgo?.markets?.kalshi?.houseD },
+      wkPolyD: weekAgo?.markets?.polymarket?.houseD, wkKD: (weekAgo?.markets?.kalshi?.updatedDate && (new Date() - new Date(weekAgo.markets.kalshi.updatedDate)) / (1000*60*60*24) < 14) ? weekAgo.markets.kalshi.houseD : null },
     { chamber:'Senate', polyD:poly.senateR?100-poly.senateR:null, kD:kalshi.senateR?100-kalshi.senateR:null, polyR:poly.senateR, kR:kalshi.senateR, favors:'R',
       wkPolyD: weekAgo?.markets?.polymarket?.senateR != null ? 100-weekAgo.markets.polymarket.senateR : null,
-      wkKD: weekAgo?.markets?.kalshi?.senateR != null ? 100-weekAgo.markets.kalshi.senateR : null },
+      wkKD: (weekAgo?.markets?.kalshi?.updatedDate && (new Date() - new Date(weekAgo.markets.kalshi.updatedDate)) / (1000*60*60*24) < 14 && weekAgo.markets.kalshi.senateR != null) ? 100-weekAgo.markets.kalshi.senateR : null },
     ].forEach(function(row) {
     const inner = div('poll-row');
   const pDemDelta = row.wkPolyD!=null&&row.polyD!=null ? row.polyD-row.wkPolyD : null;
