@@ -123,7 +123,8 @@ const RACE_DETAILS = {
 };
 
 const RACE_ORDER = ["North Carolina","Maine","Ohio (Special)","Alaska","Michigan","Georgia","New Hampshire","Texas","Nebraska","Iowa"];
-
+const POLY_ODDS = { "Maine":55,"North Carolina":64,"Georgia":70,"Michigan":58,"Ohio (Special)":40,"Alaska":48,"Texas":22,"New Hampshire":65 };
+  
 function fmtMargin(margin) {
   const m = parseFloat(margin);
   const abs = Math.abs(m).toFixed(1);
@@ -295,7 +296,6 @@ function renderOverview(poly, kalshi, gb) {
   const big8Card = div('card');
   big8Card.innerHTML = '<div class="card-title">The Big 8 Senate Races</div>';
   const big8Grid = div('grid-2');
-  const POLY_ODDS = { "Maine":55,"North Carolina":64,"Georgia":70,"Michigan":58,"Ohio (Special)":40,"Alaska":48,"Texas":22,"New Hampshire":65 };
 
   ["North Carolina","Maine","Ohio (Special)","Alaska","Michigan","Georgia","New Hampshire","Texas"].forEach(function(state) {
     const polyD = POLY_ODDS[state] || 50;
@@ -386,7 +386,19 @@ function renderSenatePolling() {
   const liveData = DATA && DATA.senatePolls && DATA.senatePolls[selectedRace];
   const mSection = div('');
   mSection.innerHTML = '<div class="card-title">Poll Averages</div>';
-
+  const polyD = POLY_ODDS[selectedRace];
+  const kalshiD = DATA?.markets?.kalshi?.houseD;
+  if (polyD != null) {
+    const mktBox = div('');
+    mktBox.style.cssText = 'display:flex;gap:8px;margin-bottom:12px';
+    const kalshiData = DATA && DATA.markets && DATA.markets.kalshi;
+    const kalshiStateD = null; // no per-state Kalshi data yet
+    mktBox.innerHTML = 
+      (polyD != null ? '<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:6px 12px;font-size:12px"><span style="color:var(--faint)">Polymarket</span> <span style="font-weight:700;color:' + (polyD>=50?'var(--dem)':'var(--rep)') + '">' + (polyD >= 50 ? polyD+'% D' : (100-polyD)+'% R') + '</span></div>' : '') +
+      (kalshiData && kalshiData.houseD != null ? '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:6px 12px;font-size:12px"><span style="color:var(--faint)">Kalshi (chamber)</span> <span style="font-weight:700;color:var(--dem)">' + kalshiData.houseD + '% D House</span></div>' : '');
+    mSection.appendChild(mktBox);
+  }
+  
   if (liveData && (liveData.avg || liveData.rtwh)) {
     const weekAgo = HISTORY.slice().reverse().find(function(h) {
       const d = new Date(h.date);
