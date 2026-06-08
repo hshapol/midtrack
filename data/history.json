@@ -25139,35 +25139,80 @@
             "date": "05/10 - 05/11",
             "dem": 49.8,
             "rep": 38.7,
-            "margin": "11.1"
+            "margin": "11.1",
+            "partisan": null
           },
           {
             "source": "Change Research",
             "date": "05/04 - 05/08",
             "dem": 49,
             "rep": 42,
-            "margin": "7"
+            "margin": "7",
+            "partisan": "DEM"
           },
           {
             "source": "Opinion Diagnostics",
             "date": "04/21 - 04/24",
             "dem": 50.4,
             "rep": 41.4,
-            "margin": "9"
+            "margin": "9",
+            "partisan": "REP"
           },
           {
             "source": "High Point University Survey Research Center/YouGov",
             "date": "03/26 - 04/06",
             "dem": 50,
             "rep": 42,
-            "margin": "8"
+            "margin": "8",
+            "partisan": null
           },
           {
             "source": "High Point University Survey Research Center/YouGov",
             "date": "03/26 - 04/06",
             "dem": 49,
             "rep": 39,
-            "margin": "10"
+            "margin": "10",
+            "partisan": null
+          },
+          {
+            "source": "YouGov",
+            "date": "03/09 - 03/18",
+            "dem": 48,
+            "rep": 34,
+            "margin": "14",
+            "partisan": null
+          },
+          {
+            "source": "Public Policy Polling",
+            "date": "03/13 - 03/14",
+            "dem": 47,
+            "rep": 44,
+            "margin": "3",
+            "partisan": null
+          },
+          {
+            "source": "Nexus Strategies/Strategic Partners Solutions",
+            "date": "03/08 - 03/09",
+            "dem": 50,
+            "rep": 32,
+            "margin": "18",
+            "partisan": null
+          },
+          {
+            "source": "Change Research",
+            "date": "01/31 - 02/04",
+            "dem": 50,
+            "rep": 40,
+            "margin": "10",
+            "partisan": null
+          },
+          {
+            "source": "TIPP Insights",
+            "date": "01/12 - 01/15",
+            "dem": 48,
+            "rep": 24,
+            "margin": "24",
+            "partisan": "REP"
           }
         ],
         "rtwh": null
@@ -25187,35 +25232,80 @@
             "date": "05/21 - 05/25",
             "dem": 51,
             "rep": 42,
-            "margin": "9"
+            "margin": "9",
+            "partisan": null
           },
           {
             "source": "Pan Atlantic SMS Group",
             "date": "05/08 - 05/18",
             "dem": 48,
             "rep": 41,
-            "margin": "7"
+            "margin": "7",
+            "partisan": null
           },
           {
             "source": "University of Massachusetts Lowell Center for Public Opinion/YouGov",
             "date": "05/13 - 05/16",
             "dem": 48,
             "rep": 43,
-            "margin": "5"
+            "margin": "5",
+            "partisan": null
           },
           {
             "source": "Echelon Insights",
             "date": "04/03 - 04/09",
             "dem": 51,
             "rep": 45,
-            "margin": "6"
+            "margin": "6",
+            "partisan": null
           },
           {
             "source": "Echelon Insights",
             "date": "04/03 - 04/09",
             "dem": 48,
             "rep": 46,
-            "margin": "2"
+            "margin": "2",
+            "partisan": null
+          },
+          {
+            "source": "Maine People's Resource Center",
+            "date": "03/20 - 03/31",
+            "dem": 48.3,
+            "rep": 39.3,
+            "margin": "9",
+            "partisan": null
+          },
+          {
+            "source": "Maine People's Resource Center",
+            "date": "03/20 - 03/31",
+            "dem": 41.9,
+            "rep": 45,
+            "margin": "-3.1",
+            "partisan": null
+          },
+          {
+            "source": "Emerson College",
+            "date": "03/21 - 03/23",
+            "dem": 47.8,
+            "rep": 40.6,
+            "margin": "7.2",
+            "partisan": null
+          },
+          {
+            "source": "Emerson College",
+            "date": "03/21 - 03/23",
+            "dem": 46.2,
+            "rep": 42.5,
+            "margin": "3.7",
+            "partisan": null
+          },
+          {
+            "source": "Quantus Insights",
+            "date": "03/03 - 03/05",
+            "dem": 43,
+            "rep": 44.6,
+            "margin": "-1.6",
+            "partisan": null
           }
         ],
         "rtwh": null
@@ -25235,35 +25325,80 @@
             "date": "05/28 - 06/01",
             "dem": 53,
             "rep": 45,
-            "margin": "8"
+            "margin": "8",
+            "partisan": null
           },
           {
             "source": "Bowling Green State University/YouGov",
             "date": "04/07 - 04/14",
             "dem": 47,
             "rep": 50,
-            "margin": "-3"
+            "margin": "-3",
+            "partisan": null
           },
           {
             "source": "Echelon Insights",
             "date": "04/03 - 04/09",
             "dem": 45,
             "rep": 51,
-            "margin": "-6"
+            "margin": "-6",
+            "partisan": null
           },
           {
             "source": "Quantus Insights",
             "date": "03/13 - 03/14",
             "dem": 44,
             "rep": 46,
-            "margin": "-2"
+            "margin": "-2",
+            "partisan": null
           },
           {
             "source": "OnMessage",
             "date": "03/03 - 03/08",
             "dem": 47,
             "rep": 45,
-            "margin": "2"
+            "margin": "2",
+            "partisan": null
+          },
+          {
+            "source": "EMC Research",
+            "date": "02/10 - 02/22",
+            "dem": 51,
+            "rep": 47,
+            "margin": "4",
+            "partisan": null
+          },
+          {
+            "source": "Emerson College",
+            "date": "12/06 - 12/08",
+            "dem": 46.3,
+            "rep": 48.8,
+            "margin": "-2.5",
+            "partisan": null
+          },
+          {
+            "source": "Bowling Green State University/YouGov",
+            "date": "10/02 - 10/14",
+            "dem": 49,
+            "rep": 48,
+            "margin": "1",
+            "partisan": null
+          },
+          {
+            "source": "Emerson College",
+            "date": "08/18 - 08/19",
+            "dem": 43.7,
+            "rep": 49.5,
+            "margin": "-5.8",
+            "partisan": null
+          },
+          {
+            "source": "Bowling Green State University/YouGov",
+            "date": "04/18 - 04/24",
+            "dem": 46,
+            "rep": 49,
+            "margin": "-3",
+            "partisan": null
           }
         ],
         "rtwh": null
@@ -25283,35 +25418,80 @@
             "date": "05/20 - 05/23",
             "dem": 43,
             "rep": 42,
-            "margin": "1"
+            "margin": "1",
+            "partisan": "REP"
           },
           {
             "source": "TIPP Insights",
             "date": "05/20 - 05/23",
             "dem": 40,
             "rep": 40,
-            "margin": "0"
+            "margin": "0",
+            "partisan": "REP"
           },
           {
             "source": "TIPP Insights",
             "date": "05/20 - 05/23",
             "dem": 48,
             "rep": 41,
-            "margin": "7"
+            "margin": "7",
+            "partisan": "REP"
           },
           {
             "source": "TIPP Insights",
             "date": "05/20 - 05/23",
             "dem": 45,
             "rep": 38,
-            "margin": "7"
+            "margin": "7",
+            "partisan": "REP"
           },
           {
             "source": "TIPP Insights",
             "date": "05/20 - 05/23",
             "dem": 45,
             "rep": 42,
-            "margin": "3"
+            "margin": "3",
+            "partisan": "REP"
+          },
+          {
+            "source": "TIPP Insights",
+            "date": "05/20 - 05/23",
+            "dem": 42,
+            "rep": 39,
+            "margin": "3",
+            "partisan": "REP"
+          },
+          {
+            "source": "Mitchell Research & Communications",
+            "date": "05/01 - 05/07",
+            "dem": 42,
+            "rep": 41,
+            "margin": "1",
+            "partisan": null
+          },
+          {
+            "source": "Mitchell Research & Communications",
+            "date": "05/01 - 05/07",
+            "dem": 43,
+            "rep": 41,
+            "margin": "2",
+            "partisan": null
+          },
+          {
+            "source": "Mitchell Research & Communications",
+            "date": "05/01 - 05/07",
+            "dem": 42,
+            "rep": 39,
+            "margin": "3",
+            "partisan": null
+          },
+          {
+            "source": "Glengariff Group, Inc.",
+            "date": "04/28 - 05/01",
+            "dem": 40,
+            "rep": 45,
+            "margin": "-5",
+            "partisan": null
           }
         ],
         "rtwh": null
@@ -25331,28 +25511,56 @@
             "date": "04/03 - 04/09",
             "dem": 51,
             "rep": 44,
-            "margin": "7"
+            "margin": "7",
+            "partisan": null
           },
           {
             "source": "Emerson College",
             "date": "02/28 - 03/02",
             "dem": 47.7,
             "rep": 43.3,
-            "margin": "4.4"
+            "margin": "4.4",
+            "partisan": null
           },
           {
             "source": "Quantus Insights",
             "date": "09/09 - 09/12",
             "dem": 37.8,
             "rep": 37.7,
-            "margin": "0.1"
+            "margin": "0.1",
+            "partisan": null
           },
           {
             "source": "TIPP Insights",
             "date": "07/28 - 08/01",
             "dem": 45,
             "rep": 44,
-            "margin": "1"
+            "margin": "1",
+            "partisan": "REP"
+          },
+          {
+            "source": "Cygnal",
+            "date": "05/15 - 05/17",
+            "dem": 46,
+            "rep": 43,
+            "margin": "3",
+            "partisan": "DEM"
+          },
+          {
+            "source": "Trafalgar Group",
+            "date": "04/24 - 04/27",
+            "dem": 47.5,
+            "rep": 42.8,
+            "margin": "4.7",
+            "partisan": "REP"
+          },
+          {
+            "source": "WPA Intelligence",
+            "date": "01/14 - 01/15",
+            "dem": 44,
+            "rep": 34,
+            "margin": "10",
+            "partisan": "REP"
           }
         ],
         "rtwh": null
@@ -25372,35 +25580,80 @@
             "date": "03/21 - 03/23",
             "dem": 45.3,
             "rep": 43.7,
-            "margin": "1.6"
+            "margin": "1.6",
+            "partisan": null
           },
           {
             "source": "Saint Anselm",
             "date": "03/16 - 03/18",
             "dem": 46,
             "rep": 43,
-            "margin": "3"
+            "margin": "3",
+            "partisan": null
           },
           {
             "source": "yes. every kid.",
             "date": "01/28 - 01/29",
             "dem": 45,
             "rep": 41,
-            "margin": "4"
+            "margin": "4",
+            "partisan": null
           },
           {
             "source": "University of New Hampshire",
             "date": "01/15 - 01/19",
             "dem": 50,
             "rep": 45,
-            "margin": "5"
+            "margin": "5",
+            "partisan": null
           },
           {
             "source": "Praecones Analytica",
             "date": "12/26 - 12/28",
             "dem": 42.3,
             "rep": 35.6,
-            "margin": "6.7"
+            "margin": "6.7",
+            "partisan": null
+          },
+          {
+            "source": "Saint Anselm",
+            "date": "11/18 - 11/19",
+            "dem": 44,
+            "rep": 41,
+            "margin": "3",
+            "partisan": null
+          },
+          {
+            "source": "co/efficient",
+            "date": "10/09 - 10/13",
+            "dem": 45,
+            "rep": 42,
+            "margin": "3",
+            "partisan": null
+          },
+          {
+            "source": "University of New Hampshire",
+            "date": "09/17 - 09/23",
+            "dem": 49,
+            "rep": 43,
+            "margin": "6",
+            "partisan": null
+          },
+          {
+            "source": "co/efficient",
+            "date": "09/10 - 09/12",
+            "dem": 46,
+            "rep": 43,
+            "margin": "3",
+            "partisan": null
+          },
+          {
+            "source": "1892 Polling",
+            "date": "09/02 - 09/04",
+            "dem": 45,
+            "rep": 43,
+            "margin": "2",
+            "partisan": null
           }
         ],
         "rtwh": null
@@ -25420,35 +25673,40 @@
             "date": "04/16 - 04/19",
             "dem": 52,
             "rep": 48,
-            "margin": "4"
+            "margin": "4",
+            "partisan": null
           },
           {
             "source": "Alaska Survey Research",
             "date": "04/16 - 04/19",
             "dem": 50.8,
             "rep": 47.3,
-            "margin": "3.5"
+            "margin": "3.5",
+            "partisan": null
           },
           {
             "source": "Alaska Survey Research",
             "date": "03/19 - 03/22",
             "dem": 52.4,
             "rep": 47.6,
-            "margin": "4.8"
+            "margin": "4.8",
+            "partisan": null
           },
           {
             "source": "Public Policy Polling",
             "date": "01/16 - 01/17",
             "dem": 49,
             "rep": 47,
-            "margin": "2"
+            "margin": "2",
+            "partisan": "DEM"
           },
           {
             "source": "Alaska Survey Research",
             "date": "01/08 - 01/11",
             "dem": 48,
             "rep": 46.4,
-            "margin": "1.6"
+            "margin": "1.6",
+            "partisan": null
           }
         ],
         "rtwh": null
@@ -25468,35 +25726,80 @@
             "date": "06/03 - 06/04",
             "dem": 43,
             "rep": 45,
-            "margin": "-2"
+            "margin": "-2",
+            "partisan": null
           },
           {
             "source": "Slingshot Strategies",
             "date": "05/27 - 05/28",
             "dem": 48,
             "rep": 45,
-            "margin": "3"
+            "margin": "3",
+            "partisan": "DEM"
           },
           {
             "source": "Public Policy Polling",
             "date": "05/22 - 05/23",
             "dem": 45,
             "rep": 38,
-            "margin": "7"
+            "margin": "7",
+            "partisan": "DEM"
           },
           {
             "source": "Texas Southern University Barbara Jordan Public Policy Research and Survey Center",
             "date": "04/22 - 05/06",
             "dem": 45,
             "rep": 45,
-            "margin": "0"
+            "margin": "0",
+            "partisan": null
           },
           {
             "source": "Texas Public Opinion Research",
             "date": "04/17 - 04/20",
             "dem": 46,
             "rep": 41,
-            "margin": "5"
+            "margin": "5",
+            "partisan": null
+          },
+          {
+            "source": "Texas Public Opinion Research",
+            "date": "04/17 - 04/20",
+            "dem": 44,
+            "rep": 41,
+            "margin": "3",
+            "partisan": null
+          },
+          {
+            "source": "YouGov",
+            "date": "04/10 - 04/20",
+            "dem": 42,
+            "rep": 34,
+            "margin": "8",
+            "partisan": null
+          },
+          {
+            "source": "YouGov",
+            "date": "04/10 - 04/12",
+            "dem": 40,
+            "rep": 33,
+            "margin": "7",
+            "partisan": null
+          },
+          {
+            "source": "Impact Research",
+            "date": "03/12 - 03/17",
+            "dem": 44,
+            "rep": 43,
+            "margin": "1",
+            "partisan": null
+          },
+          {
+            "source": "Public Policy Polling",
+            "date": "03/04 - 03/05",
+            "dem": 47,
+            "rep": 45,
+            "margin": "2",
+            "partisan": "DEM"
           }
         ],
         "rtwh": null
@@ -25516,7 +25819,8 @@
             "date": "05/08 - 05/11",
             "dem": 47,
             "rep": 42,
-            "margin": "5"
+            "margin": "5",
+            "partisan": null
           }
         ],
         "rtwh": null
