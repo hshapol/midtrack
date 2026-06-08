@@ -61,11 +61,16 @@ const STATE_SUBJECTS = {
   'Iowa':           '2026 Iowa',
 };
 
+const DEM_CANDIDATES = ['cooper','ossoff','pappas','peltola','stevens','mcmorrow','el-sayed','brown','platner','mills','talarico','osborn','cortez masto','slotkin'];
+const REP_CANDIDATES = ['whatley','collins','sununu','sullivan','rogers','husted','cornyn','paxton','ricketts','hinson'];
+
 function getDemPct(answers) {
-  return answers.find(a => ['Dem', 'Democrat', 'Democratic'].includes(a.choice))?.pct ?? null;
+  return answers.find(a => ['Dem','Democrat','Democratic'].includes(a.choice) ||
+    DEM_CANDIDATES.some(c => a.choice.toLowerCase().includes(c)))?.pct ?? null;
 }
 function getRepPct(answers) {
-  return answers.find(a => ['Rep', 'Republican'].includes(a.choice))?.pct ?? null;
+  return answers.find(a => ['Rep','Republican'].includes(a.choice) ||
+    REP_CANDIDATES.some(c => a.choice.toLowerCase().includes(c)))?.pct ?? null;
 }
 
 function computeAverage(polls) {
