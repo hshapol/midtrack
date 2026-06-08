@@ -25066,9 +25066,9 @@
       "kalshi": {
         "houseD": 77,
         "senateR": 58,
-        "dSweepPct": null,
-        "splitPct": null,
-        "repSweepPct": null,
+        "dSweepPct": 40,
+        "splitPct": 35,
+        "repSweepPct": 20,
         "updatedDate": "2026-06-08"
       }
     },
