@@ -124,34 +124,7 @@ const RACE_DETAILS = {
 
 const RACE_ORDER = ["North Carolina","Maine","Ohio (Special)","Alaska","Michigan","Georgia","New Hampshire","Texas","Nebraska","Iowa"];
 const POLY_ODDS = { "Maine":55,"North Carolina":64,"Georgia":70,"Michigan":58,"Ohio (Special)":40,"Alaska":48,"Texas":22,"New Hampshire":65 };
-const POLLSTER_GRADES = {
-  'The Washington Post': 'A+',
-  'Marquette University Law School': 'A/B',
-  'Research & Polling Inc.': 'A+',
-  'OnMessage Inc.': 'A',
-  'Data Orbital': 'A/B',
-  'TIPP Insights': 'A',
-  'Cygnal': 'A',
-  'The New York Times/Siena College': 'A',
-  'Monmouth University': 'A',
-  'SurveyUSA': 'A',
-  'CBS News/The New York Times': 'A',
-  'AtlasIntel': 'A',
-  'Emerson College': 'A',
-  'Siena College': 'A',
-  'Marist College': 'A-',
-  'Suffolk University': 'A-',
-  'Quinnipiac University': 'B+',
-  'Rasmussen Reports': 'B+',
-  'Public Policy Polling': 'B+',
-  'Trafalgar Group': 'B',
-  'YouGov': 'B',
-  'Ipsos': 'B',
-  'RMG Research': 'B',
-  'Civiqs': 'B',
-  'Morning Consult': 'C+',
-  'Change Research': 'C+',
-};
+const POLLSTER_GRADES = {};
 
 function getPollsterGrade(name) {
   if (!name) return null;
@@ -719,14 +692,16 @@ function renderSources() {
 
 async function loadData() {
   try {
-    const [dataRes, histRes, nateRes] = await Promise.allSettled([
+    const [dataRes, histRes, nateRes, gradesRes] = await Promise.allSettled([
       fetch('data/data.json?v=' + Date.now()),
       fetch('data/history.json?v=' + Date.now()),
-      fetch('data/nate-approval.json?v=' + Date.now())
-    ]);
+      fetch('data/nate-approval.json?v=' + Date.now()),
+      fetch('data/pollster-grades.json?v=' + Date.now())
+        ]);
     if (dataRes.status === 'fulfilled' && dataRes.value.ok) { DATA = await dataRes.value.json(); document.getElementById('last-updated').textContent = DATA.lastUpdated || 'Unknown'; }
     if (histRes.status === 'fulfilled' && histRes.value.ok) { HISTORY = await histRes.value.json(); }
     if (nateRes.status === 'fulfilled' && nateRes.value.ok) { NATE_APPROVAL = await nateRes.value.json(); }
+    if (gradesRes.status === 'fulfilled' && gradesRes.value.ok) { Object.assign(POLLSTER_GRADES, await gradesRes.value.json()); }
   } catch (e) { DATA = { markets: { polymarket: {}, kalshi: {} }, genericBallot: { polls: [], avg: null }, senateRatings: {}, trumpApproval: {} }; }
   renderTabs();
   renderMain();
