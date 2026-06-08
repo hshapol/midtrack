@@ -246,7 +246,7 @@ function renderOverview(poly, kalshi, gb) {
  const houseAvg = (poly.houseD != null && kalshi.houseD != null) ? Math.round((poly.houseD + kalshi.houseD) / 2) : (poly.houseD ?? kalshi.houseD ?? null);
   const senateAvg = (poly.senateR != null && kalshi.senateR != null) ? Math.round(((100-poly.senateR) + (100-kalshi.senateR)) / 2) : (poly.senateR != null ? 100-poly.senateR : kalshi.senateR != null ? 100-kalshi.senateR : null);
   const houseStr = houseAvg != null ? '<span style="color:var(--dem);font-weight:600">' + houseAvg + '% D</span>' : '—';
-  const senateStr = senateAvg != null ? '<span style="color:' + (senateAvg >= 50 ? 'var(--dem)' : 'var(--rep)') + ';font-weight:600">' + senateAvg + '% D</span>' : '—';
+  const avgSource = liveData && liveData.rtwh ? 'RTWH' : liveData && liveData.avg ? ((liveData.avg.source || 'Avg') + (liveData.avg.dateRange ? ' · ' + liveData.avg.dateRange : liveData.avg.date ? ' · ' + liveData.avg.date : '')) : '';
 
   const pollsText = (pollDFlips.length ? 'Dems on track for <span style="color:var(--dem);font-weight:600">' + pollDFlips.length + ' flip' + (pollDFlips.length>1?'s':'') + '</span> (' + pollDFlips.join(', ') + ') · ' : 'No clear D flips · ') +
     (pollDHolds.length ? 'Dems hold ' + pollDHolds.join(', ') + ' · ' : '') +
