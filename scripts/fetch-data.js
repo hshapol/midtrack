@@ -14,14 +14,14 @@ const TODAY = new Date().toISOString().split('T')[0];
 const EXPECTED_CANDIDATES = {
   'North Carolina': ['Cooper', 'Whatley'],
   'Georgia':        ['Ossoff'],
-  'Maine':          ['Collins'],
+  'Maine':          ['Collins', 'Platner'],
   'Ohio (Special)': ['Brown', 'Husted'],
   'New Hampshire':  ['Pappas'],
   'Alaska':         ['Peltola', 'Sullivan'],
   'Michigan':       null,
-  'Texas':          null,
+  'Texas':          ['Paxton', 'Talarico'],
   'Nebraska':       ['Osborn', 'Ricketts'],
-  'Iowa':           null,
+  'Iowa':           ['Hinson', 'Turek'],
 };
 
 // ─── POLYMARKET (unchanged from original) ────────────────────────────────────
