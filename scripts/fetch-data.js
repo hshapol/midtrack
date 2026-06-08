@@ -54,7 +54,7 @@ async function fetchKalshi() {
     const [houseRes, senateRes, bopRes] = await Promise.all([
       fetch('https://external-api.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLH&limit=100'),
       fetch('https://external-api.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLS&limit=100'),
-      fetch('https://external-api.kalshi.com/trade-api/v2/markets?series_ticker=MIDTERM&limit=100'),
+      fetch('https://external-api.kalshi.com/trade-api/v2/markets?series_ticker=KXBALANCEPOWERCOMBO&limit=100'),
 ]);
     
     let houseD = null, senateR = null;
