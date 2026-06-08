@@ -51,10 +51,11 @@ async function fetchPolymarket() {
 async function fetchKalshi() {
   console.log('Fetching Kalshi...');
   try {
-    const [houseRes, senateRes] = await Promise.all([
+    const [houseRes, senateRes, bopRes] = await Promise.all([
       fetch('https://external-api.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLH&limit=100'),
       fetch('https://external-api.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLS&limit=100'),
-    ]);
+      fetch('https://external-api.kalshi.com/trade-api/v2/markets?series_ticker=MIDTERM&limit=100'),
+]);
     
     let houseD = null, senateR = null;
     
@@ -72,16 +73,32 @@ async function fetchKalshi() {
     if (senateRes.ok) {
       const d = await senateRes.json();
       const markets = d.markets || [];
-      // Find Dem wins contract (senate R = 100 - Dem%)
       const m = markets.find(m => m.ticker === 'CONTROLS-2026-D') || markets.find(m => m.ticker?.includes('2026') && m.ticker?.includes('-D'));
       if (m) {
         const price = m.yes_bid_dollars ?? m.last_price_dollars ?? m.close_price_dollars ?? null;
         if (price != null) senateR = 100 - Math.round(parseFloat(price) * 100);
       }
     }
+
+    let dSweepPct = null, splitPct = null, repSweepPct = null;
+    if (bopRes.ok) {
+      const d = await bopRes.json();
+      const markets = d.markets || [];
+      console.log('  Kalshi BOP markets:', markets.map(m => m.ticker + ' ' + (m.subtitle || m.title || '')));
+      markets.forEach(function(m) {
+        const sub = (m.subtitle || m.title || m.yes_sub_title || '').toLowerCase();
+        const price = m.yes_bid_dollars ?? m.last_price_dollars ?? null;
+        if (price == null) return;
+        const pct = Math.round(parseFloat(price) * 100);
+        if (sub.includes('dem') && sub.includes('sweep')) dSweepPct = pct;
+        else if (sub.includes('rep') && sub.includes('sweep')) repSweepPct = pct;
+        else if (sub.includes('split') || (sub.includes('r senate') && sub.includes('d house'))) splitPct = pct;
+      });
+      console.log('  Kalshi BOP:', { dSweepPct, splitPct, repSweepPct });
+    }
     
     console.log('  Kalshi:', { houseD, senateR });
-    return { houseD, senateR, updatedDate: TODAY };
+    return { houseD, senateR, dSweepPct, splitPct, repSweepPct, updatedDate: TODAY };
   } catch (e) {
     console.error('  Kalshi error:', e.message);
     return null;
