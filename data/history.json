@@ -25064,9 +25064,9 @@
         "repSweepPct": 18
       },
       "kalshi": {
-        "houseD": 83,
-        "senateR": 50,
-        "updatedDate": "2026-04-29"
+        "houseD": 77,
+        "senateR": 58,
+        "updatedDate": "2026-06-08"
       }
     },
     "genericBallot": {
@@ -25310,7 +25310,7 @@
         ],
         "rtwh": null
       },
-      "Ohio": {
+      "Ohio (Special)": {
         "avg": {
           "source": "VoteHub Avg",
           "dem": 48.7,
