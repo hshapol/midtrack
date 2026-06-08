@@ -243,9 +243,10 @@ function renderOverview(poly, kalshi, gb) {
     else fcRHolds.push(state);
   });
 
-  const polyHouse = poly.houseD != null ? '<span style="color:var(--dem);font-weight:600">' + poly.houseD + '% D</span>' : '—';
-  const polySenate = poly.senateR != null ? '<span style="color:var(--dem);font-weight:600">' + (100-poly.senateR) + '% D</span>' : '—';
-  const kalshiSenate = kalshi.senateR != null ? '<span style="color:var(--dem);font-weight:600">' + (100-kalshi.senateR) + '% D</span>' : '<span style="color:var(--faint)">—</span>';
+ const houseAvg = (poly.houseD != null && kalshi.houseD != null) ? Math.round((poly.houseD + kalshi.houseD) / 2) : (poly.houseD ?? kalshi.houseD ?? null);
+  const senateAvg = (poly.senateR != null && kalshi.senateR != null) ? Math.round(((100-poly.senateR) + (100-kalshi.senateR)) / 2) : (poly.senateR != null ? 100-poly.senateR : kalshi.senateR != null ? 100-kalshi.senateR : null);
+  const houseStr = houseAvg != null ? '<span style="color:var(--dem);font-weight:600">' + houseAvg + '% D</span>' : '—';
+  const senateStr = senateAvg != null ? '<span style="color:var(--dem);font-weight:600">' + senateAvg + '% D</span>' : '—';
 
   const pollsText = (pollDFlips.length ? 'Dems on track for <span style="color:var(--dem);font-weight:600">' + pollDFlips.length + ' flip' + (pollDFlips.length>1?'s':'') + '</span> (' + pollDFlips.join(', ') + ') · ' : 'No clear D flips · ') +
     (pollDHolds.length ? 'Dems hold ' + pollDHolds.join(', ') + ' · ' : '') +
@@ -259,7 +260,7 @@ function renderOverview(poly, kalshi, gb) {
     (fcRHolds.length ? '<span style="color:var(--rep);">' + fcRHolds.length + ' Lean/Likely R</span> (' + fcRHolds.join(', ') + ')' : '');
 
   ietdCard.innerHTML = '<div class="card-title">🗳 If the Election Were Held Today</div>' +
-    '<div class="ietd-row"><span class="ietd-label">Markets</span><span class="ietd-value">House ' + polyHouse + ' · Senate flip ' + polySenate + ' (Polymarket) / ' + kalshiSenate + ' (Kalshi)</span></div>' +
+    '<div class="ietd-row"><span class="ietd-label">Markets</span><span class="ietd-value">House ' + houseStr + ' · Senate flip ' + senateStr + ' <span style="color:var(--faint);font-size:11px">(Avg. Polymarket & Kalshi)</span></span></div>' +
     '<div class="ietd-row"><span class="ietd-label">Polls say</span><span class="ietd-value">' + pollsText + '</span></div>' +
     '<div class="ietd-row"><span class="ietd-label">Forecasters</span><span class="ietd-value">' + fcText + '</span></div>';
   wrap.appendChild(ietdCard);
