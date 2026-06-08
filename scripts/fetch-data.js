@@ -46,6 +46,34 @@ async function fetchPolymarket() {
   return markets;
 }
 
+// ─── KALSHI ───────────────────────────────────────────────────────────────────
+
+async function fetchKalshi() {
+  console.log('Fetching Kalshi...');
+  try {
+    const [houseRes, senateRes] = await Promise.all([
+      fetch('https://external-api.kalshi.com/trade-api/v2/markets/CONTROLH-2026-D'),
+      fetch('https://external-api.kalshi.com/trade-api/v2/markets/CONTROLS-2026-D'),
+    ]);
+    let houseD = null, senateR = null;
+    if (houseRes.ok) {
+      const d = await houseRes.json();
+      const price = d.market?.yes_bid_dollars || d.market?.last_price_dollars;
+      if (price) houseD = Math.round(parseFloat(price) * 100);
+    }
+    if (senateRes.ok) {
+      const d = await senateRes.json();
+      const price = d.market?.yes_bid_dollars || d.market?.last_price_dollars;
+      if (price) senateR = Math.round((1 - parseFloat(price)) * 100);
+    }
+    console.log('  Kalshi:', { houseD, senateR });
+    return { houseD, senateR, updatedDate: TODAY };
+  } catch (e) {
+    console.error('  Kalshi error:', e.message);
+    return null;
+  }
+}
+
 // ─── VOTEHUB API ──────────────────────────────────────────────────────────────
 
 const STATE_SUBJECTS = {
@@ -211,9 +239,10 @@ async function main() {
   try { existingData = JSON.parse(readFileSync('data/data.json', 'utf8')); }
   catch { console.log('  No existing data.json'); }
 
-  const [polymarket, vhResult] = await Promise.all([
-    fetchPolymarket(),
-    fetchVoteHub(existingData),
+ const [polymarket, vhResult, kalshiResult] = await Promise.all([
+  fetchPolymarket(),
+  fetchVoteHub(existingData),
+  fetchKalshi(),
   ]);
 
   const todayEntry = {
@@ -221,7 +250,7 @@ async function main() {
     fetchedAt:  new Date().toISOString(),
     markets: {
       polymarket,
-      kalshi: existingData?.markets?.kalshi || { houseD: null, senateR: null },
+      kalshi: kalshiResult || existingData?.markets?.kalshi || { houseD: null, senateR: null },
     },
     genericBallot:  vhResult?.genericBallot  || existingData?.genericBallot  || { polls: [], avg: null },
     senatePolls:    vhResult?.senatePolls     || existingData?.senatePolls    || {},
