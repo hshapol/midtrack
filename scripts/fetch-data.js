@@ -11,6 +11,19 @@ function getPollsterWeight(name) {
 
 const TODAY = new Date().toISOString().split('T')[0];
 
+const EXPECTED_CANDIDATES = {
+  'North Carolina': ['Cooper', 'Whatley'],
+  'Georgia':        ['Ossoff'],
+  'Maine':          ['Collins'],
+  'Ohio (Special)': ['Brown', 'Husted'],
+  'New Hampshire':  ['Pappas'],
+  'Alaska':         ['Peltola', 'Sullivan'],
+  'Michigan':       null,
+  'Texas':          null,
+  'Nebraska':       ['Osborn', 'Ricketts'],
+  'Iowa':           null,
+};
+
 // ─── POLYMARKET (unchanged from original) ────────────────────────────────────
 
 async function fetchPolymarket() {
@@ -140,8 +153,14 @@ function getRepPct(answers) {
     REP_CANDIDATES.some(c => a.choice.toLowerCase().includes(c)))?.pct ?? null;
 }
 
-function computeAverage(polls) {
-  const nonPartisan = polls.filter(p => !p.partisan && getDemPct(p.answers) !== null && getRepPct(p.answers) !== null);
+function computeAverage(polls, stateName) {
+  let nonPartisan = polls.filter(p => !p.partisan && getDemPct(p.answers) !== null && getRepPct(p.answers) !== null);
+  const expected = EXPECTED_CANDIDATES[stateName];
+  if (expected) {
+    nonPartisan = nonPartisan.filter(p =>
+      expected.some(name => p.answers.some(a => a.candidate && a.candidate.toLowerCase().includes(name.toLowerCase())))
+    );
+  }
   if (!nonPartisan.length) return null;
 
   // One poll per pollster (most recent)
@@ -205,7 +224,7 @@ async function fetchVoteHub(existingData) {
       }
 
       console.log(`  ${stateName}: ${polls.length} polls (latest ${polls[0].end_date})`); 
-      const avg = computeAverage(polls);
+      const avg = computeAverage(polls, stateName);
       const fmt = d => d.slice(5).replace('-', '/');
 
       const seen = new Set();
