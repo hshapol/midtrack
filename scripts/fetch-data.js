@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { writeFileSync, readFileSync, mkdirSync } from 'fs';
+import { getPollsterWeight } from './pollster-weights.js';
 
 const TODAY = new Date().toISOString().split('T')[0];
 
@@ -133,30 +134,45 @@ function getRepPct(answers) {
 }
 
 function computeAverage(polls) {
-  const valid = polls.filter(p => getDemPct(p.answers) !== null && getRepPct(p.answers) !== null);
-  if (!valid.length) return null;
-  const sorted = [...valid].sort((a, b) => new Date(b.end_date) - new Date(a.end_date));
-  const recent = sorted.slice(0, 10);
+  const nonPartisan = polls.filter(p => !p.partisan && getDemPct(p.answers) !== null && getRepPct(p.answers) !== null);
+  if (!nonPartisan.length) return null;
+
+  // One poll per pollster (most recent)
+  const byPollster = {};
+  nonPartisan.forEach(p => {
+    if (!byPollster[p.pollster] || p.end_date > byPollster[p.pollster].end_date)
+      byPollster[p.pollster] = p;
+  });
+  const deduped = Object.values(byPollster);
+
+  const now = new Date();
+  const HALF_LIFE = 30;
   let wDem = 0, wRep = 0, wTotal = 0;
-  recent.forEach((p, i) => {
-    const w = 1 / (i + 1);
-    wDem   += getDemPct(p.answers) * w;
-    wRep   += getRepPct(p.answers) * w;
+  deduped.forEach(p => {
+    const age = (now - new Date(p.end_date)) / (1000 * 60 * 60 * 24);
+    const recency = Math.pow(0.5, age / HALF_LIFE);
+    const quality = getPollsterWeight(p.pollster);
+    const sampleW = p.sample_size ? Math.sqrt(p.sample_size / 600) : 1;
+    const w = recency * quality * sampleW;
+    wDem += getDemPct(p.answers) * w;
+    wRep += getRepPct(p.answers) * w;
     wTotal += w;
   });
-  const dem    = +(wDem / wTotal).toFixed(1);
-  const rep    = +(wRep / wTotal).toFixed(1);
+
+  if (!wTotal) return null;
+  const dem = +(wDem / wTotal).toFixed(1);
+  const rep = +(wRep / wTotal).toFixed(1);
   const margin = +(dem - rep).toFixed(1);
-  const newest = sorted[0];
-  const oldest = sorted[Math.min(sorted.length, 5) - 1];
-  const fmt    = d => d.slice(5).replace('-', '/');
+  const sorted = [...deduped].sort((a, b) => new Date(b.end_date) - new Date(a.end_date));
+  const fmt = d => d.slice(5).replace('-', '/');
   return {
-    source:    'VoteHub Avg',
+    source: 'SB-style Avg',
     dem, rep,
-    margin:    margin.toString(),
-    date:      fmt(newest.end_date),
-    dateRange: fmt(oldest.end_date) + ' - ' + fmt(newest.end_date),
+    margin: margin.toString(),
+    date: fmt(sorted[0].end_date),
+    dateRange: fmt(sorted[sorted.length - 1].end_date) + ' - ' + fmt(sorted[0].end_date),
   };
+}
 }
 
 async function fetchVoteHub(existingData) {
@@ -186,7 +202,17 @@ async function fetchVoteHub(existingData) {
       const avg = computeAverage(polls);
       const fmt = d => d.slice(5).replace('-', '/');
 
-      const pollsArr = polls.slice(0, 10).map(p => {
+      const seen = new Set();
+      const pollsArr = polls
+        .filter(p => {
+          if (p.partisan) return false;
+          const k = p.pollster + '|' + p.end_date;
+          if (seen.has(k)) return false;
+          seen.add(k);
+          return true;
+        })
+        .slice(0, 10)
+        .map(p => {
         const dem = getDemPct(p.answers);
         const rep = getRepPct(p.answers);
         if (dem === null || rep === null) return null;
