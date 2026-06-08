@@ -158,7 +158,10 @@ function computeAverage(polls, stateName) {
   const expected = EXPECTED_CANDIDATES[stateName];
   if (expected) {
     nonPartisan = nonPartisan.filter(p =>
-      expected.some(name => p.answers.some(a => a.candidate && a.candidate.toLowerCase().includes(name.toLowerCase())))
+      expected.some(name => p.answers.some(a => {
+        const field = (a.choice || a.candidate || '').toLowerCase();
+        return field.includes(name.toLowerCase());
+      }))
     );
   }
  const sixMonthsAgo = new Date();
