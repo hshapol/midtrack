@@ -123,11 +123,11 @@ async function fetchVoteHub(existingData) {
         continue;
       }
 
-      console.log(`  ${stateName}: ${polls.length} polls (latest ${polls[0].end_date})`); if (stateName === 'North Carolina') console.log('  NC sample answers:', JSON.stringify(polls[0].answers));
+      console.log(`  ${stateName}: ${polls.length} polls (latest ${polls[0].end_date})`); 
       const avg = computeAverage(polls);
       const fmt = d => d.slice(5).replace('-', '/');
 
-      const pollsArr = polls.slice(0, 5).map(p => {
+      const pollsArr = polls.slice(0, 10).map(p => {
         const dem = getDemPct(p.answers);
         const rep = getRepPct(p.answers);
         if (dem === null || rep === null) return null;
@@ -136,6 +136,7 @@ async function fetchVoteHub(existingData) {
           date:   p.start_date ? fmt(p.start_date) + ' - ' + fmt(p.end_date) : fmt(p.end_date),
           dem, rep,
           margin: (+(dem - rep).toFixed(1)).toString(),
+          partisan: p.partisan || null,
         };
       }).filter(Boolean);
 
