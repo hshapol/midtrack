@@ -173,7 +173,6 @@ function computeAverage(polls) {
     dateRange: fmt(sorted[sorted.length - 1].end_date) + ' - ' + fmt(sorted[0].end_date),
   };
 }
-}
 
 async function fetchVoteHub(existingData) {
   console.log('Fetching VoteHub API...');
