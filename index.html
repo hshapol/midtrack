@@ -124,6 +124,44 @@ const RACE_DETAILS = {
 
 const RACE_ORDER = ["North Carolina","Maine","Ohio (Special)","Alaska","Michigan","Georgia","New Hampshire","Texas","Nebraska","Iowa"];
 const POLY_ODDS = { "Maine":55,"North Carolina":64,"Georgia":70,"Michigan":58,"Ohio (Special)":40,"Alaska":48,"Texas":22,"New Hampshire":65 };
+const POLLSTER_GRADES = {
+  'The Washington Post': 'A+',
+  'Marquette University Law School': 'A/B',
+  'Research & Polling Inc.': 'A+',
+  'OnMessage Inc.': 'A',
+  'Data Orbital': 'A/B',
+  'TIPP Insights': 'A',
+  'Cygnal': 'A',
+  'The New York Times/Siena College': 'A',
+  'Monmouth University': 'A',
+  'SurveyUSA': 'A',
+  'CBS News/The New York Times': 'A',
+  'AtlasIntel': 'A',
+  'Emerson College': 'A',
+  'Siena College': 'A',
+  'Marist College': 'A-',
+  'Suffolk University': 'A-',
+  'Quinnipiac University': 'B+',
+  'Rasmussen Reports': 'B+',
+  'Public Policy Polling': 'B+',
+  'Trafalgar Group': 'B',
+  'YouGov': 'B',
+  'Ipsos': 'B',
+  'RMG Research': 'B',
+  'Civiqs': 'B',
+  'Morning Consult': 'C+',
+  'Change Research': 'C+',
+};
+
+function getPollsterGrade(name) {
+  if (!name) return null;
+  if (POLLSTER_GRADES[name]) return POLLSTER_GRADES[name];
+  const lower = name.toLowerCase();
+  for (const [k, v] of Object.entries(POLLSTER_GRADES)) {
+    if (lower.includes(k.toLowerCase()) || k.toLowerCase().includes(lower)) return v;
+  }
+  return null;
+}
   
 function fmtMargin(margin) {
   const m = parseFloat(margin);
@@ -432,7 +470,9 @@ function renderSenatePolling() {
     (liveData.polls || []).forEach(function(p) {
       const pIsDem = isMarginD(p.margin);
       const pRow = div('poll-row');
-      pRow.innerHTML = '<div class="poll-header"><div><div style="font-size:13px;color:var(--text)">' + p.source + (p.partisan ? ' <span style="font-size:10px;background:#f1f5f9;border:1px solid var(--border);border-radius:3px;padding:1px 5px;color:var(--muted)">' + p.partisan + '</span>' : '') + '</div><div style="font-size:11px;color:var(--faint)">' + p.date + '</div></div><div class="poll-margin ' + (pIsDem ? 'dem-color' : 'rep-color') + '">' + fmtMargin(p.margin) + '</div></div>' + pollBar(p.dem, p.rep);
+      const grade = getPollsterGrade(p.source);
+      const gradeColor = grade && grade.startsWith('A') ? '#16a34a' : grade && grade.startsWith('B') ? '#d97706' : grade ? '#dc2626' : '#94a3b8';
+      pRow.innerHTML = '<div class="poll-header"><div><div style="font-size:13px;color:var(--text)">' + p.source + (p.partisan ? ' <span style="font-size:10px;background:#f1f5f9;border:1px solid var(--border);border-radius:3px;padding:1px 5px;color:var(--muted)">' + p.partisan + '</span>' : '') + (grade ? ' <span style="font-size:10px;font-weight:700;color:' + gradeColor + '">' + grade + '</span>' : '') + '</div><div style="font-size:11px;color:var(--faint)">' + p.date + '</div></div><div class="poll-margin ' + (pIsDem ? 'dem-color' : 'rep-color') + '">' + fmtMargin(p.margin) + '</div></div>' + pollBar(p.dem, p.rep);
       mSection.appendChild(pRow);
     });
   } else if (detail.matchups.length > 0) {
