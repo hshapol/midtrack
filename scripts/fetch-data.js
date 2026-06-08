@@ -1,6 +1,14 @@
 import fetch from 'node-fetch';
 import { writeFileSync, readFileSync, mkdirSync } from 'fs';
-import { getPollsterWeight } from './pollster-weights.js';
+import { readFileSync } from 'fs';
+const _grades = JSON.parse(readFileSync(new URL('../data/pollster-grades.json', import.meta.url)));
+function getPollsterWeight(name) {
+  if (!name) return 0.7;
+  let grade = _grades[name];
+  if (!grade) { const e = Object.entries(_grades).find(([k]) => name.toLowerCase().includes(k.toLowerCase())); grade = e?.[1]; }
+  const map = {'A+':2.0,'A':1.8,'A-':1.6,'A/B':1.5,'B+':1.3,'B':1.1,'B/C':0.9,'C+':0.7,'C':0.5,'C/D':0.4,'D+':0.3,'D':0.2,'F':0};
+  return map[grade] ?? 0.7;
+}
 
 const TODAY = new Date().toISOString().split('T')[0];
 
