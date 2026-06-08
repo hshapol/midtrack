@@ -479,15 +479,7 @@ function renderMarkets(poly, kalshi) {
     '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 80px;gap:8px;align-items:center"><div style="font-size:12px;color:var(--rep)">Rep wins</div><div style="text-align:center;font-weight:700;color:var(--rep)">' + (row.polyR!=null?row.polyR+'%':'—') + '</div><div style="text-align:center;font-weight:700;color:var(--rep)">' + (row.kR!=null?row.kR+'%':'—') + '</div><div></div></div>';
           chamberCard.appendChild(inner);
   });
-  wrap.appendChild(chamberCard);
-
-  const houseChartCard = div('card');
-  houseChartCard.innerHTML = '<div class="card-title">Polymarket House Control</div><div style="position:relative;height:200px"><canvas id="mkt-chart-house"></canvas></div>';
-  wrap.appendChild(houseChartCard);
-
-  const senateChartCard = div('card');
-  senateChartCard.innerHTML = '<div class="card-title">Polymarket Senate Control</div><div style="position:relative;height:200px"><canvas id="mkt-chart-senate"></canvas></div>';
-  wrap.appendChild(senateChartCard);
+ wrap.appendChild(chamberCard);
 
   const bopCard = div('card');
   bopCard.innerHTML = '<div class="card-title">Balance of Power</div><div style="display:grid;grid-template-columns:140px 1fr 1fr;gap:8px;font-size:11px;color:var(--faint);font-weight:600;margin-bottom:8px"><div></div><div>Polymarket</div><div>Kalshi</div></div>';
@@ -497,17 +489,25 @@ function renderMarkets(poly, kalshi) {
     { label:'Republicans Sweep',  pct:poly.repSweepPct, kpct:kalshi.repSweepPct, d:false },
   ].forEach(function(item) {
     const row = div('');
-   row.style.cssText = 'display:grid;grid-template-columns:140px 1fr 1fr;gap:8px;align-items:center;margin-bottom:8px';
+    row.style.cssText = 'display:grid;grid-template-columns:140px 1fr 1fr;gap:8px;align-items:center;margin-bottom:8px';
     row.innerHTML = '<div style="font-size:12px;font-weight:500;color:' + (item.d?'var(--dem)':'var(--rep)') + '">' + item.label + '</div><div class="mkt-bar-wrap"><div class="mkt-bar-fill" style="width:' + (item.pct||0) + '%;background:' + (item.d?'#1d4ed8':'#b91c1c') + '">' + (item.pct!=null?item.pct+'%':'') + '</div></div><div class="mkt-bar-wrap"><div class="mkt-bar-fill" style="width:' + (item.kpct||0) + '%;background:' + (item.d?'#1d4ed8':'#b91c1c') + '">' + (item.kpct!=null?item.kpct+'%':'—') + '</div></div>';
     bopCard.appendChild(row);
   });
   wrap.appendChild(bopCard);
 
+  const houseChartCard = div('card');
+  houseChartCard.innerHTML = '<div class="card-title">Polymarket House Control</div><div style="position:relative;height:200px"><canvas id="mkt-chart-house"></canvas></div>';
+  wrap.appendChild(houseChartCard);
+
+  const senateChartCard = div('card');
+  senateChartCard.innerHTML = '<div class="card-title">Polymarket Senate Control</div><div style="position:relative;height:200px"><canvas id="mkt-chart-senate"></canvas></div>';
+  wrap.appendChild(senateChartCard);
+
   const sweepCard = div('card');
   sweepCard.innerHTML = '<div class="card-title">Dem Sweep Probability</div><div style="position:relative;height:200px"><canvas id="mkt-chart-sweep"></canvas></div>';
   wrap.appendChild(sweepCard);
 
-  if (HISTORY.length >= 2) {
+    if (HISTORY.length >= 2) {
     const dates = HISTORY.map(function(d) { return d.date.slice(5); });
     setTimeout(function() {
       const houseCtx = document.getElementById('mkt-chart-house');
