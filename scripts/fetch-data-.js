@@ -1,0 +1,260 @@
+import fetch from 'node-fetch';
+import { writeFileSync, readFileSync, mkdirSync } from 'fs';
+
+const TODAY = new Date().toISOString().split('T')[0];
+
+// ─── POLYMARKET (unchanged from original) ────────────────────────────────────
+
+async function fetchPolymarket() {
+  console.log('Fetching Polymarket...');
+  const markets = { houseD: null, senateR: null, splitPct: null, dSweepPct: null, repSweepPct: null };
+  const slugs = [
+    { key: 'house',   slug: 'which-party-will-win-the-house-in-2026' },
+    { key: 'senate',  slug: 'which-party-will-win-the-senate-in-2026' },
+    { key: 'balance', slug: 'balance-of-power-2026-midterms' },
+  ];
+  for (const { key, slug } of slugs) {
+    try {
+      const res = await fetch(`https://gamma-api.polymarket.com/events?slug=${slug}&limit=1`, {
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!res.ok) continue;
+      const data = await res.json();
+      if (!data?.length) continue;
+      const event = data[0];
+      if (key === 'house') {
+        const m = event.markets?.find(m => m.outcomePrices && (m.question?.toLowerCase().includes('democrat') || m.groupItemTitle?.toLowerCase().includes('democrat')));
+        if (m?.outcomePrices) markets.houseD = Math.round(parseFloat(JSON.parse(m.outcomePrices)[0]) * 100);
+      }
+      if (key === 'senate') {
+        const m = event.markets?.find(m => m.question?.toLowerCase().includes('republican') || m.groupItemTitle?.toLowerCase().includes('republican'));
+        if (m?.outcomePrices) markets.senateR = Math.round(parseFloat(JSON.parse(m.outcomePrices)[0]) * 100);
+      }
+      if (key === 'balance') {
+        for (const m of (event.markets || [])) {
+          const title = (m.question || m.groupItemTitle || '');
+          if (!m.outcomePrices) continue;
+          const pct = Math.round(parseFloat(JSON.parse(m.outcomePrices)[0]) * 100);
+          if (title.includes('R Senate, D House')) markets.splitPct = pct;
+          else if (title.includes('D Senate, D House')) markets.dSweepPct = pct;
+          else if (title.includes('R Senate, R House')) markets.repSweepPct = pct;
+        }
+      }
+    } catch (e) { console.error(`  Polymarket ${key} error:`, e.message); }
+  }
+  console.log('  Polymarket:', markets);
+  return markets;
+}
+
+// ─── VOTEHUB API ──────────────────────────────────────────────────────────────
+
+const STATE_SUBJECTS = {
+  'North Carolina': '2026 North Carolina',
+  'Maine':          '2026 Maine',
+  'Ohio':           '2026 Ohio',
+  'Michigan':       '2026 Michigan',
+  'Georgia':        '2026 Georgia',
+  'New Hampshire':  '2026 New Hampshire',
+  'Alaska':         '2026 Alaska',
+  'Texas':          '2026 Texas',
+  'Nebraska':       '2026 Nebraska',
+  'Iowa':           '2026 Iowa',
+};
+
+function getDemPct(answers) {
+  return answers.find(a => ['Dem', 'Democrat', 'Democratic'].includes(a.choice))?.pct ?? null;
+}
+function getRepPct(answers) {
+  return answers.find(a => ['Rep', 'Republican'].includes(a.choice))?.pct ?? null;
+}
+
+function computeAverage(polls) {
+  const valid = polls.filter(p => getDemPct(p.answers) !== null && getRepPct(p.answers) !== null);
+  if (!valid.length) return null;
+  const sorted = [...valid].sort((a, b) => new Date(b.end_date) - new Date(a.end_date));
+  const recent = sorted.slice(0, 10);
+  let wDem = 0, wRep = 0, wTotal = 0;
+  recent.forEach((p, i) => {
+    const w = 1 / (i + 1);
+    wDem   += getDemPct(p.answers) * w;
+    wRep   += getRepPct(p.answers) * w;
+    wTotal += w;
+  });
+  const dem    = +(wDem / wTotal).toFixed(1);
+  const rep    = +(wRep / wTotal).toFixed(1);
+  const margin = +(dem - rep).toFixed(1);
+  const newest = sorted[0];
+  const oldest = sorted[Math.min(sorted.length, 5) - 1];
+  const fmt    = d => d.slice(5).replace('-', '/');
+  return {
+    source:    'VoteHub Avg',
+    dem, rep,
+    margin:    margin.toString(),
+    date:      fmt(newest.end_date),
+    dateRange: fmt(oldest.end_date) + ' - ' + fmt(newest.end_date),
+  };
+}
+
+async function fetchVoteHub(existingData) {
+  console.log('Fetching VoteHub API...');
+  try {
+    const res = await fetch('https://api.votehub.com/polls', {
+      headers: { 'Accept': 'application/json', 'User-Agent': 'midtrack-bot/1.0' }
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const all = await res.json();
+    console.log(`  VoteHub: ${all.length} total polls`);
+
+    // ── Senate polls ──────────────────────────────────────────────────────────
+    const senatePolls = {};
+    for (const [stateName, subject] of Object.entries(STATE_SUBJECTS)) {
+      const polls = all
+        .filter(p => p.poll_type === 'us-senator' && p.subject === subject)
+        .sort((a, b) => new Date(b.end_date) - new Date(a.end_date));
+
+      if (!polls.length) {
+        console.log(`  ${stateName}: no polls — preserving existing`);
+        senatePolls[stateName] = existingData?.senatePolls?.[stateName] || { avg: null, polls: [] };
+        continue;
+      }
+
+      console.log(`  ${stateName}: ${polls.length} polls (latest ${polls[0].end_date})`);
+      const avg = computeAverage(polls);
+      const fmt = d => d.slice(5).replace('-', '/');
+
+      const pollsArr = polls.slice(0, 5).map(p => {
+        const dem = getDemPct(p.answers);
+        const rep = getRepPct(p.answers);
+        if (dem === null || rep === null) return null;
+        return {
+          source: p.pollster,
+          date:   p.start_date ? fmt(p.start_date) + ' - ' + fmt(p.end_date) : fmt(p.end_date),
+          dem, rep,
+          margin: (+(dem - rep).toFixed(1)).toString(),
+        };
+      }).filter(Boolean);
+
+      senatePolls[stateName] = {
+        avg:   avg || existingData?.senatePolls?.[stateName]?.avg || null,
+        polls: pollsArr.length ? pollsArr : (existingData?.senatePolls?.[stateName]?.polls || []),
+        rtwh:  existingData?.senatePolls?.[stateName]?.rtwh || null,
+      };
+    }
+
+    // ── Generic ballot ────────────────────────────────────────────────────────
+    const gbPolls = all
+      .filter(p => p.poll_type === 'generic-ballot' && p.subject === '2026')
+      .sort((a, b) => new Date(b.end_date) - new Date(a.end_date));
+
+    console.log(`  Generic ballot: ${gbPolls.length} polls`);
+    const gbAvg = computeAverage(gbPolls);
+    const gbArr = gbPolls.slice(0, 6).map(p => {
+      const dem = getDemPct(p.answers);
+      const rep = getRepPct(p.answers);
+      if (dem === null || rep === null) return null;
+      return {
+        source: p.pollster,
+        date:   p.end_date.slice(5).replace('-', '/'),
+        dem, rep,
+        margin: (+(dem - rep).toFixed(1)).toString(),
+      };
+    }).filter(Boolean);
+
+    const genericBallot = {
+      avg:   gbAvg || existingData?.genericBallot?.avg || null,
+      polls: gbArr.length ? gbArr : (existingData?.genericBallot?.polls || []),
+    };
+
+    // ── Trump approval (2026, non-partisan only) ──────────────────────────────
+    const trumpPolls = all
+      .filter(p => p.poll_type === 'approval' && p.subject === 'Donald Trump' && p.end_date >= '2026-01-01' && !p.partisan)
+      .sort((a, b) => new Date(b.end_date) - new Date(a.end_date));
+
+    console.log(`  Trump approval (2026): ${trumpPolls.length} polls`);
+
+    let trumpApproval = existingData?.trumpApproval || {};
+    if (trumpPolls.length) {
+      const recent = trumpPolls.slice(0, 5);
+      let appSum = 0, disSum = 0, count = 0;
+      recent.forEach(p => {
+        const app = p.answers.find(a => a.choice === 'Approve')?.pct;
+        const dis = p.answers.find(a => a.choice === 'Disapprove')?.pct;
+        if (app != null && dis != null) { appSum += app; disSum += dis; count++; }
+      });
+      if (count) {
+        const approve    = +(appSum / count).toFixed(1);
+        const disapprove = +(disSum / count).toFixed(1);
+        trumpApproval    = { approve, disapprove, net: +(approve - disapprove).toFixed(1) };
+      }
+    }
+
+    return { senatePolls, genericBallot, trumpApproval };
+
+  } catch (e) {
+    console.error('  VoteHub error:', e.message);
+    return null;
+  }
+}
+
+// ─── MAIN ─────────────────────────────────────────────────────────────────────
+
+async function main() {
+  console.log(`\n=== Midtrack Fetch — ${TODAY} ===\n`);
+
+  let existingData = {};
+  try { existingData = JSON.parse(readFileSync('data/data.json', 'utf8')); }
+  catch { console.log('  No existing data.json'); }
+
+  const [polymarket, vhResult] = await Promise.all([
+    fetchPolymarket(),
+    fetchVoteHub(existingData),
+  ]);
+
+  const todayEntry = {
+    date:       TODAY,
+    fetchedAt:  new Date().toISOString(),
+    markets: {
+      polymarket,
+      kalshi: existingData?.markets?.kalshi || { houseD: null, senateR: null },
+    },
+    genericBallot:  vhResult?.genericBallot  || existingData?.genericBallot  || { polls: [], avg: null },
+    senatePolls:    vhResult?.senatePolls     || existingData?.senatePolls    || {},
+    senateRatings:  existingData?.senateRatings  || {},
+    trumpApproval:  vhResult?.trumpApproval   || existingData?.trumpApproval  || {},
+    nateApproval:   existingData?.nateApproval   || [],
+  };
+
+  mkdirSync('data', { recursive: true });
+  writeFileSync('data/data.json', JSON.stringify({ lastUpdated: TODAY, ...todayEntry }, null, 2));
+  console.log('\n✅ data.json written');
+
+  let history = [];
+  try { history = JSON.parse(readFileSync('data/history.json', 'utf8')); }
+  catch { console.log('  Starting fresh history'); }
+
+  const snapshot = {
+    date:          TODAY,
+    markets:       todayEntry.markets,
+    genericBallot: todayEntry.genericBallot,
+    senatePolls:   todayEntry.senatePolls,
+    trumpApproval: todayEntry.trumpApproval,
+  };
+  const idx = history.findIndex(e => e.date === TODAY);
+  if (idx >= 0) history[idx] = snapshot;
+  else history.push(snapshot);
+
+  writeFileSync('data/history.json', JSON.stringify(history, null, 2));
+  console.log('✅ history.json updated');
+
+  console.log(`\n=== Summary — ${history.length} days tracked ===`);
+  console.log(`Polymarket — House D: ${polymarket.houseD}% / Senate R: ${polymarket.senateR}%`);
+  if (vhResult) {
+    Object.entries(vhResult.senatePolls).forEach(([s, d]) => {
+      if (d.avg) console.log(`${s}: ${d.avg.margin} (${d.polls.length} polls)`);
+    });
+    console.log(`Generic ballot: ${vhResult.genericBallot.avg?.margin || 'n/a'}`);
+    console.log(`Trump approval: ${vhResult.trumpApproval?.approve}% / ${vhResult.trumpApproval?.disapprove}%`);
+  }
+}
+
+main().catch(err => { console.error('Fatal error:', err); process.exit(1); });
