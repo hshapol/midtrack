@@ -460,10 +460,13 @@ function renderSenatePolling() {
   }
   content.appendChild(mSection);
 
-  if (detail.primary) {
-    const pSection = div('');
-    pSection.innerHTML = '<div class="card-title">' + (detail.primary.label || 'Primary') + '</div><div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">' + detail.primary.result + '</span><span style="font-size:14px;font-weight:700;color:var(--dem)">' + detail.primary.margin + '</span></div>';
-    content.appendChild(pSection);
+if (detail.primary && detail.primaryDate) {
+    const primaryPast = new Date(detail.primaryDate.replace(/[^0-9\-\/]/g, ' ').trim()) < new Date();
+    if (!primaryPast) {
+      const pSection = div('');
+      pSection.innerHTML = '<div class="card-title">' + (detail.primary.label || 'Primary') + '</div><div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">' + detail.primary.result + '</span><span style="font-size:14px;font-weight:700;color:var(--dem)">' + detail.primary.margin + '</span></div>';
+      content.appendChild(pSection);
+    }
   }
 
   outer.appendChild(content);
