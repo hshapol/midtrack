@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2026-06-08",
-  "date": "2026-06-08",
-  "fetchedAt": "2026-06-08T21:57:50.444Z",
+  "lastUpdated": "2026-06-09",
+  "date": "2026-06-09",
+  "fetchedAt": "2026-06-09T11:54:49.323Z",
   "markets": {
     "polymarket": {
       "houseD": 82,
-      "senateR": 56,
+      "senateR": 55,
       "splitPct": 37,
       "dSweepPct": 45,
       "repSweepPct": 18
@@ -16,7 +16,7 @@
       "dSweepPct": 40,
       "splitPct": 35,
       "repSweepPct": 20,
-      "updatedDate": "2026-06-08"
+      "updatedDate": "2026-06-09"
     }
   },
   "genericBallot": {
@@ -77,11 +77,11 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49.3,
-        "rep": 38.9,
-        "margin": "10.4",
+        "dem": 49.2,
+        "rep": 39.1,
+        "margin": "10.1",
         "date": "05/11",
-        "dateRange": "07/30 - 05/11"
+        "dateRange": "02/04 - 05/11"
       },
       "polls": [
         {
@@ -170,11 +170,11 @@
     "Maine": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.6,
-        "rep": 42.1,
-        "margin": "6.5",
+        "dem": 48.9,
+        "rep": 42,
+        "margin": "6.9",
         "date": "05/25",
-        "dateRange": "10/10 - 05/25"
+        "dateRange": "02/16 - 05/25"
       },
       "polls": [
         {
@@ -239,11 +239,11 @@
     "Ohio (Special)": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 50.3,
-        "rep": 46.5,
-        "margin": "3.8",
+        "dem": 50.2,
+        "rep": 46.6,
+        "margin": "3.6",
         "date": "06/01",
-        "dateRange": "12/08 - 06/01"
+        "dateRange": "02/22 - 06/01"
       },
       "polls": [
         {
@@ -429,7 +429,7 @@
         "rep": 43.7,
         "margin": "5.9",
         "date": "04/09",
-        "dateRange": "09/12 - 04/09"
+        "dateRange": "03/02 - 04/09"
       },
       "polls": [
         {
@@ -463,10 +463,10 @@
       "avg": {
         "source": "SB-style Avg",
         "dem": 45.7,
-        "rep": 43.1,
-        "margin": "2.6",
+        "rep": 43.2,
+        "margin": "2.5",
         "date": "03/23",
-        "dateRange": "09/04 - 03/23"
+        "dateRange": "12/28 - 03/23"
       },
       "polls": [
         {
@@ -592,11 +592,11 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 43.7,
+        "dem": 43.5,
         "rep": 42.2,
-        "margin": "1.5",
+        "margin": "1.3",
         "date": "06/04",
-        "dateRange": "09/24 - 06/04"
+        "dateRange": "01/12 - 06/04"
       },
       "polls": [
         {
@@ -696,7 +696,14 @@
       "rtwh": null
     },
     "Iowa": {
-      "avg": null,
+      "avg": {
+        "source": "SB-style Avg",
+        "dem": 45.6,
+        "rep": 44.9,
+        "margin": "0.7",
+        "date": "04/09",
+        "dateRange": "01/11 - 04/09"
+      },
       "polls": [
         {
           "source": "Change Research",
