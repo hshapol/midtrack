@@ -1,10 +1,10 @@
 {
-  "lastUpdated": "2026-06-11",
-  "date": "2026-06-11",
-  "fetchedAt": "2026-06-11T12:38:28.552Z",
+  "lastUpdated": "2026-06-12",
+  "date": "2026-06-12",
+  "fetchedAt": "2026-06-12T12:12:57.692Z",
   "markets": {
     "polymarket": {
-      "houseD": 82,
+      "houseD": 83,
       "senateR": 56,
       "splitPct": 35,
       "dSweepPct": 44,
@@ -12,19 +12,19 @@
     },
     "kalshi": {
       "houseD": 78,
-      "senateR": 58,
+      "senateR": 57,
       "dSweepPct": 40,
       "splitPct": 36,
       "repSweepPct": 21,
-      "updatedDate": "2026-06-11"
+      "updatedDate": "2026-06-12"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 47.5,
-      "rep": 41.5,
-      "margin": "6",
+      "dem": 47.7,
+      "rep": 41.6,
+      "margin": "6.1",
       "date": "06/08",
       "dateRange": "12/16 - 06/08"
     },
@@ -58,17 +58,17 @@
         "margin": "4"
       },
       {
+        "source": "Emerson College",
+        "date": "06/08",
+        "dem": 50.3,
+        "rep": 39.5,
+        "margin": "10.8"
+      },
+      {
         "source": "Morning Consult",
         "date": "06/07",
         "dem": 46,
         "rep": 42,
-        "margin": "4"
-      },
-      {
-        "source": "RMG Research",
-        "date": "06/04",
-        "dem": 49,
-        "rep": 45,
         "margin": "4"
       }
     ]
@@ -772,8 +772,8 @@
   },
   "trumpApproval": {
     "approve": 38.2,
-    "disapprove": 59.6,
-    "net": -21.4
+    "disapprove": 59.4,
+    "net": -21.2
   },
   "nateApproval": []
 }
