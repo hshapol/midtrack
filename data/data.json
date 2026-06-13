@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-06-12",
-  "date": "2026-06-12",
-  "fetchedAt": "2026-06-12T12:12:57.692Z",
+  "lastUpdated": "2026-06-13",
+  "date": "2026-06-13",
+  "fetchedAt": "2026-06-13T11:10:17.955Z",
   "markets": {
     "polymarket": {
       "houseD": 83,
@@ -12,11 +12,11 @@
     },
     "kalshi": {
       "houseD": 78,
-      "senateR": 57,
-      "dSweepPct": 40,
-      "splitPct": 36,
+      "senateR": 56,
+      "dSweepPct": 41,
+      "splitPct": 35,
       "repSweepPct": 21,
-      "updatedDate": "2026-06-12"
+      "updatedDate": "2026-06-13"
     }
   },
   "genericBallot": {
@@ -478,13 +478,21 @@
     "New Hampshire": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 45.7,
-        "rep": 43.2,
-        "margin": "2.5",
-        "date": "03/23",
-        "dateRange": "12/28 - 03/23"
+        "dem": 46.3,
+        "rep": 42.8,
+        "margin": "3.5",
+        "date": "04/21",
+        "dateRange": "12/28 - 04/21"
       },
       "polls": [
+        {
+          "source": "University of New Hampshire",
+          "date": "04/17 - 04/21",
+          "dem": 49,
+          "rep": 42,
+          "margin": "7",
+          "partisan": null
+        },
         {
           "source": "Emerson College",
           "date": "03/21 - 03/23",
@@ -555,14 +563,6 @@
           "dem": 46,
           "rep": 43,
           "margin": "3",
-          "partisan": null
-        },
-        {
-          "source": "1892 Polling",
-          "date": "09/02 - 09/04",
-          "dem": 45,
-          "rep": 43,
-          "margin": "2",
           "partisan": null
         }
       ],
@@ -771,9 +771,9 @@
     }
   },
   "trumpApproval": {
-    "approve": 38.2,
-    "disapprove": 59.4,
-    "net": -21.2
+    "approve": 37.8,
+    "disapprove": 59.8,
+    "net": -22
   },
   "nateApproval": []
 }
