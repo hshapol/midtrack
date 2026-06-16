@@ -1,34 +1,48 @@
 {
-  "lastUpdated": "2026-06-15",
-  "date": "2026-06-15",
-  "fetchedAt": "2026-06-15T14:59:24.421Z",
+  "lastUpdated": "2026-06-16",
+  "date": "2026-06-16",
+  "fetchedAt": "2026-06-16T13:24:48.945Z",
   "markets": {
     "polymarket": {
       "houseD": 83,
       "senateR": 56,
       "splitPct": 36,
-      "dSweepPct": 44,
-      "repSweepPct": 18
+      "dSweepPct": 43,
+      "repSweepPct": 20
     },
     "kalshi": {
-      "houseD": 77,
-      "senateR": 57,
+      "houseD": 76,
+      "senateR": 58,
       "dSweepPct": 40,
-      "splitPct": 35,
-      "repSweepPct": 22,
-      "updatedDate": "2026-06-15"
+      "splitPct": 34,
+      "repSweepPct": 23,
+      "updatedDate": "2026-06-16"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
       "dem": 47.7,
-      "rep": 41.6,
-      "margin": "6.1",
-      "date": "06/08",
-      "dateRange": "12/16 - 06/08"
+      "rep": 41.7,
+      "margin": "6",
+      "date": "06/13",
+      "dateRange": "01/15 - 06/13"
     },
     "polls": [
+      {
+        "source": "The Public Sentiment Institute",
+        "date": "06/13",
+        "dem": 50,
+        "rep": 41,
+        "margin": "9"
+      },
+      {
+        "source": "The Public Sentiment Institute",
+        "date": "06/13",
+        "dem": 43,
+        "rep": 34,
+        "margin": "9"
+      },
       {
         "source": "YouGov",
         "date": "06/08",
@@ -55,20 +69,6 @@
         "date": "06/08",
         "dem": 35,
         "rep": 31,
-        "margin": "4"
-      },
-      {
-        "source": "Emerson College",
-        "date": "06/08",
-        "dem": 50.3,
-        "rep": 39.5,
-        "margin": "10.8"
-      },
-      {
-        "source": "Morning Consult",
-        "date": "06/07",
-        "dem": 46,
-        "rep": 42,
         "margin": "4"
       }
     ]
@@ -98,6 +98,14 @@
           "dem": 50,
           "rep": 42,
           "margin": "8",
+          "partisan": null
+        },
+        {
+          "source": "Harper Polling",
+          "date": "03/22 - 03/23",
+          "dem": 48.9,
+          "rep": 41.1,
+          "margin": "7.8",
           "partisan": null
         },
         {
@@ -155,14 +163,6 @@
           "rep": 39.1,
           "margin": "8.2",
           "partisan": null
-        },
-        {
-          "source": "Victory Insights",
-          "date": "07/28 - 07/30",
-          "dem": 44.4,
-          "rep": 43.5,
-          "margin": "0.9",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -170,13 +170,21 @@
     "Maine": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.7,
-        "rep": 43.6,
-        "margin": "5.1",
-        "date": "06/08",
-        "dateRange": "02/16 - 06/08"
+        "dem": 48.1,
+        "rep": 43.9,
+        "margin": "4.2",
+        "date": "06/11",
+        "dateRange": "02/16 - 06/11"
       },
       "polls": [
+        {
+          "source": "Quantus Insights",
+          "date": "06/09 - 06/11",
+          "dem": 46,
+          "rep": 45,
+          "margin": "1",
+          "partisan": null
+        },
         {
           "source": "The Public Sentiment Institute",
           "date": "06/08 - 06/08",
@@ -239,14 +247,6 @@
           "dem": 47.8,
           "rep": 40.6,
           "margin": "7.2",
-          "partisan": null
-        },
-        {
-          "source": "Pan Atlantic SMS Group",
-          "date": "02/13 - 03/02",
-          "dem": 44,
-          "rep": 40,
-          "margin": "4",
           "partisan": null
         }
       ],
@@ -571,13 +571,29 @@
     "Alaska": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 52,
-        "rep": 48,
-        "margin": "4",
-        "date": "04/19",
-        "dateRange": "04/19 - 04/19"
+        "dem": 49.4,
+        "rep": 44.2,
+        "margin": "5.2",
+        "date": "06/07",
+        "dateRange": "06/07 - 06/07"
       },
       "polls": [
+        {
+          "source": "Alaska Survey Research",
+          "date": "06/04 - 06/07",
+          "dem": 49.4,
+          "rep": 44.2,
+          "margin": "5.2",
+          "partisan": null
+        },
+        {
+          "source": "Alaska Survey Research",
+          "date": "05/14 - 05/17",
+          "dem": 48.4,
+          "rep": 43.8,
+          "margin": "4.6",
+          "partisan": null
+        },
         {
           "source": "Alaska Survey Research",
           "date": "04/16 - 04/19",
@@ -600,6 +616,22 @@
           "dem": 48,
           "rep": 46.4,
           "margin": "1.6",
+          "partisan": null
+        },
+        {
+          "source": "Alaska Survey Research",
+          "date": "07/29 - 08/01",
+          "dem": 42.5,
+          "rep": 46.7,
+          "margin": "-4.2",
+          "partisan": null
+        },
+        {
+          "source": "Data for Progress",
+          "date": "07/21 - 07/27",
+          "dem": 45,
+          "rep": 46,
+          "margin": "-1",
           "partisan": null
         }
       ],
