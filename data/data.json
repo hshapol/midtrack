@@ -1,34 +1,62 @@
 {
-  "lastUpdated": "2026-06-16",
-  "date": "2026-06-16",
-  "fetchedAt": "2026-06-16T13:24:48.945Z",
+  "lastUpdated": "2026-06-17",
+  "date": "2026-06-17",
+  "fetchedAt": "2026-06-17T12:46:52.705Z",
   "markets": {
     "polymarket": {
       "houseD": 83,
       "senateR": 56,
       "splitPct": 36,
       "dSweepPct": 43,
-      "repSweepPct": 20
+      "repSweepPct": 16
     },
     "kalshi": {
       "houseD": 76,
       "senateR": 58,
       "dSweepPct": 40,
-      "splitPct": 34,
+      "splitPct": 35,
       "repSweepPct": 23,
-      "updatedDate": "2026-06-16"
+      "updatedDate": "2026-06-17"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 47.7,
-      "rep": 41.7,
-      "margin": "6",
-      "date": "06/13",
-      "dateRange": "01/15 - 06/13"
+      "dem": 47.6,
+      "rep": 41.8,
+      "margin": "5.8",
+      "date": "06/15",
+      "dateRange": "01/17 - 06/15"
     },
     "polls": [
+      {
+        "source": "Ipsos",
+        "date": "06/15",
+        "dem": 41,
+        "rep": 38,
+        "margin": "3"
+      },
+      {
+        "source": "Ipsos",
+        "date": "06/15",
+        "dem": 35,
+        "rep": 31,
+        "margin": "4"
+      },
+      {
+        "source": "YouGov",
+        "date": "06/15",
+        "dem": 46,
+        "rep": 44,
+        "margin": "2"
+      },
+      {
+        "source": "YouGov",
+        "date": "06/15",
+        "dem": 39,
+        "rep": 36,
+        "margin": "3"
+      },
       {
         "source": "The Public Sentiment Institute",
         "date": "06/13",
@@ -42,34 +70,6 @@
         "dem": 43,
         "rep": 34,
         "margin": "9"
-      },
-      {
-        "source": "YouGov",
-        "date": "06/08",
-        "dem": 45,
-        "rep": 41,
-        "margin": "4"
-      },
-      {
-        "source": "YouGov",
-        "date": "06/08",
-        "dem": 37,
-        "rep": 33,
-        "margin": "4"
-      },
-      {
-        "source": "Ipsos",
-        "date": "06/08",
-        "dem": 41,
-        "rep": 37,
-        "margin": "4"
-      },
-      {
-        "source": "Ipsos",
-        "date": "06/08",
-        "dem": 35,
-        "rep": 31,
-        "margin": "4"
       }
     ]
   },
@@ -170,13 +170,21 @@
     "Maine": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.1,
-        "rep": 43.9,
-        "margin": "4.2",
-        "date": "06/11",
-        "dateRange": "02/16 - 06/11"
+        "dem": 48,
+        "rep": 44.2,
+        "margin": "3.8",
+        "date": "06/14",
+        "dateRange": "02/16 - 06/14"
       },
       "polls": [
+        {
+          "source": "Wick",
+          "date": "06/11 - 06/14",
+          "dem": 47.6,
+          "rep": 45.4,
+          "margin": "2.2",
+          "partisan": null
+        },
         {
           "source": "Quantus Insights",
           "date": "06/09 - 06/11",
@@ -803,9 +811,9 @@
     }
   },
   "trumpApproval": {
-    "approve": 37.8,
-    "disapprove": 59.8,
-    "net": -22
+    "approve": 39.6,
+    "disapprove": 58,
+    "net": -18.4
   },
   "nateApproval": []
 }
