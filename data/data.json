@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-06-18",
-  "date": "2026-06-18",
-  "fetchedAt": "2026-06-18T12:18:47.505Z",
+  "lastUpdated": "2026-06-19",
+  "date": "2026-06-19",
+  "fetchedAt": "2026-06-19T12:42:23.381Z",
   "markets": {
     "polymarket": {
       "houseD": 81,
       "senateR": 56,
-      "splitPct": 36,
+      "splitPct": 37,
       "dSweepPct": 42,
-      "repSweepPct": 18
+      "repSweepPct": 19
     },
     "kalshi": {
       "houseD": 77,
       "senateR": 58,
-      "dSweepPct": 40,
+      "dSweepPct": 39,
       "splitPct": 34,
-      "repSweepPct": 22,
-      "updatedDate": "2026-06-18"
+      "repSweepPct": 23,
+      "updatedDate": "2026-06-19"
     }
   },
   "genericBallot": {
@@ -58,17 +58,17 @@
         "margin": "3"
       },
       {
-        "source": "The Public Sentiment Institute",
-        "date": "06/13",
+        "source": "Echelon Insights",
+        "date": "06/14",
         "dem": 50,
-        "rep": 41,
-        "margin": "9"
+        "rep": 44,
+        "margin": "6"
       },
       {
         "source": "The Public Sentiment Institute",
         "date": "06/13",
-        "dem": 43,
-        "rep": 34,
+        "dem": 50,
+        "rep": 41,
         "margin": "9"
       }
     ]
@@ -811,9 +811,9 @@
     }
   },
   "trumpApproval": {
-    "approve": 39.6,
-    "disapprove": 58,
-    "net": -18.4
+    "approve": 39,
+    "disapprove": 58.8,
+    "net": -19.8
   },
   "nateApproval": []
 }
