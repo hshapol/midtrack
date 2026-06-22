@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-06-21",
-  "date": "2026-06-21",
-  "fetchedAt": "2026-06-21T11:40:22.991Z",
+  "lastUpdated": "2026-06-22",
+  "date": "2026-06-22",
+  "fetchedAt": "2026-06-22T14:30:03.374Z",
   "markets": {
     "polymarket": {
       "houseD": 81,
-      "senateR": 56,
+      "senateR": 57,
       "splitPct": 37,
-      "dSweepPct": 42,
+      "dSweepPct": 43,
       "repSweepPct": 19
     },
     "kalshi": {
-      "houseD": 77,
+      "houseD": 78,
       "senateR": 58,
       "dSweepPct": 39,
       "splitPct": 35,
       "repSweepPct": 22,
-      "updatedDate": "2026-06-21"
+      "updatedDate": "2026-06-22"
     }
   },
   "genericBallot": {
@@ -35,6 +35,20 @@
         "dem": 47,
         "rep": 43,
         "margin": "4"
+      },
+      {
+        "source": "The Bullfinch Group",
+        "date": "06/16",
+        "dem": 44,
+        "rep": 36,
+        "margin": "8"
+      },
+      {
+        "source": "The Bullfinch Group",
+        "date": "06/16",
+        "dem": 43,
+        "rep": 34,
+        "margin": "9"
       },
       {
         "source": "Ipsos",
@@ -56,20 +70,6 @@
         "dem": 46,
         "rep": 44,
         "margin": "2"
-      },
-      {
-        "source": "YouGov",
-        "date": "06/15",
-        "dem": 39,
-        "rep": 36,
-        "margin": "3"
-      },
-      {
-        "source": "Echelon Insights",
-        "date": "06/14",
-        "dem": 50,
-        "rep": 44,
-        "margin": "6"
       }
     ]
   },
@@ -811,9 +811,9 @@
     }
   },
   "trumpApproval": {
-    "approve": 39.8,
-    "disapprove": 59,
-    "net": -19.2
+    "approve": 40.6,
+    "disapprove": 58.2,
+    "net": -17.6
   },
   "nateApproval": []
 }
