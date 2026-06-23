@@ -1,14 +1,14 @@
 {
-  "lastUpdated": "2026-06-22",
-  "date": "2026-06-22",
-  "fetchedAt": "2026-06-22T14:30:03.374Z",
+  "lastUpdated": "2026-06-23",
+  "date": "2026-06-23",
+  "fetchedAt": "2026-06-23T11:54:40.728Z",
   "markets": {
     "polymarket": {
-      "houseD": 81,
-      "senateR": 57,
+      "houseD": 82,
+      "senateR": 56,
       "splitPct": 37,
       "dSweepPct": 43,
-      "repSweepPct": 19
+      "repSweepPct": 18
     },
     "kalshi": {
       "houseD": 78,
@@ -16,7 +16,7 @@
       "dSweepPct": 39,
       "splitPct": 35,
       "repSweepPct": 22,
-      "updatedDate": "2026-06-22"
+      "updatedDate": "2026-06-23"
     }
   },
   "genericBallot": {
@@ -811,9 +811,9 @@
     }
   },
   "trumpApproval": {
-    "approve": 40.6,
-    "disapprove": 58.2,
-    "net": -17.6
+    "approve": 36.8,
+    "disapprove": 61.2,
+    "net": -24.4
   },
   "nateApproval": []
 }
