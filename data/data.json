@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-06-23",
-  "date": "2026-06-23",
-  "fetchedAt": "2026-06-23T11:54:40.728Z",
+  "lastUpdated": "2026-06-24",
+  "date": "2026-06-24",
+  "fetchedAt": "2026-06-24T11:40:58.345Z",
   "markets": {
     "polymarket": {
-      "houseD": 82,
-      "senateR": 56,
+      "houseD": 81,
+      "senateR": 57,
       "splitPct": 37,
       "dSweepPct": 43,
-      "repSweepPct": 18
+      "repSweepPct": 19
     },
     "kalshi": {
       "houseD": 78,
       "senateR": 58,
       "dSweepPct": 39,
-      "splitPct": 35,
+      "splitPct": 37,
       "repSweepPct": 22,
-      "updatedDate": "2026-06-23"
+      "updatedDate": "2026-06-24"
     }
   },
   "genericBallot": {
@@ -77,13 +77,21 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49.2,
-        "rep": 39.1,
-        "margin": "10.1",
-        "date": "05/11",
-        "dateRange": "02/04 - 05/11"
+        "dem": 48.6,
+        "rep": 36.6,
+        "margin": "12",
+        "date": "06/10",
+        "dateRange": "02/04 - 06/10"
       },
       "polls": [
+        {
+          "source": "YouGov",
+          "date": "06/01 - 06/10",
+          "dem": 48,
+          "rep": 34,
+          "margin": "14",
+          "partisan": null
+        },
         {
           "source": "Harper Polling",
           "date": "05/10 - 05/11",
@@ -154,14 +162,6 @@
           "dem": 46,
           "rep": 42,
           "margin": "4",
-          "partisan": null
-        },
-        {
-          "source": "Harper Polling",
-          "date": "08/11 - 08/12",
-          "dem": 47.3,
-          "rep": 39.1,
-          "margin": "8.2",
           "partisan": null
         }
       ],
@@ -648,13 +648,21 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 44.2,
-        "rep": 42.5,
-        "margin": "1.7",
-        "date": "06/04",
-        "dateRange": "01/12 - 06/04"
+        "dem": 43.4,
+        "rep": 42.7,
+        "margin": "0.7",
+        "date": "06/12",
+        "dateRange": "01/12 - 06/12"
       },
       "polls": [
+        {
+          "source": "Texas Politics Project at the University of Texas/YouGov",
+          "date": "06/05 - 06/12",
+          "dem": 42,
+          "rep": 43,
+          "margin": "-1",
+          "partisan": null
+        },
         {
           "source": "Quantus Insights",
           "date": "06/03 - 06/04",
@@ -717,14 +725,6 @@
           "dem": 45.6,
           "rep": 45.6,
           "margin": "0",
-          "partisan": null
-        },
-        {
-          "source": "University of Houston/Texas Southern University",
-          "date": "09/19 - 10/01",
-          "dem": 46,
-          "rep": 49,
-          "margin": "-3",
           "partisan": null
         }
       ],
@@ -811,9 +811,9 @@
     }
   },
   "trumpApproval": {
-    "approve": 36.8,
-    "disapprove": 61.2,
-    "net": -24.4
+    "approve": 34.6,
+    "disapprove": 62.2,
+    "net": -27.6
   },
   "nateApproval": []
 }
