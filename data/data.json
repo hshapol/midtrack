@@ -1,75 +1,75 @@
 {
-  "lastUpdated": "2026-06-25",
-  "date": "2026-06-25",
-  "fetchedAt": "2026-06-25T11:34:47.127Z",
+  "lastUpdated": "2026-06-26",
+  "date": "2026-06-26",
+  "fetchedAt": "2026-06-26T11:40:45.475Z",
   "markets": {
     "polymarket": {
-      "houseD": 81,
+      "houseD": 83,
       "senateR": 57,
       "splitPct": 37,
       "dSweepPct": 43,
-      "repSweepPct": 20
+      "repSweepPct": 19
     },
     "kalshi": {
-      "houseD": 78,
+      "houseD": 80,
       "senateR": 59,
       "dSweepPct": 39,
       "splitPct": 37,
-      "repSweepPct": 22,
-      "updatedDate": "2026-06-25"
+      "repSweepPct": 21,
+      "updatedDate": "2026-06-26"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 47.6,
-      "rep": 41.9,
-      "margin": "5.7",
-      "date": "06/17",
-      "dateRange": "01/17 - 06/17"
+      "dem": 47.9,
+      "rep": 41.8,
+      "margin": "6.1",
+      "date": "06/22",
+      "dateRange": "01/17 - 06/22"
     },
     "polls": [
       {
-        "source": "Quantus Insights",
-        "date": "06/17",
-        "dem": 47,
+        "source": "YouGov",
+        "date": "06/22",
+        "dem": 45,
         "rep": 43,
-        "margin": "4"
+        "margin": "2"
       },
       {
-        "source": "The Bullfinch Group",
-        "date": "06/16",
-        "dem": 44,
-        "rep": 36,
-        "margin": "8"
-      },
-      {
-        "source": "The Bullfinch Group",
-        "date": "06/16",
-        "dem": 43,
-        "rep": 34,
-        "margin": "9"
-      },
-      {
-        "source": "Ipsos",
-        "date": "06/15",
-        "dem": 41,
-        "rep": 38,
+        "source": "YouGov",
+        "date": "06/22",
+        "dem": 38,
+        "rep": 35,
         "margin": "3"
       },
       {
         "source": "Ipsos",
-        "date": "06/15",
-        "dem": 35,
-        "rep": 31,
-        "margin": "4"
+        "date": "06/22",
+        "dem": 41,
+        "rep": 36,
+        "margin": "5"
       },
       {
-        "source": "YouGov",
-        "date": "06/15",
+        "source": "Echelon Insights",
+        "date": "06/22",
+        "dem": 51,
+        "rep": 45,
+        "margin": "6"
+      },
+      {
+        "source": "Verasight",
+        "date": "06/22",
+        "dem": 50,
+        "rep": 43,
+        "margin": "7"
+      },
+      {
+        "source": "Morning Consult",
+        "date": "06/22",
         "dem": 46,
-        "rep": 44,
-        "margin": "2"
+        "rep": 42,
+        "margin": "4"
       }
     ]
   },
@@ -263,13 +263,21 @@
     "Ohio (Special)": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 50.2,
-        "rep": 46.6,
-        "margin": "3.6",
-        "date": "06/01",
-        "dateRange": "02/22 - 06/01"
+        "dem": 49.6,
+        "rep": 46.1,
+        "margin": "3.5",
+        "date": "06/16",
+        "dateRange": "02/22 - 06/16"
       },
       "polls": [
+        {
+          "source": "Fabrizio Ward/Impact Research",
+          "date": "06/14 - 06/16",
+          "dem": 48,
+          "rep": 45,
+          "margin": "3",
+          "partisan": null
+        },
         {
           "source": "Beacon Research/Shaw & Co. Research",
           "date": "05/28 - 06/01",
@@ -340,14 +348,6 @@
           "dem": 43.7,
           "rep": 49.5,
           "margin": "-5.8",
-          "partisan": null
-        },
-        {
-          "source": "Bowling Green State University/YouGov",
-          "date": "04/18 - 04/24",
-          "dem": 46,
-          "rep": 49,
-          "margin": "-3",
           "partisan": null
         }
       ],
