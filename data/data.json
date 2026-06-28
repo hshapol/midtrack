@@ -1,10 +1,10 @@
 {
-  "lastUpdated": "2026-06-27",
-  "date": "2026-06-27",
-  "fetchedAt": "2026-06-27T10:54:18.118Z",
+  "lastUpdated": "2026-06-28",
+  "date": "2026-06-28",
+  "fetchedAt": "2026-06-28T11:02:05.463Z",
   "markets": {
     "polymarket": {
-      "houseD": 84,
+      "houseD": 83,
       "senateR": 57,
       "splitPct": 38,
       "dSweepPct": 43,
@@ -16,7 +16,7 @@
       "dSweepPct": 39,
       "splitPct": 37,
       "repSweepPct": 21,
-      "updatedDate": "2026-06-27"
+      "updatedDate": "2026-06-28"
     }
   },
   "genericBallot": {
@@ -486,11 +486,11 @@
     "New Hampshire": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 46.3,
-        "rep": 42.8,
-        "margin": "3.5",
+        "dem": 46.4,
+        "rep": 43,
+        "margin": "3.4",
         "date": "04/21",
-        "dateRange": "12/28 - 04/21"
+        "dateRange": "01/29 - 04/21"
       },
       "polls": [
         {
