@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-06-28",
-  "date": "2026-06-28",
-  "fetchedAt": "2026-06-28T11:02:05.463Z",
+  "lastUpdated": "2026-06-29",
+  "date": "2026-06-29",
+  "fetchedAt": "2026-06-29T13:00:12.351Z",
   "markets": {
     "polymarket": {
       "houseD": 83,
       "senateR": 57,
       "splitPct": 38,
-      "dSweepPct": 43,
-      "repSweepPct": 19
+      "dSweepPct": 44,
+      "repSweepPct": 18
     },
     "kalshi": {
       "houseD": 80,
       "senateR": 59,
       "dSweepPct": 39,
       "splitPct": 37,
-      "repSweepPct": 21,
-      "updatedDate": "2026-06-28"
+      "repSweepPct": 20,
+      "updatedDate": "2026-06-29"
     }
   },
   "genericBallot": {
