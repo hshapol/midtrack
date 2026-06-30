@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-06-29",
-  "date": "2026-06-29",
-  "fetchedAt": "2026-06-29T13:00:12.351Z",
+  "lastUpdated": "2026-06-30",
+  "date": "2026-06-30",
+  "fetchedAt": "2026-06-30T11:40:39.175Z",
   "markets": {
     "polymarket": {
       "houseD": 83,
       "senateR": 57,
-      "splitPct": 38,
-      "dSweepPct": 44,
-      "repSweepPct": 18
+      "splitPct": 39,
+      "dSweepPct": 43,
+      "repSweepPct": 17
     },
     "kalshi": {
-      "houseD": 80,
+      "houseD": 81,
       "senateR": 59,
       "dSweepPct": 39,
-      "splitPct": 37,
-      "repSweepPct": 20,
-      "updatedDate": "2026-06-29"
+      "splitPct": 38,
+      "repSweepPct": 17,
+      "updatedDate": "2026-06-30"
     }
   },
   "genericBallot": {
@@ -170,13 +170,21 @@
     "Maine": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48,
-        "rep": 44.2,
-        "margin": "3.8",
-        "date": "06/14",
-        "dateRange": "02/16 - 06/14"
+        "dem": 48.1,
+        "rep": 44.5,
+        "margin": "3.6",
+        "date": "06/26",
+        "dateRange": "02/16 - 06/26"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "06/19 - 06/26",
+          "dem": 49,
+          "rep": 47,
+          "margin": "2",
+          "partisan": null
+        },
         {
           "source": "Wick",
           "date": "06/11 - 06/14",
@@ -247,14 +255,6 @@
           "dem": 48.3,
           "rep": 39.3,
           "margin": "9",
-          "partisan": null
-        },
-        {
-          "source": "Emerson College",
-          "date": "03/21 - 03/23",
-          "dem": 47.8,
-          "rep": 40.6,
-          "margin": "7.2",
           "partisan": null
         }
       ],
