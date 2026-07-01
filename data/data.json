@@ -1,10 +1,10 @@
 {
-  "lastUpdated": "2026-06-30",
-  "date": "2026-06-30",
-  "fetchedAt": "2026-06-30T11:40:39.175Z",
+  "lastUpdated": "2026-07-01",
+  "date": "2026-07-01",
+  "fetchedAt": "2026-07-01T11:54:50.181Z",
   "markets": {
     "polymarket": {
-      "houseD": 83,
+      "houseD": 84,
       "senateR": 57,
       "splitPct": 39,
       "dSweepPct": 43,
@@ -14,21 +14,35 @@
       "houseD": 81,
       "senateR": 59,
       "dSweepPct": 39,
-      "splitPct": 38,
+      "splitPct": 39,
       "repSweepPct": 17,
-      "updatedDate": "2026-06-30"
+      "updatedDate": "2026-07-01"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 47.9,
+      "dem": 48,
       "rep": 41.8,
-      "margin": "6.1",
-      "date": "06/22",
-      "dateRange": "01/17 - 06/22"
+      "margin": "6.2",
+      "date": "06/29",
+      "dateRange": "01/17 - 06/29"
     },
     "polls": [
+      {
+        "source": "YouGov",
+        "date": "06/29",
+        "dem": 45,
+        "rep": 42,
+        "margin": "3"
+      },
+      {
+        "source": "Big Data Poll",
+        "date": "06/28",
+        "dem": 50.2,
+        "rep": 41,
+        "margin": "9.2"
+      },
       {
         "source": "YouGov",
         "date": "06/22",
@@ -56,20 +70,6 @@
         "dem": 51,
         "rep": 45,
         "margin": "6"
-      },
-      {
-        "source": "Verasight",
-        "date": "06/22",
-        "dem": 50,
-        "rep": 43,
-        "margin": "7"
-      },
-      {
-        "source": "Morning Consult",
-        "date": "06/22",
-        "dem": 46,
-        "rep": 42,
-        "margin": "4"
       }
     ]
   },
@@ -648,13 +648,21 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 43.4,
-        "rep": 42.7,
-        "margin": "0.7",
-        "date": "06/12",
-        "dateRange": "01/12 - 06/12"
+        "dem": 43.9,
+        "rep": 43.4,
+        "margin": "0.5",
+        "date": "06/27",
+        "dateRange": "01/12 - 06/27"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "06/19 - 06/27",
+          "dem": 47,
+          "rep": 47,
+          "margin": "0",
+          "partisan": null
+        },
         {
           "source": "Texas Politics Project at the University of Texas/YouGov",
           "date": "06/05 - 06/12",
@@ -717,14 +725,6 @@
           "dem": 44,
           "rep": 46,
           "margin": "-2",
-          "partisan": null
-        },
-        {
-          "source": "Emerson College",
-          "date": "01/10 - 01/12",
-          "dem": 45.6,
-          "rep": 45.6,
-          "margin": "0",
           "partisan": null
         }
       ],
@@ -811,9 +811,9 @@
     }
   },
   "trumpApproval": {
-    "approve": 39.2,
-    "disapprove": 57.6,
-    "net": -18.4
+    "approve": 41.1,
+    "disapprove": 55.5,
+    "net": -14.4
   },
   "nateApproval": []
 }
