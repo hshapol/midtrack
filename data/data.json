@@ -1,30 +1,30 @@
 {
-  "lastUpdated": "2026-07-01",
-  "date": "2026-07-01",
-  "fetchedAt": "2026-07-01T11:54:50.181Z",
+  "lastUpdated": "2026-07-02",
+  "date": "2026-07-02",
+  "fetchedAt": "2026-07-02T11:28:09.721Z",
   "markets": {
     "polymarket": {
       "houseD": 84,
       "senateR": 57,
-      "splitPct": 39,
+      "splitPct": 40,
       "dSweepPct": 43,
       "repSweepPct": 17
     },
     "kalshi": {
       "houseD": 81,
-      "senateR": 59,
+      "senateR": 60,
       "dSweepPct": 39,
       "splitPct": 39,
       "repSweepPct": 17,
-      "updatedDate": "2026-07-01"
+      "updatedDate": "2026-07-02"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 48,
+      "dem": 47.9,
       "rep": 41.8,
-      "margin": "6.2",
+      "margin": "6.1",
       "date": "06/29",
       "dateRange": "01/17 - 06/29"
     },
@@ -77,13 +77,21 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.6,
-        "rep": 36.6,
-        "margin": "12",
-        "date": "06/10",
-        "dateRange": "02/04 - 06/10"
+        "dem": 48.9,
+        "rep": 38.1,
+        "margin": "10.8",
+        "date": "06/27",
+        "dateRange": "02/04 - 06/27"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "06/15 - 06/27",
+          "dem": 50,
+          "rep": 43,
+          "margin": "7",
+          "partisan": null
+        },
         {
           "source": "YouGov",
           "date": "06/01 - 06/10",
@@ -155,14 +163,6 @@
           "rep": 39,
           "margin": "8",
           "partisan": null
-        },
-        {
-          "source": "Harper Polling",
-          "date": "09/14 - 09/15",
-          "dem": 46,
-          "rep": 42,
-          "margin": "4",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -170,13 +170,21 @@
     "Maine": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.1,
-        "rep": 44.5,
-        "margin": "3.6",
-        "date": "06/26",
-        "dateRange": "02/16 - 06/26"
+        "dem": 47.8,
+        "rep": 46.2,
+        "margin": "1.6",
+        "date": "06/27",
+        "dateRange": "02/16 - 06/27"
       },
       "polls": [
+        {
+          "source": "Beacon Research/Shaw & Co. Research",
+          "date": "06/23 - 06/27",
+          "dem": 47,
+          "rep": 50,
+          "margin": "-3",
+          "partisan": null
+        },
         {
           "source": "The New York Times/Siena University",
           "date": "06/19 - 06/26",
@@ -248,14 +256,6 @@
           "rep": 45,
           "margin": "6",
           "partisan": null
-        },
-        {
-          "source": "Maine People's Resource Center",
-          "date": "03/20 - 03/31",
-          "dem": 48.3,
-          "rep": 39.3,
-          "margin": "9",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -263,13 +263,21 @@
     "Ohio (Special)": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49.6,
-        "rep": 46.1,
-        "margin": "3.5",
-        "date": "06/16",
-        "dateRange": "02/22 - 06/16"
+        "dem": 49.2,
+        "rep": 46.7,
+        "margin": "2.5",
+        "date": "06/28",
+        "dateRange": "02/22 - 06/28"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "06/15 - 06/28",
+          "dem": 47,
+          "rep": 50,
+          "margin": "-3",
+          "partisan": null
+        },
         {
           "source": "Fabrizio Ward/Impact Research",
           "date": "06/14 - 06/16",
@@ -340,14 +348,6 @@
           "dem": 49,
           "rep": 48,
           "margin": "1",
-          "partisan": null
-        },
-        {
-          "source": "Emerson College",
-          "date": "08/18 - 08/19",
-          "dem": 43.7,
-          "rep": 49.5,
-          "margin": "-5.8",
           "partisan": null
         }
       ],
@@ -486,13 +486,29 @@
     "New Hampshire": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 46.4,
-        "rep": 43,
-        "margin": "3.4",
-        "date": "04/21",
-        "dateRange": "01/29 - 04/21"
+        "dem": 46.9,
+        "rep": 42,
+        "margin": "4.9",
+        "date": "06/25",
+        "dateRange": "01/29 - 06/25"
       },
       "polls": [
+        {
+          "source": "Saint Anselm",
+          "date": "06/24 - 06/25",
+          "dem": 47,
+          "rep": 41,
+          "margin": "6",
+          "partisan": null
+        },
+        {
+          "source": "University of New Hampshire",
+          "date": "06/18 - 06/23",
+          "dem": 47,
+          "rep": 44,
+          "margin": "3",
+          "partisan": null
+        },
         {
           "source": "University of New Hampshire",
           "date": "04/17 - 04/21",
@@ -556,22 +572,6 @@
           "rep": 42,
           "margin": "3",
           "partisan": null
-        },
-        {
-          "source": "University of New Hampshire",
-          "date": "09/17 - 09/23",
-          "dem": 49,
-          "rep": 43,
-          "margin": "6",
-          "partisan": null
-        },
-        {
-          "source": "co/efficient",
-          "date": "09/10 - 09/12",
-          "dem": 46,
-          "rep": 43,
-          "margin": "3",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -579,13 +579,21 @@
     "Alaska": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49.4,
-        "rep": 44.2,
-        "margin": "5.2",
-        "date": "06/07",
-        "dateRange": "06/07 - 06/07"
+        "dem": 48.2,
+        "rep": 44.9,
+        "margin": "3.3",
+        "date": "06/29",
+        "dateRange": "06/07 - 06/29"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "06/15 - 06/29",
+          "dem": 45,
+          "rep": 47,
+          "margin": "-2",
+          "partisan": null
+        },
         {
           "source": "Alaska Survey Research",
           "date": "06/04 - 06/07",
@@ -648,13 +656,21 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 43.9,
-        "rep": 43.4,
-        "margin": "0.5",
-        "date": "06/27",
-        "dateRange": "01/12 - 06/27"
+        "dem": 44.9,
+        "rep": 43.9,
+        "margin": "1",
+        "date": "06/28",
+        "dateRange": "01/12 - 06/28"
       },
       "polls": [
+        {
+          "source": "A2 Insights",
+          "date": "06/23 - 06/28",
+          "dem": 48.4,
+          "rep": 46.1,
+          "margin": "2.3",
+          "partisan": null
+        },
         {
           "source": "The New York Times/Siena University",
           "date": "06/19 - 06/27",
@@ -718,14 +734,6 @@
           "rep": 43,
           "margin": "1",
           "partisan": null
-        },
-        {
-          "source": "University of Houston/YouGov",
-          "date": "01/20 - 01/31",
-          "dem": 44,
-          "rep": 46,
-          "margin": "-2",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -754,13 +762,21 @@
     "Iowa": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 45.6,
-        "rep": 44.9,
-        "margin": "0.7",
-        "date": "04/09",
-        "dateRange": "01/11 - 04/09"
+        "dem": 45.9,
+        "rep": 47,
+        "margin": "-1.1",
+        "date": "06/27",
+        "dateRange": "01/11 - 06/27"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "06/15 - 06/27",
+          "dem": 46,
+          "rep": 48,
+          "margin": "-2",
+          "partisan": null
+        },
         {
           "source": "Change Research",
           "date": "01/08 - 01/11",
