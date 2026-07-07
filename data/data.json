@@ -1,34 +1,41 @@
 {
-  "lastUpdated": "2026-07-06",
-  "date": "2026-07-06",
-  "fetchedAt": "2026-07-06T12:39:57.326Z",
+  "lastUpdated": "2026-07-07",
+  "date": "2026-07-07",
+  "fetchedAt": "2026-07-07T11:40:36.972Z",
   "markets": {
     "polymarket": {
       "houseD": 84,
       "senateR": 55,
-      "splitPct": 41,
-      "dSweepPct": 43,
-      "repSweepPct": 14
+      "splitPct": 40,
+      "dSweepPct": 44,
+      "repSweepPct": 15
     },
     "kalshi": {
       "houseD": 81,
-      "senateR": 60,
-      "dSweepPct": 39,
+      "senateR": 58,
+      "dSweepPct": 41,
       "splitPct": 40,
       "repSweepPct": 17,
-      "updatedDate": "2026-07-06"
+      "updatedDate": "2026-07-07"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 47.9,
+      "dem": 48,
       "rep": 41.8,
-      "margin": "6.1",
-      "date": "06/29",
-      "dateRange": "01/17 - 06/29"
+      "margin": "6.2",
+      "date": "06/30",
+      "dateRange": "01/17 - 06/30"
     },
     "polls": [
+      {
+        "source": "Focaldata",
+        "date": "06/30",
+        "dem": 50,
+        "rep": 43,
+        "margin": "7"
+      },
       {
         "source": "YouGov",
         "date": "06/29",
@@ -63,13 +70,6 @@
         "dem": 41,
         "rep": 36,
         "margin": "5"
-      },
-      {
-        "source": "Echelon Insights",
-        "date": "06/22",
-        "dem": 51,
-        "rep": 45,
-        "margin": "6"
       }
     ]
   },
