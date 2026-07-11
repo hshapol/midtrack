@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-07-10",
-  "date": "2026-07-10",
-  "fetchedAt": "2026-07-10T11:44:43.258Z",
+  "lastUpdated": "2026-07-11",
+  "date": "2026-07-11",
+  "fetchedAt": "2026-07-11T10:10:32.511Z",
   "markets": {
     "polymarket": {
       "houseD": 84,
-      "senateR": 53,
+      "senateR": 54,
       "splitPct": 41,
-      "dSweepPct": 44,
+      "dSweepPct": 45,
       "repSweepPct": 14
     },
     "kalshi": {
-      "houseD": 82,
+      "houseD": 81,
       "senateR": 57,
       "dSweepPct": 43,
-      "splitPct": 39,
+      "splitPct": 37,
       "repSweepPct": 17,
-      "updatedDate": "2026-07-10"
+      "updatedDate": "2026-07-11"
     }
   },
   "genericBallot": {
@@ -778,11 +778,11 @@
     "Iowa": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.9,
+        "dem": 49,
         "rep": 46.3,
-        "margin": "2.6",
+        "margin": "2.7",
         "date": "06/27",
-        "dateRange": "01/11 - 06/27"
+        "dateRange": "04/09 - 06/27"
       },
       "polls": [
         {
