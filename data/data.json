@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-07-22",
-  "date": "2026-07-22",
-  "fetchedAt": "2026-07-22T11:00:54.805Z",
+  "lastUpdated": "2026-07-23",
+  "date": "2026-07-23",
+  "fetchedAt": "2026-07-23T11:03:19.607Z",
   "markets": {
     "polymarket": {
       "houseD": 86,
@@ -16,7 +16,7 @@
       "dSweepPct": 42,
       "splitPct": 38,
       "repSweepPct": 16,
-      "updatedDate": "2026-07-22"
+      "updatedDate": "2026-07-23"
     }
   },
   "genericBallot": {
@@ -247,14 +247,6 @@
           "dem": 48,
           "rep": 43,
           "margin": "5",
-          "partisan": null
-        },
-        {
-          "source": "Echelon Insights",
-          "date": "04/03 - 04/09",
-          "dem": 51,
-          "rep": 45,
-          "margin": "6",
           "partisan": null
         }
       ],
