@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-07-23",
-  "date": "2026-07-23",
-  "fetchedAt": "2026-07-23T11:03:19.607Z",
+  "lastUpdated": "2026-07-24",
+  "date": "2026-07-24",
+  "fetchedAt": "2026-07-24T10:58:40.058Z",
   "markets": {
     "polymarket": {
       "houseD": 86,
@@ -13,10 +13,10 @@
     "kalshi": {
       "houseD": 82,
       "senateR": 56,
-      "dSweepPct": 42,
+      "dSweepPct": 43,
       "splitPct": 38,
       "repSweepPct": 16,
-      "updatedDate": "2026-07-23"
+      "updatedDate": "2026-07-24"
     }
   },
   "genericBallot": {
@@ -441,13 +441,21 @@
     "Georgia": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 52.1,
+        "dem": 52,
         "rep": 43,
-        "margin": "9.1",
-        "date": "06/30",
-        "dateRange": "03/02 - 06/30"
+        "margin": "9",
+        "date": "07/16",
+        "dateRange": "03/02 - 07/16"
       },
       "polls": [
+        {
+          "source": "Fabrizio, Lee & Associates/Impact Research",
+          "date": "07/13 - 07/16",
+          "dem": 52,
+          "rep": 43,
+          "margin": "9",
+          "partisan": null
+        },
         {
           "source": "Wick",
           "date": "06/27 - 06/30",
