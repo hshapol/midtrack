@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-07-24",
-  "date": "2026-07-24",
-  "fetchedAt": "2026-07-24T10:58:40.058Z",
+  "lastUpdated": "2026-07-25",
+  "date": "2026-07-25",
+  "fetchedAt": "2026-07-25T10:22:16.480Z",
   "markets": {
     "polymarket": {
       "houseD": 86,
@@ -11,12 +11,12 @@
       "repSweepPct": 14
     },
     "kalshi": {
-      "houseD": 82,
+      "houseD": 83,
       "senateR": 56,
       "dSweepPct": 43,
       "splitPct": 38,
       "repSweepPct": 16,
-      "updatedDate": "2026-07-24"
+      "updatedDate": "2026-07-25"
     }
   },
   "genericBallot": {
@@ -348,11 +348,11 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 43.8,
+        "dem": 43.7,
         "rep": 44,
-        "margin": "-0.2",
+        "margin": "-0.3",
         "date": "06/30",
-        "dateRange": "01/25 - 06/30"
+        "dateRange": "05/01 - 06/30"
       },
       "polls": [
         {
