@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-07-28",
-  "date": "2026-07-28",
-  "fetchedAt": "2026-07-28T11:10:40.768Z",
+  "lastUpdated": "2026-07-29",
+  "date": "2026-07-29",
+  "fetchedAt": "2026-07-29T11:16:30.653Z",
   "markets": {
     "polymarket": {
       "houseD": 86,
@@ -16,7 +16,7 @@
       "dSweepPct": 43,
       "splitPct": 38,
       "repSweepPct": 16,
-      "updatedDate": "2026-07-28"
+      "updatedDate": "2026-07-29"
     }
   },
   "genericBallot": {
@@ -26,7 +26,7 @@
       "rep": 41.8,
       "margin": "6.2",
       "date": "06/30",
-      "dateRange": "01/29 - 06/30"
+      "dateRange": "01/30 - 06/30"
     },
     "polls": [
       {
@@ -348,13 +348,21 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 43.7,
-        "rep": 44,
-        "margin": "-0.3",
-        "date": "06/30",
-        "dateRange": "05/01 - 06/30"
+        "dem": 40.7,
+        "rep": 47.3,
+        "margin": "-6.6",
+        "date": "07/24",
+        "dateRange": "05/07 - 07/24"
       },
       "polls": [
+        {
+          "source": "Glengariff Group, Inc.",
+          "date": "07/22 - 07/24",
+          "dem": 38.7,
+          "rep": 49,
+          "margin": "-10.3",
+          "partisan": null
+        },
         {
           "source": "Quantus Insights",
           "date": "06/29 - 06/30",
@@ -425,14 +433,6 @@
           "dem": 44,
           "rep": 48,
           "margin": "-4",
-          "partisan": null
-        },
-        {
-          "source": "Glengariff Group, Inc.",
-          "date": "05/05 - 05/08",
-          "dem": 45,
-          "rep": 44,
-          "margin": "1",
           "partisan": null
         }
       ],
@@ -506,7 +506,7 @@
         "rep": 42,
         "margin": "4.9",
         "date": "06/25",
-        "dateRange": "01/29 - 06/25"
+        "dateRange": "03/23 - 06/25"
       },
       "polls": [
         {
@@ -673,12 +673,20 @@
       "avg": {
         "source": "SB-style Avg",
         "dem": 44.9,
-        "rep": 43.9,
-        "margin": "1",
-        "date": "06/28",
-        "dateRange": "01/31 - 06/28"
+        "rep": 42.7,
+        "margin": "2.2",
+        "date": "07/17",
+        "dateRange": "01/31 - 07/17"
       },
       "polls": [
+        {
+          "source": "Slingshot Strategies",
+          "date": "07/15 - 07/17",
+          "dem": 45,
+          "rep": 40,
+          "margin": "5",
+          "partisan": null
+        },
         {
           "source": "A2 Insights",
           "date": "06/23 - 06/28",
@@ -741,14 +749,6 @@
           "dem": 42,
           "rep": 34,
           "margin": "8",
-          "partisan": null
-        },
-        {
-          "source": "Impact Research",
-          "date": "03/12 - 03/17",
-          "dem": 44,
-          "rep": 43,
-          "margin": "1",
           "partisan": null
         }
       ],
