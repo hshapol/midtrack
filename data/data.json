@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-07-30",
-  "date": "2026-07-30",
-  "fetchedAt": "2026-07-30T11:00:17.505Z",
+  "lastUpdated": "2026-07-31",
+  "date": "2026-07-31",
+  "fetchedAt": "2026-07-31T11:24:05.320Z",
   "markets": {
     "polymarket": {
       "houseD": 86,
@@ -12,11 +12,11 @@
     },
     "kalshi": {
       "houseD": 83,
-      "senateR": 56,
-      "dSweepPct": 43,
-      "splitPct": 38,
+      "senateR": 55,
+      "dSweepPct": 44,
+      "splitPct": 39,
       "repSweepPct": 16,
-      "updatedDate": "2026-07-30"
+      "updatedDate": "2026-07-31"
     }
   },
   "genericBallot": {
@@ -77,13 +77,21 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.5,
-        "rep": 40.9,
-        "margin": "7.6",
-        "date": "07/11",
-        "dateRange": "02/04 - 07/11"
+        "dem": 50.8,
+        "rep": 42.5,
+        "margin": "8.3",
+        "date": "07/27",
+        "dateRange": "02/04 - 07/27"
       },
       "polls": [
+        {
+          "source": "Beacon Research/Shaw & Co. Research",
+          "date": "07/23 - 07/27",
+          "dem": 53,
+          "rep": 44,
+          "margin": "9",
+          "partisan": null
+        },
         {
           "source": "Public Policy Polling",
           "date": "07/10 - 07/11",
@@ -154,14 +162,6 @@
           "dem": 50,
           "rep": 32,
           "margin": "18",
-          "partisan": null
-        },
-        {
-          "source": "Change Research",
-          "date": "01/31 - 02/04",
-          "dem": 50,
-          "rep": 40,
-          "margin": "10",
           "partisan": null
         }
       ],
@@ -672,13 +672,21 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 44.9,
-        "rep": 42.7,
-        "margin": "2.2",
-        "date": "07/17",
-        "dateRange": "01/31 - 07/17"
+        "dem": 47.4,
+        "rep": 44.8,
+        "margin": "2.6",
+        "date": "07/27",
+        "dateRange": "03/17 - 07/27"
       },
       "polls": [
+        {
+          "source": "Beacon Research/Shaw & Co. Research",
+          "date": "07/23 - 07/27",
+          "dem": 51,
+          "rep": 48,
+          "margin": "3",
+          "partisan": null
+        },
         {
           "source": "Slingshot Strategies",
           "date": "07/15 - 07/17",
