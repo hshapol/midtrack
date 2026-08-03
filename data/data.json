@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2026-08-02",
-  "date": "2026-08-02",
-  "fetchedAt": "2026-08-02T10:27:57.103Z",
+  "lastUpdated": "2026-08-03",
+  "date": "2026-08-03",
+  "fetchedAt": "2026-08-03T12:14:49.722Z",
   "markets": {
     "polymarket": {
       "houseD": 86,
-      "senateR": 55,
+      "senateR": 56,
       "splitPct": 42,
       "dSweepPct": 45,
       "repSweepPct": 13
@@ -16,7 +16,7 @@
       "dSweepPct": 45,
       "splitPct": 39,
       "repSweepPct": 15,
-      "updatedDate": "2026-08-02"
+      "updatedDate": "2026-08-03"
     }
   },
   "genericBallot": {
@@ -348,13 +348,21 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 40.7,
-        "rep": 47.3,
-        "margin": "-6.6",
-        "date": "07/24",
-        "dateRange": "05/07 - 07/24"
+        "dem": 41.6,
+        "rep": 46.8,
+        "margin": "-5.2",
+        "date": "07/31",
+        "dateRange": "05/07 - 07/31"
       },
       "polls": [
+        {
+          "source": "EPIC-MRA",
+          "date": "07/24 - 07/31",
+          "dem": 43,
+          "rep": 46,
+          "margin": "-3",
+          "partisan": null
+        },
         {
           "source": "Glengariff Group, Inc.",
           "date": "07/22 - 07/24",
@@ -425,14 +433,6 @@
           "dem": 40,
           "rep": 47,
           "margin": "-7",
-          "partisan": null
-        },
-        {
-          "source": "Normington, Petts & Associates",
-          "date": "06/12 - 06/16",
-          "dem": 44,
-          "rep": 48,
-          "margin": "-4",
           "partisan": null
         }
       ],
