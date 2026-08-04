@@ -1,13 +1,13 @@
 {
-  "lastUpdated": "2026-08-03",
-  "date": "2026-08-03",
-  "fetchedAt": "2026-08-03T12:14:49.722Z",
+  "lastUpdated": "2026-08-04",
+  "date": "2026-08-04",
+  "fetchedAt": "2026-08-04T11:17:31.817Z",
   "markets": {
     "polymarket": {
       "houseD": 86,
-      "senateR": 56,
-      "splitPct": 42,
-      "dSweepPct": 45,
+      "senateR": 55,
+      "splitPct": 41,
+      "dSweepPct": 46,
       "repSweepPct": 13
     },
     "kalshi": {
@@ -16,7 +16,7 @@
       "dSweepPct": 45,
       "splitPct": 39,
       "repSweepPct": 15,
-      "updatedDate": "2026-08-03"
+      "updatedDate": "2026-08-04"
     }
   },
   "genericBallot": {
@@ -81,7 +81,7 @@
         "rep": 42.5,
         "margin": "8.3",
         "date": "07/27",
-        "dateRange": "02/04 - 07/27"
+        "dateRange": "03/09 - 07/27"
       },
       "polls": [
         {
@@ -348,11 +348,11 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 41.6,
-        "rep": 46.8,
-        "margin": "-5.2",
+        "dem": 42.1,
+        "rep": 46.6,
+        "margin": "-4.5",
         "date": "07/31",
-        "dateRange": "05/07 - 07/31"
+        "dateRange": "06/30 - 07/31"
       },
       "polls": [
         {
@@ -361,6 +361,14 @@
           "dem": 43,
           "rep": 46,
           "margin": "-3",
+          "partisan": null
+        },
+        {
+          "source": "Mitchell Research & Communications",
+          "date": "07/28 - 07/29",
+          "dem": 45,
+          "rep": 45,
+          "margin": "0",
           "partisan": null
         },
         {
@@ -425,14 +433,6 @@
           "dem": 44,
           "rep": 42,
           "margin": "2",
-          "partisan": null
-        },
-        {
-          "source": "Rosetta Stone",
-          "date": "10/23 - 10/25",
-          "dem": 40,
-          "rep": 47,
-          "margin": "-7",
           "partisan": null
         }
       ],
@@ -673,12 +673,20 @@
       "avg": {
         "source": "SB-style Avg",
         "dem": 47.4,
-        "rep": 44.8,
-        "margin": "2.6",
-        "date": "07/27",
-        "dateRange": "03/17 - 07/27"
+        "rep": 45,
+        "margin": "2.4",
+        "date": "07/31",
+        "dateRange": "03/17 - 07/31"
       },
       "polls": [
+        {
+          "source": "Wedgewood Polls",
+          "date": "07/30 - 07/31",
+          "dem": 48,
+          "rep": 46,
+          "margin": "2",
+          "partisan": null
+        },
         {
           "source": "Beacon Research/Shaw & Co. Research",
           "date": "07/23 - 07/27",
@@ -749,14 +757,6 @@
           "dem": 46,
           "rep": 41,
           "margin": "5",
-          "partisan": null
-        },
-        {
-          "source": "YouGov",
-          "date": "04/10 - 04/20",
-          "dem": 42,
-          "rep": 34,
-          "margin": "8",
           "partisan": null
         }
       ],
