@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-08-04",
-  "date": "2026-08-04",
-  "fetchedAt": "2026-08-04T11:17:31.817Z",
+  "lastUpdated": "2026-08-05",
+  "date": "2026-08-05",
+  "fetchedAt": "2026-08-05T11:13:56.018Z",
   "markets": {
     "polymarket": {
-      "houseD": 86,
-      "senateR": 55,
+      "houseD": 87,
+      "senateR": 56,
       "splitPct": 41,
       "dSweepPct": 46,
-      "repSweepPct": 13
+      "repSweepPct": 12
     },
     "kalshi": {
       "houseD": 83,
       "senateR": 54,
-      "dSweepPct": 45,
+      "dSweepPct": 42,
       "splitPct": 39,
       "repSweepPct": 15,
-      "updatedDate": "2026-08-04"
+      "updatedDate": "2026-08-05"
     }
   },
   "genericBallot": {
@@ -688,6 +688,14 @@
           "partisan": null
         },
         {
+          "source": "Texas Southern University Barbara Jordan Public Policy Research and Survey Center",
+          "date": "07/27 - 07/30",
+          "dem": 47,
+          "rep": 45,
+          "margin": "2",
+          "partisan": null
+        },
+        {
           "source": "Beacon Research/Shaw & Co. Research",
           "date": "07/23 - 07/27",
           "dem": 51,
@@ -749,14 +757,6 @@
           "dem": 45,
           "rep": 45,
           "margin": "0",
-          "partisan": null
-        },
-        {
-          "source": "Texas Public Opinion Research",
-          "date": "04/17 - 04/20",
-          "dem": 46,
-          "rep": 41,
-          "margin": "5",
           "partisan": null
         }
       ],
