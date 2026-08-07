@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-08-06",
-  "date": "2026-08-06",
-  "fetchedAt": "2026-08-06T11:13:34.021Z",
+  "lastUpdated": "2026-08-07",
+  "date": "2026-08-07",
+  "fetchedAt": "2026-08-07T09:53:44.605Z",
   "markets": {
     "polymarket": {
       "houseD": 88,
       "senateR": 55,
       "splitPct": 41,
       "dSweepPct": 46,
-      "repSweepPct": 14
+      "repSweepPct": 13
     },
     "kalshi": {
       "houseD": 83,
-      "senateR": 55,
-      "dSweepPct": 42,
+      "senateR": 54,
+      "dSweepPct": 43,
       "splitPct": 39,
       "repSweepPct": 15,
-      "updatedDate": "2026-08-06"
+      "updatedDate": "2026-08-07"
     }
   },
   "genericBallot": {
@@ -786,13 +786,21 @@
     "Iowa": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49,
-        "rep": 46.3,
-        "margin": "2.7",
-        "date": "06/27",
-        "dateRange": "04/09 - 06/27"
+        "dem": 46.5,
+        "rep": 47.4,
+        "margin": "-0.9",
+        "date": "08/04",
+        "dateRange": "04/09 - 08/04"
       },
       "polls": [
+        {
+          "source": "Emerson College",
+          "date": "08/02 - 08/04",
+          "dem": 45,
+          "rep": 48,
+          "margin": "-3",
+          "partisan": null
+        },
         {
           "source": "The New York Times/Siena University",
           "date": "06/15 - 06/27",
