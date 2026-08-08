@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-08-07",
-  "date": "2026-08-07",
-  "fetchedAt": "2026-08-07T09:53:44.605Z",
+  "lastUpdated": "2026-08-08",
+  "date": "2026-08-08",
+  "fetchedAt": "2026-08-08T09:29:49.462Z",
   "markets": {
     "polymarket": {
       "houseD": 88,
@@ -11,12 +11,12 @@
       "repSweepPct": 13
     },
     "kalshi": {
-      "houseD": 83,
+      "houseD": 84,
       "senateR": 54,
       "dSweepPct": 43,
       "splitPct": 39,
       "repSweepPct": 15,
-      "updatedDate": "2026-08-07"
+      "updatedDate": "2026-08-08"
     }
   },
   "genericBallot": {
@@ -77,13 +77,21 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 50.8,
-        "rep": 42.5,
-        "margin": "8.3",
-        "date": "07/27",
-        "dateRange": "03/09 - 07/27"
+        "dem": 50.6,
+        "rep": 42.2,
+        "margin": "8.4",
+        "date": "08/01",
+        "dateRange": "03/09 - 08/01"
       },
       "polls": [
+        {
+          "source": "Change Research",
+          "date": "07/29 - 08/01",
+          "dem": 50,
+          "rep": 41,
+          "margin": "9",
+          "partisan": null
+        },
         {
           "source": "Beacon Research/Shaw & Co. Research",
           "date": "07/23 - 07/27",
@@ -154,14 +162,6 @@
           "dem": 47,
           "rep": 44,
           "margin": "3",
-          "partisan": null
-        },
-        {
-          "source": "Nexus Strategies/Strategic Partners Solutions",
-          "date": "03/08 - 03/09",
-          "dem": 50,
-          "rep": 32,
-          "margin": "18",
           "partisan": null
         }
       ],
@@ -673,8 +673,8 @@
       "avg": {
         "source": "SB-style Avg",
         "dem": 47.4,
-        "rep": 45,
-        "margin": "2.4",
+        "rep": 44.8,
+        "margin": "2.6",
         "date": "07/31",
         "dateRange": "03/17 - 07/31"
       },
@@ -693,6 +693,14 @@
           "dem": 47,
           "rep": 45,
           "margin": "2",
+          "partisan": null
+        },
+        {
+          "source": "ReconMR/Siena University",
+          "date": "07/27 - 07/30",
+          "dem": 47,
+          "rep": 43,
+          "margin": "4",
           "partisan": null
         },
         {
@@ -749,14 +757,6 @@
           "dem": 47,
           "rep": 44,
           "margin": "3",
-          "partisan": null
-        },
-        {
-          "source": "Texas Southern University Barbara Jordan Public Policy Research and Survey Center",
-          "date": "04/22 - 05/06",
-          "dem": 45,
-          "rep": 45,
-          "margin": "0",
           "partisan": null
         }
       ],
