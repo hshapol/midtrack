@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-08-12",
-  "date": "2026-08-12",
-  "fetchedAt": "2026-08-12T09:54:50.397Z",
+  "lastUpdated": "2026-08-13",
+  "date": "2026-08-13",
+  "fetchedAt": "2026-08-13T09:56:41.024Z",
   "markets": {
     "polymarket": {
       "houseD": 88,
-      "senateR": 49,
-      "splitPct": 39,
+      "senateR": 48,
+      "splitPct": 38,
       "dSweepPct": 50,
       "repSweepPct": 12
     },
     "kalshi": {
       "houseD": 85,
-      "senateR": 52,
+      "senateR": 51,
       "dSweepPct": 47,
-      "splitPct": 39,
+      "splitPct": 38,
       "repSweepPct": 14,
-      "updatedDate": "2026-08-12"
+      "updatedDate": "2026-08-13"
     }
   },
   "genericBallot": {
@@ -77,9 +77,9 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 50.6,
-        "rep": 42.2,
-        "margin": "8.4",
+        "dem": 50.7,
+        "rep": 40.6,
+        "margin": "10.1",
         "date": "08/01",
         "dateRange": "03/09 - 08/01"
       },
@@ -98,6 +98,14 @@
           "dem": 53,
           "rep": 44,
           "margin": "9",
+          "partisan": null
+        },
+        {
+          "source": "Elon University/YouGov",
+          "date": "07/21 - 07/23",
+          "dem": 51,
+          "rep": 35,
+          "margin": "16",
           "partisan": null
         },
         {
@@ -154,14 +162,6 @@
           "dem": 48,
           "rep": 34,
           "margin": "14",
-          "partisan": null
-        },
-        {
-          "source": "Public Policy Polling",
-          "date": "03/13 - 03/14",
-          "dem": 47,
-          "rep": 44,
-          "margin": "3",
           "partisan": null
         }
       ],
@@ -595,13 +595,21 @@
     "Alaska": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.2,
-        "rep": 44.9,
-        "margin": "3.3",
-        "date": "06/29",
-        "dateRange": "06/07 - 06/29"
+        "dem": 50.3,
+        "rep": 49,
+        "margin": "1.3",
+        "date": "08/05",
+        "dateRange": "06/29 - 08/05"
       },
       "polls": [
+        {
+          "source": "Alaska Survey Research",
+          "date": "08/02 - 08/05",
+          "dem": 50.8,
+          "rep": 49.2,
+          "margin": "1.6",
+          "partisan": null
+        },
         {
           "source": "The New York Times/Siena University",
           "date": "06/15 - 06/29",
