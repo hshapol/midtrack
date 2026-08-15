@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-08-14",
-  "date": "2026-08-14",
-  "fetchedAt": "2026-08-14T09:52:59.105Z",
+  "lastUpdated": "2026-08-15",
+  "date": "2026-08-15",
+  "fetchedAt": "2026-08-15T09:18:43.155Z",
   "markets": {
     "polymarket": {
       "houseD": 88,
       "senateR": 48,
-      "splitPct": 38,
+      "splitPct": 37,
       "dSweepPct": 50,
       "repSweepPct": 14
     },
     "kalshi": {
       "houseD": 85,
-      "senateR": 51,
+      "senateR": 52,
       "dSweepPct": 47,
       "splitPct": 38,
       "repSweepPct": 14,
-      "updatedDate": "2026-08-14"
+      "updatedDate": "2026-08-15"
     }
   },
   "genericBallot": {
@@ -77,13 +77,21 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 50.7,
-        "rep": 40.6,
-        "margin": "10.1",
-        "date": "08/01",
-        "dateRange": "03/09 - 08/01"
+        "dem": 50.9,
+        "rep": 40.3,
+        "margin": "10.6",
+        "date": "08/10",
+        "dateRange": "03/09 - 08/10"
       },
       "polls": [
+        {
+          "source": "Harper Polling",
+          "date": "08/09 - 08/10",
+          "dem": 51.5,
+          "rep": 39,
+          "margin": "12.5",
+          "partisan": null
+        },
         {
           "source": "Change Research",
           "date": "07/29 - 08/01",
@@ -154,14 +162,6 @@
           "dem": 48.9,
           "rep": 41.1,
           "margin": "7.8",
-          "partisan": null
-        },
-        {
-          "source": "YouGov",
-          "date": "03/09 - 03/18",
-          "dem": 48,
-          "rep": 34,
-          "margin": "14",
           "partisan": null
         }
       ],
@@ -247,13 +247,21 @@
     "Ohio (Special)": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49.2,
-        "rep": 46.7,
-        "margin": "2.5",
-        "date": "06/28",
-        "dateRange": "02/22 - 06/28"
+        "dem": 51.4,
+        "rep": 45.7,
+        "margin": "5.7",
+        "date": "08/10",
+        "dateRange": "02/22 - 08/10"
       },
       "polls": [
+        {
+          "source": "Beacon Research/Shaw & Co. Research",
+          "date": "08/06 - 08/10",
+          "dem": 53,
+          "rep": 45,
+          "margin": "8",
+          "partisan": null
+        },
         {
           "source": "The New York Times/Siena University",
           "date": "06/15 - 06/28",
@@ -325,14 +333,6 @@
           "rep": 48.8,
           "margin": "-2.5",
           "partisan": null
-        },
-        {
-          "source": "Bowling Green State University/YouGov",
-          "date": "10/02 - 10/14",
-          "dem": 49,
-          "rep": 48,
-          "margin": "1",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -340,13 +340,21 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 42.1,
-        "rep": 46.6,
-        "margin": "-4.5",
-        "date": "07/31",
-        "dateRange": "06/30 - 07/31"
+        "dem": 44.1,
+        "rep": 48.5,
+        "margin": "-4.4",
+        "date": "08/10",
+        "dateRange": "06/30 - 08/10"
       },
       "polls": [
+        {
+          "source": "Beacon Research/Shaw & Co. Research",
+          "date": "08/06 - 08/10",
+          "dem": 47,
+          "rep": 51,
+          "margin": "-4",
+          "partisan": null
+        },
         {
           "source": "EPIC-MRA",
           "date": "07/24 - 07/31",
@@ -417,14 +425,6 @@
           "dem": 40,
           "rep": 42,
           "margin": "-2",
-          "partisan": null
-        },
-        {
-          "source": "EPIC-MRA",
-          "date": "11/06 - 11/11",
-          "dem": 44,
-          "rep": 42,
-          "margin": "2",
           "partisan": null
         }
       ],
