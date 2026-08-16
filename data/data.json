@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-08-15",
-  "date": "2026-08-15",
-  "fetchedAt": "2026-08-15T09:18:43.155Z",
+  "lastUpdated": "2026-08-16",
+  "date": "2026-08-16",
+  "fetchedAt": "2026-08-16T09:20:17.818Z",
   "markets": {
     "polymarket": {
       "houseD": 88,
       "senateR": 48,
-      "splitPct": 37,
+      "splitPct": 38,
       "dSweepPct": 50,
       "repSweepPct": 14
     },
@@ -16,7 +16,7 @@
       "dSweepPct": 47,
       "splitPct": 38,
       "repSweepPct": 14,
-      "updatedDate": "2026-08-15"
+      "updatedDate": "2026-08-16"
     }
   },
   "genericBallot": {
@@ -174,7 +174,7 @@
         "rep": 46.2,
         "margin": "1.6",
         "date": "06/27",
-        "dateRange": "02/16 - 06/27"
+        "dateRange": "03/23 - 06/27"
       },
       "polls": [
         {
@@ -247,13 +247,21 @@
     "Ohio (Special)": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 51.4,
-        "rep": 45.7,
-        "margin": "5.7",
-        "date": "08/10",
-        "dateRange": "02/22 - 08/10"
+        "dem": 50.8,
+        "rep": 45.4,
+        "margin": "5.4",
+        "date": "08/13",
+        "dateRange": "02/22 - 08/13"
       },
       "polls": [
+        {
+          "source": "Wedgewood Polls",
+          "date": "08/11 - 08/13",
+          "dem": 48,
+          "rep": 44,
+          "margin": "4",
+          "partisan": null
+        },
         {
           "source": "Beacon Research/Shaw & Co. Research",
           "date": "08/06 - 08/10",
@@ -324,14 +332,6 @@
           "dem": 51,
           "rep": 47,
           "margin": "4",
-          "partisan": null
-        },
-        {
-          "source": "Emerson College",
-          "date": "12/06 - 12/08",
-          "dem": 46.3,
-          "rep": 48.8,
-          "margin": "-2.5",
           "partisan": null
         }
       ],
