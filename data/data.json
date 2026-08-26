@@ -1,75 +1,75 @@
 {
-  "lastUpdated": "2026-08-25",
-  "date": "2026-08-25",
-  "fetchedAt": "2026-08-25T09:27:38.567Z",
+  "lastUpdated": "2026-08-26",
+  "date": "2026-08-26",
+  "fetchedAt": "2026-08-26T09:33:16.262Z",
   "markets": {
     "polymarket": {
       "houseD": 88,
       "senateR": 50,
-      "splitPct": 39,
-      "dSweepPct": 48,
+      "splitPct": 38,
+      "dSweepPct": 49,
       "repSweepPct": 12
     },
     "kalshi": {
       "houseD": 85,
-      "senateR": 54,
+      "senateR": 53,
       "dSweepPct": 46,
       "splitPct": 38,
       "repSweepPct": 15,
-      "updatedDate": "2026-08-25"
+      "updatedDate": "2026-08-26"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 48,
-      "rep": 41.8,
-      "margin": "6.2",
-      "date": "06/30",
-      "dateRange": "03/20 - 06/30"
+      "dem": 47,
+      "rep": 41.2,
+      "margin": "5.8",
+      "date": "08/24",
+      "dateRange": "03/20 - 08/24"
     },
     "polls": [
       {
-        "source": "Focaldata",
-        "date": "06/30",
-        "dem": 50,
-        "rep": 43,
-        "margin": "7"
-      },
-      {
-        "source": "YouGov",
-        "date": "06/29",
-        "dem": 45,
-        "rep": 42,
-        "margin": "3"
-      },
-      {
-        "source": "Big Data Poll",
-        "date": "06/28",
-        "dem": 50.2,
-        "rep": 41,
-        "margin": "9.2"
-      },
-      {
-        "source": "YouGov",
-        "date": "06/22",
-        "dem": 45,
-        "rep": 43,
-        "margin": "2"
-      },
-      {
-        "source": "YouGov",
-        "date": "06/22",
-        "dem": 38,
+        "source": "Ipsos",
+        "date": "08/24",
+        "dem": 41,
         "rep": 35,
-        "margin": "3"
+        "margin": "6"
       },
       {
         "source": "Ipsos",
-        "date": "06/22",
-        "dem": 41,
-        "rep": 36,
+        "date": "08/24",
+        "dem": 35,
+        "rep": 29,
+        "margin": "6"
+      },
+      {
+        "source": "YouGov",
+        "date": "08/24",
+        "dem": 46,
+        "rep": 40,
+        "margin": "6"
+      },
+      {
+        "source": "YouGov",
+        "date": "08/24",
+        "dem": 37,
+        "rep": 31,
+        "margin": "6"
+      },
+      {
+        "source": "Noble Predictive Insights",
+        "date": "08/16",
+        "dem": 47,
+        "rep": 42,
         "margin": "5"
+      },
+      {
+        "source": "Morning Consult",
+        "date": "07/12",
+        "dem": 46,
+        "rep": 43,
+        "margin": "3"
       }
     ]
   },
@@ -77,13 +77,21 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 50.9,
-        "rep": 40.3,
-        "margin": "10.6",
-        "date": "08/10",
-        "dateRange": "03/09 - 08/10"
+        "dem": 50.7,
+        "rep": 41,
+        "margin": "9.7",
+        "date": "08/12",
+        "dateRange": "03/09 - 08/12"
       },
       "polls": [
+        {
+          "source": "High Point University Survey Research Center",
+          "date": "08/03 - 08/12",
+          "dem": 50,
+          "rep": 45,
+          "margin": "5",
+          "partisan": null
+        },
         {
           "source": "Harper Polling",
           "date": "08/09 - 08/10",
@@ -154,14 +162,6 @@
           "dem": 50,
           "rep": 42,
           "margin": "8",
-          "partisan": null
-        },
-        {
-          "source": "Harper Polling",
-          "date": "03/22 - 03/23",
-          "dem": 48.9,
-          "rep": 41.1,
-          "margin": "7.8",
           "partisan": null
         }
       ],
@@ -502,13 +502,21 @@
     "New Hampshire": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 46.9,
-        "rep": 42,
-        "margin": "4.9",
-        "date": "06/25",
-        "dateRange": "03/23 - 06/25"
+        "dem": 47.6,
+        "rep": 41.3,
+        "margin": "6.3",
+        "date": "08/18",
+        "dateRange": "03/23 - 08/18"
       },
       "polls": [
+        {
+          "source": "Saint Anselm College Survey Center",
+          "date": "08/17 - 08/18",
+          "dem": 48,
+          "rep": 41,
+          "margin": "7",
+          "partisan": null
+        },
         {
           "source": "Saint Anselm",
           "date": "06/24 - 06/25",
@@ -578,14 +586,6 @@
           "date": "11/18 - 11/19",
           "dem": 44,
           "rep": 41,
-          "margin": "3",
-          "partisan": null
-        },
-        {
-          "source": "co/efficient",
-          "date": "10/09 - 10/13",
-          "dem": 45,
-          "rep": 42,
           "margin": "3",
           "partisan": null
         }
@@ -680,13 +680,21 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 46.9,
-        "rep": 45.5,
-        "margin": "1.4",
-        "date": "08/10",
-        "dateRange": "03/17 - 08/10"
+        "dem": 46,
+        "rep": 44.3,
+        "margin": "1.7",
+        "date": "08/13",
+        "dateRange": "03/17 - 08/13"
       },
       "polls": [
+        {
+          "source": "The Texas Politics Project at the University of Texas at Austin/YouGov",
+          "date": "08/05 - 08/13",
+          "dem": 42,
+          "rep": 39,
+          "margin": "3",
+          "partisan": null
+        },
         {
           "source": "Emerson College",
           "date": "08/09 - 08/10",
@@ -757,14 +765,6 @@
           "dem": 42,
           "rep": 43,
           "margin": "-1",
-          "partisan": null
-        },
-        {
-          "source": "Quantus Insights",
-          "date": "06/03 - 06/04",
-          "dem": 43,
-          "rep": 45,
-          "margin": "-2",
           "partisan": null
         }
       ],
@@ -875,9 +875,9 @@
     }
   },
   "trumpApproval": {
-    "approve": 41.1,
-    "disapprove": 55.5,
-    "net": -14.4
+    "approve": 37.6,
+    "disapprove": 59.4,
+    "net": -21.8
   },
   "nateApproval": []
 }
