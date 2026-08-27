@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-08-26",
-  "date": "2026-08-26",
-  "fetchedAt": "2026-08-26T09:33:16.262Z",
+  "lastUpdated": "2026-08-27",
+  "date": "2026-08-27",
+  "fetchedAt": "2026-08-27T19:21:46.604Z",
   "markets": {
     "polymarket": {
-      "houseD": 88,
-      "senateR": 50,
-      "splitPct": 38,
-      "dSweepPct": 49,
+      "houseD": 89,
+      "senateR": 51,
+      "splitPct": 34,
+      "dSweepPct": 50,
       "repSweepPct": 12
     },
     "kalshi": {
-      "houseD": 85,
-      "senateR": 53,
+      "houseD": 84,
+      "senateR": 52,
       "dSweepPct": 46,
       "splitPct": 38,
       "repSweepPct": 15,
-      "updatedDate": "2026-08-26"
+      "updatedDate": "2026-08-27"
     }
   },
   "genericBallot": {
@@ -502,13 +502,21 @@
     "New Hampshire": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47.6,
-        "rep": 41.3,
-        "margin": "6.3",
-        "date": "08/18",
-        "dateRange": "03/23 - 08/18"
+        "dem": 46.5,
+        "rep": 42,
+        "margin": "4.5",
+        "date": "08/24",
+        "dateRange": "03/23 - 08/24"
       },
       "polls": [
+        {
+          "source": "University of New Hampshire",
+          "date": "08/20 - 08/24",
+          "dem": 43,
+          "rep": 45,
+          "margin": "-2",
+          "partisan": null
+        },
         {
           "source": "Saint Anselm College Survey Center",
           "date": "08/17 - 08/18",
@@ -579,14 +587,6 @@
           "dem": 42.3,
           "rep": 35.6,
           "margin": "6.7",
-          "partisan": null
-        },
-        {
-          "source": "Saint Anselm",
-          "date": "11/18 - 11/19",
-          "dem": 44,
-          "rep": 41,
-          "margin": "3",
           "partisan": null
         }
       ],
@@ -680,13 +680,21 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 46,
-        "rep": 44.3,
-        "margin": "1.7",
-        "date": "08/13",
-        "dateRange": "03/17 - 08/13"
+        "dem": 46.4,
+        "rep": 44.2,
+        "margin": "2.2",
+        "date": "08/24",
+        "dateRange": "03/17 - 08/24"
       },
       "polls": [
+        {
+          "source": "Slingshot Strategies",
+          "date": "08/21 - 08/24",
+          "dem": 48,
+          "rep": 42,
+          "margin": "6",
+          "partisan": null
+        },
         {
           "source": "The Texas Politics Project at the University of Texas at Austin/YouGov",
           "date": "08/05 - 08/13",
@@ -758,14 +766,6 @@
           "rep": 47,
           "margin": "0",
           "partisan": null
-        },
-        {
-          "source": "Texas Politics Project at the University of Texas/YouGov",
-          "date": "06/05 - 06/12",
-          "dem": 42,
-          "rep": 43,
-          "margin": "-1",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -794,13 +794,21 @@
     "Iowa": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 46.5,
-        "rep": 47.4,
-        "margin": "-0.9",
-        "date": "08/04",
-        "dateRange": "04/09 - 08/04"
+        "dem": 44.1,
+        "rep": 46.5,
+        "margin": "-2.4",
+        "date": "08/23",
+        "dateRange": "04/09 - 08/23"
       },
       "polls": [
+        {
+          "source": "Suffolk University",
+          "date": "08/20 - 08/23",
+          "dem": 40.8,
+          "rep": 45.4,
+          "margin": "-4.6",
+          "partisan": null
+        },
         {
           "source": "Emerson College",
           "date": "08/02 - 08/04",
