@@ -1,13 +1,13 @@
 {
-  "lastUpdated": "2026-08-31",
-  "date": "2026-08-31",
-  "fetchedAt": "2026-08-31T16:35:20.694Z",
+  "lastUpdated": "2026-09-01",
+  "date": "2026-09-01",
+  "fetchedAt": "2026-09-01T13:50:26.868Z",
   "markets": {
     "polymarket": {
       "houseD": 89,
       "senateR": 50,
       "splitPct": 36,
-      "dSweepPct": 51,
+      "dSweepPct": 50,
       "repSweepPct": 12
     },
     "kalshi": {
@@ -16,7 +16,7 @@
       "dSweepPct": 46,
       "splitPct": 38,
       "repSweepPct": 15,
-      "updatedDate": "2026-08-31"
+      "updatedDate": "2026-09-01"
     }
   },
   "genericBallot": {
@@ -433,11 +433,11 @@
     "Georgia": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 51.3,
+        "dem": 51.2,
         "rep": 42.8,
-        "margin": "8.5",
+        "margin": "8.4",
         "date": "08/17",
-        "dateRange": "04/09 - 08/17"
+        "dateRange": "03/02 - 08/17"
       },
       "polls": [
         {
