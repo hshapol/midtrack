@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-09-01",
-  "date": "2026-09-01",
-  "fetchedAt": "2026-09-01T13:50:26.868Z",
+  "lastUpdated": "2026-09-02",
+  "date": "2026-09-02",
+  "fetchedAt": "2026-09-02T13:07:55.368Z",
   "markets": {
     "polymarket": {
-      "houseD": 89,
+      "houseD": 90,
       "senateR": 50,
       "splitPct": 36,
-      "dSweepPct": 50,
-      "repSweepPct": 12
+      "dSweepPct": 51,
+      "repSweepPct": 11
     },
     "kalshi": {
       "houseD": 84,
-      "senateR": 52,
+      "senateR": 53,
       "dSweepPct": 46,
       "splitPct": 38,
       "repSweepPct": 15,
-      "updatedDate": "2026-09-01"
+      "updatedDate": "2026-09-02"
     }
   },
   "genericBallot": {
@@ -340,9 +340,9 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 46,
-        "rep": 45.3,
-        "margin": "0.7",
+        "dem": 46.7,
+        "rep": 45.2,
+        "margin": "1.5",
         "date": "08/28",
         "dateRange": "06/30 - 08/28"
       },
@@ -353,6 +353,14 @@
           "dem": 47,
           "rep": 43,
           "margin": "4",
+          "partisan": null
+        },
+        {
+          "source": "Michigan State University Institute for Public Policy and Social Research/YouGov",
+          "date": "08/10 - 08/20",
+          "dem": 50,
+          "rep": 45,
+          "margin": "5",
           "partisan": null
         },
         {
@@ -418,14 +426,6 @@
           "rep": 41,
           "margin": "1",
           "partisan": null
-        },
-        {
-          "source": "Glengariff Group, Inc.",
-          "date": "04/28 - 05/01",
-          "dem": 40,
-          "rep": 45,
-          "margin": "-5",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -433,11 +433,11 @@
     "Georgia": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 51.2,
+        "dem": 51.3,
         "rep": 42.8,
-        "margin": "8.4",
+        "margin": "8.5",
         "date": "08/17",
-        "dateRange": "03/02 - 08/17"
+        "dateRange": "04/09 - 08/17"
       },
       "polls": [
         {
