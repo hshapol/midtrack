@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-09-03",
-  "date": "2026-09-03",
-  "fetchedAt": "2026-09-03T13:09:30.481Z",
+  "lastUpdated": "2026-09-04",
+  "date": "2026-09-04",
+  "fetchedAt": "2026-09-04T13:03:19.033Z",
   "markets": {
     "polymarket": {
       "houseD": 90,
       "senateR": 50,
       "splitPct": 36,
-      "dSweepPct": 51,
-      "repSweepPct": 11
+      "dSweepPct": 50,
+      "repSweepPct": 12
     },
     "kalshi": {
       "houseD": 84,
       "senateR": 53,
-      "dSweepPct": 46,
+      "dSweepPct": 47,
       "splitPct": 38,
-      "repSweepPct": 15,
-      "updatedDate": "2026-09-03"
+      "repSweepPct": 16,
+      "updatedDate": "2026-09-04"
     }
   },
   "genericBallot": {
@@ -596,12 +596,20 @@
       "avg": {
         "source": "SB-style Avg",
         "dem": 50.3,
-        "rep": 49,
-        "margin": "1.3",
-        "date": "08/05",
-        "dateRange": "06/29 - 08/05"
+        "rep": 49.3,
+        "margin": "1",
+        "date": "08/23",
+        "dateRange": "06/29 - 08/23"
       },
       "polls": [
+        {
+          "source": "Alaska Survey Research",
+          "date": "08/20 - 08/23",
+          "dem": 50.6,
+          "rep": 49.4,
+          "margin": "1.2",
+          "partisan": null
+        },
         {
           "source": "Alaska Survey Research",
           "date": "08/02 - 08/05",
@@ -664,14 +672,6 @@
           "dem": 42.5,
           "rep": 46.7,
           "margin": "-4.2",
-          "partisan": null
-        },
-        {
-          "source": "Data for Progress",
-          "date": "07/21 - 07/27",
-          "dem": 45,
-          "rep": 46,
-          "margin": "-1",
           "partisan": null
         }
       ],
@@ -794,13 +794,21 @@
     "Iowa": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 44.1,
-        "rep": 46.5,
-        "margin": "-2.4",
-        "date": "08/23",
-        "dateRange": "04/09 - 08/23"
+        "dem": 44.3,
+        "rep": 48,
+        "margin": "-3.7",
+        "date": "09/01",
+        "dateRange": "04/09 - 09/01"
       },
       "polls": [
+        {
+          "source": "Emerson College",
+          "date": "08/31 - 09/01",
+          "dem": 45,
+          "rep": 50,
+          "margin": "-5",
+          "partisan": null
+        },
         {
           "source": "Suffolk University",
           "date": "08/20 - 08/23",
