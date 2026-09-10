@@ -1,34 +1,48 @@
 {
-  "lastUpdated": "2026-09-09",
-  "date": "2026-09-09",
-  "fetchedAt": "2026-09-09T13:17:33.365Z",
+  "lastUpdated": "2026-09-10",
+  "date": "2026-09-10",
+  "fetchedAt": "2026-09-10T13:15:13.582Z",
   "markets": {
     "polymarket": {
-      "houseD": 88,
+      "houseD": 87,
       "senateR": 49,
       "splitPct": 36,
-      "dSweepPct": 51,
-      "repSweepPct": 12
+      "dSweepPct": 50,
+      "repSweepPct": 14
     },
     "kalshi": {
       "houseD": 84,
       "senateR": 53,
-      "dSweepPct": 47,
+      "dSweepPct": 46,
       "splitPct": 36,
-      "repSweepPct": 16,
-      "updatedDate": "2026-09-09"
+      "repSweepPct": 15,
+      "updatedDate": "2026-09-10"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 47,
-      "rep": 41.2,
-      "margin": "5.8",
-      "date": "08/24",
-      "dateRange": "03/20 - 08/24"
+      "dem": 47.4,
+      "rep": 40.8,
+      "margin": "6.6",
+      "date": "09/08",
+      "dateRange": "03/20 - 09/08"
     },
     "polls": [
+      {
+        "source": "YouGov",
+        "date": "09/08",
+        "dem": 49,
+        "rep": 38,
+        "margin": "11"
+      },
+      {
+        "source": "Morning Consult",
+        "date": "09/06",
+        "dem": 46,
+        "rep": 42,
+        "margin": "4"
+      },
       {
         "source": "Ipsos",
         "date": "08/24",
@@ -56,20 +70,6 @@
         "dem": 37,
         "rep": 31,
         "margin": "6"
-      },
-      {
-        "source": "Noble Predictive Insights",
-        "date": "08/16",
-        "dem": 47,
-        "rep": 42,
-        "margin": "5"
-      },
-      {
-        "source": "Morning Consult",
-        "date": "07/12",
-        "dem": 46,
-        "rep": 43,
-        "margin": "3"
       }
     ]
   },
