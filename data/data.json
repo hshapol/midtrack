@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-09-17",
-  "date": "2026-09-17",
-  "fetchedAt": "2026-09-17T14:01:12.474Z",
+  "lastUpdated": "2026-09-18",
+  "date": "2026-09-18",
+  "fetchedAt": "2026-09-18T13:17:26.572Z",
   "markets": {
     "polymarket": {
-      "houseD": 89,
-      "senateR": 41,
+      "houseD": 90,
+      "senateR": 42,
       "splitPct": 31,
       "dSweepPct": 60,
       "repSweepPct": 11
     },
     "kalshi": {
-      "houseD": 88,
-      "senateR": 43,
-      "dSweepPct": 57,
-      "splitPct": 31,
-      "repSweepPct": 11,
-      "updatedDate": "2026-09-17"
+      "houseD": 89,
+      "senateR": 42,
+      "dSweepPct": 58,
+      "splitPct": 30,
+      "repSweepPct": 10,
+      "updatedDate": "2026-09-18"
     }
   },
   "genericBallot": {
@@ -224,14 +224,6 @@
           "rep": 49,
           "margin": "2",
           "partisan": null
-        },
-        {
-          "source": "University of New Hampshire Survey Center",
-          "date": "05/21 - 05/25",
-          "dem": 51,
-          "rep": 42,
-          "margin": "9",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -332,13 +324,29 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 46.7,
-        "rep": 45.2,
-        "margin": "1.5",
-        "date": "08/28",
-        "dateRange": "06/30 - 08/28"
+        "dem": 47.3,
+        "rep": 45.3,
+        "margin": "2",
+        "date": "09/14",
+        "dateRange": "06/30 - 09/14"
       },
       "polls": [
+        {
+          "source": "The Washington Post/George Mason University School of Policy and Government",
+          "date": "09/10 - 09/14",
+          "dem": 48,
+          "rep": 45,
+          "margin": "3",
+          "partisan": null
+        },
+        {
+          "source": "Emerson College",
+          "date": "09/12 - 09/14",
+          "dem": 48.2,
+          "rep": 45.7,
+          "margin": "2.5",
+          "partisan": null
+        },
         {
           "source": "EPIC-MRA",
           "date": "08/22 - 08/28",
@@ -401,22 +409,6 @@
           "dem": 38.7,
           "rep": 49,
           "margin": "-10.3",
-          "partisan": null
-        },
-        {
-          "source": "Quantus Insights",
-          "date": "06/29 - 06/30",
-          "dem": 45.2,
-          "rep": 44.1,
-          "margin": "1.1",
-          "partisan": null
-        },
-        {
-          "source": "Mitchell Research & Communications",
-          "date": "05/01 - 05/07",
-          "dem": 42,
-          "rep": 41,
-          "margin": "1",
           "partisan": null
         }
       ],
@@ -587,13 +579,21 @@
     "Alaska": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 50.3,
-        "rep": 49.3,
-        "margin": "1",
-        "date": "08/23",
-        "dateRange": "06/29 - 08/23"
+        "dem": 51.7,
+        "rep": 48.1,
+        "margin": "3.6",
+        "date": "09/11",
+        "dateRange": "06/29 - 09/11"
       },
       "polls": [
+        {
+          "source": "Fabrizio, Lee & Associates/Impact Research",
+          "date": "09/08 - 09/11",
+          "dem": 53,
+          "rep": 47,
+          "margin": "6",
+          "partisan": null
+        },
         {
           "source": "Alaska Survey Research",
           "date": "08/20 - 08/23",
@@ -657,14 +657,6 @@
           "rep": 46.4,
           "margin": "1.6",
           "partisan": null
-        },
-        {
-          "source": "Alaska Survey Research",
-          "date": "07/29 - 08/01",
-          "dem": 42.5,
-          "rep": 46.7,
-          "margin": "-4.2",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -672,13 +664,29 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47,
+        "dem": 47.2,
         "rep": 44.4,
-        "margin": "2.6",
-        "date": "09/09",
-        "dateRange": "04/20 - 09/09"
+        "margin": "2.8",
+        "date": "09/14",
+        "dateRange": "04/20 - 09/14"
       },
       "polls": [
+        {
+          "source": "Emerson College",
+          "date": "09/12 - 09/14",
+          "dem": 47,
+          "rep": 46,
+          "margin": "1",
+          "partisan": null
+        },
+        {
+          "source": "ReconMR/Siena University",
+          "date": "09/08 - 09/11",
+          "dem": 49,
+          "rep": 43,
+          "margin": "6",
+          "partisan": null
+        },
         {
           "source": "InsiderAdvantage",
           "date": "09/08 - 09/09",
@@ -741,22 +749,6 @@
           "dem": 47,
           "rep": 45,
           "margin": "2",
-          "partisan": null
-        },
-        {
-          "source": "ReconMR/Siena University",
-          "date": "07/27 - 07/30",
-          "dem": 47,
-          "rep": 43,
-          "margin": "4",
-          "partisan": null
-        },
-        {
-          "source": "Beacon Research/Shaw & Co. Research",
-          "date": "07/23 - 07/27",
-          "dem": 51,
-          "rep": 48,
-          "margin": "3",
           "partisan": null
         }
       ],
