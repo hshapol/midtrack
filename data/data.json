@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-09-24",
-  "date": "2026-09-24",
-  "fetchedAt": "2026-09-24T13:56:34.782Z",
+  "lastUpdated": "2026-09-25",
+  "date": "2026-09-25",
+  "fetchedAt": "2026-09-25T14:20:42.255Z",
   "markets": {
     "polymarket": {
       "houseD": 93,
       "senateR": 38,
-      "splitPct": 31,
+      "splitPct": 28,
       "dSweepPct": 64,
       "repSweepPct": 8
     },
     "kalshi": {
       "houseD": 92,
-      "senateR": 39,
-      "dSweepPct": 61,
-      "splitPct": 30,
-      "repSweepPct": 7,
-      "updatedDate": "2026-09-24"
+      "senateR": 40,
+      "dSweepPct": 60,
+      "splitPct": 29,
+      "repSweepPct": 8,
+      "updatedDate": "2026-09-25"
     }
   },
   "genericBallot": {
@@ -78,8 +78,8 @@
       "avg": {
         "source": "SB-style Avg",
         "dem": 49.6,
-        "rep": 40.9,
-        "margin": "8.7",
+        "rep": 40.8,
+        "margin": "8.8",
         "date": "09/17",
         "dateRange": "04/06 - 09/17"
       },
@@ -90,6 +90,14 @@
           "dem": 48.4,
           "rep": 42.5,
           "margin": "5.9",
+          "partisan": null
+        },
+        {
+          "source": "High Point University Survey Research Center",
+          "date": "09/09 - 09/16",
+          "dem": 50,
+          "rep": 42,
+          "margin": "8",
           "partisan": null
         },
         {
@@ -155,14 +163,6 @@
           "rep": 35,
           "margin": "16",
           "partisan": null
-        },
-        {
-          "source": "Public Policy Polling",
-          "date": "07/10 - 07/11",
-          "dem": 48,
-          "rep": 44,
-          "margin": "4",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -207,22 +207,6 @@
           "dem": 46,
           "rep": 45,
           "margin": "1",
-          "partisan": null
-        },
-        {
-          "source": "The Public Sentiment Institute",
-          "date": "06/08 - 06/08",
-          "dem": 43,
-          "rep": 44,
-          "margin": "-1",
-          "partisan": null
-        },
-        {
-          "source": "Tavern Research",
-          "date": "06/05 - 06/08",
-          "dem": 51,
-          "rep": 49,
-          "margin": "2",
           "partisan": null
         }
       ],
@@ -324,27 +308,35 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47.2,
-        "rep": 44.6,
+        "dem": 47.7,
+        "rep": 45.1,
         "margin": "2.6",
-        "date": "09/20",
-        "dateRange": "06/30 - 09/20"
+        "date": "09/23",
+        "dateRange": "06/30 - 09/23"
       },
       "polls": [
+        {
+          "source": "co/efficient",
+          "date": "09/21 - 09/23",
+          "dem": 50,
+          "rep": 50,
+          "margin": "0",
+          "partisan": null
+        },
+        {
+          "source": "The New York Times/Siena University",
+          "date": "09/15 - 09/22",
+          "dem": 49,
+          "rep": 44,
+          "margin": "5",
+          "partisan": null
+        },
         {
           "source": "Suffolk University",
           "date": "09/16 - 09/20",
           "dem": 47,
           "rep": 40,
           "margin": "7",
-          "partisan": null
-        },
-        {
-          "source": "InsiderAdvantage",
-          "date": "09/16 - 09/17",
-          "dem": 47,
-          "rep": 45,
-          "margin": "2",
           "partisan": null
         },
         {
@@ -401,14 +393,6 @@
           "dem": 47,
           "rep": 51,
           "margin": "-4",
-          "partisan": null
-        },
-        {
-          "source": "EPIC-MRA",
-          "date": "07/24 - 07/31",
-          "dem": 43,
-          "rep": 46,
-          "margin": "-3",
           "partisan": null
         }
       ],
@@ -486,13 +470,21 @@
     "New Hampshire": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47.2,
-        "rep": 41.1,
-        "margin": "6.1",
-        "date": "09/17",
-        "dateRange": "06/25 - 09/17"
+        "dem": 47.6,
+        "rep": 41.6,
+        "margin": "6",
+        "date": "09/22",
+        "dateRange": "06/25 - 09/22"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "09/15 - 09/22",
+          "dem": 50,
+          "rep": 45,
+          "margin": "5",
+          "partisan": null
+        },
         {
           "source": "InsiderAdvantage",
           "date": "09/16 - 09/17",
@@ -563,14 +555,6 @@
           "dem": 45,
           "rep": 41,
           "margin": "4",
-          "partisan": null
-        },
-        {
-          "source": "University of New Hampshire",
-          "date": "01/15 - 01/19",
-          "dem": 50,
-          "rep": 45,
-          "margin": "5",
           "partisan": null
         }
       ],
