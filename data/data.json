@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-09-29",
-  "date": "2026-09-29",
-  "fetchedAt": "2026-09-29T15:16:09.168Z",
+  "lastUpdated": "2026-09-30",
+  "date": "2026-09-30",
+  "fetchedAt": "2026-09-30T15:29:54.585Z",
   "markets": {
     "polymarket": {
       "houseD": 93,
       "senateR": 38,
-      "splitPct": 31,
+      "splitPct": 28,
       "dSweepPct": 63,
       "repSweepPct": 8
     },
     "kalshi": {
-      "houseD": 92,
+      "houseD": 91,
       "senateR": 38,
       "dSweepPct": 61,
       "splitPct": 28,
       "repSweepPct": 8,
-      "updatedDate": "2026-09-29"
+      "updatedDate": "2026-09-30"
     }
   },
   "genericBallot": {
@@ -26,7 +26,7 @@
       "rep": 40.8,
       "margin": "6.7",
       "date": "09/08",
-      "dateRange": "03/30 - 09/08"
+      "dateRange": "04/09 - 09/08"
     },
     "polls": [
       {
@@ -207,13 +207,29 @@
     "Ohio (Special)": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.7,
-        "rep": 44.6,
-        "margin": "4.1",
-        "date": "09/23",
-        "dateRange": "04/09 - 09/23"
+        "dem": 48.8,
+        "rep": 44.1,
+        "margin": "4.7",
+        "date": "09/27",
+        "dateRange": "04/09 - 09/27"
       },
       "polls": [
+        {
+          "source": "Marist University",
+          "date": "09/24 - 09/27",
+          "dem": 51,
+          "rep": 43,
+          "margin": "8",
+          "partisan": null
+        },
+        {
+          "source": "Big Data Poll",
+          "date": "09/26 - 09/27",
+          "dem": 46.3,
+          "rep": 42.6,
+          "margin": "3.7",
+          "partisan": null
+        },
         {
           "source": "Quantus Insights",
           "date": "09/21 - 09/23",
@@ -277,22 +293,6 @@
           "rep": 50,
           "margin": "-3",
           "partisan": null
-        },
-        {
-          "source": "Echelon Insights",
-          "date": "04/03 - 04/09",
-          "dem": 45,
-          "rep": 51,
-          "margin": "-6",
-          "partisan": null
-        },
-        {
-          "source": "Quantus Insights",
-          "date": "03/13 - 03/14",
-          "dem": 44,
-          "rep": 46,
-          "margin": "-2",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -300,9 +300,9 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47.7,
-        "rep": 45.1,
-        "margin": "2.6",
+        "dem": 47.3,
+        "rep": 44.5,
+        "margin": "2.8",
         "date": "09/23",
         "dateRange": "06/30 - 09/23"
       },
@@ -320,6 +320,14 @@
           "date": "09/15 - 09/22",
           "dem": 49,
           "rep": 44,
+          "margin": "5",
+          "partisan": null
+        },
+        {
+          "source": "Cygnal/Beacon Research",
+          "date": "09/18 - 09/21",
+          "dem": 45,
+          "rep": 40,
           "margin": "5",
           "partisan": null
         },
@@ -377,14 +385,6 @@
           "dem": 48,
           "rep": 47,
           "margin": "1",
-          "partisan": null
-        },
-        {
-          "source": "Beacon Research/Shaw & Co. Research",
-          "date": "08/06 - 08/10",
-          "dem": 47,
-          "rep": 51,
-          "margin": "-4",
           "partisan": null
         }
       ],
