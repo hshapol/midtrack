@@ -1,34 +1,48 @@
 {
-  "lastUpdated": "2026-09-30",
-  "date": "2026-09-30",
-  "fetchedAt": "2026-09-30T15:29:54.585Z",
+  "lastUpdated": "2026-10-01",
+  "date": "2026-10-01",
+  "fetchedAt": "2026-10-01T15:52:55.066Z",
   "markets": {
     "polymarket": {
       "houseD": 93,
       "senateR": 38,
       "splitPct": 28,
-      "dSweepPct": 63,
+      "dSweepPct": 64,
       "repSweepPct": 8
     },
     "kalshi": {
-      "houseD": 91,
+      "houseD": 92,
       "senateR": 38,
       "dSweepPct": 61,
       "splitPct": 28,
       "repSweepPct": 8,
-      "updatedDate": "2026-09-30"
+      "updatedDate": "2026-10-01"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 47.5,
-      "rep": 40.8,
-      "margin": "6.7",
-      "date": "09/08",
-      "dateRange": "04/09 - 09/08"
+      "dem": 48.1,
+      "rep": 41.5,
+      "margin": "6.6",
+      "date": "09/28",
+      "dateRange": "04/09 - 09/28"
     },
     "polls": [
+      {
+        "source": "HarrisX/Harris",
+        "date": "09/28",
+        "dem": 51,
+        "rep": 49,
+        "margin": "2"
+      },
+      {
+        "source": "The Argument/Verasight",
+        "date": "09/22",
+        "dem": 55,
+        "rep": 45,
+        "margin": "10"
+      },
       {
         "source": "YouGov",
         "date": "09/08",
@@ -56,20 +70,6 @@
         "dem": 35,
         "rep": 29,
         "margin": "6"
-      },
-      {
-        "source": "YouGov",
-        "date": "08/24",
-        "dem": 46,
-        "rep": 40,
-        "margin": "6"
-      },
-      {
-        "source": "YouGov",
-        "date": "08/24",
-        "dem": 37,
-        "rep": 31,
-        "margin": "6"
       }
     ]
   },
@@ -77,13 +77,21 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49.6,
-        "rep": 40.8,
-        "margin": "8.8",
-        "date": "09/17",
-        "dateRange": "04/06 - 09/17"
+        "dem": 49.8,
+        "rep": 40.7,
+        "margin": "9.1",
+        "date": "09/29",
+        "dateRange": "04/06 - 09/29"
       },
       "polls": [
+        {
+          "source": "Big Data Poll",
+          "date": "09/27 - 09/29",
+          "dem": 51,
+          "rep": 39,
+          "margin": "12",
+          "partisan": null
+        },
         {
           "source": "InsiderAdvantage",
           "date": "09/16 - 09/17",
@@ -155,14 +163,6 @@
           "rep": 44,
           "margin": "9",
           "partisan": null
-        },
-        {
-          "source": "Elon University/YouGov",
-          "date": "07/21 - 07/23",
-          "dem": 51,
-          "rep": 35,
-          "margin": "16",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -170,11 +170,11 @@
     "Maine": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47.8,
-        "rep": 46.4,
-        "margin": "1.4",
+        "dem": 47.7,
+        "rep": 46.6,
+        "margin": "1.1",
         "date": "06/27",
-        "dateRange": "03/31 - 06/27"
+        "dateRange": "04/09 - 06/27"
       },
       "polls": [
         {
@@ -191,14 +191,6 @@
           "dem": 49,
           "rep": 47,
           "margin": "2",
-          "partisan": null
-        },
-        {
-          "source": "Wick",
-          "date": "06/11 - 06/14",
-          "dem": 47.6,
-          "rep": 45.4,
-          "margin": "2.2",
           "partisan": null
         }
       ],
@@ -300,13 +292,21 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47.3,
-        "rep": 44.5,
-        "margin": "2.8",
-        "date": "09/23",
-        "dateRange": "06/30 - 09/23"
+        "dem": 47.8,
+        "rep": 44.9,
+        "margin": "2.9",
+        "date": "09/28",
+        "dateRange": "06/30 - 09/28"
       },
       "polls": [
+        {
+          "source": "Beacon Research/Shaw & Co. Research",
+          "date": "09/24 - 09/28",
+          "dem": 50,
+          "rep": 49,
+          "margin": "1",
+          "partisan": null
+        },
         {
           "source": "co/efficient",
           "date": "09/21 - 09/23",
@@ -377,14 +377,6 @@
           "dem": 46,
           "rep": 39,
           "margin": "7",
-          "partisan": null
-        },
-        {
-          "source": "Fabrizio, Lee & Associates/Impact Research",
-          "date": "08/09 - 08/11",
-          "dem": 48,
-          "rep": 47,
-          "margin": "1",
           "partisan": null
         }
       ],
