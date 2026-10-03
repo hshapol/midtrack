@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-10-02",
-  "date": "2026-10-02",
-  "fetchedAt": "2026-10-02T15:14:11.295Z",
+  "lastUpdated": "2026-10-03",
+  "date": "2026-10-03",
+  "fetchedAt": "2026-10-03T14:05:50.606Z",
   "markets": {
     "polymarket": {
-      "houseD": 93,
+      "houseD": 94,
       "senateR": 36,
-      "splitPct": 30,
-      "dSweepPct": 64,
-      "repSweepPct": 8
+      "splitPct": 28,
+      "dSweepPct": 65,
+      "repSweepPct": 7
     },
     "kalshi": {
       "houseD": 92,
-      "senateR": 38,
-      "dSweepPct": 61,
+      "senateR": 36,
+      "dSweepPct": 63,
       "splitPct": 29,
       "repSweepPct": 8,
-      "updatedDate": "2026-10-02"
+      "updatedDate": "2026-10-03"
     }
   },
   "genericBallot": {
@@ -555,13 +555,21 @@
     "Alaska": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 50,
-        "rep": 48.4,
-        "margin": "1.6",
-        "date": "09/17",
-        "dateRange": "06/29 - 09/17"
+        "dem": 49.3,
+        "rep": 48.2,
+        "margin": "1.1",
+        "date": "09/30",
+        "dateRange": "06/29 - 09/30"
       },
       "polls": [
+        {
+          "source": "Quantus Insights",
+          "date": "09/28 - 09/30",
+          "dem": 47.2,
+          "rep": 47.8,
+          "margin": "-0.6",
+          "partisan": null
+        },
         {
           "source": "co/efficient",
           "date": "09/14 - 09/17",
@@ -633,14 +641,6 @@
           "rep": 47.6,
           "margin": "4.8",
           "partisan": null
-        },
-        {
-          "source": "Alaska Survey Research",
-          "date": "01/08 - 01/11",
-          "dem": 48,
-          "rep": 46.4,
-          "margin": "1.6",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -648,13 +648,21 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47.4,
-        "rep": 44.8,
-        "margin": "2.6",
-        "date": "09/22",
-        "dateRange": "04/20 - 09/22"
+        "dem": 47.9,
+        "rep": 45.5,
+        "margin": "2.4",
+        "date": "09/28",
+        "dateRange": "04/20 - 09/28"
       },
       "polls": [
+        {
+          "source": "Beacon Research/Shaw & Co. Research",
+          "date": "09/24 - 09/28",
+          "dem": 51,
+          "rep": 49,
+          "margin": "2",
+          "partisan": null
+        },
         {
           "source": "Slingshot Strategies",
           "date": "09/19 - 09/22",
@@ -726,14 +734,6 @@
           "rep": 39,
           "margin": "3",
           "partisan": null
-        },
-        {
-          "source": "Emerson College",
-          "date": "08/09 - 08/10",
-          "dem": 46,
-          "rep": 47,
-          "margin": "-1",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -762,13 +762,21 @@
     "Iowa": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 45,
-        "rep": 45.5,
-        "margin": "-0.5",
-        "date": "09/20",
-        "dateRange": "04/09 - 09/20"
+        "dem": 46.2,
+        "rep": 46,
+        "margin": "0.2",
+        "date": "09/28",
+        "dateRange": "04/09 - 09/28"
       },
       "polls": [
+        {
+          "source": "Beacon Research/Shaw & Co. Research",
+          "date": "09/24 - 09/28",
+          "dem": 49,
+          "rep": 47,
+          "margin": "2",
+          "partisan": null
+        },
         {
           "source": "Marist University",
           "date": "09/17 - 09/20",
