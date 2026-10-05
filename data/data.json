@@ -1,34 +1,41 @@
 {
-  "lastUpdated": "2026-10-04",
-  "date": "2026-10-04",
-  "fetchedAt": "2026-10-04T14:32:04.676Z",
+  "lastUpdated": "2026-10-05",
+  "date": "2026-10-05",
+  "fetchedAt": "2026-10-05T17:39:03.419Z",
   "markets": {
     "polymarket": {
-      "houseD": 94,
-      "senateR": 35,
-      "splitPct": 28,
-      "dSweepPct": 67,
-      "repSweepPct": 7
+      "houseD": 93,
+      "senateR": 34,
+      "splitPct": 27,
+      "dSweepPct": 66,
+      "repSweepPct": 8
     },
     "kalshi": {
       "houseD": 92,
-      "senateR": 38,
+      "senateR": 36,
       "dSweepPct": 63,
-      "splitPct": 29,
+      "splitPct": 28,
       "repSweepPct": 8,
-      "updatedDate": "2026-10-04"
+      "updatedDate": "2026-10-05"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 48.1,
-      "rep": 41.5,
-      "margin": "6.6",
-      "date": "09/28",
-      "dateRange": "04/09 - 09/28"
+      "dem": 49.4,
+      "rep": 42.3,
+      "margin": "7.1",
+      "date": "10/02",
+      "dateRange": "04/09 - 10/02"
     },
     "polls": [
+      {
+        "source": "YouGov - CBS News",
+        "date": "10/02",
+        "dem": 54,
+        "rep": 45,
+        "margin": "9"
+      },
       {
         "source": "HarrisX/Harris",
         "date": "09/28",
@@ -62,13 +69,6 @@
         "date": "08/24",
         "dem": 41,
         "rep": 35,
-        "margin": "6"
-      },
-      {
-        "source": "Ipsos",
-        "date": "08/24",
-        "dem": 35,
-        "rep": 29,
         "margin": "6"
       }
     ]
@@ -377,13 +377,21 @@
     "Georgia": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 51.5,
-        "rep": 42.7,
-        "margin": "8.8",
-        "date": "09/23",
-        "dateRange": "04/09 - 09/23"
+        "dem": 52,
+        "rep": 43.1,
+        "margin": "8.9",
+        "date": "10/03",
+        "dateRange": "04/09 - 10/03"
       },
       "polls": [
+        {
+          "source": "Wedgewood Polls",
+          "date": "10/02 - 10/03",
+          "dem": 55,
+          "rep": 45,
+          "margin": "10",
+          "partisan": null
+        },
         {
           "source": "Big Data Poll",
           "date": "09/21 - 09/23",
