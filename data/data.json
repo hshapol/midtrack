@@ -1,34 +1,41 @@
 {
-  "lastUpdated": "2026-10-09",
-  "date": "2026-10-09",
-  "fetchedAt": "2026-10-09T15:41:40.413Z",
+  "lastUpdated": "2026-10-10",
+  "date": "2026-10-10",
+  "fetchedAt": "2026-10-10T14:56:46.504Z",
   "markets": {
     "polymarket": {
       "houseD": 91,
       "senateR": 37,
-      "splitPct": 28,
-      "dSweepPct": 63,
+      "splitPct": 30,
+      "dSweepPct": 62,
       "repSweepPct": 9
     },
     "kalshi": {
-      "houseD": 90,
+      "houseD": 89,
       "senateR": 40,
       "dSweepPct": 60,
-      "splitPct": 28,
+      "splitPct": 29,
       "repSweepPct": 10,
-      "updatedDate": "2026-10-09"
+      "updatedDate": "2026-10-10"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 49.4,
-      "rep": 42.3,
-      "margin": "7.1",
-      "date": "10/02",
-      "dateRange": "04/13 - 10/02"
+      "dem": 47.6,
+      "rep": 40.2,
+      "margin": "7.4",
+      "date": "10/04",
+      "dateRange": "04/13 - 10/04"
     },
     "polls": [
+      {
+        "source": "Pew Research Center",
+        "date": "10/04",
+        "dem": 44,
+        "rep": 36,
+        "margin": "8"
+      },
       {
         "source": "YouGov - CBS News",
         "date": "10/02",
@@ -63,13 +70,6 @@
         "dem": 46,
         "rep": 42,
         "margin": "4"
-      },
-      {
-        "source": "Ipsos",
-        "date": "08/24",
-        "dem": 41,
-        "rep": 35,
-        "margin": "6"
       }
     ]
   },
@@ -77,13 +77,21 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49.8,
-        "rep": 40.6,
-        "margin": "9.2",
-        "date": "09/29",
-        "dateRange": "06/10 - 09/29"
+        "dem": 50.2,
+        "rep": 41.3,
+        "margin": "8.9",
+        "date": "10/03",
+        "dateRange": "06/10 - 10/03"
       },
       "polls": [
+        {
+          "source": "East Carolina University",
+          "date": "09/30 - 10/03",
+          "dem": 53,
+          "rep": 46,
+          "margin": "7",
+          "partisan": null
+        },
         {
           "source": "Big Data Poll",
           "date": "09/27 - 09/29",
@@ -153,14 +161,6 @@
           "date": "07/29 - 08/01",
           "dem": 50,
           "rep": 41,
-          "margin": "9",
-          "partisan": null
-        },
-        {
-          "source": "Beacon Research/Shaw & Co. Research",
-          "date": "07/23 - 07/27",
-          "dem": 53,
-          "rep": 44,
           "margin": "9",
           "partisan": null
         }
@@ -770,13 +770,21 @@
     "Iowa": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 45.8,
-        "rep": 45.9,
-        "margin": "-0.1",
-        "date": "10/05",
-        "dateRange": "06/27 - 10/05"
+        "dem": 45.7,
+        "rep": 45.5,
+        "margin": "0.2",
+        "date": "10/06",
+        "dateRange": "06/27 - 10/06"
       },
       "polls": [
+        {
+          "source": "Emerson College",
+          "date": "10/05 - 10/06",
+          "dem": 45,
+          "rep": 46.6,
+          "margin": "-1.6",
+          "partisan": null
+        },
         {
           "source": "CNN/SSRS",
           "date": "09/29 - 10/05",
@@ -891,9 +899,9 @@
     }
   },
   "trumpApproval": {
-    "approve": 36.8,
-    "disapprove": 58.8,
-    "net": -22
+    "approve": 36.2,
+    "disapprove": 60.8,
+    "net": -24.6
   },
   "nateApproval": []
 }
