@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-10-10",
-  "date": "2026-10-10",
-  "fetchedAt": "2026-10-10T14:56:46.504Z",
+  "lastUpdated": "2026-10-11",
+  "date": "2026-10-11",
+  "fetchedAt": "2026-10-11T15:13:31.962Z",
   "markets": {
     "polymarket": {
       "houseD": 91,
@@ -11,12 +11,12 @@
       "repSweepPct": 9
     },
     "kalshi": {
-      "houseD": 89,
+      "houseD": 90,
       "senateR": 40,
       "dSweepPct": 60,
       "splitPct": 29,
       "repSweepPct": 10,
-      "updatedDate": "2026-10-10"
+      "updatedDate": "2026-10-11"
     }
   },
   "genericBallot": {
