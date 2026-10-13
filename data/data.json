@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-10-12",
-  "date": "2026-10-12",
-  "fetchedAt": "2026-10-12T18:26:26.625Z",
+  "lastUpdated": "2026-10-13",
+  "date": "2026-10-13",
+  "fetchedAt": "2026-10-13T16:38:20.786Z",
   "markets": {
     "polymarket": {
       "houseD": 91,
@@ -11,12 +11,12 @@
       "repSweepPct": 10
     },
     "kalshi": {
-      "houseD": 89,
+      "houseD": 90,
       "senateR": 39,
       "dSweepPct": 60,
       "splitPct": 29,
       "repSweepPct": 10,
-      "updatedDate": "2026-10-12"
+      "updatedDate": "2026-10-13"
     }
   },
   "genericBallot": {
@@ -26,7 +26,7 @@
       "rep": 40.2,
       "margin": "7.4",
       "date": "10/04",
-      "dateRange": "04/13 - 10/04"
+      "dateRange": "04/15 - 10/04"
     },
     "polls": [
       {
@@ -77,13 +77,21 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 50.2,
-        "rep": 41.3,
-        "margin": "8.9",
-        "date": "10/03",
-        "dateRange": "06/10 - 10/03"
+        "dem": 51.2,
+        "rep": 41,
+        "margin": "10.2",
+        "date": "10/11",
+        "dateRange": "06/10 - 10/11"
       },
       "polls": [
+        {
+          "source": "SurveyUSA",
+          "date": "10/07 - 10/11",
+          "dem": 54,
+          "rep": 40,
+          "margin": "14",
+          "partisan": null
+        },
         {
           "source": "East Carolina University",
           "date": "09/30 - 10/03",
@@ -154,14 +162,6 @@
           "dem": 51.5,
           "rep": 39,
           "margin": "12.5",
-          "partisan": null
-        },
-        {
-          "source": "Change Research",
-          "date": "07/29 - 08/01",
-          "dem": 50,
-          "rep": 41,
-          "margin": "9",
           "partisan": null
         }
       ],
@@ -659,10 +659,18 @@
         "dem": 47.4,
         "rep": 45.4,
         "margin": "2",
-        "date": "09/28",
-        "dateRange": "04/20 - 09/28"
+        "date": "10/08",
+        "dateRange": "04/20 - 10/08"
       },
       "polls": [
+        {
+          "source": "ReconMR/Siena University",
+          "date": "10/05 - 10/08",
+          "dem": 48,
+          "rep": 44,
+          "margin": "4",
+          "partisan": null
+        },
         {
           "source": "Beacon Research/Shaw & Co. Research",
           "date": "09/24 - 09/28",
@@ -734,14 +742,6 @@
           "rep": 43,
           "margin": "5",
           "partisan": null
-        },
-        {
-          "source": "Fabrizio Ward/Impact Research",
-          "date": "08/30 - 09/01",
-          "dem": 48,
-          "rep": 44,
-          "margin": "4",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -749,19 +749,19 @@
     "Nebraska": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47,
-        "rep": 42,
-        "margin": "5",
-        "date": "05/11",
-        "dateRange": "05/11 - 05/11"
+        "dem": 46,
+        "rep": 49,
+        "margin": "-3",
+        "date": "10/05",
+        "dateRange": "10/05 - 10/05"
       },
       "polls": [
         {
-          "source": "Tavern Research",
-          "date": "05/08 - 05/11",
-          "dem": 47,
-          "rep": 42,
-          "margin": "5",
+          "source": "National Public Affairs",
+          "date": "10/02 - 10/05",
+          "dem": 46,
+          "rep": 49,
+          "margin": "-3",
           "partisan": null
         }
       ],
