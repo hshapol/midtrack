@@ -1,14 +1,14 @@
 {
-  "lastUpdated": "2026-10-13",
-  "date": "2026-10-13",
-  "fetchedAt": "2026-10-13T16:38:20.786Z",
+  "lastUpdated": "2026-10-14",
+  "date": "2026-10-14",
+  "fetchedAt": "2026-10-14T14:14:21.068Z",
   "markets": {
     "polymarket": {
       "houseD": 91,
-      "senateR": 37,
+      "senateR": 38,
       "splitPct": 28,
-      "dSweepPct": 62,
-      "repSweepPct": 10
+      "dSweepPct": 63,
+      "repSweepPct": 9
     },
     "kalshi": {
       "houseD": 90,
@@ -16,7 +16,7 @@
       "dSweepPct": 60,
       "splitPct": 29,
       "repSweepPct": 10,
-      "updatedDate": "2026-10-13"
+      "updatedDate": "2026-10-14"
     }
   },
   "genericBallot": {
@@ -195,7 +195,7 @@
         "rep": 44,
         "margin": "3.6",
         "date": "10/05",
-        "dateRange": "04/14 - 10/05"
+        "dateRange": "06/16 - 10/05"
       },
       "polls": [
         {
@@ -656,13 +656,21 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47.4,
-        "rep": 45.4,
-        "margin": "2",
-        "date": "10/08",
-        "dateRange": "04/20 - 10/08"
+        "dem": 47.3,
+        "rep": 45.6,
+        "margin": "1.7",
+        "date": "10/11",
+        "dateRange": "04/20 - 10/11"
       },
       "polls": [
+        {
+          "source": "Quantus Insights",
+          "date": "10/09 - 10/11",
+          "dem": 46.7,
+          "rep": 47.2,
+          "margin": "-0.5",
+          "partisan": null
+        },
         {
           "source": "ReconMR/Siena University",
           "date": "10/05 - 10/08",
@@ -733,14 +741,6 @@
           "dem": 47.1,
           "rep": 45.6,
           "margin": "1.5",
-          "partisan": null
-        },
-        {
-          "source": "YouGov",
-          "date": "08/27 - 09/04",
-          "dem": 48,
-          "rep": 43,
-          "margin": "5",
           "partisan": null
         }
       ],
