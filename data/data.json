@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-10-15",
-  "date": "2026-10-15",
-  "fetchedAt": "2026-10-15T13:49:41.578Z",
+  "lastUpdated": "2026-10-16",
+  "date": "2026-10-16",
+  "fetchedAt": "2026-10-16T13:39:53.272Z",
   "markets": {
     "polymarket": {
       "houseD": 91,
-      "senateR": 37,
+      "senateR": 38,
       "splitPct": 28,
       "dSweepPct": 63,
       "repSweepPct": 9
     },
     "kalshi": {
       "houseD": 90,
-      "senateR": 39,
+      "senateR": 38,
       "dSweepPct": 61,
-      "splitPct": 29,
+      "splitPct": 30,
       "repSweepPct": 10,
-      "updatedDate": "2026-10-15"
+      "updatedDate": "2026-10-16"
     }
   },
   "genericBallot": {
@@ -656,13 +656,21 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47.3,
-        "rep": 45.6,
-        "margin": "1.7",
-        "date": "10/11",
-        "dateRange": "04/20 - 10/11"
+        "dem": 47.5,
+        "rep": 45.7,
+        "margin": "1.8",
+        "date": "10/14",
+        "dateRange": "04/20 - 10/14"
       },
       "polls": [
+        {
+          "source": "ActiVote",
+          "date": "09/30 - 10/14",
+          "dem": 51.9,
+          "rep": 48.1,
+          "margin": "3.8",
+          "partisan": null
+        },
         {
           "source": "Quantus Insights",
           "date": "10/09 - 10/11",
@@ -734,14 +742,6 @@
           "rep": 43,
           "margin": "6",
           "partisan": null
-        },
-        {
-          "source": "InsiderAdvantage",
-          "date": "09/08 - 09/09",
-          "dem": 47.1,
-          "rep": 45.6,
-          "margin": "1.5",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -770,13 +770,29 @@
     "Iowa": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 45.7,
-        "rep": 45.5,
+        "dem": 46.3,
+        "rep": 46.1,
         "margin": "0.2",
-        "date": "10/06",
-        "dateRange": "06/27 - 10/06"
+        "date": "10/12",
+        "dateRange": "06/27 - 10/12"
       },
       "polls": [
+        {
+          "source": "YouGov",
+          "date": "10/06 - 10/12",
+          "dem": 47,
+          "rep": 46,
+          "margin": "1",
+          "partisan": null
+        },
+        {
+          "source": "Marist University",
+          "date": "10/08 - 10/11",
+          "dem": 48,
+          "rep": 45,
+          "margin": "3",
+          "partisan": null
+        },
         {
           "source": "Emerson College",
           "date": "10/05 - 10/06",
@@ -839,22 +855,6 @@
           "dem": 45,
           "rep": 48,
           "margin": "-3",
-          "partisan": null
-        },
-        {
-          "source": "The New York Times/Siena University",
-          "date": "06/15 - 06/27",
-          "dem": 46,
-          "rep": 48,
-          "margin": "-2",
-          "partisan": null
-        },
-        {
-          "source": "Beacon Research/Shaw & Co. Research",
-          "date": "06/23 - 06/27",
-          "dem": 50,
-          "rep": 46,
-          "margin": "4",
           "partisan": null
         }
       ],
