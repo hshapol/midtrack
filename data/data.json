@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2026-10-17",
-  "date": "2026-10-17",
-  "fetchedAt": "2026-10-17T12:36:55.469Z",
+  "lastUpdated": "2026-10-18",
+  "date": "2026-10-18",
+  "fetchedAt": "2026-10-18T12:54:10.501Z",
   "markets": {
     "polymarket": {
       "houseD": 91,
-      "senateR": 37,
+      "senateR": 38,
       "splitPct": 28,
       "dSweepPct": 63,
       "repSweepPct": 9
@@ -14,9 +14,9 @@
       "houseD": 90,
       "senateR": 38,
       "dSweepPct": 61,
-      "splitPct": 29,
+      "splitPct": 28,
       "repSweepPct": 10,
-      "updatedDate": "2026-10-17"
+      "updatedDate": "2026-10-18"
     }
   },
   "genericBallot": {
