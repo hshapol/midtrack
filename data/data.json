@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-10-27",
-  "date": "2026-10-27",
-  "fetchedAt": "2026-10-27T15:03:03.700Z",
+  "lastUpdated": "2026-10-28",
+  "date": "2026-10-28",
+  "fetchedAt": "2026-10-28T15:38:38.776Z",
   "markets": {
     "polymarket": {
       "houseD": 92,
-      "senateR": 35,
-      "splitPct": 28,
-      "dSweepPct": 65,
+      "senateR": 34,
+      "splitPct": 27,
+      "dSweepPct": 67,
       "repSweepPct": 8
     },
     "kalshi": {
       "houseD": 91,
-      "senateR": 36,
-      "dSweepPct": 63,
+      "senateR": 37,
+      "dSweepPct": 62,
       "splitPct": 28,
       "repSweepPct": 9,
-      "updatedDate": "2026-10-27"
+      "updatedDate": "2026-10-28"
     }
   },
   "genericBallot": {
@@ -191,13 +191,21 @@
     "Ohio (Special)": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49,
-        "rep": 44.6,
-        "margin": "4.4",
-        "date": "10/22",
-        "dateRange": "06/16 - 10/22"
+        "dem": 48.7,
+        "rep": 44.9,
+        "margin": "3.8",
+        "date": "10/23",
+        "dateRange": "06/16 - 10/23"
       },
       "polls": [
+        {
+          "source": "Echelon Insights",
+          "date": "10/16 - 10/23",
+          "dem": 47,
+          "rep": 47,
+          "margin": "0",
+          "partisan": null
+        },
         {
           "source": "InsiderAdvantage",
           "date": "10/21 - 10/22",
@@ -269,14 +277,6 @@
           "rep": 43,
           "margin": "8",
           "partisan": null
-        },
-        {
-          "source": "Big Data Poll",
-          "date": "09/26 - 09/27",
-          "dem": 46.3,
-          "rep": 42.6,
-          "margin": "3.7",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -284,9 +284,9 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47.7,
-        "rep": 45.1,
-        "margin": "2.6",
+        "dem": 48.2,
+        "rep": 45,
+        "margin": "3.2",
         "date": "10/22",
         "dateRange": "06/30 - 10/22"
       },
@@ -297,6 +297,14 @@
           "dem": 47,
           "rep": 46,
           "margin": "1",
+          "partisan": null
+        },
+        {
+          "source": "Glengariff Group, Inc.",
+          "date": "10/19 - 10/22",
+          "dem": 51.4,
+          "rep": 45.1,
+          "margin": "6.3",
           "partisan": null
         },
         {
@@ -362,14 +370,6 @@
           "rep": 40,
           "margin": "5",
           "partisan": null
-        },
-        {
-          "source": "Suffolk University",
-          "date": "09/16 - 09/20",
-          "dem": 47,
-          "rep": 40,
-          "margin": "7",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -377,13 +377,21 @@
     "Georgia": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 51.2,
-        "rep": 43,
-        "margin": "8.2",
-        "date": "10/20",
-        "dateRange": "06/27 - 10/20"
+        "dem": 52.2,
+        "rep": 42.2,
+        "margin": "10",
+        "date": "10/23",
+        "dateRange": "06/27 - 10/23"
       },
       "polls": [
+        {
+          "source": "Echelon Insights",
+          "date": "10/16 - 10/23",
+          "dem": 55,
+          "rep": 40,
+          "margin": "15",
+          "partisan": null
+        },
         {
           "source": "ActiVote",
           "date": "10/06 - 10/20",
@@ -454,14 +462,6 @@
           "dem": 46.7,
           "rep": 42.9,
           "margin": "3.8",
-          "partisan": null
-        },
-        {
-          "source": "Beacon Research/Shaw & Co. Research",
-          "date": "06/23 - 06/27",
-          "dem": 56,
-          "rep": 43,
-          "margin": "13",
           "partisan": null
         }
       ],
@@ -656,9 +656,9 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48,
+        "dem": 48.2,
         "rep": 46.3,
-        "margin": "1.7",
+        "margin": "1.9",
         "date": "10/21",
         "dateRange": "06/12 - 10/21"
       },
@@ -669,6 +669,14 @@
           "dem": 51,
           "rep": 49,
           "margin": "2",
+          "partisan": null
+        },
+        {
+          "source": "YouGov",
+          "date": "10/13 - 10/21",
+          "dem": 50,
+          "rep": 45,
+          "margin": "5",
           "partisan": null
         },
         {
@@ -734,14 +742,6 @@
           "rep": 44,
           "margin": "5",
           "partisan": null
-        },
-        {
-          "source": "Quantus Insights",
-          "date": "10/09 - 10/11",
-          "dem": 46.7,
-          "rep": 47.2,
-          "margin": "-0.5",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -749,13 +749,21 @@
     "Nebraska": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47,
-        "rep": 50,
-        "margin": "-3",
-        "date": "10/18",
-        "dateRange": "10/18 - 10/18"
+        "dem": 46.4,
+        "rep": 48.1,
+        "margin": "-1.7",
+        "date": "10/23",
+        "dateRange": "10/18 - 10/23"
       },
       "polls": [
+        {
+          "source": "Echelon Insights",
+          "date": "10/16 - 10/23",
+          "dem": 46,
+          "rep": 47,
+          "margin": "-1",
+          "partisan": null
+        },
         {
           "source": "National Public Affairs",
           "date": "10/15 - 10/18",
@@ -778,13 +786,21 @@
     "Iowa": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 45.8,
-        "rep": 46.2,
-        "margin": "-0.4",
-        "date": "10/22",
-        "dateRange": "06/27 - 10/22"
+        "dem": 45.7,
+        "rep": 45.8,
+        "margin": "-0.1",
+        "date": "10/23",
+        "dateRange": "06/27 - 10/23"
       },
       "polls": [
+        {
+          "source": "Echelon Insights",
+          "date": "10/16 - 10/23",
+          "dem": 45,
+          "rep": 43,
+          "margin": "2",
+          "partisan": null
+        },
         {
           "source": "InsiderAdvantage",
           "date": "10/21 - 10/22",
@@ -855,14 +871,6 @@
           "dem": 50,
           "rep": 42,
           "margin": "8",
-          "partisan": null
-        },
-        {
-          "source": "YouGov",
-          "date": "09/03 - 09/08",
-          "dem": 44,
-          "rep": 43,
-          "margin": "1",
           "partisan": null
         }
       ],
