@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-10-29",
-  "date": "2026-10-29",
-  "fetchedAt": "2026-10-29T15:45:16.141Z",
+  "lastUpdated": "2026-10-30",
+  "date": "2026-10-30",
+  "fetchedAt": "2026-10-30T15:27:29.435Z",
   "markets": {
     "polymarket": {
-      "houseD": 93,
-      "senateR": 33,
-      "splitPct": 27,
-      "dSweepPct": 67,
-      "repSweepPct": 7
+      "houseD": 94,
+      "senateR": 28,
+      "splitPct": 23,
+      "dSweepPct": 72,
+      "repSweepPct": 6
     },
     "kalshi": {
-      "houseD": 91,
-      "senateR": 34,
-      "dSweepPct": 65,
-      "splitPct": 28,
-      "repSweepPct": 8,
-      "updatedDate": "2026-10-29"
+      "houseD": 92,
+      "senateR": 31,
+      "dSweepPct": 67,
+      "splitPct": 26,
+      "repSweepPct": 7,
+      "updatedDate": "2026-10-30"
     }
   },
   "genericBallot": {
@@ -26,7 +26,7 @@
       "rep": 40.2,
       "margin": "7.4",
       "date": "10/04",
-      "dateRange": "04/30 - 10/04"
+      "dateRange": "05/04 - 10/04"
     },
     "polls": [
       {
@@ -77,9 +77,9 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 51.6,
-        "rep": 41.4,
-        "margin": "10.2",
+        "dem": 52,
+        "rep": 41.2,
+        "margin": "10.8",
         "date": "10/25",
         "dateRange": "06/10 - 10/25"
       },
@@ -106,6 +106,14 @@
           "dem": 49,
           "rep": 39,
           "margin": "10",
+          "partisan": null
+        },
+        {
+          "source": "High Point University Survey Research Center",
+          "date": "10/01 - 10/20",
+          "dem": 54,
+          "rep": 40,
+          "margin": "14",
           "partisan": null
         },
         {
@@ -154,14 +162,6 @@
           "dem": 50,
           "rep": 42,
           "margin": "8",
-          "partisan": null
-        },
-        {
-          "source": "Harper Polling",
-          "date": "09/13 - 09/15",
-          "dem": 49,
-          "rep": 34,
-          "margin": "15",
           "partisan": null
         }
       ],
@@ -284,13 +284,37 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.2,
-        "rep": 45,
-        "margin": "3.2",
-        "date": "10/22",
-        "dateRange": "06/30 - 10/22"
+        "dem": 48.7,
+        "rep": 44.6,
+        "margin": "4.1",
+        "date": "10/27",
+        "dateRange": "06/30 - 10/27"
       },
       "polls": [
+        {
+          "source": "Mitchell Research & Communications",
+          "date": "10/26 - 10/27",
+          "dem": 51,
+          "rep": 44,
+          "margin": "7",
+          "partisan": null
+        },
+        {
+          "source": "CNN/SSRS",
+          "date": "10/20 - 10/27",
+          "dem": 49,
+          "rep": 42,
+          "margin": "7",
+          "partisan": null
+        },
+        {
+          "source": "Michigan State University Department of Political Science/Verasight",
+          "date": "10/08 - 10/23",
+          "dem": 50.5,
+          "rep": 43.1,
+          "margin": "7.4",
+          "partisan": null
+        },
         {
           "source": "InsiderAdvantage",
           "date": "10/21 - 10/22",
@@ -344,30 +368,6 @@
           "date": "09/20 - 09/27",
           "dem": 48,
           "rep": 43,
-          "margin": "5",
-          "partisan": null
-        },
-        {
-          "source": "co/efficient",
-          "date": "09/21 - 09/23",
-          "dem": 50,
-          "rep": 50,
-          "margin": "0",
-          "partisan": null
-        },
-        {
-          "source": "The New York Times/Siena University",
-          "date": "09/15 - 09/22",
-          "dem": 49,
-          "rep": 44,
-          "margin": "5",
-          "partisan": null
-        },
-        {
-          "source": "Cygnal/Beacon Research",
-          "date": "09/18 - 09/21",
-          "dem": 45,
-          "rep": 40,
           "margin": "5",
           "partisan": null
         }
@@ -470,9 +470,9 @@
     "New Hampshire": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49.4,
-        "rep": 42.2,
-        "margin": "7.2",
+        "dem": 49,
+        "rep": 41.9,
+        "margin": "7.1",
         "date": "10/20",
         "dateRange": "08/18 - 10/20"
       },
@@ -482,6 +482,14 @@
           "date": "10/19 - 10/20",
           "dem": 50,
           "rep": 43,
+          "margin": "7",
+          "partisan": null
+        },
+        {
+          "source": "University of Massachusetts Lowell Center for Public Opinion/YouGov",
+          "date": "10/02 - 10/19",
+          "dem": 48,
+          "rep": 41,
           "margin": "7",
           "partisan": null
         },
@@ -547,14 +555,6 @@
           "dem": 49,
           "rep": 42,
           "margin": "7",
-          "partisan": null
-        },
-        {
-          "source": "Emerson College",
-          "date": "03/21 - 03/23",
-          "dem": 45.3,
-          "rep": 43.7,
-          "margin": "1.6",
           "partisan": null
         }
       ],
@@ -656,13 +656,37 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.2,
-        "rep": 46.3,
-        "margin": "1.9",
-        "date": "10/21",
-        "dateRange": "06/12 - 10/21"
+        "dem": 48.4,
+        "rep": 46.2,
+        "margin": "2.2",
+        "date": "10/27",
+        "dateRange": "06/12 - 10/27"
       },
       "polls": [
+        {
+          "source": "CNN/SSRS",
+          "date": "10/20 - 10/27",
+          "dem": 49,
+          "rep": 43,
+          "margin": "6",
+          "partisan": null
+        },
+        {
+          "source": "A2 Insights",
+          "date": "10/23 - 10/27",
+          "dem": 50.2,
+          "rep": 47.2,
+          "margin": "3",
+          "partisan": null
+        },
+        {
+          "source": "Texas Southern University Barbara Jordan Public Policy Research and Survey Center",
+          "date": "10/21 - 10/25",
+          "dem": 49,
+          "rep": 47,
+          "margin": "2",
+          "partisan": null
+        },
         {
           "source": "ActiVote",
           "date": "10/17 - 10/21",
@@ -717,30 +741,6 @@
           "dem": 51,
           "rep": 47,
           "margin": "4",
-          "partisan": null
-        },
-        {
-          "source": "InsiderAdvantage",
-          "date": "10/13 - 10/14",
-          "dem": 48,
-          "rep": 49,
-          "margin": "-1",
-          "partisan": null
-        },
-        {
-          "source": "ActiVote",
-          "date": "09/30 - 10/14",
-          "dem": 51.9,
-          "rep": 48.1,
-          "margin": "3.8",
-          "partisan": null
-        },
-        {
-          "source": "New River Strategies/GS Strategy Group",
-          "date": "10/09 - 10/13",
-          "dem": 49,
-          "rep": 44,
-          "margin": "5",
           "partisan": null
         }
       ],
