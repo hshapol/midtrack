@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-10-30",
-  "date": "2026-10-30",
-  "fetchedAt": "2026-10-30T15:27:29.435Z",
+  "lastUpdated": "2026-10-31",
+  "date": "2026-10-31",
+  "fetchedAt": "2026-10-31T14:55:46.330Z",
   "markets": {
     "polymarket": {
-      "houseD": 94,
+      "houseD": 95,
       "senateR": 28,
-      "splitPct": 23,
-      "dSweepPct": 72,
+      "splitPct": 24,
+      "dSweepPct": 71,
       "repSweepPct": 6
     },
     "kalshi": {
-      "houseD": 92,
-      "senateR": 31,
-      "dSweepPct": 67,
+      "houseD": 94,
+      "senateR": 29,
+      "dSweepPct": 70,
       "splitPct": 26,
-      "repSweepPct": 7,
-      "updatedDate": "2026-10-30"
+      "repSweepPct": 6,
+      "updatedDate": "2026-10-31"
     }
   },
   "genericBallot": {
@@ -656,13 +656,29 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.4,
-        "rep": 46.2,
-        "margin": "2.2",
-        "date": "10/27",
-        "dateRange": "06/12 - 10/27"
+        "dem": 48.5,
+        "rep": 46.4,
+        "margin": "2.1",
+        "date": "10/28",
+        "dateRange": "06/12 - 10/28"
       },
       "polls": [
+        {
+          "source": "ActiVote",
+          "date": "10/22 - 10/28",
+          "dem": 52.1,
+          "rep": 47.9,
+          "margin": "4.2",
+          "partisan": null
+        },
+        {
+          "source": "Quantus Insights",
+          "date": "10/26 - 10/28",
+          "dem": 48.4,
+          "rep": 49.4,
+          "margin": "-1",
+          "partisan": null
+        },
         {
           "source": "CNN/SSRS",
           "date": "10/20 - 10/27",
@@ -725,22 +741,6 @@
           "dem": 48,
           "rep": 46,
           "margin": "2",
-          "partisan": null
-        },
-        {
-          "source": "Pollfinity",
-          "date": "10/15 - 10/18",
-          "dem": 48,
-          "rep": 43,
-          "margin": "5",
-          "partisan": null
-        },
-        {
-          "source": "Slingshot Strategies",
-          "date": "10/15 - 10/18",
-          "dem": 51,
-          "rep": 47,
-          "margin": "4",
           "partisan": null
         }
       ],
