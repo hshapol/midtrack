@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-11-01",
-  "date": "2026-11-01",
-  "fetchedAt": "2026-11-01T15:38:56.984Z",
+  "lastUpdated": "2026-11-02",
+  "date": "2026-11-02",
+  "fetchedAt": "2026-11-02T19:00:10.734Z",
   "markets": {
     "polymarket": {
-      "houseD": 95,
-      "senateR": 28,
-      "splitPct": 23,
-      "dSweepPct": 72,
-      "repSweepPct": 5
+      "houseD": 96,
+      "senateR": 27,
+      "splitPct": 22,
+      "dSweepPct": 73,
+      "repSweepPct": 7
     },
     "kalshi": {
-      "houseD": 93,
-      "senateR": 29,
-      "dSweepPct": 70,
-      "splitPct": 26,
-      "repSweepPct": 7,
-      "updatedDate": "2026-11-01"
+      "houseD": 94,
+      "senateR": 26,
+      "dSweepPct": 73,
+      "splitPct": 21,
+      "repSweepPct": 6,
+      "updatedDate": "2026-11-02"
     }
   },
   "genericBallot": {
@@ -77,13 +77,21 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 52,
-        "rep": 41.2,
+        "dem": 52.2,
+        "rep": 41.4,
         "margin": "10.8",
-        "date": "10/25",
-        "dateRange": "06/10 - 10/25"
+        "date": "10/29",
+        "dateRange": "06/10 - 10/29"
       },
       "polls": [
+        {
+          "source": "East Carolina University",
+          "date": "10/26 - 10/29",
+          "dem": 54,
+          "rep": 45,
+          "margin": "9",
+          "partisan": null
+        },
         {
           "source": "Quantus Insights",
           "date": "10/24 - 10/25",
@@ -155,14 +163,6 @@
           "rep": 42.5,
           "margin": "5.9",
           "partisan": null
-        },
-        {
-          "source": "High Point University Survey Research Center",
-          "date": "09/09 - 09/16",
-          "dem": 50,
-          "rep": 42,
-          "margin": "8",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -192,12 +192,20 @@
       "avg": {
         "source": "SB-style Avg",
         "dem": 48.7,
-        "rep": 44.9,
-        "margin": "3.8",
-        "date": "10/23",
-        "dateRange": "06/16 - 10/23"
+        "rep": 44.8,
+        "margin": "3.9",
+        "date": "11/01",
+        "dateRange": "06/16 - 11/01"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "10/26 - 11/01",
+          "dem": 49,
+          "rep": 44,
+          "margin": "5",
+          "partisan": null
+        },
         {
           "source": "Echelon Insights",
           "date": "10/16 - 10/23",
@@ -269,14 +277,6 @@
           "rep": 43,
           "margin": "1",
           "partisan": null
-        },
-        {
-          "source": "Marist University",
-          "date": "09/24 - 09/27",
-          "dem": 51,
-          "rep": 43,
-          "margin": "8",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -284,13 +284,29 @@
     "Michigan": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.7,
-        "rep": 44.6,
-        "margin": "4.1",
-        "date": "10/27",
-        "dateRange": "06/30 - 10/27"
+        "dem": 49.2,
+        "rep": 44.8,
+        "margin": "4.4",
+        "date": "11/01",
+        "dateRange": "06/30 - 11/01"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "10/23 - 11/01",
+          "dem": 53,
+          "rep": 42,
+          "margin": "11",
+          "partisan": null
+        },
+        {
+          "source": "YouGov",
+          "date": "10/26 - 10/29",
+          "dem": 51,
+          "rep": 47,
+          "margin": "4",
+          "partisan": null
+        },
         {
           "source": "Mitchell Research & Communications",
           "date": "10/26 - 10/27",
@@ -352,22 +368,6 @@
           "date": "10/01 - 10/01",
           "dem": 46,
           "rep": 41,
-          "margin": "5",
-          "partisan": null
-        },
-        {
-          "source": "Beacon Research/Shaw & Co. Research",
-          "date": "09/24 - 09/28",
-          "dem": 50,
-          "rep": 49,
-          "margin": "1",
-          "partisan": null
-        },
-        {
-          "source": "Guidant Polling and Strategy",
-          "date": "09/20 - 09/27",
-          "dem": 48,
-          "rep": 43,
           "margin": "5",
           "partisan": null
         }
@@ -470,13 +470,21 @@
     "New Hampshire": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49,
+        "dem": 49.8,
         "rep": 41.9,
-        "margin": "7.1",
-        "date": "10/20",
-        "dateRange": "08/18 - 10/20"
+        "margin": "7.9",
+        "date": "10/31",
+        "dateRange": "08/18 - 10/31"
       },
       "polls": [
+        {
+          "source": "University of New Hampshire",
+          "date": "10/27 - 10/31",
+          "dem": 54,
+          "rep": 42,
+          "margin": "12",
+          "partisan": null
+        },
         {
           "source": "Saint Anselm",
           "date": "10/19 - 10/20",
@@ -548,14 +556,6 @@
           "rep": 44,
           "margin": "3",
           "partisan": null
-        },
-        {
-          "source": "University of New Hampshire",
-          "date": "04/17 - 04/21",
-          "dem": 49,
-          "rep": 42,
-          "margin": "7",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -563,13 +563,21 @@
     "Alaska": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 49.6,
-        "rep": 48.4,
-        "margin": "1.2",
-        "date": "10/16",
-        "dateRange": "06/29 - 10/16"
+        "dem": 49.4,
+        "rep": 48,
+        "margin": "1.4",
+        "date": "10/30",
+        "dateRange": "08/23 - 10/30"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "10/23 - 10/30",
+          "dem": 48,
+          "rep": 46,
+          "margin": "2",
+          "partisan": null
+        },
         {
           "source": "Data for Progress",
           "date": "10/08 - 10/16",
@@ -641,14 +649,6 @@
           "rep": 43.8,
           "margin": "4.6",
           "partisan": null
-        },
-        {
-          "source": "Alaska Survey Research",
-          "date": "04/16 - 04/19",
-          "dem": 52,
-          "rep": 48,
-          "margin": "4",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -656,13 +656,21 @@
     "Texas": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 48.5,
-        "rep": 46.4,
-        "margin": "2.1",
-        "date": "10/28",
-        "dateRange": "06/12 - 10/28"
+        "dem": 48.6,
+        "rep": 46.3,
+        "margin": "2.3",
+        "date": "11/01",
+        "dateRange": "06/12 - 11/01"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "10/27 - 11/01",
+          "dem": 50,
+          "rep": 43,
+          "margin": "7",
+          "partisan": null
+        },
         {
           "source": "ActiVote",
           "date": "10/22 - 10/28",
@@ -734,14 +742,6 @@
           "rep": 49,
           "margin": "0",
           "partisan": null
-        },
-        {
-          "source": "Emerson College",
-          "date": "10/17 - 10/19",
-          "dem": 48,
-          "rep": 46,
-          "margin": "2",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -786,13 +786,29 @@
     "Iowa": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 45.7,
-        "rep": 45.8,
-        "margin": "-0.1",
-        "date": "10/23",
-        "dateRange": "06/27 - 10/23"
+        "dem": 45.8,
+        "rep": 46,
+        "margin": "-0.2",
+        "date": "11/01",
+        "dateRange": "08/23 - 11/01"
       },
       "polls": [
+        {
+          "source": "The New York Times/Siena University",
+          "date": "10/26 - 11/01",
+          "dem": 48,
+          "rep": 47,
+          "margin": "1",
+          "partisan": null
+        },
+        {
+          "source": "GrayHouse",
+          "date": "10/28 - 10/31",
+          "dem": 46,
+          "rep": 48,
+          "margin": "-2",
+          "partisan": null
+        },
         {
           "source": "Echelon Insights",
           "date": "10/16 - 10/23",
@@ -855,22 +871,6 @@
           "dem": 43,
           "rep": 45,
           "margin": "-2",
-          "partisan": null
-        },
-        {
-          "source": "Beacon Research/Shaw & Co. Research",
-          "date": "09/24 - 09/28",
-          "dem": 49,
-          "rep": 47,
-          "margin": "2",
-          "partisan": null
-        },
-        {
-          "source": "Marist University",
-          "date": "09/17 - 09/20",
-          "dem": 50,
-          "rep": 42,
-          "margin": "8",
           "partisan": null
         }
       ],
