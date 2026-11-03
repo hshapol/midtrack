@@ -1,34 +1,41 @@
 {
-  "lastUpdated": "2026-11-02",
-  "date": "2026-11-02",
-  "fetchedAt": "2026-11-02T19:00:10.734Z",
+  "lastUpdated": "2026-11-03",
+  "date": "2026-11-03",
+  "fetchedAt": "2026-11-03T16:45:26.825Z",
   "markets": {
     "polymarket": {
-      "houseD": 96,
-      "senateR": 27,
-      "splitPct": 22,
-      "dSweepPct": 73,
-      "repSweepPct": 7
+      "houseD": 95,
+      "senateR": 24,
+      "splitPct": 19,
+      "dSweepPct": 76,
+      "repSweepPct": 5
     },
     "kalshi": {
-      "houseD": 94,
-      "senateR": 26,
-      "dSweepPct": 73,
-      "splitPct": 21,
-      "repSweepPct": 6,
-      "updatedDate": "2026-11-02"
+      "houseD": 93,
+      "senateR": 27,
+      "dSweepPct": 74,
+      "splitPct": 19,
+      "repSweepPct": 7,
+      "updatedDate": "2026-11-03"
     }
   },
   "genericBallot": {
     "avg": {
       "source": "SB-style Avg",
-      "dem": 47.6,
-      "rep": 40.2,
-      "margin": "7.4",
-      "date": "10/04",
-      "dateRange": "05/04 - 10/04"
+      "dem": 48.8,
+      "rep": 41.2,
+      "margin": "7.6",
+      "date": "11/02",
+      "dateRange": "05/04 - 11/02"
     },
     "polls": [
+      {
+        "source": "Ipsos",
+        "date": "11/02",
+        "dem": 52,
+        "rep": 44,
+        "margin": "8"
+      },
       {
         "source": "Pew Research Center",
         "date": "10/04",
@@ -63,13 +70,6 @@
         "dem": 49,
         "rep": 38,
         "margin": "11"
-      },
-      {
-        "source": "Morning Consult",
-        "date": "09/06",
-        "dem": 46,
-        "rep": 42,
-        "margin": "4"
       }
     ]
   },
@@ -77,13 +77,21 @@
     "North Carolina": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 52.2,
+        "dem": 53.4,
         "rep": 41.4,
-        "margin": "10.8",
-        "date": "10/29",
-        "dateRange": "06/10 - 10/29"
+        "margin": "12",
+        "date": "11/01",
+        "dateRange": "06/10 - 11/01"
       },
       "polls": [
+        {
+          "source": "AtlasIntel",
+          "date": "10/28 - 11/01",
+          "dem": 56.4,
+          "rep": 41.5,
+          "margin": "14.9",
+          "partisan": null
+        },
         {
           "source": "East Carolina University",
           "date": "10/26 - 10/29",
@@ -155,14 +163,6 @@
           "rep": 39,
           "margin": "12",
           "partisan": null
-        },
-        {
-          "source": "InsiderAdvantage",
-          "date": "09/16 - 09/17",
-          "dem": 48.4,
-          "rep": 42.5,
-          "margin": "5.9",
-          "partisan": null
         }
       ],
       "rtwh": null
@@ -192,8 +192,8 @@
       "avg": {
         "source": "SB-style Avg",
         "dem": 48.7,
-        "rep": 44.8,
-        "margin": "3.9",
+        "rep": 44.9,
+        "margin": "3.8",
         "date": "11/01",
         "dateRange": "06/16 - 11/01"
       },
@@ -204,6 +204,14 @@
           "dem": 49,
           "rep": 44,
           "margin": "5",
+          "partisan": null
+        },
+        {
+          "source": "Survey 160",
+          "date": "10/27 - 11/01",
+          "dem": 49,
+          "rep": 45,
+          "margin": "4",
           "partisan": null
         },
         {
@@ -268,14 +276,6 @@
           "dem": 49,
           "rep": 43,
           "margin": "6",
-          "partisan": null
-        },
-        {
-          "source": "InsiderAdvantage",
-          "date": "09/28 - 09/29",
-          "dem": 44,
-          "rep": 43,
-          "margin": "1",
           "partisan": null
         }
       ],
@@ -377,13 +377,21 @@
     "Georgia": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 52.2,
-        "rep": 42.2,
-        "margin": "10",
-        "date": "10/23",
-        "dateRange": "06/27 - 10/23"
+        "dem": 52.8,
+        "rep": 43.8,
+        "margin": "9",
+        "date": "11/02",
+        "dateRange": "06/27 - 11/02"
       },
       "polls": [
+        {
+          "source": "InsiderAdvantage",
+          "date": "10/31 - 11/02",
+          "dem": 53,
+          "rep": 46,
+          "margin": "7",
+          "partisan": null
+        },
         {
           "source": "Echelon Insights",
           "date": "10/16 - 10/23",
@@ -454,14 +462,6 @@
           "dem": 52,
           "rep": 43,
           "margin": "9",
-          "partisan": null
-        },
-        {
-          "source": "Wick",
-          "date": "06/27 - 06/30",
-          "dem": 46.7,
-          "rep": 42.9,
-          "margin": "3.8",
           "partisan": null
         }
       ],
