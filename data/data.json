@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-11-20",
-  "date": "2026-11-20",
-  "fetchedAt": "2026-11-20T17:26:58.858Z",
+  "lastUpdated": "2026-11-21",
+  "date": "2026-11-21",
+  "fetchedAt": "2026-11-21T16:30:55.234Z",
   "markets": {
     "polymarket": {
       "houseD": 100,
@@ -16,7 +16,7 @@
       "dSweepPct": 0,
       "splitPct": 0,
       "repSweepPct": 0,
-      "updatedDate": "2026-11-20"
+      "updatedDate": "2026-11-21"
     }
   },
   "genericBallot": {
@@ -915,9 +915,9 @@
     }
   },
   "trumpApproval": {
-    "approve": 36.1,
+    "approve": 35.9,
     "disapprove": 60.4,
-    "net": -24.3
+    "net": -24.5
   },
   "nateApproval": []
 }
