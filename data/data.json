@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-11-21",
-  "date": "2026-11-21",
-  "fetchedAt": "2026-11-21T16:30:55.234Z",
+  "lastUpdated": "2026-11-22",
+  "date": "2026-11-22",
+  "fetchedAt": "2026-11-22T16:48:40.291Z",
   "markets": {
     "polymarket": {
       "houseD": 100,
@@ -16,7 +16,7 @@
       "dSweepPct": 0,
       "splitPct": 0,
       "repSweepPct": 0,
-      "updatedDate": "2026-11-21"
+      "updatedDate": "2026-11-22"
     }
   },
   "genericBallot": {
@@ -26,7 +26,7 @@
       "rep": 41.2,
       "margin": "7.6",
       "date": "11/02",
-      "dateRange": "05/22 - 11/02"
+      "dateRange": "05/26 - 11/02"
     },
     "polls": [
       {
