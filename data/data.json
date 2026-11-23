@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-11-22",
-  "date": "2026-11-22",
-  "fetchedAt": "2026-11-22T16:48:40.291Z",
+  "lastUpdated": "2026-11-23",
+  "date": "2026-11-23",
+  "fetchedAt": "2026-11-23T20:46:07.033Z",
   "markets": {
     "polymarket": {
       "houseD": 100,
@@ -16,7 +16,7 @@
       "dSweepPct": 0,
       "splitPct": 0,
       "repSweepPct": 0,
-      "updatedDate": "2026-11-22"
+      "updatedDate": "2026-11-23"
     }
   },
   "genericBallot": {
