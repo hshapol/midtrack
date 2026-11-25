@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-11-24",
-  "date": "2026-11-24",
-  "fetchedAt": "2026-11-24T19:50:32.492Z",
+  "lastUpdated": "2026-11-25",
+  "date": "2026-11-25",
+  "fetchedAt": "2026-11-25T18:55:24.164Z",
   "markets": {
     "polymarket": {
       "houseD": 100,
@@ -16,7 +16,7 @@
       "dSweepPct": 0,
       "splitPct": 0,
       "repSweepPct": 0,
-      "updatedDate": "2026-11-24"
+      "updatedDate": "2026-11-25"
     }
   },
   "genericBallot": {
@@ -170,11 +170,11 @@
     "Maine": {
       "avg": {
         "source": "SB-style Avg",
-        "dem": 47.6,
-        "rep": 47.3,
-        "margin": "0.3",
+        "dem": 47.3,
+        "rep": 47.7,
+        "margin": "-0.4",
         "date": "06/27",
-        "dateRange": "05/25 - 06/27"
+        "dateRange": "06/08 - 06/27"
       },
       "polls": [
         {
@@ -915,9 +915,9 @@
     }
   },
   "trumpApproval": {
-    "approve": 35.9,
-    "disapprove": 60.4,
-    "net": -24.5
+    "approve": 33.4,
+    "disapprove": 64.2,
+    "net": -30.8
   },
   "nateApproval": []
 }
